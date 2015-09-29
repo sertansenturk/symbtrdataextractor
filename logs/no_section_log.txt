@@ -1,0 +1,593 @@
+acem--seyir--sofyan--1--erol_bingol
+acem--seyir--sofyan--1--sefik_gurmeric
+acemasiran--beste--devrikebir--ber_kusa-yi--basmaci_abdi_efendi
+    Some measures are skipped by the offsets
+acemasiran--beste--zencir--hayatin_cumleye--dellalzade_haci_ismail_efendi
+    Some measures are skipped by the offsets
+acemasiran--ilahi--muhammes--ta_dil--calakzade_mustafa_efendi
+    Some measures are skipped by the offsets
+acemasiran--pesrev--duyek--son_pesrev--huseyin_fahreddin_dede
+acemasiran--sarki--aksak--acildi_nevbahar--sadullah_aga
+    Some measures are skipped by the offsets
+acemasiran--sarki--aksak--dustum_bir--ali_riza_avni_tinaz
+    Some measures are skipped by the offsets
+acemasiran--sarki--devrihindi--ey_gul-i_rana--neveser_kokdes
+    Some measures are skipped by the offsets
+acemasiran--sarki--devrihindi--neseyab_ol--ahmet_mukerrem_akinci
+acemasiran--sarki--devrihindi--ruy-i_alemdir--dellalzade_haci_ismail_efendi
+acemasiran--sarki--duyek--bulutlar_kokunu--sadettin_kaynak
+acemasiran--sarki--duyek--gonul_seni--sadettin_kaynak
+acemasiran--sarki--duyek--pence-i_gamdan--misirli_udi_ibrahim_efendi
+acemasiran--sarki--duyek--ruhumda_derin--kemal_gurses
+    Some measures are skipped by the offsets
+acemasiran--sarki--duyek--sim-ten_gonca--sakir_aga
+acemasiran--sarki--raksaksagi--bana_tavr-i--sakir_aga
+    Some measures are skipped by the offsets
+acemasiran--sazsemaisi--aksaksemai----gazi_giray_han
+    Some measures are skipped by the offsets
+acemasiran--seyir--semai--1--rauf_yekta
+acemasiran--seyir--sofyan--1--erol_bingol
+acemasiran--seyir--sofyan--1--sefik_gurmeric
+acemasiran--yuruksemai--yuruksemai----huseyin_fahreddin_dede
+acemkurdi--seyir--senginsemai--1--erol_bingol
+acemkurdi--seyir--sofyan--1--sefik_gurmeric
+acemkurdi--turku--duyek--ankaranin_yollari--
+arazbar--seyir--duyek--1--sefik_gurmeric
+arazbar--seyir--semai--1--rauf_yekta
+arazbar--seyir--sofyan--1--erol_bingol
+askefza--seyir--devrihindi--1--erol_bingol
+besteisfahan--seyir--sofyan--1--sefik_gurmeric
+bestenigar--seyir--duyek--1--sefik_gurmeric
+bestenigar--seyir--semai--1--rauf_yekta
+bestenigar--seyir--sofyan--1--erol_bingol
+beyati--agirsemai--agir_aksaksemai--didi_ci_kerdi--yahya_nazim_celebi
+beyati--beste--hafif--bir_gonca_femin--dede_efendi
+beyati--mehter--yuruksemai----zurnazen_dagi_ahmet_celebi
+    Some measures are skipped by the offsets
+beyati--sarki--agiraksak--muptelayim--dede_efendi
+beyati--sarki--duyek--bende_oldum--rifat_bey
+beyati--sarki--duyek--dilbera_sazin--tanburi_isak
+    Some measures are skipped by the offsets
+beyati--sarki--duyek--hayli_demdir--suphi_ziya_ozbekkan
+    Some measures are skipped by the offsets
+beyati--sarki--duyek--seni_ne_cok--erol_sayan
+beyati--sarki--duyek--zaman_icinde--semahat_ozdenses
+    Some measures are skipped by the offsets
+beyati--sarki--sofyan--acilan_bir--ertugrul_yalcinkaya
+    Some measures are skipped by the offsets
+beyati--sarki--sofyan--ruhuma_sundugun--sadettin_kaynak
+    Some measures are skipped by the offsets
+beyati--seyir--semai--1--rauf_yekta
+beyati--seyir--sofyan--1--erol_bingol
+beyati--seyir--sofyan--1--sefik_gurmeric
+beyati-araban--seyir--duyek--1--sefik_gurmeric
+beyati-araban--seyir--turkaksagi--1--erol_bingol
+buselik--agirsemai--agir_aksaksemai--soyle_ey_nalem--ahmed_irsoy
+buselik--aranagme--agiraksak--1--
+buselik--beste--hafif--her_gordugu--itri
+buselik--fantezi--devrituran--bir_ak_duvak--fethi_karamahmutoglu
+buselik--ilahi--sofyan--bizi_insan--cinucen_tanrikorur
+    Some measures are skipped by the offsets
+buselik--karce--muhammes--sunbuli_sunbuli--sestari_murat_aga
+buselik--mehter--yuruksemai----zurnazen_ibrahim_aga
+buselik--murabba--zencir--gonul_o_turra--yahya_nazim_celebi
+    Some measures are skipped by the offsets
+buselik--ornek-oz--duyek--1--ruhi_ayangil
+buselik--ornek-oz--semai--1--ruhi_ayangil
+buselik--ornek-oz--sofyan--1--huseyin_sadettin_arel
+buselik--pesrev--devrikebir----bolahenk_nuri_bey
+buselik--sarki--agiraksak--bir_peri-ruyin--hamparsum
+    Some measures are skipped by the offsets
+buselik--sarki--agiraksak--kalbimin_derdiyle--feridun_darbaz
+    Some measures are skipped by the offsets
+buselik--sarki--aksak--bir_misli--sakir_aga
+buselik--sarki--aksak--eda_ile--dede_efendi
+buselik--sarki--aksak--inanmaz_vad_i--latif_aga
+    Some measures are skipped by the offsets
+buselik--sarki--duyek--askin_once--amir_ates
+buselik--sarki--duyek--denizlerin_otesinden--ismail_baha_surelsan
+    Some measures are skipped by the offsets
+buselik--sarki--duyek--keremkani_efendim--tanburi_mustafa_cavus
+    Some measures are skipped by the offsets
+buselik--sarki--duyek--sevgim_bitti_mi--arif_sami_toker
+    Some measures are skipped by the offsets
+buselik--sarki--duyek--sunbulistan_etmis--sakir_aga
+    Some measures are skipped by the offsets
+buselik--sarki--duyek--yalandir_dogustan--munir_nurettin_selcuk
+    Some measures are skipped by the offsets
+buselik--sarki--senginsemai--bir_tek--ali_ulvi_baradan
+buselik--sarki--yuruksemai--suzis-i_askim--haci_arif_bey
+    Some measures are skipped by the offsets
+buselik--sazsemaisi--aksaksemai----nefiri_behram_aga
+buselik--seyir--semai--1--rauf_yekta
+buselik--seyir--sofyan--1--erol_bingol
+buselik--seyir--sofyan--1--sefik_gurmeric
+buselik--seyir--sofyan--2--erol_bingol
+buselikasiran--seyir--sofyan--1--sefik_gurmeric
+buzurk--seyir--sofyan--1--sefik_gurmeric
+canfeza--seyir--sofyan--1--sefik_gurmeric
+cargah--pesrev--devrikebir----
+cargah--sazeseri--sofyan--sinsin--bunyan
+cargah--seyir--sofyan--1--erol_bingol
+dilkeshaveran--seyir--duyek--1--erol_bingol
+dilkeshaveran--seyir--duyek--1--sefik_gurmeric
+dugah--seyir--sofyan--1--erol_bingol
+dugah--seyir--sofyan--1--sefik_gurmeric
+evcara--seyir--semai--1--rauf_yekta
+evcara--seyir--sofyan--1--erol_bingol
+evcara--seyir--sofyan--1--sefik_gurmeric
+evic--seyir--devrihindi--1--erol_bingol
+evic--seyir--semai--1--rauf_yekta
+evic--seyir--sofyan--1--sefik_gurmeric
+ferahfeza--pesrev--hafif--son_pesrev--zeki_mehmet_aga
+ferahfeza--seyir--semai--1--rauf_yekta
+ferahfeza--seyir--sofyan--1--erol_bingol
+ferahfeza--seyir--sofyan--1--sefik_gurmeric
+ferahfeza--seyir--sofyan--2--sefik_gurmeric
+ferahfeza--yuruksemai--yuruksemai--son_yuruksemai--zeki_mehmet_aga
+ferahnak--seyir--duyek--1--sefik_gurmeric
+ferahnak--seyir--semai--1--rauf_yekta
+ferahnak--seyir--sofyan--1--erol_bingol
+ferahnuma--seyir--sofyan--1--erol_bingol
+gerdaniye--seyir--senginsemai--1--erol_bingol
+gerdaniye--seyir--sofyan--1--sefik_gurmeric
+gulizar--seyir--duyek--1--erol_bingol
+gulizar--seyir--sofyan--1--sefik_gurmeric
+gulizar--taksim--serbest----tanburi_cemil_bey
+    Some measures are skipped by the offsets
+hicaz--aranagme--evfer--1--
+hicaz--mandra--devrituran--hicaz_mandra--lavtaci_andon
+hicaz--ninni--yuruksofyan--dere_dibi--
+hicaz--ornek-oz--devrihindi--1--ruhi_ayangil
+hicaz--ornek-oz--senginsemai--1--ruhi_ayangil
+hicaz--ornek-oz--sofyan--1--ruhi_ayangil
+hicaz--ornek-oz--yuruksemai--1--ruhi_ayangil
+hicaz--sarki--agiraksak--soylemez_miydim--ii_mahmud
+    Some measures are skipped by the offsets
+hicaz--sarki--agiraksak--var_mi_sen_gibi--sivelioglu_yorgaki
+    Some measures are skipped by the offsets
+hicaz--sarki--yuruksemai--gittin_de_biraktin--munir_nurettin_selcuk
+hicaz--seyir--duyek--1--erol_bingol
+hicaz--seyir--duyek--1--sefik_gurmeric
+hicaz--seyir--semai--1--rauf_yekta
+hicaz--taksim--serbest----tanburi_cemil_bey
+    Some measures are skipped by the offsets
+hicaz--zeybek--agiraksak--harmandali--ege
+hicaz--zeybek--aksak----izmir
+hicaz-humayun--kar--hafif--ey_ki_dostan--makbul_ibrahim_pasa
+    Some measures are skipped by the offsets
+hicaz-humayun--murabba--agircenber--hasret-i_ruyinle--gevrekzade_mustafa_aga
+    Some measures are skipped by the offsets
+hicaz-humayun--nakis--agirsenginsemai--seb_cunun--seyyid_nuh
+    Some measures are skipped by the offsets
+hicaz-humayun--pesrev--devrikebir----musahib_ahmed_aga
+    Some measures are skipped by the offsets
+hicaz-humayun--sazsemaisi--aksaksemai----tanburi_isak
+    Some measures are skipped by the offsets
+hicaz-humayun--seyir--sofyan--1--erol_bingol
+hicaz-humayun--seyir--sofyan--1--sefik_gurmeric
+hicaz-uzzal--seyir--duyek--1--sefik_gurmeric
+hicaz-uzzal--seyir--senginsemai--1--erol_bingol
+hicaz-zirgule--seyir--duyek--1--sefik_gurmeric
+hicaz-zirgule--seyir--sofyan--1--erol_bingol
+hicaz-zirgule--turku--evfer--kirda_erik--ankara
+hicazasiran--seyir--sofyan--1--sefik_gurmeric
+hicazkar--aranagme--aksak--1--muallim_ismail_hakki_bey
+hicazkar--beste--devrikebir--ey_sehensah-i--sadullah_aga
+    Some measures are skipped by the offsets
+hicazkar--etud--sofyan----ozer_ozel
+hicazkar--pesrev--agirduyek----dede_salih_efendi
+hicazkar--pesrev--berefsan----gazi_giray_han
+hicazkar--sarki--agirduyek--can_ile_ben--sakir_aga
+    Some measures are skipped by the offsets
+hicazkar--sarki--agirduyek--sen_gibi--numan_aga
+hicazkar--sarki--aksak--ey_gul--tahir_aga
+    Some measures are skipped by the offsets
+hicazkar--sarki--aksak--nolur_bir_an--mildan_niyazi_bey
+hicazkar--sarki--devrihindi--ey_verd-i--tahir_aga
+    Some measures are skipped by the offsets
+hicazkar--sarki--devrihindi--lezzet_almis--ahmet_mithat_gupgupoglu
+hicazkar--sarki--devrihindi--seb_ta_seher--hasim_bey
+hicazkar--sarki--devrihindi_7_8--gizli_sevdim--tahir_aga
+    Some measures are skipped by the offsets
+hicazkar--sarki--duyek--aglatip_kustureceksen--alaattin_sensoy
+hicazkar--sarki--duyek--beyhude_askina--nikogos_aga
+hicazkar--sarki--duyek--ciceklerin_guluyor--sadettin_kaynak
+    Some measures are skipped by the offsets
+hicazkar--sarki--duyek--harap_oldu--arif_sami_toker
+    Some measures are skipped by the offsets
+hicazkar--sarki--duyek--serpil_yagmur--cevdet_cagla
+    Some measures are skipped by the offsets
+hicazkar--sarki--duyek--yaziktir_etme--erol_sayan
+    Some measures are skipped by the offsets
+hicazkar--sarki--evfer--hic_esin--zeki_mehmet_aga
+hicazkar--sarki--sofyan--sarsam_seni--sadettin_kaynak
+hicazkar--sarki--turkaksagi--vazgecip_naz--medeni_aziz_efendi
+hicazkar--sazsemaisi--aksaksemai----gazi_giray_han
+    Some measures are skipped by the offsets
+hicazkar--seyir--devrihindi--1--erol_bingol
+hicazkar--seyir--devrihindi--2--erol_bingol
+hicazkar--seyir--semai--1--rauf_yekta
+hicazkar--seyir--sofyan--1--sefik_gurmeric
+hicazkarkurdi--seyir--semai--1--rauf_yekta
+hisar--seyir--devrihindi--1--erol_bingol
+hisar--seyir--duyek--1--sefik_gurmeric
+hisarbuselik--seyir--sofyan--1--sefik_gurmeric
+huseyni--agirsemai--aksaksemai--acildi_gonce-i--komurcuzade_hafiz_mehmet_efendi
+    Some measures are skipped by the offsets
+huseyni--beste--agircenber--cemalin_ates-i--zaharya
+    Some measures are skipped by the offsets
+huseyni--beste--berefsan--sebnem_gibi--zaharya
+huseyni--beste--cenber--nigaha_ruhsat--zaharya
+    Some measures are skipped by the offsets
+huseyni--divan--sofyan----
+huseyni--etud--sofyan----hasan_esen
+huseyni--ilahi--yuruksemai--nur-i_fahr-i--dede_efendi
+    Some measures are skipped by the offsets
+huseyni--karsilama--evfer--trakya_karsilamasi--
+huseyni--ornek-oz--duyek--1--ruhi_ayangil
+huseyni--ornek-oz--sofyan--1--ruhi_ayangil
+huseyni--ornek-oz--sofyan--2--ruhi_ayangil
+huseyni--ornek-oz--sofyan--3--ruhi_ayangil
+huseyni--oyunhavasi--nimsofyan--cecen_kizi--tanburi_cemil_bey
+huseyni--pesrev--cifteduyek----tanburi_isak
+    Some measures are skipped by the offsets
+huseyni--sarki--agiraksak--bendeni_gordukce--ismet_aga
+    Some measures are skipped by the offsets
+huseyni--sarki--agiraksak--semi_husnun--sivelioglu_yorgaki
+    Some measures are skipped by the offsets
+huseyni--sarki--duyek--bahcede_gordum--medeni_aziz_efendi
+huseyni--seyir--duyek--1--erol_bingol
+huseyni--seyir--semai--1--rauf_yekta
+huseyni--seyir--sofyan--1--sefik_gurmeric
+huseyni--yuruksemai--yuruksemai--dok_dideden--tabi_mustafa_efendi
+huseyni--zeybek--agiraksak--sarizeybek--osman_pehlivan
+huseyniasiran--seyir--duyek--1--erol_bingol
+huseyniasiran--seyir--semai--1--rauf_yekta
+huseyniasiran--seyir--sofyan--1--sefik_gurmeric
+huzzam--beste--agircenber--asika_tan--hekimbasi_abdulaziz_efendi
+    Some measures are skipped by the offsets
+huzzam--beste--remel--aldim_hayal-i--komurcuzade_hafiz_mehmet_efendi
+huzzam--ilahi--muhammes--duseli_askin--tiznam_yusuf_celebi
+huzzam--ornek-oz--oynak--1--ruhi_ayangil
+huzzam--ornek-oz--sofyan--1--ruhi_ayangil
+huzzam--pesrev--fahte----gazi_giray_han
+huzzam--sarki--agirduyek--bag-i_husnunde--dede_salih_efendi
+    Some measures are skipped by the offsets
+huzzam--sarki--aksak--gonul_dustu--kemenceci_usta_yani
+huzzam--sarki--aksak--guzellerde_ne--tanburi_mustafa_cavus
+    Some measures are skipped by the offsets
+huzzam--sarki--devrihindi--ey_cefacu--sakir_aga
+    Some measures are skipped by the offsets
+huzzam--sarki--devrihindi--umidim_kalmadi--medeni_aziz_efendi
+    Some measures are skipped by the offsets
+huzzam--sarki--sarkidevrirevani--isittim_ey--sakir_aga
+huzzam--sazsemaisi--aksaksemai----gazi_giray_han
+    Some measures are skipped by the offsets
+huzzam--seyir--duyek--1--erol_bingol
+huzzam--seyir--duyek--1--sefik_gurmeric
+huzzam--seyir--semai--1--rauf_yekta
+huzzam--taksim--serbest----tanburi_cemil_bey
+    Some measures are skipped by the offsets
+irak--seyir--sofyan--1--erol_bingol
+irak--seyir--sofyan--1--sefik_gurmeric
+isfahan--seyir--sofyan--1--erol_bingol
+isfahan--seyir--sofyan--1--sefik_gurmeric
+isfahan--taksim--serbest----tanburi_cemil_bey
+    Some measures are skipped by the offsets
+karcigar--agirsemai--aksaksemai--ne_dane--dellalzade_haci_ismail_efendi
+karcigar--beste--zencir--yikildi_ask_ile--dellalzade_haci_ismail_efendi
+karcigar--guvende--nimdevir--edremit--
+karcigar--ilahi--duyek--ey_derde_derman--rakim_elkutlu
+karcigar--kocekce--aksak--girdi_gonul--dede_efendi
+karcigar--kocekce--devrihindi--gul_acil--dede_efendi
+karcigar--kocekce--oynak--iki_de_durnam--dede_efendi
+    Some measures are skipped by the offsets
+karcigar--mandra--devrituran--karadeniz_oyunhavasi--
+karcigar--nakis--yuruksemai--nihani_ol--dellalzade_haci_ismail_efendi
+karcigar--ornek-oz--devrihindi--1--ruhi_ayangil
+karcigar--ornek-oz--nimsofyan--1--ruhi_ayangil
+karcigar--ornek-oz--sofyan--1--huseyin_sadettin_arel
+karcigar--sarki--agirevfer--hezar_zar--suyolcuzade_salih_efendi
+    Some measures are skipped by the offsets
+karcigar--sarki--aksak--bir_rum_dilbere--tanburi_mustafa_cavus
+    Some measures are skipped by the offsets
+karcigar--sarki--aksak--daglari_hep--sadettin_kaynak
+    Some measures are skipped by the offsets
+karcigar--sarki--duyek--bir_kiz_ile--sadettin_kaynak
+    Some measures are skipped by the offsets
+karcigar--sarki--duyek--boyun_ince--arif_sami_toker
+karcigar--sarki--duyek--kemend-i_zulfu--afet_misirliyan
+    Some measures are skipped by the offsets
+karcigar--sarki--duyek--kirpigi_oyali--sadettin_kaynak
+    Some measures are skipped by the offsets
+karcigar--sarki--duyek--kocyigitler--sadettin_kaynak
+karcigar--sarki--duyek--oh_guzel_kiz--sadettin_kaynak
+    Some measures are skipped by the offsets
+karcigar--sarki--sofyan--yine_ey--santuri_ethem_efendi
+    Some measures are skipped by the offsets
+karcigar--sazeseri--sofyan----mutlu_torun
+karcigar--seyir--devrihindi--1--erol_bingol
+karcigar--seyir--semai--1--rauf_yekta
+karcigar--seyir--sofyan--1--sefik_gurmeric
+karcigar--zeybek--oynak----
+kurdi--ornek-oz--devrihindi--1--ruhi_ayangil
+kurdi--ornek-oz--sofyan--1--huseyin_sadettin_arel
+kurdi--ornek-oz--sofyan--1--ruhi_ayangil
+kurdi--seyir--sofyan--1--erol_bingol
+kurdi--seyir--sofyan--1--sefik_gurmeric
+kurdilihicazkar--etud--sofyan----ozer_ozel
+kurdilihicazkar--sarki--aksak--bunca_cevrinle--emin_ongan
+kurdilihicazkar--sarki--aksak--nereden_sevdim--selahaddin_pinar
+kurdilihicazkar--sarki--curcuna--bitmez_tukenmez--selahattin_icli
+kurdilihicazkar--sarki--curcuna--gurub_etti--haci_arif_bey
+kurdilihicazkar--sarki--curcuna--hancer-i_ebrusu--asdik_aga
+kurdilihicazkar--sarki--duyek--her_kimde--civan_aga
+    Some measures are skipped by the offsets
+kurdilihicazkar--sarki--turkaksagi--endami_guzeldir--medeni_aziz_efendi
+kurdilihicazkar--seyir--devrihindi--1--erol_bingol
+kurdilihicazkar--seyir--senginsemai--1--erol_bingol
+kurdilihicazkar--seyir--sofyan--1--erol_bingol
+kurdilihicazkar--seyir--sofyan--1--sefik_gurmeric
+kurdilihicazkar--seyir--sofyan--2--sefik_gurmeric
+mahur--agirsemai--aksaksemai--cihani_lal-i--itri
+    Some measures are skipped by the offsets
+mahur--beste--devrikebir--ta-be-key_sinemde--dilhayat_kalfa
+    Some measures are skipped by the offsets
+mahur--beste--lenkfahte--seyret_izar-i--tascizade_recep_celebi
+    Some measures are skipped by the offsets
+mahur--kar--hafif--gul_bi-ruh-i--abdulkadir_meragi
+mahur--sarki--agir_aksaksemai--sen_seh-i--iii_selim
+    Some measures are skipped by the offsets
+mahur--sarki--aksak--gor_nitti_cana--dede_efendi
+mahur--sarki--aksak--muptelayim_hayli--kemenceci_usta_yani
+    Some measures are skipped by the offsets
+mahur--sarki--aksak--olmusum_divane--komurcuzade_hafiz_mehmet_efendi
+mahur--sarki--duyek--ay_dogar--sadettin_kaynak
+    Some measures are skipped by the offsets
+mahur--sarki--duyek--gul_mevsimi--tanburi_mustafa_cavus
+    Some measures are skipped by the offsets
+mahur--sarki--duyek--hosgeldin_elimize--sadettin_kaynak
+    Some measures are skipped by the offsets
+mahur--sarki--duyek--ipek_saclarin--sadettin_kaynak
+    Some measures are skipped by the offsets
+mahur--sarki--duyek--olsa_da_hos--sadettin_kaynak
+    Some measures are skipped by the offsets
+mahur--sarki--duyek--seb-i_vuslat--nasibin_mehmet_yuru
+mahur--sarki--sarkidevrirevani--zevki_coktur--sakir_aga
+mahur--sarki--sofyan--gordum_bugun--dede_efendi
+    Some measures are skipped by the offsets
+mahur--seyir--sofyan--1--erol_bingol
+mahur--seyir--sofyan--1--sefik_gurmeric
+mahur--tavsanca--aksak--aldi_aklim--ii_mahmud
+    Some measures are skipped by the offsets
+mahur--tavsanca--duyek--ne_ararsam--iii_selim
+mahur--yuruksemai--yuruksemai--beni_cun--ebubekir_aga
+    Some measures are skipped by the offsets
+muhayyer--beste--muhammes--derd-i_hicrana--tosunzade_abdullah_efendi
+muhayyer--etud--sofyan----hasan_esen
+muhayyer--ilahi--duyek--toprakta_yatacak--dede_efendi
+    Some measures are skipped by the offsets
+muhayyer--ilahi--sofyan--duseli_bu_askin--dede_efendi
+    Some measures are skipped by the offsets
+muhayyer--murabba--agircenber--vakt-i_subh--hafiz_post
+    Some measures are skipped by the offsets
+muhayyer--pesrev--darbifetih----tanburi_isak
+muhayyer--sarki--aksak--aglamaktan_dideden--rifat_bey
+muhayyer--sarki--aksak--hala_gonlum--tanburi_mustafa_cavus
+    Some measures are skipped by the offsets
+muhayyer--sarki--yuruksemai--ben_sana_asik--dede_efendi
+    Some measures are skipped by the offsets
+muhayyer--seyir--semai--1--rauf_yekta
+muhayyer--seyir--sofyan--1--erol_bingol
+muhayyer--seyir--sofyan--1--sefik_gurmeric
+muhayyer--zeybek--agiraksak--eskisehir--
+muhayyer--zeybek--aksak--serenler--burdur
+muhayyerkurdi--seyir--turkaksagi--1--erol_bingol
+mustear--seyir--duyek--1--erol_bingol
+mustear--seyir--sofyan--1--sefik_gurmeric
+neva--agirsemai--aksaksemai--sevdi_bu_gonul--ama_kadri_efendi
+    Some measures are skipped by the offsets
+neva--murabba--muhammes--zeyn_eden--dede_efendi
+    Some measures are skipped by the offsets
+neva--murabba--zencir--piyaleler_ki--itri
+    Some measures are skipped by the offsets
+neva--nakis--agir_aksaksemai--ey_gonca-i--dede_efendi
+    Some measures are skipped by the offsets
+neva--nakis--yuruksemai--bir_zaman--hatibzade_osman_efendi
+    Some measures are skipped by the offsets
+neva--seyir--semai--1--rauf_yekta
+neva--seyir--sofyan--1--erol_bingol
+neva--seyir--sofyan--1--sefik_gurmeric
+neva--taksim--serbest----tanburi_cemil_bey
+    Some measures are skipped by the offsets
+neva--yuruksemai--yuruksemai--ey_gonce_dehen--dede_efendi
+    Some measures are skipped by the offsets
+neveser--etud--sofyan----ozer_ozel
+neveser--seyir--senginsemai--1--erol_bingol
+neveser--seyir--sofyan--1--sefik_gurmeric
+neveser--sirto--sofyan----neveser_kokdes
+nihavendikebir--seyir--sofyan--1--sefik_gurmeric
+nihavent--etud--sofyan----ozer_ozel
+nihavent--karsilama--sofyan----merzifon
+nihavent--kasaphavasi--duyek----
+nihavent--longa--nimsofyan----kevser_hanim
+nihavent--pesrev--darbeyn----katip_celebi
+nihavent--sarki--agiraksak--akibet_viran--numan_aga
+    Some measures are skipped by the offsets
+nihavent--sarki--nimsofyan--ben_bir--sivelioglu_yorgaki
+nihavent--sazeseri--nimsofyan--kanatlarim_olsaydi--serif_muhittin_targan
+nihavent--sazsemaisi--aksaksemai----vecdi_seyhun
+nihavent--seyir--semai--1--rauf_yekta
+nihavent--seyir--sofyan--1--erol_bingol
+nihavent--seyir--sofyan--1--sefik_gurmeric
+nihavent--seyir--turkaksagi--1--erol_bingol
+nihavent--taksim--serbest----tanburi_cemil_bey
+    Some measures are skipped by the offsets
+nikriz--longa--nimsofyan----haydar_tatliyay
+nikriz--longa--nimsofyan----tanburi_cemil_bey
+nikriz--seyir--duyek--1--erol_bingol
+nikriz--seyir--duyek--1--sefik_gurmeric
+nikriz--sirto--nimsofyan----refik_fersan
+nikriz--sirto--nimsofyan--nikriz_sirto--tanburi_cemil_bey
+    Some measures are skipped by the offsets
+nikriz--zeybek--agiraksak----izmir
+nikriz--zeybek--aksak--1--tanburi_cemil_bey
+nikriz--zeybek--aksak--2--tanburi_cemil_bey
+nisabur--seyir--sofyan--1--sefik_gurmeric
+nisaburek--seyir--devrihindi--1--erol_bingol
+nisaburek--seyir--senginsemai--1--erol_bingol
+nisaburek--seyir--sofyan--1--sefik_gurmeric
+nuhuft--seyir--sofyan--1--sefik_gurmeric
+pencgah--seyir--semai--1--rauf_yekta
+pencgah--seyir--sofyan--1--sefik_gurmeric
+pencgahizaid--seyir--sofyan--1--sefik_gurmeric
+pesendide--seyir--sofyan--1--sefik_gurmeric
+rahatulervah--seyir--sofyan--1--sefik_gurmeric
+rast--etud--sofyan----ozer_ozel
+rast--kar-i_natik--cenber--rast_geldim--hatibzade_osman_efendi
+    Some measures are skipped by the offsets
+rast--ornek-oz--devrihindi--1--ruhi_ayangil
+rast--ornek-oz--musemmen--1--ruhi_ayangil
+rast--ornek-oz--sofyan--1--huseyin_sadettin_arel
+rast--oyunhavasi--ciftesofyan--tekirdag_karsilamasi--
+rast--sarki--evfer--kordonboyu--erol_sayan
+rast--sazeseri--cifteduyek--du-sems--farabi
+rast--seyir--duyek--1--sefik_gurmeric
+rast--seyir--semai--1--rauf_yekta
+rast--seyir--yuruksemai--1--erol_bingol
+rast--taksim--serbest----tanburi_cemil_bey
+    Some measures are skipped by the offsets
+rast--zeybek--agiraksak--kordon_zeybegi--
+ruhnuvaz--sazsemaisi--aksaksemai----suphi_ezgi
+ruhnuvaz--seyir--sofyan--1--erol_bingol
+saba--beste--devrikebir--gulistan-i_naks-i--zaharya
+    Some measures are skipped by the offsets
+saba--beste--muhammes--bir_nim-nigah--efrasiyaboglu_ali_pasa
+    Some measures are skipped by the offsets
+saba--miraciye--turkdarbi--pes_heman--nayi_osman_dede
+    Some measures are skipped by the offsets
+saba--ornek-oz--sofyan--1--ruhi_ayangil
+saba--ornek-oz--sofyan--2--ruhi_ayangil
+saba--ornek-oz--sofyan--3--ruhi_ayangil
+saba--ornek-oz--yuruksemai--1--ruhi_ayangil
+saba--pesrev--hafif----zurnazen_dagi_ahmet_celebi
+saba--pesrev--nimsofyan--mevlana--kemani_hamza
+saba--sarki--agiraksak--degilsem_de--numan_aga
+    Some measures are skipped by the offsets
+saba--sarki--agiraksak--fasl-i_guldur--sivelioglu_yorgaki
+    Some measures are skipped by the offsets
+saba--sarki--agiraksak--sevdi_canim--komurcuzade_hafiz_mehmet_efendi
+    Some measures are skipped by the offsets
+saba--sarki--aksak--gitti_de--denizoglu_ali_bey
+    Some measures are skipped by the offsets
+saba--sarki--senginsemai--sahilde_saba_ruzgari--mustafa_nafiz_irmak
+saba--sarki--sofyan--asikina_eylemez--numan_aga
+    Some measures are skipped by the offsets
+saba--seyir--semai--1--rauf_yekta
+saba--seyir--sofyan--1--erol_bingol
+saba--seyir--sofyan--1--sefik_gurmeric
+saba--taksim--serbest----tanburi_cemil_bey
+    Some measures are skipped by the offsets
+sabaasiran--seyir--sofyan--1--sefik_gurmeric
+sazkar--seyir--sofyan--1--sefik_gurmeric
+sedaraban--etud--sofyan----ozer_ozel
+sedaraban--seyir--semai--1--rauf_yekta
+sedaraban--seyir--sofyan--1--erol_bingol
+sedaraban--seyir--sofyan--1--sefik_gurmeric
+sedaraban--taksim--serbest----tanburi_cemil_bey
+    Some measures are skipped by the offsets
+segah--ilahi--duyek--ey_acep--seyh_huseyin_halis_efendi
+    Some measures are skipped by the offsets
+segah--kar--hafif--ses-agaz_kar--abdulkadir_meragi
+    Some measures are skipped by the offsets
+segah--ornek-oz--aksak--1--ruhi_ayangil
+segah--ornek-oz--duyek--1--ruhi_ayangil
+segah--pesrev--serbest--karabatak--tanburi_cemil_bey
+    Some measures are skipped by the offsets
+segah--sarki--agir_aksaksemai--cok_kildi--dellalzade_haci_ismail_efendi
+    Some measures are skipped by the offsets
+segah--sarki--aksak--bulbul_yetisir--haci_arif_bey
+    Some measures are skipped by the offsets
+segah--sarki--ciftesofyan--sema-i_maksudu--dellalzade_haci_ismail_efendi
+    Some measures are skipped by the offsets
+segah--sarki--senginsemai--kactim_birakip--kirkor_cigercioglu
+    Some measures are skipped by the offsets
+segah--sazeseri--sofyan--uc_turkoglu--aksehir
+segah--seyir--semai--1--rauf_yekta
+segah--seyir--sofyan--1--erol_bingol
+segah--seyir--sofyan--1--sefik_gurmeric
+segah--zeybek--agiraksak--antalya_zeybegi--antalya
+segah-maye--seyir--sofyan--1--sefik_gurmeric
+sehnaz--seyir--devrihindi--1--erol_bingol
+sehnaz--seyir--sofyan--1--sefik_gurmeric
+sehnazbuselik--ornek-oz--sofyan--1--huseyin_sadettin_arel
+sehnazbuselik--seyir--sofyan--1--erol_bingol
+sevkefza--seyir--semai--1--rauf_yekta
+sevkefza--seyir--sofyan--1--sefik_gurmeric
+sevkefza--seyir--sofyan--2--sefik_gurmeric
+sevkefza--seyir--turkaksagi--1--erol_bingol
+sevkutarab--seyir--sofyan--1--erol_bingol
+sevkutarab--seyir--sofyan--1--sefik_gurmeric
+sultaniyegah--seyir--semai--1--rauf_yekta
+sultaniyegah--seyir--sofyan--1--erol_bingol
+sultaniyegah--seyir--sofyan--1--sefik_gurmeric
+suzidil--aranagme--ciftesofyan--1--
+suzidil--seyir--aksak--1--erol_bingol
+suzidil--seyir--sofyan--1--sefik_gurmeric
+suzidil--taksim--serbest----tanburi_cemil_bey
+    Some measures are skipped by the offsets
+suzidilara--seyir--sofyan--1--erol_bingol
+suzidilara--seyir--sofyan--1--sefik_gurmeric
+suzinak--seyir--semai--1--rauf_yekta
+suzinak--seyir--sofyan--1--erol_bingol
+suzinak--seyir--sofyan--1--sefik_gurmeric
+suzinak-zirgule--seyir--aksak--1--erol_bingol
+suzinak-zirgule--seyir--sofyan--1--sefik_gurmeric
+tahir--seyir--sofyan--1--sefik_gurmeric
+tahir--seyir--turkaksagi--1--erol_bingol
+tarzinevin--seyir--sofyan--1--sefik_gurmeric
+ussak--agirsemai--agir_aksaksemai--padisah-i_isvesin--tahir_aga
+    Some measures are skipped by the offsets
+ussak--beste--agircenber--cam-i_lalin--zaharya
+    Some measures are skipped by the offsets
+ussak--beste--zencir--bahar_geldi--hafiz_post
+ussak--ilahi--sofyan--ey_sehinsah-i--tiznam_yusuf_celebi
+    Some measures are skipped by the offsets
+ussak--kalenderi--yuruksemai--ey_nur-i--numan_aga
+ussak--ornek-oz--semai--1--ruhi_ayangil
+ussak--ornek-oz--senginsemai--1--ruhi_ayangil
+ussak--ornek-oz--sofyan--1--huseyin_sadettin_arel
+ussak--ornek-oz--turkaksagi--1--ruhi_ayangil
+ussak--oyunhavasi--aksak--bandirma_dortlemesi--
+ussak--oyunhavasi--ikizaksak--ata_bari--artvin
+ussak--pesrev--devrikebir----iii_selim
+ussak--sarki--agir_aksaksemai--pur-atesim--dede_efendi
+ussak--sarki--aksak--aglatirlar_guldururler--dede_efendi
+    Some measures are skipped by the offsets
+ussak--sarki--aksak--muntazirdir_sana--dellalzade_haci_ismail_efendi
+    Some measures are skipped by the offsets
+ussak--sarki--evfer--yavrucagim_guzellendi--tanburi_mustafa_cavus
+    Some measures are skipped by the offsets
+ussak--sazsemaisi--aksaksemai----corci
+    Some measures are skipped by the offsets
+ussak--seyir--semai--1--rauf_yekta
+ussak--seyir--sofyan--1--erol_bingol
+ussak--seyir--sofyan--1--sefik_gurmeric
+ussak--taksim--serbest----tanburi_cemil_bey
+    Some measures are skipped by the offsets
+ussak--tevsihilahi--evsat--bir_ismi_mustafa--dede_efendi
+    Some measures are skipped by the offsets
+ussak--yuruksemai--yuruksemai--dila_cunem--diyarbakirli_mahmut_celebi
+    Some measures are skipped by the offsets
+ussak--yuruksemai--yuruksemai--ol_sim-beden--tabi_mustafa_efendi
+    Some measures are skipped by the offsets
+yegah--seyir--semai--1--rauf_yekta
+yegah--seyir--sofyan--1--erol_bingol
+yegah--seyir--sofyan--1--sefik_gurmeric
+zavil--seyir--musemmen--1--erol_bingol
+zavil--seyir--sofyan--1--sefik_gurmeric
+beyati--sazsemaisi--aksaksemai----nayi_osman_dede
+    Some measures are skipped by the offsets
+huseyni--pesrev--devrikebir----iii_selim
+    Some measures are skipped by the offsets
