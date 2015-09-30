@@ -11,7 +11,6 @@ acem--selam--devrikebir--asik-i_ger--huseyin_fahreddin_dede
     84.0: tim   and Ah  are in the same measure!
     7.0: men   and Ah  are in the same measure!
     106, LYRICS_SECTION does not start on a measure: 7.714286
-    215, TERENNUM does not start on a measure: 16.0
     627, LYRICS_SECTION does not start on a measure: 84.5
     914, LYRICS_SECTION does not start on a measure: 142.6667
     929, LYRICS_SECTION does not start on a measure: 145.6667
@@ -22,9 +21,6 @@ acem--selam--devrikebir--asik-i_ger--huseyin_fahreddin_dede
     1056, LYRICS_SECTION does not start on a measure: 171.6667
     1094, LYRICS_SECTION does not start on a measure: 179.6667
     1126, LYRICS_SECTION does not start on a measure: 187.6667
-acemasiran--pesrev--frenkcin----nuri_halil_poyraz
-    402, 4-HANE does not start on a measure: 28.0
-    571, 1-HANE-VE-MULAZIME does not start on a measure: 60.0
 acemasiran--sarki--aksak--dinle_sozum--iii_selim
     34.0: hım   and Yâr_ are in the same measure!
     28.0: hâ   and Yâr_ are in the same measure!
@@ -86,12 +82,6 @@ acemasiran--sarki--sofyan--bakma_sakin--sakir_aga
     375, LYRICS_SECTION does not start on a measure: 33.875
     392, LYRICS_SECTION does not start on a measure: 35.875
     436, LYRICS_SECTION does not start on a measure: 39.875
-acemasiran--sazsemaisi--aksaksemai----misirli_udi_ibrahim_efendi
-    370, 4-HANE does not start on a measure: 36.0
-    521, TESLIM does not start on a measure: 68.0
-acemasiran--sazsemaisi--aksaksemai----serafettin_seref_cakar
-    492, 4-HANE does not start on a measure: 36.0
-    617, MULAZIME does not start on a measure: 100.0
 acemasiran--yuruksemai--yuruksemai--bileydi_dil--itri
     Some measures are skipped by the offsets
     98.0: li   and vay   are in the same measure!
@@ -100,8 +90,10 @@ acemasiran--yuruksemai--yuruksemai--bileydi_dil--itri
     40.0: li   and Te are in the same measure!
     3.0: dir   and Yar  are in the same measure!
     35, LYRICS_SECTION does not start on a measure: 3.666667
+    301, LYRICS_SECTION does not start on a measure: 33.08333
     376, LYRICS_SECTION does not start on a measure: 40.83333
     423, LYRICS_SECTION does not start on a measure: 46.83333
+    695, LYRICS_SECTION does not start on a measure: 78.08334
     860, LYRICS_SECTION does not start on a measure: 96.58334
     876, LYRICS_SECTION does not start on a measure: 98.41666
 acemkurdi--agirsemai--agir_aksaksemai--dur_etme--osep_aga
@@ -113,6 +105,7 @@ acemkurdi--agirsemai--agir_aksaksemai--dur_etme--osep_aga
     31.0: vay   and Ah  are in the same measure!
     326, LYRICS_SECTION does not start on a measure: 31.6
     387, LYRICS_SECTION does not start on a measure: 36.4
+    449, LYRICS_SECTION does not start on a measure: 42.2
     509, LYRICS_SECTION does not start on a measure: 46.4
     558, LYRICS_SECTION does not start on a measure: 49.5
     583, LYRICS_SECTION does not start on a measure: 51.8
@@ -148,25 +141,14 @@ acemkurdi--sarki--aksak--altin_tasta--nimet_hanim
 acemkurdi--sarki--aksak--ruhum_su--alaeddin_yavasca
     47.0: ca   and növ are in the same measure!
     415, LYRICS_SECTION does not start on a measure: 47.44444
-acemkurdi--sazsemaisi--aksaksemai----muallim_ismail_hakki_bey
-    524, 4-HANE does not start on a measure: 36.0
-    627, TESLIM does not start on a measure: 52.0
 arazbarbuselik--kupe--agiraksak--buse--ahmet_avni_konuk
     3.0: bân   and Ah  are in the same measure!
     50, LYRICS_SECTION does not start on a measure: 3.888889
-arazbarbuselik--sazsemaisi--aksaksemai----refik_fersan
-    852, 4-HANE does not start on a measure: 50.0
-    1360, TESLIM does not start on a measure: 148.0
-bestenigar--pesrev--fahte----tatyos_efendi
-    166, 2-HANE does not start on a measure: 19.0
 bestenigar--sarki--agiraksak--gayridan_bulmaz--kazasker_mustafa_izzet_efendi
     19.0: ğim   and Sen are in the same measure!
     348, LYRICS_SECTION does not start on a measure: 19.27778
 bestenigar--sarki--curcuna--cok_surmedi--enderunlu_hafiz_husnu_efendi
     Some measures are skipped by the offsets
-bestenigar--sazsemaisi--aksaksemai----tanburi_cemil_bey
-    345, 4-HANE does not start on a measure: 28.0
-    498, TESLIM does not start on a measure: 44.0
 beyati--agirsemai--aksaksemai--cikmaz_derun_u--tabi_mustafa_efendi
     57.0: vay   and Cây_ are in the same measure!
     52.0: vay   and Ey  are in the same measure!
@@ -206,12 +188,6 @@ beyati--sarki--aksak--ne_semtden--kemani_riza_efendi
     220, LYRICS_SECTION does not start on a measure: 16.66667
     481, LYRICS_SECTION does not start on a measure: 36.66667
     505, LYRICS_SECTION does not start on a measure: 38.66667
-beyati--sazsemaisi--aksaksemai----kanuni_omer_efendi
-    493, 4-HANE does not start on a measure: 39.0
-    569, TESLIM does not start on a measure: 47.0
-beyati--sazsemaisi--aksaksemai--beyatiye_bir_damla--necmi_kiran
-    975, 4-HANE does not start on a measure: 48.0
-    1180, TESLIM does not start on a measure: 96.0
 beyati--turku--3334--kirmizi_gul--erzurum
     9.0: dı   and Yav are in the same measure!
     8.0: net   and Git are in the same measure!
@@ -250,11 +226,6 @@ beyati--turku--curcuna--aksam_olur--urfa
     558, LYRICS_SECTION does not start on a measure: 65.7
     648, LYRICS_SECTION does not start on a measure: 76.7
     692, LYRICS_SECTION does not start on a measure: 81.7
-beyati--turku--nimsofyan--gesi_baglarinda--kayseri
-    244, ARANAGME does not start on a measure: 24.0
-beyati-araban--sazsemaisi--aksaksemai----rauf_yekta
-    253, 4-HANE does not start on a measure: 24.0
-    352, TESLIM does not start on a measure: 40.0
 buselik--nakis--yuruksemai--cefasi_asika--dellalzade_haci_ismail_efendi
     20.0: vay   and Ah  are in the same measure!
     181, LYRICS_SECTION does not start on a measure: 20.5
@@ -287,6 +258,7 @@ dilkeshaveran--agirsemai--agir_aksaksemai--hal-i_ruhsarina--kucuk_mehmet_aga
     44.0: nı   and Ah  are in the same measure!
     17.0: nı   and Ah  are in the same measure!
     238, LYRICS_SECTION does not start on a measure: 17.66667
+    569, LYRICS_SECTION does not start on a measure: 42.2
     606, LYRICS_SECTION does not start on a measure: 44.6
 dugah--kar--hafif--pek_sevdim--haci_faik_bey
     80.0: men   and Dost  are in the same measure!
@@ -308,8 +280,6 @@ dugah--yuruksemai--yuruksemai--der_yemeni--seyhulislam_esad_efendi
     381, LYRICS_SECTION does not start on a measure: 51.66667
     406, LYRICS_SECTION does not start on a measure: 54.66667
     431, LYRICS_SECTION does not start on a measure: 57.66667
-evcara--sazsemaisi--aksaksemai----dilhayat_kalfa
-    424, 4-HANE does not start on a measure: 51.0
 evchuzi--turku--aksak--ben_havada--
     44.0: man   and Ben  are in the same measure!
     40.0: man   and Ben  are in the same measure!
@@ -339,12 +309,6 @@ evic--sarki--aydin--kakulleri_lule--tanburi_mustafa_cavus
     35.0: mı   and Ha are in the same measure!
     231, LYRICS_SECTION does not start on a measure: 35.44444
     485, LYRICS_SECTION does not start on a measure: 73.44444
-evic--sazsemaisi--aksaksemai----muallim_ismail_hakki_bey
-    625, 4-HANE does not start on a measure: 48.0
-    736, TESLIM does not start on a measure: 72.0
-evic--sazsemaisi--aksaksemai----sedat_oztoprak
-    422, 4-HANE does not start on a measure: 36.0
-    605, TESLIM does not start on a measure: 56.0
 evic--turku--aksak--ayagina_giymis--
     48.0: man   and Yan are in the same measure!
     46.0: mi   and of   are in the same measure!
@@ -393,12 +357,6 @@ ferahfeza--agirsemai--senginsemai--bir_dilber-i--dede_efendi
     18.0: li   and Gü are in the same measure!
     253, LYRICS_SECTION does not start on a measure: 18.5
     521, LYRICS_SECTION does not start on a measure: 39.5
-ferahfeza--sazsemaisi--aksaksemai----serif_muhittin_targan
-    540, 4-HANE does not start on a measure: 40.0
-    761, TESLIM does not start on a measure: 56.0
-ferahfeza--sazsemaisi--aksaksemai----tanburi_cemil_bey
-    595, 4-HANE does not start on a measure: 48.0
-    855, TESLIM does not start on a measure: 95.0
 ferahfeza--yuruksemai--yuruksemai--bu_gece_ben--dede_efendi
     79.0: dim   and Dil  are in the same measure!
     43.0: dim   and Dil  are in the same measure!
@@ -406,9 +364,6 @@ ferahfeza--yuruksemai--yuruksemai--bu_gece_ben--dede_efendi
     143, LYRICS_SECTION does not start on a measure: 17.66667
     351, LYRICS_SECTION does not start on a measure: 43.66667
     639, LYRICS_SECTION does not start on a measure: 79.66666
-ferahnak--sazsemaisi--aksaksemai----leon_hanciyan
-    233, 4-HANE does not start on a measure: 24.0
-    389, TESLIM does not start on a measure: 86.0
 ferahnuma--turku--aksak--kiz_bahcende--kastamonu
     31.0: ne   and Ben  are in the same measure!
     30.0: mı   and Hay are in the same measure!
@@ -462,13 +417,17 @@ gerdaniye--turku--nimcember--kirimdan_gelirim--rumeli
     12.0: rim   and A are in the same measure!
     132, LYRICS_SECTION does not start on a measure: 12.42857
     149, LYRICS_SECTION does not start on a measure: 14.42857
+    201, LYRICS_SECTION does not start on a measure: 20.14286
+    219, LYRICS_SECTION does not start on a measure: 22.14286
     237, LYRICS_SECTION does not start on a measure: 23.85714
+    265, LYRICS_SECTION does not start on a measure: 27.71428
     284, LYRICS_SECTION does not start on a measure: 29.57143
     315, ARANAGME does not start on a measure: 33.57143
     373, ARANAGME does not start on a measure: 38.57143
     499, LYRICS_SECTION does not start on a measure: 51.71429
     516, LYRICS_SECTION does not start on a measure: 53.71429
     552, LYRICS_SECTION does not start on a measure: 57.42857
+    580, LYRICS_SECTION does not start on a measure: 61.28571
 gerdaniye--turku--sofyan--odasina_girdim--
     27.0: man   and a are in the same measure!
     27.0: de   and a are in the same measure!
@@ -491,10 +450,11 @@ gerdaniye--turku--turkaksagi--uca_daglarin--erzurum
     19.0: mı   and Le  are in the same measure!
     8.0: da   and Kar are in the same measure!
     68, LYRICS_SECTION does not start on a measure: 8.6
+    127, LYRICS_SECTION does not start on a measure: 17.2
     140, LYRICS_SECTION does not start on a measure: 19.8
-guldeste--sazsemaisi--aksaksemai----dede_salih_efendi
-    309, 4-HANE does not start on a measure: 36.0
-    374, MULAZIME does not start on a measure: 48.0
+    169, LYRICS_SECTION does not start on a measure: 24.8
+    327, LYRICS_SECTION does not start on a measure: 48.1
+    357, LYRICS_SECTION does not start on a measure: 53.2
 gulizar--kocekce--aksak--nazli_nazli--dede_efendi
     9.0: der   and ah  are in the same measure!
     3.0: der   and ah  are in the same measure!
@@ -502,15 +462,6 @@ gulizar--kocekce--aksak--nazli_nazli--dede_efendi
     12, LYRICS_SECTION does not start on a measure: 1.666667
     28, LYRICS_SECTION does not start on a measure: 3.666667
     77, LYRICS_SECTION does not start on a measure: 9.666667
-gulizar--sazsemaisi--aksaksemai----tanburi_isak
-    422, 4-HANE does not start on a measure: 31.0
-    542, TESLIM does not start on a measure: 43.0
-gulsen-ivefa--sazsemaisi--aksaksemai----feraizcizade_ibrahim_efendi
-    305, 4-HANE does not start on a measure: 28.0
-    349, TESLIM does not start on a measure: 32.0
-gulzar--sazsemaisi--aksaksemai----ismet_burkay
-    657, 4-HANE does not start on a measure: 56.0
-    868, MULAZIME does not start on a measure: 88.0
 hicaz--agirsemai--agirsenginsemai--guller_kizarir--ibrahim_aga
     56.0: gel   and Öm are in the same measure!
     46.0: ce   and Ah  are in the same measure!
@@ -589,13 +540,9 @@ hicaz--sarki--duyek--istanbulda_bogazicinde--sekip_ayhan_ozisik
     110, LYRICS_SECTION does not start on a measure: 12.5
     343, LYRICS_SECTION does not start on a measure: 25.22222
     523, LYRICS_SECTION does not start on a measure: 33.22222
-hicaz--sarki--nimsofyan--sari_kurdelem--fahri_kayahan
-    363, ARANAGME does not start on a measure: 67.0
 hicaz--sarki--semai--sana_dun--munir_nurettin_selcuk
     398, SESLERLE-NINNI does not start on a measure: 76.66666
     412, SESLERLE-NINNI does not start on a measure: 79.33334
-hicaz--sarki--senginsemai--derdimi_arz--enderuni_ali_bey
-    55, ARANAGME does not start on a measure: 4.0
 hicaz--sarki--sofyan--ada_sahillerinde--
     49.0: rum   and Be are in the same measure!
     47.0: rum   and Her  are in the same measure!
@@ -606,17 +553,9 @@ hicaz--sarki--sofyan--ada_sahillerinde--
     175, LYRICS_SECTION does not start on a measure: 19.25
     197, LYRICS_SECTION does not start on a measure: 21.25
     221, LYRICS_SECTION does not start on a measure: 23.25
-    240, ARANAGME does not start on a measure: 26.0
     415, LYRICS_SECTION does not start on a measure: 45.25
     437, LYRICS_SECTION does not start on a measure: 47.25
     461, LYRICS_SECTION does not start on a measure: 49.25
-hicaz--sarki--turkaksagi--yadeller_aldi--sadettin_kaynak
-    320, ARANAGME does not start on a measure: 55.0
-hicaz--sazsemaisi--aksaksemai----muhittin_erev
-    429, 4-HANE does not start on a measure: 36.0
-hicaz--sazsemaisi--aksaksemai----refik_talat_alpman
-    614, 4-HANE does not start on a measure: 44.0
-    744, MULAZIME does not start on a measure: 80.0
 hicaz--turku--aksak--gemilerde_talim--
     22.0: ğim   and Al are in the same measure!
     21.0: bim   and Re are in the same measure!
@@ -633,18 +572,12 @@ hicaz--turku--aksak--karanfil_oylum_oylum--
     10.0: dim   and E are in the same measure!
     134, LYRICS_SECTION does not start on a measure: 10.66667
     160, LYRICS_SECTION does not start on a measure: 12.66667
-    176, ARANAGME does not start on a measure: 14.0
     310, LYRICS_SECTION does not start on a measure: 24.66667
     336, LYRICS_SECTION does not start on a measure: 26.66667
-hicaz--turku--sofyan--ela_gozlerine--sadettin_kaynak
-    391, ARANAGME does not start on a measure: 42.0
 hicaz--turku--turkaksagi--carsambayi_sel--
     22.0: dım   and E are in the same measure!
     18.0: dı   and Bir  are in the same measure!
     6.0: dım   and E are in the same measure!
-    80, LYRICS_SECTION does not start on a measure: 6.0
-    236, LYRICS_SECTION does not start on a measure: 18.0
-    299, LYRICS_SECTION does not start on a measure: 22.0
 hicaz--yuruksemai--yuruksemai--yine_nese-i--dede_efendi
     64.0: lat   and e are in the same measure!
     54.0: lim   and be are in the same measure!
@@ -673,10 +606,8 @@ hicaz-humayun--sarki--evsat--nicin_a_sevdigim--nikogos_aga
     25.0: ri   and Reh  are in the same measure!
     12.0: ri   and Reh  are in the same measure!
     151, LYRICS_SECTION does not start on a measure: 12.92308
+    247, LYRICS_SECTION does not start on a measure: 21.15385
     299, LYRICS_SECTION does not start on a measure: 25.84615
-hicaz-humayun--sazsemaisi--aksaksemai----neyzen_yusuf_pasa
-    556, 4-HANE does not start on a measure: 39.0
-    761, TESLIM does not start on a measure: 55.0
 hicaz-humayun--turku--sofyan--bulbulun_gogsu--urfa
     23.0: man   and Bu  are in the same measure!
     14.0: man   and Ger are in the same measure!
@@ -793,9 +724,6 @@ hicazkar--sarki--sofyan--ben_sozune--numan_aga
     162, LYRICS_SECTION does not start on a measure: 13.875
     222, LYRICS_SECTION does not start on a measure: 19.875
     248, LYRICS_SECTION does not start on a measure: 21.875
-hicazkar--sazsemaisi--aksaksemai----tanburi_cemil_bey
-    532, 4-HANE does not start on a measure: 36.0
-    682, TESLIM does not start on a measure: 52.0
 hicazkar--turku--tekvurus--gul_kuruttum--hatay
     Some measures are skipped by the offsets
     27.0: nül   and Yâr are in the same measure!
@@ -816,6 +744,7 @@ hicazkar--turku--tekvurus--gul_kuruttum--hatay
     7.0: tum   and Yâ are in the same measure!
     6.0: tum   and Yâ are in the same measure!
     5.0: tum   and Gül  are in the same measure!
+    33, ARANAGME does not start on a measure: 2.090909
     80, LYRICS_SECTION does not start on a measure: 5.181818
     93, LYRICS_SECTION does not start on a measure: 6.181818
     110, LYRICS_SECTION does not start on a measure: 7.181818
@@ -848,9 +777,6 @@ hisar--yuruksemai--yuruksemai--hava_guzel--dede_efendi
     323, LYRICS_SECTION does not start on a measure: 45.66667
     433, LYRICS_SECTION does not start on a measure: 60.66667
     488, LYRICS_SECTION does not start on a measure: 68.66666
-hisarbuselik--sazsemaisi--aksaksemai----tanburi_buyuk_osman_bey
-    409, 4-HANE does not start on a measure: 35.0
-    564, TESLIM does not start on a measure: 51.0
 hisarbuselik--yuruksemai--yuruksemai--gonlum_hevesi--zekai_dede
     88.0: ney   and Mürg_ are in the same measure!
     80.0: man   and Ten  are in the same measure!
@@ -900,14 +826,9 @@ huseyni--ilahi--turkdarbi--ey_dil--ali_ufki
     18, LYRICS_SECTION does not start on a measure: 0.703125
     31, LYRICS_SECTION does not start on a measure: 0.90625
     44, LYRICS_SECTION does not start on a measure: 1.125
+    52, LYRICS_SECTION does not start on a measure: 2.089286
     62, LYRICS_SECTION does not start on a measure: 2.328125
     75, LYRICS_SECTION does not start on a measure: 2.53125
-huseyni--sazsemaisi--aksaksemai----neyzen_rasid_efendi
-    835, 4-HANE does not start on a measure: 60.0
-    980, TESLIM does not start on a measure: 84.0
-huseyni--sazsemaisi--aksaksemai----tatyos_efendi
-    594, 4-HANE does not start on a measure: 44.0
-    806, TESLIM does not start on a measure: 76.0
 huseyni--turku--aksak--akzadeler_giyer--rumeli
     72.0: dı   and U are in the same measure!
     61.0: ca   and Düğ are in the same measure!
@@ -994,24 +915,17 @@ huzzam--kanto--aksak--bana_bir--lavtaci_hristo
     10.0: ah   and Kal are in the same measure!
     80, LYRICS_SECTION does not start on a measure: 10.22222
     111, LYRICS_SECTION does not start on a measure: 14.22222
-huzzam--sarki--aksak--gonul_verdim--iii_selim
-    42, ARANAGME does not start on a measure: 4.0
-    281, ARANAGME does not start on a measure: 26.0
-    323, ARANAGME does not start on a measure: 30.0
 huzzam--sarki--aksak--sevdim_yine--tanburi_mustafa_cavus
     Some measures are skipped by the offsets
-huzzam--sarki--curcuna--guzel_gun_gormedi--haci_arif_bey
-    32, ARANAGME does not start on a measure: 4.0
-huzzam--sazsemaisi--aksaksemai----udi_nevres_bey
-    505, 4-HANE does not start on a measure: 42.0
+    210, LYRICS_SECTION does not start on a measure: 20.11111
+    242, LYRICS_SECTION does not start on a measure: 24.11111
+    268, LYRICS_SECTION does not start on a measure: 26.11111
+    294, LYRICS_SECTION does not start on a measure: 28.11111
 huzzam--turku--musemmen_ii--su_karsiki--hatay
     59.0: yok   and a are in the same measure!
     21.0: yok   and a are in the same measure!
     168, LYRICS_SECTION does not start on a measure: 21.25
     458, LYRICS_SECTION does not start on a measure: 59.25
-irak--sazsemaisi--aksaksemai----serif_muhittin_targan
-    524, 4-HANE does not start on a measure: 36.0
-    706, TESLIM does not start on a measure: 56.0
 isfahan--beste--zencir--gel_ey--itri
     74.0: ber   and A are in the same measure!
     14.0: ber   and A are in the same measure!
@@ -1021,13 +935,12 @@ isfahan--mars--devrihindi--ey_gaziler--iii_selim
     Some measures are skipped by the offsets
     12.0: me   and Dağ are in the same measure!
     39, ARANAGME does not start on a measure: 3.076923
+    74, LYRICS_SECTION does not start on a measure: 5.038462
     191, LYRICS_SECTION does not start on a measure: 12.46154
     239, ARANAGME does not start on a measure: 14.61539
     278, ARANAGME does not start on a measure: 17.69231
 isfahan--sazsemaisi--aksaksemai----tanburi_cemil_bey
     Some measures are skipped by the offsets
-    461, 4-HANE does not start on a measure: 36.0
-    624, TESLIM does not start on a measure: 92.0
 isfahan--yuruksemai--yuruksemai--o_guzler--dellalzade_haci_ismail_efendi
     54.0: de   and Ne are in the same measure!
     34.0: de   and Ne are in the same measure!
@@ -1067,15 +980,9 @@ karcigar--sarki--aksak--aldin_dil-i--enderuni_ali_bey
     14.0: man   and Â are in the same measure!
     200, LYRICS_SECTION does not start on a measure: 14.22222
     285, LYRICS_SECTION does not start on a measure: 22.22222
-karcigar--sazsemaisi--aksaksemai----ahmet_mukerrem_akinci
-    733, 4-HANE does not start on a measure: 48.0
-    978, TESLIM does not start on a measure: 96.0
 karcigar--sazsemaisi--aksaksemai----kanuni_omer_efendi
     Some measures are skipped by the offsets
     355, MULAZIME does not start on a measure: 33.6
-karcigar--sazsemaisi--aksaksemai----resat_aysu
-    563, 4-HANE does not start on a measure: 36.0
-    969, TESLIM does not start on a measure: 116.0
 karcigar--turku--aksak--cayira_serdim--
     59.0: lah   and ma are in the same measure!
     54.0: nım   and Ki are in the same measure!
@@ -1117,6 +1024,8 @@ kurdi--turku--agiraksak--elif_dedim--kutahya
     23, ARANAGME does not start on a measure: 0.5
     144, LYRICS_SECTION does not start on a measure: 2.894097
     186, LYRICS_SECTION does not start on a measure: 4.894097
+    214, LYRICS_SECTION does not start on a measure: 6.005208
+    255, LYRICS_SECTION does not start on a measure: 8.005208
     303, LYRICS_SECTION does not start on a measure: 9.065972
     333, LYRICS_SECTION does not start on a measure: 9.323785
     378, LYRICS_SECTION does not start on a measure: 9.597222
@@ -1127,16 +1036,6 @@ kurdilihicazkar--sarki--nimsofyan--huzun--selahattin_icli
     Some measures are skipped by the offsets
 kurdilihicazkar--sazsemaisi--aksaksemai----haydar_tatliyay
     Some measures are skipped by the offsets
-    828, 4-HANE does not start on a measure: 39.0
-kurdilihicazkar--sazsemaisi--aksaksemai----tatyos_efendi
-    443, 4-HANE does not start on a measure: 36.0
-    646, TESLIM does not start on a measure: 52.0
-kurdilihicazkar--sazsemaisi--aksaksemai----yalcin_tura
-    403, 4-HANE does not start on a measure: 56.0
-    515, TESLIM does not start on a measure: 72.0
-kurdilihicazkar--sazsemaisi--aksaksemai--sonbahar--coskun_acikgoz
-    586, 4-HANE does not start on a measure: 48.0
-    901, TESLIM does not start on a measure: 103.0
 mahur--sarki--evfer--kalbimdeki_amal-i--muallim_ismail_hakki_bey
     10.0: le   and in are in the same measure!
     6.0: le   and in are in the same measure!
@@ -1175,16 +1074,8 @@ mahur--sazsemaisi--aksaksemai----gazi_giray_han
     344, TESLIM does not start on a measure: 40.2
     413, 4-HANE does not start on a measure: 48.7
     465, TESLIM does not start on a measure: 55.9
-mahur--sazsemaisi--aksaksemai----nikolaki
-    445, 4-HANE does not start on a measure: 36.0
-    518, MULAZIME does not start on a measure: 52.0
-mahur--sazsemaisi--aksaksemai----refik_talat_alpman
-    527, 4-HANE does not start on a measure: 48.0
-    718, TESLIM does not start on a measure: 100.0
 mahur--sazsemaisi--aksaksemai--bahar_1--goksel_baktagir
     Some measures are skipped by the offsets
-    546, 4-HANE does not start on a measure: 39.0
-    753, TESLIM does not start on a measure: 91.0
 mahur--tavsanca--aksak--nazar_etti--tanburi_mustafa_cavus
     40.0: dan   and Ge are in the same measure!
     14.0: dan   and Ge are in the same measure!
@@ -1223,9 +1114,6 @@ mahur--zeybek--aydin--kirpigine_surme--refik_fersan
     532, LYRICS_SECTION does not start on a measure: 40.66667
     629, LYRICS_SECTION does not start on a measure: 48.66667
     659, LYRICS_SECTION does not start on a measure: 50.66667
-muberka--sazsemaisi--aksaksemai----
-    500, 4-HANE does not start on a measure: 55.0
-    608, MULAZIME does not start on a measure: 75.0
 muhayyer--bozlak--serbest--havayi_da--asaf_guven
     6.0: yı   and Çe are in the same measure!
     59, LYRICS_SECTION does not start on a measure: 6.5625
@@ -1268,9 +1156,6 @@ muhayyer--sarki--sofyan--ne_zaman--sadettin_kaynak
     381, LYRICS_SECTION does not start on a measure: 31.5
     412, LYRICS_SECTION does not start on a measure: 34.5
     426, LYRICS_SECTION does not start on a measure: 35.5
-muhayyer--sazsemaisi--aksaksemai----tanburi_cemil_bey
-    556, 4-HANE does not start on a measure: 44.0
-    703, TESLIM does not start on a measure: 56.0
 muhayyer--turku--curcuna--kerpic_kerpic--diyarbakir
     54.0: hı   and Gel  are in the same measure!
     51.0: zı   and Gel  are in the same measure!
@@ -1317,13 +1202,9 @@ muhayyer--turku--raksaksagi--istanbuldan_uskudara--
     384, LYRICS_SECTION does not start on a measure: 48.77778
     420, LYRICS_SECTION does not start on a measure: 53.77778
     457, LYRICS_SECTION does not start on a measure: 58.77778
-muhayyer--turku--sofyan--binip_de--denizli
-    235, ARANAGME does not start on a measure: 21.0
 muhayyerkurdi--sarki--duyek--ruzgar_soyluyor--sekip_ayhan_ozisik
     45.0: zün   and ah  are in the same measure!
     359, LYRICS_SECTION does not start on a measure: 45.5
-muhayyerkurdi--sarki--nimsofyan--gonlumu_gonlune--omer_sami_gupgup
-    224, ARANAGME does not start on a measure: 100.0
 muhayyerkurdi--sarki--nimsofyan--kadehinde_zehir--erol_sayan
     Some measures are skipped by the offsets
     147.0: rı   and Çe are in the same measure!
@@ -1352,9 +1233,6 @@ muhayyerkurdi--sarki--nimsofyan--kadehinde_zehir--erol_sayan
     913, LYRICS_SECTION does not start on a measure: 143.625
     924, LYRICS_SECTION does not start on a measure: 145.5
     938, LYRICS_SECTION does not start on a measure: 147.5
-muhayyerkurdi--sazsemaisi--aksaksemai----sadi_isilay
-    341, 4-HANE does not start on a measure: 24.0
-    486, TESLIM does not start on a measure: 38.0
 neva--kar--nimsakil--ey_gulbun-i--itri
     Some measures are skipped by the offsets
     196.0: li   and Ey  are in the same measure!
@@ -1368,10 +1246,16 @@ neva--kar--nimsakil--ey_gulbun-i--itri
     177.0: li   and Yen  are in the same measure!
     124.0: ten   and Te  are in the same measure!
     752, LYRICS_SECTION does not start on a measure: 124.75
+    1046, LYRICS_SECTION does not start on a measure: 166.4444
+    1080, LYRICS_SECTION does not start on a measure: 171.0556
+    1119, LYRICS_SECTION does not start on a measure: 176.5556
     1166, LYRICS_SECTION does not start on a measure: 177.8889
     1209, LYRICS_SECTION does not start on a measure: 178.8889
     1249, LYRICS_SECTION does not start on a measure: 180.9722
+    1274, LYRICS_SECTION does not start on a measure: 183.0556
+    1308, LYRICS_SECTION does not start on a measure: 186.1389
     1341, LYRICS_SECTION does not start on a measure: 188.9722
+    1366, LYRICS_SECTION does not start on a measure: 191.0556
     1444, LYRICS_SECTION does not start on a measure: 193.5972
     1470, LYRICS_SECTION does not start on a measure: 194.2222
     1495, LYRICS_SECTION does not start on a measure: 194.9097
@@ -1379,6 +1263,7 @@ neva--kar--nimsakil--ey_gulbun-i--itri
     1560, LYRICS_SECTION does not start on a measure: 196.5972
 neva--pesrev--devrikebir----zeki_mehmet_aga
     Some measures are skipped by the offsets
+    122, 2-HANE does not start on a measure: 8.035714
     245, 3-HANE does not start on a measure: 16.07143
     364, 4-HANE does not start on a measure: 24.07143
 neva--sazsemaisi--aksaksemai----kantemiroglu
@@ -1386,9 +1271,6 @@ neva--sazsemaisi--aksaksemai----kantemiroglu
     92, 2-HANE does not start on a measure: 7.9
     180, 3-HANE does not start on a measure: 15.9
     269, 4-HANE does not start on a measure: 27.9
-neva--sazsemaisi--aksaksemai----yusuf_ziya_pasa
-    371, 4-HANE does not start on a measure: 36.0
-    481, TESLIM does not start on a measure: 60.0
 neva--turku--sofyan--canakkale_icinde--
     53.0: şı   and Of  are in the same measure!
     47.0: şı   and Of  are in the same measure!
@@ -1455,20 +1337,19 @@ nihavent--sarki--aksak--yok_baska--munir_nurettin_selcuk
 nihavent--sarki--duyek--ahimi_hicranimi--selahattin_inal
     58.0: tum   and ah  are in the same measure!
     519, LYRICS_SECTION does not start on a measure: 58.5
-nihavent--sarki--duyek--bulbul_asikmis--zeki_muren
-    252, ARANAGME does not start on a measure: 46.0
 nihavent--sarki--duyek--istanbul_biricik--sadettin_kaynak
     Some measures are skipped by the offsets
+    171, LYRICS_SECTION does not start on a measure: 21.5
+    239, LYRICS_SECTION does not start on a measure: 38.5
+    334, LYRICS_SECTION does not start on a measure: 56.5
 nihavent--sarki--semai--gelin_kizlar--haci_faik_bey
     Some measures are skipped by the offsets
-    236, ARANAGME does not start on a measure: 62.0
 nihavent--sarki--sofyan--sahilde_o--yesari_asim_arsoy
     27.0: tım   and - are in the same measure!
     326, LYRICS_SECTION does not start on a measure: 27.6875
 nihavent--sazsemaisi--senginsemai----erzurumlu_hasib_dede
     1, 1-HANE-VE-MULAZIME does not start on a measure: 0.125
     42, 1-HANE-VE-MULAZIME does not start on a measure: 4.125
-    83, 2-HANE does not start on a measure: 8.0
     165, 1-HANE-VE-MULAZIME does not start on a measure: 24.125
     206, 1-HANE-VE-MULAZIME does not start on a measure: 28.125
     323, 1-HANE-VE-MULAZIME does not start on a measure: 40.125
@@ -1548,17 +1429,10 @@ nisaburek--sarki--yuruksemai--mest-i_nazim--yusuf_ziya_pasa
     9.0: ni   and Mest_ are in the same measure!
     60, LYRICS_SECTION does not start on a measure: 9.6
     92, LYRICS_SECTION does not start on a measure: 14.4
+    119, LYRICS_SECTION does not start on a measure: 19.2
     174, LYRICS_SECTION does not start on a measure: 28.8
     202, LYRICS_SECTION does not start on a measure: 33.6
     229, LYRICS_SECTION does not start on a measure: 38.4
-nisaburek--sazsemaisi--aksaksemai----munir_mazhar_kamsoy
-    603, 4-HANE does not start on a measure: 44.0
-    800, TESLIM does not start on a measure: 68.0
-nisabureyn--pesrev--devriaryan----ozan_yarman
-    439, 3-HANE does not start on a measure: 48.0
-    610, MULAZIME does not start on a measure: 56.0
-    682, 4-HANE does not start on a measure: 64.0
-    856, MULAZIME does not start on a measure: 80.0
 nuhuft--murabba--darbifetih--ta_kim_hattin--seyyid_nuh
     77.0: ah   and Be are in the same measure!
     55.0: ma   and Be are in the same measure!
@@ -1589,8 +1463,6 @@ pesendide--nakis--yuruksemai--ey_afet-i_can--dede_efendi
     381, LYRICS_SECTION does not start on a measure: 44.66667
     425, LYRICS_SECTION does not start on a measure: 48.66667
     558, LYRICS_SECTION does not start on a measure: 65.66666
-pesendide--sazsemaisi--aksaksemai----iii_selim
-    177, 4-HANE does not start on a measure: 18.0
 rast--agirsemai--aksaksemai--cekmis_yuzune--tascizade_recep_celebi
     55.0: te   and Gel are in the same measure!
     52.0: ve   and Kim  are in the same measure!
@@ -1673,11 +1545,6 @@ rast--mars--sofyan--baska_bir--musa_sureyya_bey
     214, LYRICS_SECTION does not start on a measure: 53.75
     230, LYRICS_SECTION does not start on a measure: 57.75
     246, LYRICS_SECTION does not start on a measure: 61.75
-rast--medhal--hafif--musahabet_i_musikiye--refik_fersan
-    71, TESLIM does not start on a measure: 16.0
-    202, TESLIM does not start on a measure: 40.0
-    341, TESLIM does not start on a measure: 64.0
-    468, TESLIM does not start on a measure: 88.0
 rast--nefes--bektasidevrirevani--al_dokeyim--
     5.0: i   and Hay are in the same measure!
     3.0: i   and Hay are in the same measure!
@@ -1717,9 +1584,6 @@ rast--sarki--duyek--gorsem_seni--dede_efendi
     149, LYRICS_SECTION does not start on a measure: 19.875
 rast--sarki--sofyan--ask_denilen--erol_sayan
     Some measures are skipped by the offsets
-rast--sazsemaisi--aksaksemai----benli_hasan_aga
-    467, 4-HANE does not start on a measure: 40.0
-    632, TESLIM does not start on a measure: 56.0
 rast--turku--devrihindi--deryalar--rumeli
     78.0: yor   and Yu are in the same measure!
     70.0: yor   and Yu are in the same measure!
@@ -1757,11 +1621,6 @@ rast--turku--sofyan--kalenin_dibinde--kerkuk
 rehavi--beste--remel--zannetme_ben--numan_aga
     10.0: dir   and Ten  are in the same measure!
     145, LYRICS_SECTION does not start on a measure: 10.375
-ruyidilara--sazsemaisi--aksaksemai----erzurumlu_hasib_dede
-    392, MULAZIME does not start on a measure: 40.0
-ruyiirak--sazsemaisi--aksaksemai----kani_karaca
-    308, 4-HANE does not start on a measure: 24.0
-    387, TESLIM does not start on a measure: 32.0
 saba--mehter--hafif----zurnazen_dagi_ahmet_celebi
     96, HANE-I-SANI does not start on a measure: 16.125
     194, HANE-I-SALIS does not start on a measure: 32.125
@@ -1782,18 +1641,12 @@ saba--sarki--curcuna--suzdukce_guzel--cevdet_cagla
 saba--sarki--duyek--gus_eyle--dede_efendi
     7.0: ri   and a  are in the same measure!
     116, LYRICS_SECTION does not start on a measure: 7.375
-saba--sazsemaisi--aksaksemai----neyzen_aziz_dede
-    305, 4-HANE does not start on a measure: 24.0
-    496, TESLIM does not start on a measure: 40.0
 saba--sazsemaisi--aksaksemai----zaharya
     Some measures are skipped by the offsets
     153, TESLIM does not start on a measure: 13.9
     194, 3-HANE does not start on a measure: 17.4
     251, TESLIM does not start on a measure: 22.4
     292, 4-HANE does not start on a measure: 25.9
-sedaraban--sazsemaisi--aksaksemai----tanburi_cemil_bey
-    435, 4-HANE does not start on a measure: 39.0
-    657, TESLIM does not start on a measure: 87.0
 segah--pesrev--sakil--karabatak--hizir_aga
     Some measures are skipped by the offsets
     131, 2-HANE does not start on a measure: 12.5
@@ -1822,7 +1675,6 @@ segah--sazsemaisi--aksaksemai----hizir_aga
     151, 2-HANE-VE-TESLIM does not start on a measure: 12.2
     359, 2-HANE-VE-TESLIM does not start on a measure: 32.2
     405, 2-HANE-VE-TESLIM does not start on a measure: 36.2
-    451, 4-HANE does not start on a measure: 40.0
     569, 2-HANE-VE-TESLIM does not start on a measure: 52.2
     615, 2-HANE-VE-TESLIM does not start on a measure: 56.2
 segah--sazsemaisi--aksaksemai----nayi_osman_dede
@@ -1830,7 +1682,6 @@ segah--sazsemaisi--aksaksemai----nayi_osman_dede
     94, 2-HANE-VE-TESLIM does not start on a measure: 12.2
     193, 2-HANE-VE-TESLIM does not start on a measure: 24.2
     218, 2-HANE-VE-TESLIM does not start on a measure: 28.2
-    245, 4-HANE does not start on a measure: 32.0
     378, 2-HANE-VE-TESLIM does not start on a measure: 48.2
     403, 2-HANE-VE-TESLIM does not start on a measure: 52.2
 segah--tekbir--durakevferi--allah_u_ekber--itri
@@ -1928,6 +1779,7 @@ sehnaz--turku--sofyan--arpa_bugday--orta_anadolu
     237, LYRICS_SECTION does not start on a measure: 6.875
     259, LYRICS_SECTION does not start on a measure: 8.75
     420, LYRICS_SECTION does not start on a measure: 18.875
+    435, LYRICS_SECTION does not start on a measure: 20.125
     458, LYRICS_SECTION does not start on a measure: 21.875
     504, LYRICS_SECTION does not start on a measure: 25.75
     532, LYRICS_SECTION does not start on a measure: 27.875
@@ -1943,18 +1795,6 @@ sehnaz--yuruksemai--yuruksemai--dem-i_visali--kara_ismail_aga
     282, LYRICS_SECTION does not start on a measure: 33.66667
     396, LYRICS_SECTION does not start on a measure: 46.66667
     504, LYRICS_SECTION does not start on a measure: 58.66667
-sehnazbuselik--sazsemaisi--aksaksemai----seref_cakar
-    534, 4-HANE does not start on a measure: 36.0
-    749, TESLIM does not start on a measure: 100.0
-selmek--sazsemaisi--aksaksemai----mehmet_aga
-    231, 4-HANE does not start on a measure: 24.0
-    298, MULAZIME does not start on a measure: 36.0
-serefnuma--sazsemaisi--aksaksemai----suphi_ezgi
-    424, 4-HANE does not start on a measure: 44.0
-    501, MULAZIME does not start on a measure: 59.0
-sevkefza--sazsemaisi--aksaksemai----said_dede
-    339, 4-HANE does not start on a measure: 36.0
-    496, TESLIM does not start on a measure: 52.0
 sultaniyegah--pesrev--muhammes----kanuni_haci_arif_bey
     220, 2-HANE does not start on a measure: 3.875
     448, 3-HANE does not start on a measure: 7.875
@@ -1976,9 +1816,6 @@ sultaniyegah--sarki--sofyan--andikca_gecen--lemi_atli
     479, LYRICS_SECTION does not start on a measure: 66.75
     528, LYRICS_SECTION does not start on a measure: 73.75
     585, LYRICS_SECTION does not start on a measure: 80.75
-sultaniyegah--sazsemaisi--aksaksemai----kanuni_haci_arif_bey
-    453, 4-HANE does not start on a measure: 36.0
-    604, TESLIM does not start on a measure: 68.0
 sultaniyegah--yuruksemai--yuruksemai--sadeyledi_can--dede_efendi
     65.0: dim   and Dil  are in the same measure!
     61.0: ney   and Dil  are in the same measure!
@@ -2009,9 +1846,6 @@ suzidil--beste--fer--hiraman_ol--abdulhalim_aga
     554, LYRICS_SECTION does not start on a measure: 17.75
     575, LYRICS_SECTION does not start on a measure: 18.28125
     606, LYRICS_SECTION does not start on a measure: 18.75
-suzidilara--sazsemaisi--aksaksemai----tanburi_cemil_bey
-    435, 4-HANE does not start on a measure: 36.0
-    565, TESLIM does not start on a measure: 50.0
 suzinak--longa--nimsofyan----turhan_yalcin
     Some measures are skipped by the offsets
 suzinak--sarki--yuruksemai--husn_alemini--haci_arif_bey
@@ -2029,8 +1863,6 @@ suzinak--sarki--yuruksemai--husn_alemini--haci_arif_bey
     252, LYRICS_SECTION does not start on a measure: 27.66667
     285, LYRICS_SECTION does not start on a measure: 31.66667
     324, LYRICS_SECTION does not start on a measure: 35.66667
-tahir--turku--aksak--top_yatagin--aydin
-    234, ARANAGME does not start on a measure: 12.0
 tahir--turku--bektasidevrirevani--asamadim_su--eskisehir
     22.0: man   and Ör are in the same measure!
     15.0: man   and Gayf_ are in the same measure!
@@ -2045,9 +1877,6 @@ tahir--turku--sofyan--hele_yar--diyarbakir
     9.0: yâr   and Ha are in the same measure!
     99, LYRICS_SECTION does not start on a measure: 9.5
     319, LYRICS_SECTION does not start on a measure: 30.5
-tahirbuselik--sazsemaisi--aksaksemai----kemani_riza_efendi
-    407, 4-HANE does not start on a measure: 32.0
-    529, TESLIM does not start on a measure: 44.0
 ussak--ilahi--sofyan--hak_taala--ali_ufki
     22.0: miş   and Mer are in the same measure!
     110, LYRICS_SECTION does not start on a measure: 22.5
@@ -2068,15 +1897,6 @@ ussak--sarki--muasser--dilber_sana--erol_basara
     156, LYRICS_SECTION does not start on a measure: 5.6
     185, LYRICS_SECTION does not start on a measure: 6.6
     216, LYRICS_SECTION does not start on a measure: 7.6
-ussak--sazsemaisi--aksaksemai----dede_salih_efendi
-    532, 4-HANE does not start on a measure: 42.0
-    708, MULAZIME does not start on a measure: 58.0
-ussak--sazsemaisi--aksaksemai----kantemiroglu
-    377, 4-HANE does not start on a measure: 36.0
-    465, TESLIM does not start on a measure: 44.0
-ussak--sazsemaisi--aksaksemai----neyzen_aziz_dede
-    478, 4-HANE does not start on a measure: 36.0
-    573, TESLIM does not start on a measure: 60.0
 yegah--sarki--aksaksemai--benim_afet-i--dellalzade_haci_ismail_efendi
     14.0: (da)   and Pa are in the same measure!
     12.0: (da)   and A are in the same measure!
@@ -2094,9 +1914,6 @@ yegah--sarki--aksaksemai--benim_afet-i--dellalzade_haci_ismail_efendi
     143, LYRICS_SECTION does not start on a measure: 12.5
     144, LYRICS_SECTION does not start on a measure: 12.6
     166, LYRICS_SECTION does not start on a measure: 14.6
-yegah--sazsemaisi--aksaksemai----neyzen_aziz_dede
-    276, 4-HANE does not start on a measure: 24.0
-    361, TESLIM does not start on a measure: 32.0
 zavil--turku--aksak--bahceye_bar--
     32.0: li   and Me are in the same measure!
     30.0: li   and Me are in the same measure!
