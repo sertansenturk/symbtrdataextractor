@@ -7,8 +7,6 @@ from symbtr import getTrueLyricsIdx
 from structure_labeler import labelSections, get_symbtr_labels
 from offset import *
 
-import pdb
-
 def extractSection(score, slugify = True, extractAllLabels=False, 
     lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
     all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list] 
@@ -104,7 +102,6 @@ def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx):
 
                 se['startNote'] = nextLyricsStartInd
             else: # The section starts on the first measure the lyrics start
-                pdb.set_trace()
                 se['startNote'] = getMeasureOffsetId(nextLyricsMeasureOffset, 
                     score['offset'], measure_start_idx)
 
