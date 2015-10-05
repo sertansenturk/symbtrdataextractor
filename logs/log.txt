@@ -88,6 +88,9 @@ acemasiran--sarki--aksak--o_tebessum--ismail_baha_surelsan
     75.0: ram   and Bir  are in the same measure!
     71.0: ram   and Bir  are in the same measure!
     67.0: ram   and O  are in the same measure!
+   Mixture clique encountered
+    296, ARANAGME does not start on a measure: 47.66667
+    345, ARANAGME does not start on a measure: 55.66667
     414, LYRICS_SECTION does not start on a measure: 67.88889
     433, LYRICS_SECTION does not start on a measure: 71.77778
     464, LYRICS_SECTION does not start on a measure: 75.77778
@@ -183,6 +186,10 @@ acemasiran--yuruksemai--yuruksemai--bileydi_dil--itri
     46.0: li   and ye are in the same measure!
     40.0: li   and Te are in the same measure!
     3.0: dir   and Yar  are in the same measure!
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
     35, LYRICS_SECTION does not start on a measure: 3.666667
     301, LYRICS_SECTION does not start on a measure: 33.08333
     376, LYRICS_SECTION does not start on a measure: 40.83333
@@ -266,6 +273,8 @@ acemkurdi--sarki--senginsemai--askin_ile--sadi_hosses
 acemkurdi--sarki--senginsemai--ruzgar_uyumus--refik_fersan
 acemkurdi--sarki--sofyan--yar_pesinde--zeki_duygulu
 acemkurdi--sarki--yuruksemai--bari_felek--nikogos_aga
+   Mixture clique encountered
+   Mixture clique encountered
 acemkurdi--sarki--yuruksemai--fikrimin_ince--muallim_ismail_hakki_bey
 acemkurdi--sazsemaisi--aksaksemai----muallim_ismail_hakki_bey
 acemkurdi--seyir--senginsemai--1--erol_bingol
@@ -357,8 +366,6 @@ beyati--sarki--agiraksak--gul_hazin--rahmi_bey
 beyati--sarki--agiraksak--muptelayim--dede_efendi
     Missing section info in lyrics.
 beyati--sarki--agiraksak--ne_bahar--rakim_elkutlu
-    30.0: var   and a are in the same measure!
-    433, LYRICS_SECTION does not start on a measure: 30.9
 beyati--sarki--agirduyek--her_dem--dede_efendi
 beyati--sarki--aksak--benzemez_kimse--fehmi_tokay
 beyati--sarki--aksak--delisin_deli--selahattin_pinar
@@ -376,17 +383,12 @@ beyati--sarki--aksak--meclise_gel--tanburi_mustafa_cavus
     126, LYRICS_SECTION does not start on a measure: 14.22222
     173, LYRICS_SECTION does not start on a measure: 19.22222
 beyati--sarki--aksak--ne_semtden--kemani_riza_efendi
-    38.0: viş   and ah  are in the same measure!
-    36.0: viş   and ah  are in the same measure!
-    16.0: viş   and ah  are in the same measure!
-    14.0: viş   and ah  are in the same measure!
-    196, LYRICS_SECTION does not start on a measure: 14.66667
-    220, LYRICS_SECTION does not start on a measure: 16.66667
-    481, LYRICS_SECTION does not start on a measure: 36.66667
-    505, LYRICS_SECTION does not start on a measure: 38.66667
 beyati--sarki--aksak--sebep_ne--markar_aga
 beyati--sarki--aksaksemai--aglatma_beni--dede_efendi
 beyati--sarki--ciftesofyan--cikalim_sayd_u--tanburi_mustafa_cavus
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 beyati--sarki--curcuna--bilmezsin_dusundugum--rakim_elkutlu
 beyati--sarki--curcuna--gel_nazli_gulum--alaeddin_yavasca
 beyati--sarki--curcuna--kalbim_yine--selahattin_pinar
@@ -419,6 +421,15 @@ beyati--sarki--sofyan--ruhuma_sundugun--sadettin_kaynak
 beyati--sarki--turkaksagi--askinla_harab--serif_icli
 beyati--sarki--yuruksemai--uzulme_bir--omer_sami_gupgup
 beyati--sazsemaisi--aksaksemai----kanuni_omer_efendi
+nuhuft--murabba--darbifetih--ta_kim_hattin--seyyid_nuh
+    77.0: ah   and Be are in the same measure!
+    55.0: ma   and Be are in the same measure!
+    33.0: ah   and Be are in the same measure!
+    11.0: ah   and Be are in the same measure!
+    117, LYRICS_SECTION does not start on a measure: 11.625
+    325, LYRICS_SECTION does not start on a measure: 33.625
+    546, LYRICS_SECTION does not start on a measure: 55.625
+    754, LYRICS_SECTION does not start on a measure: 77.625
 beyati--sazsemaisi--aksaksemai--arap--misirli_udi_ibrahim_efendi
 beyati--sazsemaisi--aksaksemai--beyatiye_bir_damla--necmi_kiran
 beyati--seyir--semai--1--rauf_yekta
@@ -470,6 +481,10 @@ beyati--turku--nimsofyan--gesi_baglarinda--kayseri
 beyati--yuruksemai--senginsemai--gelse_nesim-i--iv_murad
 beyati--yuruksemai--yuruksemai--gul_yuzlulerin--tabi_mustafa_efendi
 beyati-araban--ilahi--duyek--gonul_mazhardir--enderunlu_hafiz_husnu_efendi
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 beyati-araban--kupe--duyek--ehl-i--ahmet_avni_konuk
 beyati-araban--sarki--aksak--baga_girdim--sadi_hosses
 beyati-araban--sarki--aksak--bana_noldu--rahmi_bey
@@ -539,6 +554,7 @@ buselik--sarki--devrihindi--bahara_indi--selahattin_icli
 buselik--sarki--duyek--askin_once--amir_ates
     Missing section info in lyrics.
 buselik--sarki--duyek--bir_sitemin--durri_turan
+   Mixture clique encountered
 buselik--sarki--duyek--denizlerin_otesinden--ismail_baha_surelsan
     Some measures are skipped by the offsets
     Missing section info in lyrics.
@@ -557,6 +573,7 @@ buselik--sarki--duyek--yalandir_dogustan--munir_nurettin_selcuk
 buselik--sarki--duyek--zaman_olur--selahattin_icli
     36.0: lar   and Ve  are in the same measure!
     32.0: dir   and Ve  are in the same measure!
+   Mixture clique encountered
     189, LYRICS_SECTION does not start on a measure: 32.875
     208, LYRICS_SECTION does not start on a measure: 36.875
 buselik--sarki--semai--dil_bestenim--vecdi_seyhun
@@ -656,6 +673,7 @@ dugah--yuruksemai--yuruksemai--der_yemeni--seyhulislam_esad_efendi
     19.0: dost   and Bî are in the same measure!
     16.0: yâr   and Hay are in the same measure!
     13.0: yâr   and Kur are in the same measure!
+   Mixture clique encountered
     99, LYRICS_SECTION does not start on a measure: 13.66667
     124, LYRICS_SECTION does not start on a measure: 16.66667
     149, LYRICS_SECTION does not start on a measure: 19.66667
@@ -769,6 +787,7 @@ evic--turku--aksak--sabah_oldu--rumeli
     12.0: nım   and U are in the same measure!
     10.0: na   and Ö are in the same measure!
     8.0: na   and Gül  are in the same measure!
+   Mixture clique encountered
     68, LYRICS_SECTION does not start on a measure: 8.222222
     85, LYRICS_SECTION does not start on a measure: 10.22222
     105, LYRICS_SECTION does not start on a measure: 12.66667
@@ -779,7 +798,8 @@ evic--turku--aksak--sabah_oldu--rumeli
     276, LYRICS_SECTION does not start on a measure: 31.66667
 evic--turku--curcuna--calin_davullari--rumeli
 evic--turku--sofyan--guvercin_ucuverdi--
-evic-huzi--ilahi--yuruksemai--uyan_ey--ali_ufki
+hicazkar--pesrev--berefsan----gazi_giray_han
+    Missing section info in lyrics.
 evicbuselik--kupe--agiraksak--o--ahmet_avni_konuk
 ferahfeza--agirsemai--senginsemai--bir_dilber-i--dede_efendi
     39.0: li   and Gü are in the same measure!
@@ -795,6 +815,10 @@ ferahfeza--sarki--aydin--mehtapta_guzel--muallim_ismail_hakki_bey
 ferahfeza--sarki--firengifer--ey_kasi--dede_efendi
 ferahfeza--sarki--semai--bulbul-i_hos_neva--dede_efendi
 ferahfeza--sarki--yuruksemai--dinlendi_basim--lemi_atli
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 ferahfeza--sazsemaisi--aksaksemai----serif_muhittin_targan
 ferahfeza--sazsemaisi--aksaksemai----tanburi_cemil_bey
 ferahfeza--seyir--semai--1--rauf_yekta
@@ -853,11 +877,9 @@ gerdaniye--turku--aksak--antalyanin_mor--antalya
     183, LYRICS_SECTION does not start on a measure: 16.5
 gerdaniye--turku--aksak--asagidan_gelen--bilecik
 gerdaniye--turku--aksak--cemilemin_gezdigi--
+   Mixture clique encountered
+   Mixture clique encountered
 gerdaniye--turku--aksak--salina_salina--denizli
-    61.0: ya   and uy   are in the same measure!
-    25.0: ya   and uy   are in the same measure!
-    167, LYRICS_SECTION does not start on a measure: 25.66667
-    397, LYRICS_SECTION does not start on a measure: 61.66667
 gerdaniye--turku--curcuna--celik_pazari--erzurum
     99.0: dum   and Le  are in the same measure!
     91.0: dum   and Le  are in the same measure!
@@ -896,6 +918,8 @@ gerdaniye--turku--nimcember--kirimdan_gelirim--rumeli
     23.0: yu   and Kan are in the same measure!
     14.0: man   and a are in the same measure!
     12.0: rim   and A are in the same measure!
+   Mixture clique encountered
+   Mixture clique encountered
     132, LYRICS_SECTION does not start on a measure: 12.42857
     149, LYRICS_SECTION does not start on a measure: 14.42857
     201, LYRICS_SECTION does not start on a measure: 20.14286
@@ -912,6 +936,7 @@ gerdaniye--turku--nimcember--kirimdan_gelirim--rumeli
 gerdaniye--turku--nimsofyan--al_almanin--malatya
 gerdaniye--turku--nimsofyan--cezayirin_harmanlari--bursa
 gerdaniye--turku--raksaksagi--penceresi_yesil--konya
+   Mixture clique encountered
 gerdaniye--turku--sofyan--benusene_gideyim--
 gerdaniye--turku--sofyan--bin_derdim--maras
 gerdaniye--turku--sofyan--cabur_dagdan--urfa
@@ -1007,12 +1032,11 @@ hicaz--beste--agircenber--dusmesin_miskin--zaharya
     1068, LYRICS_SECTION does not start on a measure: 177.5
 hicaz--beste--agirduyek--ey_cesm-i--dede_efendi
 hicaz--beste--lenkfahte--baktikca_husn_u--suphi_ezgi
+   Mixture clique encountered
 hicaz--durak--durakevferi--allah_emrin--
 hicaz--fantezi--duyek--sevemez_kimse--suat_sayin
 hicaz--fantezi--nimsofyan--ayni_cati--turhan_tasan
 hicaz--fantezi--sofyan--basin_one--kerem_guney
-    292, RITM does not start on a measure: 29.125
-    434, RITM does not start on a measure: 43.125
 hicaz--fantezi--sofyan--bogazinda_dugumlenen--erol_tanir
 hicaz--fantezi--yuruksemai--gamze_gamze--sezen_aksu
 hicaz--ilahi--duyek--icimde_bir--amir_ates
@@ -1060,6 +1084,7 @@ hicaz--rumeliturkusu--aksak--yine_de--
     333, LYRICS_SECTION does not start on a measure: 28.22222
     368, LYRICS_SECTION does not start on a measure: 31.22222
 hicaz--rumeliturkusu--nimsofyan--daglar_daglar--
+   Mixture clique encountered
 hicaz--rumeliturkusu--sofyan--gemi_kalkar--
 hicaz--rumeliturkusu--sofyan--kirmizi_gulun--
     Some measures are skipped by the offsets
@@ -1086,8 +1111,6 @@ hicaz--sarki--aksak--beni_sev--misirli_udi_ibrahim_efendi
 hicaz--sarki--aksak--bilmiyorum--sevki_bey
 hicaz--sarki--aksak--bir_an--omer_sami_gupgup
 hicaz--sarki--aksak--bir_bahar--selahattin_pinar
-    39.0: mu   and ah   are in the same measure!
-    287, LYRICS_SECTION does not start on a measure: 39.66667
 hicaz--sarki--aksak--dil_yaresini--sevki_bey
 hicaz--sarki--aksak--gormedim_omrumun--kadri_sencalar
 hicaz--sarki--aksak--gulsen-i_husnune--rifat_bey
@@ -1101,11 +1124,8 @@ hicaz--sarki--aksak--sazlar_calinir--yesari_asim_arsoy
 hicaz--sarki--aksak--sen_bu_yerden--sevki_bey
 hicaz--sarki--aksak--su_karsiki_dagda--dede_efendi
 hicaz--sarki--aksaksemai--sezdim_dargin--rifat_ayaydin
+   Mixture clique encountered
 hicaz--sarki--curcuna--acaba_sen_misin--bimen_sen
-    40.0: Ne   and ka are in the same measure!
-    24.0: Ne   and ka are in the same measure!
-    149, LYRICS_SECTION does not start on a measure: 24.3
-    247, LYRICS_SECTION does not start on a measure: 40.3
 hicaz--sarki--curcuna--aksam_erdi--rahmi_bey
 hicaz--sarki--curcuna--anladim_sevmeyeceksin--selahattin_pinar
 hicaz--sarki--curcuna--anlatilmaz_bin--erdogan_yildizel
@@ -1122,6 +1142,7 @@ hicaz--sarki--devrihindi--baglanip_zulf--sevki_bey
 hicaz--sarki--devrisureyya--kuru_dallar--ismet_burkay
 hicaz--sarki--duyek--anilsin_yar--semseddin_ziya_bey
 hicaz--sarki--duyek--artik_bu--alaeddin_yavasca
+   Mixture clique encountered
 hicaz--sarki--duyek--aski_seninle--fehmi_tokay
 hicaz--sarki--duyek--ayrilik_canlari--omer_sami_gupgup
 hicaz--sarki--duyek--beyaz_ten--
@@ -1131,8 +1152,10 @@ hicaz--sarki--duyek--hicbir_seyde--fethi_karamahmutoglu
 hicaz--sarki--duyek--istanbulda_bogazicinde--sekip_ayhan_ozisik
     33.0: lim   and Sev are in the same measure!
     25.0: lim   and E are in the same measure!
-    12.0: de   and yim   are in the same measure!
-    110, LYRICS_SECTION does not start on a measure: 12.5
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
     343, LYRICS_SECTION does not start on a measure: 25.22222
     523, LYRICS_SECTION does not start on a measure: 33.22222
 hicaz--sarki--duyek--kederden_mi--nasibin_mehmet_yuru
@@ -1140,6 +1163,10 @@ hicaz--sarki--duyek--sarkilardan_fal--erdogan_berker
 hicaz--sarki--duyek--sensizligi_ben--zekai_tunca
 hicaz--sarki--duyek--yalan_degil--yusuf_nalkesen
 hicaz--sarki--duyek--yalancinin_birine--necdet_tokatlioglu
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 hicaz--sarki--evfer--bir_seni--selahattin_icli
 hicaz--sarki--evfer--mah_yuzune--dede_efendi
 hicaz--sarki--nimsofyan--cok_yasa--muhlis_sabahaddin_ezgi
@@ -1150,11 +1177,14 @@ hicaz--sarki--semai--bulbulun_cilesi--yusuf_nalkesen
 hicaz--sarki--semai--degdi_saclarima--bekirof
 hicaz--sarki--semai--ey_mehlika--muallim_ismail_hakki_bey
 hicaz--sarki--semai--nasil_gecti--teoman_alpay
+   Mixture clique encountered
 hicaz--sarki--semai--sana_dun--munir_nurettin_selcuk
     398, SESLERLE-NINNI does not start on a measure: 76.66666
     412, SESLERLE-NINNI does not start on a measure: 79.33334
 hicaz--sarki--semai--sirma_sacli--misirli_udi_ibrahim_efendi
 hicaz--sarki--semai--tadi_yok--muzaffer_ilkar
+   Mixture clique encountered
+   Mixture clique encountered
 hicaz--sarki--senginsemai--agyar_ile--bimen_sen
 hicaz--sarki--senginsemai--derdimi_arz--enderuni_ali_bey
 hicaz--sarki--senginsemai--hep_saye-i--tanburi_cemil_bey
@@ -1236,8 +1266,10 @@ hicaz--turku--sofyan--gokteki_yildizin--
 hicaz--turku--sofyan--mektebin_bacalari--mus
 hicaz--turku--sofyan--sandalim_geliyor--
 hicaz--turku--sofyan--su_gelen--
+   Mixture clique encountered
 hicaz--turku--sofyan--su_yaltadan--kirim
 hicaz--turku--sofyan--suda_balik--kirsehir
+   Mixture clique encountered
 hicaz--turku--turkaksagi--carsambayi_sel--
     22.0: dım   and E are in the same measure!
     18.0: dı   and Bir  are in the same measure!
@@ -1316,7 +1348,13 @@ hicaz-humayun--seyir--sofyan--1--erol_bingol
 hicaz-humayun--seyir--sofyan--1--sefik_gurmeric
     Missing section info in lyrics.
 hicaz-humayun--turku--aksak--estergon_kalasi--
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 hicaz-humayun--turku--curcuna--hishisi_hancer--gaziantep
+   Mixture clique encountered
 hicaz-humayun--turku--devrituran--gidem_dedim--rumeli
 hicaz-humayun--turku--sofyan--benim_gulum--kirsehir
 hicaz-humayun--turku--sofyan--bulbulun_gogsu--urfa
@@ -1448,8 +1486,6 @@ hicazkar--kosma--sofyan--melin_mahzun--muallim_ismail_hakki_bey
 hicazkar--kupe--devrirevan--dun_gece--ahmet_avni_konuk
 hicazkar--pesrev--agirduyek----dede_salih_efendi
     Missing section info in lyrics.
-hicazkar--pesrev--berefsan----gazi_giray_han
-    Missing section info in lyrics.
 hicazkar--pesrev--devrikebir----tanburi_buyuk_osman_bey
 hicazkar--pesrev--muhammes----tanburi_cemil_bey
 hicazkar--sarki--agiraksak--bana_hem-dem--nikogos_aga
@@ -1547,7 +1583,7 @@ hicazkar--sarki--semai--yoktur_zaman--latif_aga
 hicazkar--sarki--senginsemai--layik_mi--sekerci_cemil_bey
 hicazkar--sarki--senginsemai--son_askimi--lemi_atli
 hicazkar--sarki--sofyan--ben_sozune--numan_aga
-    21.0: gel   and Pek  are in the same measure!
+    21.0: gel   and Er are in the same measure!
     19.0: tel   and Er are in the same measure!
     13.0: gel   and Pek  are in the same measure!
     11.0: bel   and Pek  are in the same measure!
@@ -1594,6 +1630,8 @@ hicazkar--turku--tekvurus--gul_kuruttum--hatay
     7.0: tum   and Yâ are in the same measure!
     6.0: tum   and Yâ are in the same measure!
     5.0: tum   and Gül  are in the same measure!
+   Mixture clique encountered
+   Mixture clique encountered
     33, ARANAGME does not start on a measure: 2.090909
     80, LYRICS_SECTION does not start on a measure: 5.181818
     93, LYRICS_SECTION does not start on a measure: 6.181818
@@ -1810,10 +1848,6 @@ huseyni--turku--aksak--yanik_omer--sadettin_kaynak
     19.0: ner   and Köy are in the same measure!
     213, LYRICS_SECTION does not start on a measure: 19.5
 huseyni--turku--aksak--yuce_dag--sadettin_kaynak
-    59.0: müş   and a are in the same measure!
-    23.0: müş   and a are in the same measure!
-    213, LYRICS_SECTION does not start on a measure: 23.22222
-    520, LYRICS_SECTION does not start on a measure: 59.22222
 huseyni--turku--aksak--yuksek_yuksek--
 huseyni--turku--curcuna--coban_kizi--
     48.0: dan   and Le  are in the same measure!
@@ -1880,6 +1914,7 @@ huseyni--turku--sofyan--kopruden_gecti--kirsehir
 huseyni--turku--sofyan--koskum_var--
 huseyni--turku--sofyan--sabahin_seher--
 huseyni--turku--sofyan--su_daglari--fahri_kayahan
+   Mixture clique encountered
 huseyni--turku--sofyan--yaylanin_cimenine--trabzon
 huseyni--turku--yuruksemai--bir_hisminan--kars
 huseyni--yuruksemai--yuruksemai--ben_gibi--tabi_mustafa_efendi
@@ -1900,6 +1935,7 @@ huseyni--zeybek--agiraksak--sarizeybek--osman_pehlivan
 huseyni-gulizar--ilahi--sofyan--cun_sana--hafiz_post
 huseyniasiran--kupe--aksaksemai--gel--ahmet_avni_konuk
 huseyniasiran--sarki--curcuna--cemalin_semine--zekai_dede
+   Mixture clique encountered
 huseyniasiran--seyir--duyek--1--erol_bingol
     Missing section info in lyrics.
 huseyniasiran--seyir--semai--1--rauf_yekta
@@ -1919,10 +1955,6 @@ huzzam--beste--remel--aldim_hayal-i--komurcuzade_hafiz_mehmet_efendi
 huzzam--ilahi--muhammes--duseli_askin--tiznam_yusuf_celebi
     Missing section info in lyrics.
 huzzam--kanto--aksak--bana_bir--lavtaci_hristo
-    14.0: ah   and Kal are in the same measure!
-    10.0: ah   and Kal are in the same measure!
-    80, LYRICS_SECTION does not start on a measure: 10.22222
-    111, LYRICS_SECTION does not start on a measure: 14.22222
 huzzam--kupe--darb--sazin--ahmet_avni_konuk
 huzzam--ornek-oz--oynak--1--ruhi_ayangil
     Missing section info in lyrics.
@@ -1993,6 +2025,7 @@ huzzam--sarki--duyek--omrunde_sarmadin--omer_sami_gupgup
 huzzam--sarki--duyek--pisman_olur_da--irfan_ozbakir
 huzzam--sarki--duyek--sacin_yuzume--teoman_alpay
 huzzam--sarki--duyek--seni_sesini--sadi_hosses
+   Mixture clique encountered
 huzzam--sarki--duyek--yalniz_aksamlarimda--omer_sami_gupgup
 huzzam--sarki--duyek--zannetme_ki--kenan_savkli
 huzzam--sarki--nimsofyan--gezdigim_dikenli--kadri_sencalar
@@ -2000,6 +2033,10 @@ huzzam--sarki--sarkidevrirevani--isittim_ey--sakir_aga
     Missing section info in lyrics.
 huzzam--sarki--semai--dil-hun_olurum--bimen_sen
 huzzam--sarki--semai--her_gece--kasim_inaltekin
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 huzzam--sarki--semai--omrumuzun_son_saati--avni_anil
 huzzam--sarki--semai--ozledim_gel--omer_sami_gupgup
 huzzam--sarki--senginsemai--acmam_acamam--nasibin_mehmet_yuru
@@ -2007,6 +2044,7 @@ huzzam--sarki--senginsemai--hal-i_dil-i--haci_arif_bey
 huzzam--sarki--senginsemai--mahzun_durusun--ekrem_guyer
 huzzam--sarki--senginsemai--sen_sanki_baharin--musa_sureyya_bey
 huzzam--sarki--sofyan--solgun_durma--munir_nurettin_selcuk
+   Mixture clique encountered
 huzzam--sarki--turkaksagi--baglandi_gonul--selanikli_ahmed_bey
 huzzam--sarki--turkaksagi--bahar_oldu--seyh_ethem_efendi
 huzzam--sarki--turkaksagi--meftun_olali--haci_arif_bey
@@ -2031,10 +2069,6 @@ huzzam--turku--curcuna--al_yesil--urfa
 huzzam--turku--curcuna--hayatlari_degirmi--
 huzzam--turku--ikizaksak--cirpinirdi_karadeniz--uzeyir_hacibeyov
 huzzam--turku--musemmen_ii--su_karsiki--hatay
-    59.0: yok   and a are in the same measure!
-    21.0: yok   and a are in the same measure!
-    168, LYRICS_SECTION does not start on a measure: 21.25
-    458, LYRICS_SECTION does not start on a measure: 59.25
 huzzam--turku--nimsofyan--asker_oldum--
 huzzam--turku--nimsofyan--kopruler_yaptirdim--mustafa_sagyasar
 huzzam--turku--sofyan--aksam_oldu--rumeli
@@ -2059,6 +2093,7 @@ isfahan--kupe--duyek--ittifakan--ahmet_avni_konuk
 isfahan--mars--devrihindi--ey_gaziler--iii_selim
     Some measures are skipped by the offsets
     12.0: me   and Dağ are in the same measure!
+   Mixture clique encountered
     39, ARANAGME does not start on a measure: 3.076923
     74, LYRICS_SECTION does not start on a measure: 5.038462
     191, LYRICS_SECTION does not start on a measure: 12.46154
@@ -2072,6 +2107,7 @@ isfahan--sarki--aksak--asik_olali--dede_efendi
 isfahan--sarki--curcuna--etme_beyhude--rahmi_bey
 isfahan--sarki--curcuna--sevdigim_vaslini--
 isfahan--sarki--devrihindi--dil-i_bicare--mahmud_celaleddin_pasa
+   Mixture clique encountered
 isfahan--sarki--devrihindi--kalmadi_sabra--udi_nevres_bey
 isfahan--sarki--duyek--gelirken_meclise--haham_nesim
 isfahan--sarki--musemmen--dusme_ey_asik--nikogos_aga
@@ -2087,10 +2123,8 @@ isfahan--taksim--serbest----tanburi_cemil_bey
     Missing section info in lyrics.
 isfahan--turku--aksak--feslegen_ektim--tanburi_mustafa_cavus
 isfahan--yuruksemai--yuruksemai--o_guzler--dellalzade_haci_ismail_efendi
-    54.0: de   and Ne are in the same measure!
-    34.0: de   and Ne are in the same measure!
-    274, LYRICS_SECTION does not start on a measure: 34.5
-    374, LYRICS_SECTION does not start on a measure: 54.5
+    32.0: kâr   and Can  are in the same measure!
+    258, LYRICS_SECTION does not start on a measure: 32.66667
 isfahanek--kupe--duyek--tutiya-yi--ahmet_avni_konuk
 karcigar--agirsemai--aksaksemai--ne_dane--dellalzade_haci_ismail_efendi
     Missing section info in lyrics.
@@ -2122,6 +2156,7 @@ karcigar--kocekce--aydin--bulbul_olsam--
     26.0: re   and A are in the same measure!
     23.0: re   and A are in the same measure!
     20.0: re   and Bül are in the same measure!
+   Mixture clique encountered
     308, LYRICS_SECTION does not start on a measure: 20.66667
     337, LYRICS_SECTION does not start on a measure: 23.66667
     366, LYRICS_SECTION does not start on a measure: 26.66667
@@ -2278,6 +2313,7 @@ kurdi--turku--agiraksak--elif_dedim--kutahya
     378, LYRICS_SECTION does not start on a measure: 9.597222
 kurdi--turku--nimsofyan--hastane_onunde--akdagmadeni
 kurdi--turku--sofyan--dalda_cikmis--
+   Mixture clique encountered
 kurdi-gerdaniye--kupe--musemmen--gordum--ahmet_avni_konuk
 kurdilihicazkar--aranagme--semai--1--
 kurdilihicazkar--aranagme--turkaksagi--1--
@@ -2293,8 +2329,6 @@ kurdilihicazkar--sarki--agiraksak--ehl-i_askin--tatyos_efendi
 kurdilihicazkar--sarki--agiraksak--kalb-i_sevdazedeler--selanikli_ahmed_bey
 kurdilihicazkar--sarki--agiraksak--koparan_sinemi--bimen_sen
 kurdilihicazkar--sarki--agiraksak--soyle_ey--rahmi_bey
-    2.0: dâ   and nâ are in the same measure!
-    37, LYRICS_SECTION does not start on a measure: 2.666667
 kurdilihicazkar--sarki--aksak--bunca_cevrinle--emin_ongan
     Missing section info in lyrics.
 kurdilihicazkar--sarki--aksak--def-i_nalis--tanburi_cemil_bey
@@ -2446,35 +2480,7 @@ mahur--sarki--duyek--seb-i_vuslat--nasibin_mehmet_yuru
     Missing section info in lyrics.
 mahur--sarki--duyek--senle_durmak--kanuni_haci_arif_bey
 mahur--sarki--evfer--kalbimdeki_amal-i--muallim_ismail_hakki_bey
-    10.0: le   and in are in the same measure!
-    6.0: le   and in are in the same measure!
-    66, LYRICS_SECTION does not start on a measure: 6.444445
-    107, LYRICS_SECTION does not start on a measure: 10.44444
 mahur--sarki--evsat--sabah_olsun--ibrahim_aga
-    46.0: mi   and a are in the same measure!
-    42.0: mi   and a are in the same measure!
-    38.0: yim   and a are in the same measure!
-    34.0: yim   and a are in the same measure!
-    30.0: yim   and a are in the same measure!
-    26.0: yim   and a are in the same measure!
-    22.0: mi   and a are in the same measure!
-    18.0: mi   and a are in the same measure!
-    14.0: yim   and a are in the same measure!
-    10.0: yim   and a are in the same measure!
-    6.0: yim   and a are in the same measure!
-    2.0: yim   and a are in the same measure!
-    45, LYRICS_SECTION does not start on a measure: 2.615385
-    114, LYRICS_SECTION does not start on a measure: 6.615385
-    185, LYRICS_SECTION does not start on a measure: 10.61539
-    254, LYRICS_SECTION does not start on a measure: 14.61539
-    324, LYRICS_SECTION does not start on a measure: 18.61539
-    394, LYRICS_SECTION does not start on a measure: 22.61539
-    465, LYRICS_SECTION does not start on a measure: 26.61539
-    534, LYRICS_SECTION does not start on a measure: 30.61539
-    605, LYRICS_SECTION does not start on a measure: 34.61538
-    674, LYRICS_SECTION does not start on a measure: 38.61538
-    744, LYRICS_SECTION does not start on a measure: 42.61538
-    814, LYRICS_SECTION does not start on a measure: 46.61538
 mahur--sarki--musemmen--aman_saki--lemi_atli
 mahur--sarki--musemmen--gosterip_agyare--haci_arif_bey
 mahur--sarki--nimsofyan--cek_kuregi_guzelim--arif_sami_toker
@@ -2525,8 +2531,16 @@ mahur--turku--curcuna--indim_yarin--
 mahur--turku--curcuna--meclisinde_mail--adiyaman
 mahur--turku--sofyan--beyoglunda_gezersin--pirincci_riza_bey
 mahur--turku--sofyan--niksarin_fidanlari--tokat
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 mahur--turku--sofyan--su_dere--
 mahur--turku--sofyan--yemenimde_hare_var--
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 mahur--yuruksemai--yuruksemai--beni_cun--ebubekir_aga
     Some measures are skipped by the offsets
     Missing section info in lyrics.
@@ -2631,22 +2645,6 @@ muhayyer--sarki--senginsemai--gezdim_yurudum--lemi_atli
 muhayyer--sarki--senginsemai--pur-lerze--tanburi_cemil_bey
 muhayyer--sarki--sofyan--bir_gun--ziya_taskent
 muhayyer--sarki--sofyan--ne_zaman--sadettin_kaynak
-    35.0: şır   and vay  are in the same measure!
-    34.0: şır   and ya are in the same measure!
-    31.0: şır   and vay  are in the same measure!
-    30.0: şır   and ya are in the same measure!
-    16.0: şır   and vay  are in the same measure!
-    15.0: şır   and do are in the same measure!
-    11.0: şır   and vay  are in the same measure!
-    10.0: şır   and do are in the same measure!
-    121, LYRICS_SECTION does not start on a measure: 10.5
-    135, LYRICS_SECTION does not start on a measure: 11.5
-    179, LYRICS_SECTION does not start on a measure: 15.5
-    193, LYRICS_SECTION does not start on a measure: 16.5
-    367, LYRICS_SECTION does not start on a measure: 30.5
-    381, LYRICS_SECTION does not start on a measure: 31.5
-    412, LYRICS_SECTION does not start on a measure: 34.5
-    426, LYRICS_SECTION does not start on a measure: 35.5
 muhayyer--sarki--sofyan--nicin_mahzun--haci_arif_bey
 muhayyer--sarki--yuruksemai--ben_sana_asik--dede_efendi
     Some measures are skipped by the offsets
@@ -2690,6 +2688,7 @@ muhayyer--turku--curcuna--kerpic_kerpic--diyarbakir
     285, LYRICS_SECTION does not start on a measure: 51.3
     305, LYRICS_SECTION does not start on a measure: 54.3
 muhayyer--turku--curcuna--su_icemem--diyarbakir
+   Mixture clique encountered
 muhayyer--turku--curcuna--yar_yuregim--urfa
 muhayyer--turku--devrituran--mihrican_mi--yozgat
 muhayyer--turku--duyek--iste_seni--sadettin_kaynak
@@ -2698,31 +2697,19 @@ muhayyer--turku--duyek--zehram_bana--yesari_asim_arsoy
 muhayyer--turku--kapali_curcuna--evlerinin_onu--elazig
 muhayyer--turku--musemmen--elma_attim--tunceli
 muhayyer--turku--nimsofyan--ben_de--adana
+   Mixture clique encountered
+   Mixture clique encountered
 muhayyer--turku--nimsofyan--bir_nazar--kirsehir
 muhayyer--turku--nimsofyan--gidecegim_gurbet--
 muhayyer--turku--raksaksagi--istanbuldan_uskudara--
-    58.0: den   and Ça are in the same measure!
-    53.0: den   and Ça are in the same measure!
-    48.0: der   and Ça are in the same measure!
-    43.0: der   and Ça are in the same measure!
-    28.0: den   and Ça are in the same measure!
-    23.0: den   and Ça are in the same measure!
-    18.0: der   and Ça are in the same measure!
-    13.0: der   and Ça are in the same measure!
-    113, LYRICS_SECTION does not start on a measure: 13.77778
-    149, LYRICS_SECTION does not start on a measure: 18.77778
-    185, LYRICS_SECTION does not start on a measure: 23.77778
-    222, LYRICS_SECTION does not start on a measure: 28.77778
-    348, LYRICS_SECTION does not start on a measure: 43.77778
-    384, LYRICS_SECTION does not start on a measure: 48.77778
-    420, LYRICS_SECTION does not start on a measure: 53.77778
-    457, LYRICS_SECTION does not start on a measure: 58.77778
 muhayyer--turku--raksaksagi--su_gelir--burdur
 muhayyer--turku--raksan--sogudun_yapragi--
 muhayyer--turku--senginsemai--bulandi_gozler--urfa
 muhayyer--turku--sofyan--binip_de--denizli
 muhayyer--turku--sofyan--cayir_ince--
 muhayyer--turku--sofyan--el_vurup--tokat-zile
+   Mixture clique encountered
+   Mixture clique encountered
 muhayyer--turku--sofyan--keklik_gibi--erzincan
 muhayyer--turku--sofyan--uc_kardestik--diyarbakir
 muhayyer--turku--sofyan--yandim_allah--sivas
@@ -2742,11 +2729,10 @@ muhayyerkurdi--sarki--aksak--renkler_opuyorken--omer_dilek
 muhayyerkurdi--sarki--aksak--sevgi_deli--alaeddin_yavasca
 muhayyerkurdi--sarki--curcuna--aksam_olunca--nazif_girgin
 muhayyerkurdi--sarki--curcuna--bakisi_cagirir--selahaddin_pinar
+   Mixture clique encountered
 muhayyerkurdi--sarki--duyek--bir_kizil--amir_ates
 muhayyerkurdi--sarki--duyek--gunlerce_uykusuz--sinan_sipahi
 muhayyerkurdi--sarki--duyek--ruzgar_soyluyor--sekip_ayhan_ozisik
-    45.0: zün   and ah  are in the same measure!
-    359, LYRICS_SECTION does not start on a measure: 45.5
 muhayyerkurdi--sarki--duyek--senden_bana--teoman_alpay
 muhayyerkurdi--sarki--duyek--unutulmus_ne--avni_anil
 muhayyerkurdi--sarki--duyek--var_mi_hacet--nikogos_aga
@@ -2768,6 +2754,10 @@ muhayyerkurdi--sarki--nimsofyan--kadehinde_zehir--erol_sayan
     95.0: tır   and Bak are in the same measure!
     91.0: tır   and Aşk  are in the same measure!
     87.0: tir   and Aşk  are in the same measure!
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
     563, LYRICS_SECTION does not start on a measure: 87.875
     588, LYRICS_SECTION does not start on a measure: 91.875
     613, LYRICS_SECTION does not start on a measure: 95.875
@@ -2790,10 +2780,20 @@ muhayyerkurdi--sazsemaisi--aksaksemai----sadi_isilay
 muhayyerkurdi--seyir--turkaksagi--1--erol_bingol
     Missing section info in lyrics.
 muhayyerkurdi--turku--aksak--bulbulum_altin--
+   Mixture clique encountered
 muhayyerkurdi--turku--aksak--cubugum_yok--
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 muhayyerkurdi--turku--ciftesofyan--sendeki_kaslar--
 muhayyerkurdi--turku--oynak--evlerinin_onu--
 muhayyerkurdi--turku--sofyan--cokertmeden_ciktim_da--
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 muhayyerkurdi--turku--sofyan--eskiya_dunyaya--ordu
 muhayyersunbule--kupe--duyek--dilberanin--ahmet_avni_konuk
 muhayyersunbule--sarki--sarkidevrirevani--ey_nihal-i_isve--ahmed_aga
@@ -2924,10 +2924,23 @@ nihavent--fantezi--duyek--ufacik_tefeciktin--sekip_ayhan_ozisik
 nihavent--fantezi--duyek--yemeni_baglamis--ali_ulvi_baradan
 nihavent--fantezi--nimsofyan--aksami_suzme--kaptanzade_ali_riza_bey
 nihavent--fantezi--nimsofyan--ayaginda_halhali--bilge_ozgen
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 nihavent--fantezi--nimsofyan--benim_gonlum--kaptanzade_ali_riza_bey
 nihavent--fantezi--nimsofyan--gel_gonlumu--erdinc_celikkol
 nihavent--fantezi--sofyan--durusun_andirir--unal_narcin
+   Mixture clique encountered
 nihavent--fantezi--sofyan--mevsimlere_aldanirim--omer_sami_gupgup
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 nihavent--fantezi--sofyan--sarahaten_acaba--ali_rifat_cagatay
 nihavent--karsilama--sofyan----merzifon
     Missing section info in lyrics.
@@ -3014,11 +3027,10 @@ nihavent--sarki--curcuna--kimseye_etmem--kemani_sarkis_efendi
 nihavent--sarki--curcuna--saclarina_baglanali--rahmi_bey
 nihavent--sarki--curcuna--vucud_ikliminin--haci_arif_bey
 nihavent--sarki--curcuna--yagmur_verdim--omer_dilek
+   Mixture clique encountered
 nihavent--sarki--curcuna--yine_bu--osman_nihat_akin
 nihavent--sarki--devrihindi--yar_senden--munir_nurettin_selcuk
 nihavent--sarki--duyek--ahimi_hicranimi--selahattin_inal
-    58.0: tum   and ah  are in the same measure!
-    519, LYRICS_SECTION does not start on a measure: 58.5
 nihavent--sarki--duyek--ak_duvaklar--omer_dilek
 nihavent--sarki--duyek--askim_bahardi--yildirim_gurses
 nihavent--sarki--duyek--askimin_ilk--arif_sami_toker
@@ -3038,6 +3050,7 @@ nihavent--sarki--duyek--istanbul_biricik--sadettin_kaynak
     334, LYRICS_SECTION does not start on a measure: 56.5
 nihavent--sarki--duyek--sarkilar_seni--muzaffer_ilkar
 nihavent--sarki--duyek--sen_benim--emin_ongan
+   Mixture clique encountered
 nihavent--sarki--duyek--seninle_bu--dursun_karaca
 nihavent--sarki--duyek--sevil_neselen--sadettin_oktenay
 nihavent--sarki--duyek--su_guzeller--necip_mirkelamoglu
@@ -3047,12 +3060,23 @@ nihavent--sarki--nimsofyan--ben_bir--sivelioglu_yorgaki
     Missing section info in lyrics.
 nihavent--sarki--nimsofyan--biz_camlicanin--yesari_asim_arsoy
 nihavent--sarki--nimsofyan--geldi_yine--arif_sami_toker
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 nihavent--sarki--nimsofyan--gozleri_aska--gundogdu_duran
 nihavent--sarki--nimsofyan--istanbulda_yasanan--baki_callioglu
 nihavent--sarki--semai--bahcemde_acilmaz--munir_nurettin_selcuk
 nihavent--sarki--semai--bekledim_de--yesari_asim_arsoy
 nihavent--sarki--semai--benim_gonlum--nazmi_atlig
 nihavent--sarki--semai--bir_alev--avni_anil
+   Mixture clique encountered
 nihavent--sarki--semai--bir_nese--nuri_halil_poyraz
 nihavent--sarki--semai--dil_seni--civan_aga
 nihavent--sarki--semai--erisdi_nevbahar--arif_sami_toker
@@ -3074,8 +3098,6 @@ nihavent--sarki--sofyan--karsida_kandilli--amir_ates
 nihavent--sarki--sofyan--korfezde_meltem--ismail_otenkaya
 nihavent--sarki--sofyan--ne_dert--sadettin_kaynak
 nihavent--sarki--sofyan--sahilde_o--yesari_asim_arsoy
-    27.0: tım   and - are in the same measure!
-    326, LYRICS_SECTION does not start on a measure: 27.6875
 nihavent--sarki--sofyan--semalardan_gunes--misirli_udi_ibrahim_efendi
 nihavent--sarki--turkaksagi--ben_buy-i--haci_arif_bey
 nihavent--sarki--turkaksagi--bir_tatli_urperti--fethi_karamahmutoglu
@@ -3092,16 +3114,7 @@ nihavent--sazeseri--nimsofyan--kanatlarim_olsaydi--serif_muhittin_targan
 nihavent--sazeseri--nimsofyan--seytanin_ruyasi--muhammet_yildirir
 nihavent--sazsemaisi--aksaksemai----mesut_cemil
 nihavent--sazsemaisi--aksaksemai----vecdi_seyhun
-    Missing section info in lyrics.
 nihavent--sazsemaisi--senginsemai----erzurumlu_hasib_dede
-    1, 1-HANE-VE-MULAZIME does not start on a measure: 0.125
-    42, 1-HANE-VE-MULAZIME does not start on a measure: 4.125
-    165, 1-HANE-VE-MULAZIME does not start on a measure: 24.125
-    206, 1-HANE-VE-MULAZIME does not start on a measure: 28.125
-    323, 1-HANE-VE-MULAZIME does not start on a measure: 40.125
-    364, 1-HANE-VE-MULAZIME does not start on a measure: 44.125
-    481, 1-HANE-VE-MULAZIME does not start on a measure: 56.125
-    522, 1-HANE-VE-MULAZIME does not start on a measure: 60.125
 nihavent--seyir--semai--1--rauf_yekta
     Missing section info in lyrics.
 nihavent--seyir--sofyan--1--erol_bingol
@@ -3136,6 +3149,7 @@ nikriz--fantezi--yuruksemai--uzaga_gitme--bilge_ozgen
     29.0: ler   and Be are in the same measure!
     27.0: ler   and Be are in the same measure!
     25.0: ler   and De are in the same measure!
+   Mixture clique encountered
     154, LYRICS_SECTION does not start on a measure: 25.83333
     160, LYRICS_SECTION does not start on a measure: 27.83333
     167, LYRICS_SECTION does not start on a measure: 29.83333
@@ -3172,6 +3186,7 @@ nikriz--sirto--nimsofyan--nikriz_sirto--tanburi_cemil_bey
     Some measures are skipped by the offsets
     Missing section info in lyrics.
 nikriz--turku--aksak--penceresi_yola--
+   Mixture clique encountered
 nikriz--turku--devrituran--ben_giderim--
 nikriz--turku--nimsofyan--sokak_basi--giresun
 nikriz--turku--oynak--yoruk_de--
@@ -3193,6 +3208,7 @@ nikriz--turku--sofyan--kahve_yemenden--
     559, LYRICS_SECTION does not start on a measure: 66.75
     603, LYRICS_SECTION does not start on a measure: 71.9375
 nikriz--turku--turkaksagi--sen_bu--trabzon
+   Mixture clique encountered
 nikriz--zeybek--agiraksak----izmir
     Missing section info in lyrics.
 nikriz--zeybek--agiraksak--sobalarinda_guru--denizli
@@ -3212,6 +3228,7 @@ nisaburek--pesrev--duyek----fahri_kopuz
 nisaburek--pesrev--muhammes----tanburi_buyuk_osman_bey
 nisaburek--sarki--aksak--artik_demir--ferit_sidal
 nisaburek--sarki--aydin--meclise_gel--tanburi_mustafa_cavus
+   Mixture clique encountered
 nisaburek--sarki--curcuna--titrer_yuregim--emin_ongan
     44.0: den   and yıl are in the same measure!
     36.0: den   and yıl are in the same measure!
@@ -3221,10 +3238,6 @@ nisaburek--sarki--duyek--ayrilik_yari--selahaddin_pinar
 nisaburek--sarki--musemmen--bin_zeban--yusuf_ziya_pasa
 nisaburek--sarki--musemmen--gul_yuzun--vecihe_daryal
 nisaburek--sarki--musemmen--iftirakinla_efendim--cevdet_cagla
-    19.0: dı   and ah  are in the same measure!
-    11.0: dı   and ah  are in the same measure!
-    103, LYRICS_SECTION does not start on a measure: 11.625
-    172, LYRICS_SECTION does not start on a measure: 19.625
 nisaburek--sarki--semai--aski_fisildar--neveser_kokdes
     55.0: sin   and Be are in the same measure!
     39.0: sin   and Be are in the same measure!
@@ -3259,15 +3272,7 @@ nisaburek--turku--aksak--fincani_tastan--
 nisaburek--yuruksemai--yuruksemai--ey_gul--yusuf_ziya_pasa
 nisabureyn--pesrev--devriaryan----ozan_yarman
 nuhuft--kupe--aksaksemai--etme--ahmet_avni_konuk
-nuhuft--murabba--darbifetih--ta_kim_hattin--seyyid_nuh
-    77.0: ah   and Be are in the same measure!
-    55.0: ma   and Be are in the same measure!
-    33.0: ah   and Be are in the same measure!
-    11.0: ah   and Be are in the same measure!
-    117, LYRICS_SECTION does not start on a measure: 11.625
-    325, LYRICS_SECTION does not start on a measure: 33.625
-    546, LYRICS_SECTION does not start on a measure: 55.625
-    754, LYRICS_SECTION does not start on a measure: 77.625
+evic--ilahi--yuruksemai--uyan_ey--ali_ufki
 nuhuft--seyir--sofyan--1--sefik_gurmeric
     Missing section info in lyrics.
 pencgah--seyir--semai--1--rauf_yekta
@@ -3408,10 +3413,6 @@ rast--mersiye--sofyan--ey_padiseh-i--rifat_bey
 rast--nakis--yuruksemai--gulsende_yine--muallim_ismail_hakki_bey
 rast--nakis_beste--duyek--amed_nesim-i--abdulkadir_meragi
 rast--nefes--bektasidevrirevani--al_dokeyim--
-    5.0: i   and Hay are in the same measure!
-    3.0: i   and Hay are in the same measure!
-    29, LYRICS_SECTION does not start on a measure: 3.461539
-    49, LYRICS_SECTION does not start on a measure: 5.461538
 rast--ornek-oz--devrihindi--1--ruhi_ayangil
     Missing section info in lyrics.
 rast--ornek-oz--musemmen--1--ruhi_ayangil
@@ -3467,9 +3468,14 @@ rast--sarki--curcuna--icime_hep--yildirim_gurses
     354, LYRICS_SECTION does not start on a measure: 53.5
 rast--sarki--curcuna--mey-i_lalinle--tatyos_efendi
 rast--sarki--curcuna--nedendir_bu--sevki_bey
+   Mixture clique encountered
 rast--sarki--curcuna--nihansin_dideden--haci_faik_bey
 rast--sarki--devrihindi--gonlumun_ezhar--fehmi_tokay
 rast--sarki--duyek--bana_nasil--alaeddin_yavasca
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 rast--sarki--duyek--belki_bir_sabah--sekip_ayhan_ozisik
 rast--sarki--duyek--ben_kuskunum--baki_duyarlar
 rast--sarki--duyek--bir_gonul--ferit_sidal
@@ -3543,6 +3549,12 @@ rast--turku--devrihindi--deryalar--rumeli
 rast--turku--devrituran--oynayin_kiz--trabzon
 rast--turku--evfer--evrese_yollari--
 rast--turku--nimsofyan--ibrisim_ormuyorlar--
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 rast--turku--nimsofyan--sira_sira--
 rast--turku--oynak--aman_aysem--
 rast--turku--semai--gul_agaci--necip_mirkelamoglu
@@ -3560,6 +3572,8 @@ rast--turku--sofyan--kalenin_dibinde--kerkuk
     24.0: da   and Di are in the same measure!
     21.0: ya   and Ba are in the same measure!
     20.0: ya   and Çey are in the same measure!
+   Mixture clique encountered
+   Mixture clique encountered
     258, LYRICS_SECTION does not start on a measure: 20.875
     270, LYRICS_SECTION does not start on a measure: 21.875
     304, LYRICS_SECTION does not start on a measure: 24.5
@@ -3573,7 +3587,9 @@ rast--turku--sofyan--kalenin_dibinde--kerkuk
     734, LYRICS_SECTION does not start on a measure: 59.875
     768, LYRICS_SECTION does not start on a measure: 62.5
 rast--turku--sofyan--su_dereler--orta_anadolu
+   Mixture clique encountered
 rast--turku--yuruksemai--ben_yarali--zeki_duygulu
+   Mixture clique encountered
 rast--yuruksemai--yuruksemai--gelse_o_suh--hafiz_post
 rast--zeybek--agiraksak--kordon_zeybegi--
     Missing section info in lyrics.
@@ -3607,8 +3623,6 @@ saba--beste--muhammes--bir_nim-nigah--efrasiyaboglu_ali_pasa
 saba--ilahi--duyek--git_ey--munir_nurettin_selcuk
 saba--kupe--duyek--gayri--ahmet_avni_konuk
 saba--mehter--hafif----zurnazen_dagi_ahmet_celebi
-    96, HANE-I-SANI does not start on a measure: 16.125
-    194, HANE-I-SALIS does not start on a measure: 32.125
 saba--miraciye--turkdarbi--pes_heman--nayi_osman_dede
     Some measures are skipped by the offsets
     Missing section info in lyrics.
@@ -3622,6 +3636,7 @@ saba--nakis--yuruksemai--cefaya_ey--kara_ismail_aga
     340, LYRICS_SECTION does not start on a measure: 38.66667
     399, LYRICS_SECTION does not start on a measure: 44.66667
 saba--nakis--yuruksemai--ey_bad-i--suphi_ziya_ozbekkan
+   Mixture clique encountered
 saba--ornek-oz--sofyan--1--ruhi_ayangil
     Missing section info in lyrics.
 saba--ornek-oz--sofyan--2--ruhi_ayangil
@@ -3657,6 +3672,14 @@ saba--sarki--aksak--gitti_de--denizoglu_ali_bey
     Some measures are skipped by the offsets
     Missing section info in lyrics.
 saba--sarki--aksak--goz_actim--omer_dilek
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 saba--sarki--aksak--mey_icerken--sevki_bey
 saba--sarki--aksak--semt-i_dildare--suphi_ziya_ozbekkan
 saba--sarki--aksak--sen_sinemde--necip_mirkelamoglu
@@ -3676,6 +3699,8 @@ saba--sarki--duyek--gus_eyle--dede_efendi
     7.0: ri   and a  are in the same measure!
     116, LYRICS_SECTION does not start on a measure: 7.375
 saba--sarki--duyek--kinali_keklik--zeki_muren
+   Mixture clique encountered
+   Mixture clique encountered
 saba--sarki--duyek--seni_herkesten--yesari_asim_arsoy
 saba--sarki--nimsofyan--gel_kulbe-i--
 saba--sarki--senginsemai--hasretle_anarken--yesari_asim_arsoy
@@ -3834,19 +3859,7 @@ segah--sarki--yuruksemai--kapat_gozlerini--mustafa_seyran
 segah--sazeseri--sofyan--uc_turkoglu--aksehir
     Missing section info in lyrics.
 segah--sazsemaisi--aksaksemai----hizir_aga
-    105, 2-HANE-VE-TESLIM does not start on a measure: 8.2
-    151, 2-HANE-VE-TESLIM does not start on a measure: 12.2
-    359, 2-HANE-VE-TESLIM does not start on a measure: 32.2
-    405, 2-HANE-VE-TESLIM does not start on a measure: 36.2
-    569, 2-HANE-VE-TESLIM does not start on a measure: 52.2
-    615, 2-HANE-VE-TESLIM does not start on a measure: 56.2
 segah--sazsemaisi--aksaksemai----nayi_osman_dede
-    69, 2-HANE-VE-TESLIM does not start on a measure: 8.2
-    94, 2-HANE-VE-TESLIM does not start on a measure: 12.2
-    193, 2-HANE-VE-TESLIM does not start on a measure: 24.2
-    218, 2-HANE-VE-TESLIM does not start on a measure: 28.2
-    378, 2-HANE-VE-TESLIM does not start on a measure: 48.2
-    403, 2-HANE-VE-TESLIM does not start on a measure: 52.2
 segah--seyir--semai--1--rauf_yekta
     Missing section info in lyrics.
 segah--seyir--sofyan--1--erol_bingol
@@ -3928,6 +3941,8 @@ segah--turku--aksak--yarim_istanbulu--kayseri
     27.0: man   and Gör are in the same measure!
     14.0: man   and Gay are in the same measure!
     7.0: man   and Gör are in the same measure!
+   Mixture clique encountered
+   Mixture clique encountered
     91, LYRICS_SECTION does not start on a measure: 7.333333
     181, LYRICS_SECTION does not start on a measure: 14.27778
     335, LYRICS_SECTION does not start on a measure: 27.33333
@@ -3935,8 +3950,10 @@ segah--turku--aksak--yarim_istanbulu--kayseri
 segah--turku--curcuna--bahcada_yesil--diyarbakir
 segah--turku--curcuna--cayda_cira--elazig
 segah--turku--curcuna--havuz_basinin--erzincan
+   Mixture clique encountered
 segah--turku--curcuna--incecikten_bir--sadettin_kaynak
 segah--turku--devrihindi--gemiciler--trabzon
+   Mixture clique encountered
 segah--turku--iki-bir--pencereden_tas--kars
 segah--turku--nimsofyan--acem_ulkesinde--erzurum
 segah--turku--nimsofyan--acilir_gonca_gul--erol_sayan
@@ -3953,6 +3970,13 @@ segah--turku--sofyan--kalaliyam--urfa
 segah--turku--sofyan--keten_koynek--kirsehir-mucur
 segah--turku--sofyan--oy_kemence--ordu
 segah--turku--sofyan--pancar_pezik--hacibektas
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 segah--turku--turkaksagi--terazi--macka
 segah--turku--yuruksemai--ayli_gece--azeri
 segah--yuruksemai--yuruksemai--etti_o_guzel--ebubekir_aga
@@ -4153,6 +4177,7 @@ suzidil--sarki--aksak--sana_ben_arz-i--garbis_efendi
 suzidil--sarki--ciftesofyan--gul_olsam--bimen_sen
 suzidil--sarki--duyek--sevgi_cicegimsin--omer_sami_gupgup
 suzidil--sarki--evfer--yandikca_oldu--tanburi_ali_efendi
+   Mixture clique encountered
 suzidil--sarki--senginsemai--ey_gonca--semseddin_ziya_bey
 suzidil--sarki--turkaksagi--vadeyle_vaslin--eyyubi_mehmet_bey
 suzidil--sazsemaisi--aksaksemai----abdulhalim_aga
@@ -4229,6 +4254,8 @@ suzinak--seyir--sofyan--1--erol_bingol
 suzinak--seyir--sofyan--1--sefik_gurmeric
     Missing section info in lyrics.
 suzinak--turku--nimsofyan--yarim_gitti--istanbul
+   Mixture clique encountered
+   Mixture clique encountered
 suzinak--turku--oynak--a_benim--osman_pehlivan
 suzinak--turku--oynak--uzun_da_kavak--izmir
 suzinak--turku--semai--gokyuzunde_tuten--necmi_piskin
@@ -4251,6 +4278,10 @@ tahir--tesbih--sofyan--allahumme--ali_ufki
 tahir--turku--aksak--gimildan--manisa
 tahir--turku--aksak--havuzun_basinda--cankiri
 tahir--turku--aksak--islamoglu--afyon
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 tahir--turku--aksak--top_yatagin--aydin
 tahir--turku--bektasidevrirevani--asamadim_su--eskisehir
     22.0: man   and Ör are in the same measure!
@@ -4363,6 +4394,8 @@ ussak--sarki--curcuna--cana_rakibi--giriftzen_asim_bey
 ussak--sarki--curcuna--derdimi_anlatirdim--tahsin_karakus
 ussak--sarki--curcuna--esiri_zulfunum--sevki_bey
 ussak--sarki--curcuna--hastasin_zannim--sevki_bey
+   Mixture clique encountered
+   Mixture clique encountered
 ussak--sarki--curcuna--omrumun_gulusun--haydar_tatliyay
 ussak--sarki--curcuna--yad_ile--sevki_bey
 ussak--sarki--devrihindi--bezm-i_gamda--mustafa_coskun
@@ -4372,6 +4405,7 @@ ussak--sarki--duyek--bahari_beklerken--selcuk_tekay
 ussak--sarki--duyek--dalinda_solarken--arif_sami_toker
 ussak--sarki--duyek--gun_gelir_de--sekip_ayhan_ozisik
 ussak--sarki--duyek--hem_bakarsin--ugur_uzunhekim
+   Mixture clique encountered
 ussak--sarki--duyek--her_mevsim--semahat_ozdenses
 ussak--sarki--duyek--mehtapli_gecelerde--sevim_sengul
 ussak--sarki--duyek--menekse_gozler--yesari_asim_arsoy
@@ -4406,6 +4440,9 @@ ussak--sarki--senginsemai--affeyle_guhanim--enderuni_ali_bey
 ussak--sarki--senginsemai--askin_ile--enderuni_ali_bey
 ussak--sarki--senginsemai--ey_suh-i_cefa--haci_arif_bey
 ussak--sarki--sofyan--bir_perikizi--
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 ussak--sarki--sofyan--gamzedeyim_deva--tatyos_efendi
 ussak--sarki--turkaksagi--hala_aciyor--serif_icli
 ussak--sarki--turkaksagi--hasret_dolu--serif_icli
@@ -4443,13 +4480,29 @@ ussak--turku--nimsofyan--ayva_cicek--
 ussak--turku--nimsofyan--kadifeden_kesesi--
 ussak--turku--nimsofyan--sabahtan_kalktim--
 ussak--turku--nimsofyan--sarardim_ben--
+   Mixture clique encountered
 ussak--turku--nimsofyan--urfaliyam_ezelden--
 ussak--turku--nimsofyan--yine_gam--
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 ussak--turku--sofyan--eledim_eledim--erzurum
 ussak--turku--sofyan--kalenin_burcu_muyam--
 ussak--turku--sofyan--mevlam_bircok--malatya
 ussak--turku--sofyan--seyyah_olup--
 ussak--turku--sofyan--sigaramin_dumani--
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
+   Mixture clique encountered
 ussak--turku--sofyan--telgirafin_tellerine--
 ussak--turku--sofyan--uzun_ince--asik_veysel
 ussak--turku--turkaksagi--drama_koprusu--
@@ -4482,6 +4535,7 @@ yegah--sarki--aksaksemai--benim_afet-i--dellalzade_haci_ismail_efendi
     6.0: man   and (Ah)  are in the same measure!
     4.0: man   and (Ah)  are in the same measure!
     2.0: man   and Be are in the same measure!
+   Mixture clique encountered
     27, LYRICS_SECTION does not start on a measure: 2.5
     51, LYRICS_SECTION does not start on a measure: 4.5
     73, LYRICS_SECTION does not start on a measure: 6.5
@@ -4506,6 +4560,7 @@ yegah--seyir--sofyan--1--erol_bingol
 yegah--seyir--sofyan--1--sefik_gurmeric
     Missing section info in lyrics.
 zavil--agirsemai--aksaksemai--bulunmaz_nev-civansin--kucuk_mehmet_aga
+   Mixture clique encountered
 zavil--kupe--devrirevan--sanma_ki_mihr-i--ahmet_avni_konuk
 zavil--pesrev--hafif----zeki_mehmet_aga
 zavil--sarki--semai--hub_sada--muallim_ismail_hakki_bey
