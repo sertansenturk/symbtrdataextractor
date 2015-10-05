@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 __author__ = 'sertansenturk'
-from compmusic import dunya
 
 from section import *
 from symbtr import *
