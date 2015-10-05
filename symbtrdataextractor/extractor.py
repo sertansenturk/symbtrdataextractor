@@ -8,18 +8,18 @@ from symbtr import *
 
 def extract(scorefile, symbtrname, useMusicBrainz = False, extractAllLabels = False, 
     slugify = True, lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
-    # get the metadata in the score name, works if the name of the 
+    # get the data in the score name, works if the name of the 
     # file has not been changed
     symbtrdict = symbtrname.split('--')
-    metadata = dict()
+    data = dict()
     try:
-        [metadata['makam'], metadata['form'], metadata['usul'], metadata['name'], 
-            metadata['composer']] = symbtrname.split('--')
-        metadata['tonic'] = getTonic(metadata['makam'])
+        [data['makam'], data['form'], data['usul'], data['name'], 
+            data['composer']] = symbtrname.split('--')
+        data['tonic'] = getTonic(data['makam'])
 
-        if isinstance(metadata['composer'], list):
+        if isinstance(data['composer'], list):
             print 'The symbtrname is not in the form "makam--form--usul--name--composer"'
-            metadata = dict()
+            data = dict()
     except ValueError:
         print 'The symbtrname is not in the form "makam--form--usul--name--composer"'
         
@@ -36,14 +36,14 @@ def extract(scorefile, symbtrname, useMusicBrainz = False, extractAllLabels = Fa
         print "Unknown format"
         return -1
 
-    metadata['sections'] = extractSection(score, slugify=slugify, 
+    data['sections'] = extractSection(score, slugify=slugify, 
         extractAllLabels=extractAllLabels,lyrics_sim_thres=lyrics_sim_thres,
         melody_sim_thres=melody_sim_thres)
 
     if useMusicBrainz:
         extractSectionFromMusicBrainz
 
-    return {'metadata': metadata}
+    return {'data': data}
 
 def getTonic(makam):
     makam_tonic_file = os.path.join(os.path.dirname(

@@ -21,5 +21,5 @@ def isIntegerOffset(offset):
 def getMeasureOffsetId(measureOffset, offsets, measure_start_idx):
     measure_start_offsets = [offsets[m] for m in measure_start_idx]
     # do inexact integer matching
-    dist = [abs(o - offset) for o in measure_start_offsets]
+    dist = [abs(o - measureOffset) for o in measure_start_offsets]
     return measure_start_idx[dist.index(min(dist))]
