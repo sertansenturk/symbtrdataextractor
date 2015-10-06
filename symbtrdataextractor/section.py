@@ -4,7 +4,7 @@ from math import floor
 
 from slugify_tr import slugify_tr
 from symbtr import getTrueLyricsIdx
-from structure_labeler import labelSections, get_symbtr_labels
+from structure_label import labelSections, get_symbtr_labels
 from offset import *
 
 def extractSection(score, slugify = True, extractAllLabels=False, 

@@ -4,28 +4,16 @@ __author__ = 'sertansenturk'
 from section import *
 from symbtr import *
 
-#dunya.set_token('69ed3d824c4c41f59f0bc853f696a7dd80707779')
-
-def extract(scorefile, symbtrname, useMusicBrainz = False, extractAllLabels = False, 
+def extract(scorefile, metadata_source = '', extractAllLabels = False, 
     slugify = True, lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
-    # get the data in the score name, works if the name of the 
-    # file has not been changed
-    symbtrdict = symbtrname.split('--')
-    data = dict()
-    try:
-        [data['makam'], data['form'], data['usul'], data['name'], 
-            data['composer']] = symbtrname.split('--')
-        data['tonic'] = getTonic(data['makam'])
-
-        if isinstance(data['composer'], list):
-            print 'The symbtrname is not in the form "makam--form--usul--name--composer"'
-            data = dict()
-    except ValueError:
-        print 'The symbtrname is not in the form "makam--form--usul--name--composer"'
         
+    # get the metadata
+    data = getMetadata(metadata_source)
+
     # get the extension to determine the SymbTr-score format
     extension = os.path.splitext(scorefile)[1]
 
+    # read the scre
     if extension == ".txt":
         score = readTxtScore(scorefile)
     elif extension == ".xml":
@@ -40,10 +28,21 @@ def extract(scorefile, symbtrname, useMusicBrainz = False, extractAllLabels = Fa
         extractAllLabels=extractAllLabels,lyrics_sim_thres=lyrics_sim_thres,
         melody_sim_thres=melody_sim_thres)
 
-    if useMusicBrainz:
-        extractSectionFromMusicBrainz
-
     return {'data': data}
+
+def getMetadata(source):
+    data = dict()
+    try:  # SymbTr name
+        [data['makam'], data['form'], data['usul'], data['name'], 
+            data['composer']] = source.split('--')
+        data['tonic'] = getTonic(data['makam'])
+    except ValueError:  # musicbrainz id
+        try:
+            data = getMetadataFromMusicBrainz(source)
+        except ValueError:
+            print('The metadata source input should either be the symbtrname '
+                '(makam--form--usul--name--composer) or MusicBrainz work id')
+    return data
 
 def getTonic(makam):
     makam_tonic_file = os.path.join(os.path.dirname(
@@ -51,3 +50,6 @@ def getTonic(makam):
     makam_tonic = json.load(open(makam_tonic_file, 'r'))
 
     return makam_tonic[makam]['kararSymbol']
+
+def getMetadataFromMusicBrainz(work_mbid):
+    pass
