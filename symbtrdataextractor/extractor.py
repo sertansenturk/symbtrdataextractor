@@ -4,6 +4,10 @@ __author__ = 'sertansenturk'
 from section import *
 from symbtr import *
 
+import compmusic
+import compmusic.dunya.makam as mk
+compmusic.dunya.conn.set_token('b24315d957c8b5bb5fc78abed762764b2d34ca62')
+
 def extract(scorefile, metadata_source, extractAllLabels = False, 
     slugify = True, lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
         
@@ -35,13 +39,13 @@ def getMetadata(source):
     try:  # SymbTr name
         [data['makam'], data['form'], data['usul'], data['name'], 
             data['composer']] = source.split('--')
-        data['tonic'] = getTonic(data['makam'])
     except ValueError:  # musicbrainz id
         try:
             data = getMetadataFromMusicBrainz(source)
         except ValueError:
             print('The metadata source input should either be the symbtrname '
                 '(makam--form--usul--name--composer) or MusicBrainz work id')
+    data['tonic'] = getTonic(data['makam'])
     return data
 
 def getTonic(makam):
@@ -52,4 +56,18 @@ def getTonic(makam):
     return makam_tonic[makam]['kararSymbol']
 
 def getMetadataFromMusicBrainz(work_mbid):
-    pass
+    work = mk.get_work(work_mbid)
+    data = dict()
+
+    data['makam'] = (work['makams'][0] if len(work['makams']) == 1
+        else work['makams'])
+    data['form'] = (work['forms'][0] if len(work['forms']) == 1
+        else work['forms'])
+    data['usul'] = (work['usuls'][0] if len(work['usuls']) == 1
+        else work['usuls'])
+    data['name'] = work['title']
+    data['composer'] = (work['composers'][0] if len(work['composers']) == 1
+        else work['composers'])
+    data['mbid'] = work_mbid
+
+    return data
