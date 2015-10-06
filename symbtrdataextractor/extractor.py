@@ -4,7 +4,7 @@ __author__ = 'sertansenturk'
 from section import *
 from symbtr import *
 
-def extract(scorefile, metadata_source = '', extractAllLabels = False, 
+def extract(scorefile, metadata_source, extractAllLabels = False, 
     slugify = True, lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
         
     # get the metadata

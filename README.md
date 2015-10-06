@@ -19,8 +19,8 @@ All the relevant data can be easily obtained:
 ```python
 from symbtrdataextractor import extractor
 
-data = extractor.extract("scorefile", metadata_source = '', extractAllLabels = False, 
-    slugify = True, lyrics_sim_thres = 0.25, melody_sim_thres = 0.25)
+data = extractor.extract("scorefile", metadata_source, extractAllLabels=False, 
+    slugify=True, lyrics_sim_thres=0.25, melody_sim_thres=0.25)
 ```
 
 Installation
