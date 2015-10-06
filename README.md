@@ -14,18 +14,19 @@ Currently the algorithm is able to:
 
 Usage
 =======
-All the relevant data can be obtained by a single call:
+All the relevant data can be easily obtained:
 
 ```python
 from symbtrdataextractor import extractor
 
-data = extractor.extract("scorefile", metadata_source = '', extractAllLabels = False, slugify = True, lyrics_sim_thres = 0.25, melody_sim_thres = 0.25)
+data = extractor.extract("scorefile", metadata_source = '', extractAllLabels = False, 
+    slugify = True, lyrics_sim_thres = 0.25, melody_sim_thres = 0.25)
 ```
 
 Installation
 ============
 
-If you want to install symbtrmetadataextractor, ut is recommended to install symbtrmetadataextractor and dependencies into a virtualenv. Do it like this:
+If you want to install symbtrmetadataextractor, ut is recommended to install symbtrmetadataextractor and dependencies into a virtualenv. In the terminal, do the following:
 
     virtualenv env
     source env/bin/activate
@@ -43,11 +44,17 @@ Now you can install the rest of the dependencies:
 The inputs are:
 ```python
 # scorefile: the filepath of the SymbTr score
-# metadata_source: either the MBID of the related work or the SymbTr-name (makam--form--usul--name--composer).
-# extractAllLabels: whether to treat all (explicit) annotations in the lyrics as a section or not (e.g. ISTRUMENTATION labels). Default is False.
-# slugify: whether to replace the Turkish characters with the ASCII equivalent and replace all special characters with "-". Default is True.
-# lyrics_sim_thres: The maximum similarity threshold for two lyric stuctures to be considered as variant of each other. Default is 0.25.
-# melody_sim_thres: The maximum similarity threshold for two melodic stuctures to be considered as variant of each other. Default is 0.25.
+# metadata_source :	either the MBID of the related work or the SymbTr-name 
+#					(makam--form--usul--name--composer).
+# extractAllLabels: whether to treat all (explicit) annotations in the lyrics as 
+#					a section or not (e.g. ISTRUMENTATION labels). Default is False.
+# slugify		  : whether to replace the Turkish characters with the ASCII 
+#					equivalent and replace all special characters with "-". Default 
+#				    is True.
+# lyrics_sim_thres: The maximum similarity threshold for two lyric stuctures to be 
+#					considered as variant of each other. Default is 0.25.
+# melody_sim_thres: The maximum similarity threshold for two melodic stuctures to 
+#					be considered as variant of each other. Default is 0.25.
 ```
 
 Authors
