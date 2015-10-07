@@ -6,6 +6,7 @@ from slugify_tr import slugify_tr
 from symbtr import getTrueLyricsIdx
 from structure_label import labelSections, get_symbtr_labels
 from offset import *
+import pdb
 
 def extractSection(score, extractAllLabels=False, 
     lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
@@ -52,10 +53,12 @@ def getSections(score, struct_lbl):
     for i, l in enumerate(score['lyrics']):
         if l in struct_lbl: # note the explicit structures
             sections.append({'name':l, 'slug':slugify_tr(l), 
-                'startNote':i, 'endNote':[]})
+                'startNote':i, 'endNote':[], 'lyrics':''})
         elif '  ' in l: # lyrics end marker
+            # lyrics will be updated in locateSectionBoundaries
             sections.append({'name':u"LYRICS_SECTION", 
-                'slug':u"LYRICS_SECTION",'startNote':[],'endNote':i})
+                'slug':u"LYRICS_SECTION",'startNote':[],'endNote':i,
+                'lyrics':''})
     return sections
 
 def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx):
@@ -106,6 +109,12 @@ def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx):
             # update startNoteIdx
             startNoteIdx = ([s['startNote'] for s in sections] + 
                 [len(score['lyrics'])])
+
+            # update lyrics
+            section_lyrics_idx = ([rl for rl in real_lyrics_idx 
+                if rl >= se['startNote'] and rl<= se['endNote']])
+            syllables = [score['lyrics'][li] for li in section_lyrics_idx]
+            se['lyrics'] = ''.join(syllables)
         else:  # instrumental
             se['endNote'] = min(x for x in startNoteIdx 
                 if x > se['startNote']) - 1
