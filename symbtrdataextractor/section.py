@@ -7,7 +7,7 @@ from symbtr import getTrueLyricsIdx
 from structure_label import labelSections, get_symbtr_labels
 from offset import *
 
-def extractSection(score, slugify = True, extractAllLabels=False, 
+def extractSection(score, extractAllLabels=False, 
     lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
     all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list] 
     struct_lbl = all_labels if extractAllLabels else get_symbtr_labels()['structure'] 
@@ -20,7 +20,7 @@ def extractSection(score, slugify = True, extractAllLabels=False,
         # empty lyrics field; we cannot really do anything wo symbolic analysis
         sections = []
     else:
-        sections = getSections(score, struct_lbl, slugify=slugify)
+        sections = getSections(score, struct_lbl)
         sections = locateSectionBoundaries(sections, score, all_labels, 
             measure_start_idx)
 
@@ -38,24 +38,24 @@ def extractSection(score, slugify = True, extractAllLabels=False,
 
     return sections
 
-def extractSectionFromXML(score, slugify = True):
+def extractSectionFromXML(score):
     pass
 
-def extractSectionFromMu2(score, slugify = True):
+def extractSectionFromMu2(score):
     pass
 
-def extractSectionFromMusicBrainz(score, slugify = True):
+def extractSectionFromMusicBrainz(score):
     pass
 
-def getSections(score, struct_lbl, slugify=True):
+def getSections(score, struct_lbl):
     sections = []
     for i, l in enumerate(score['lyrics']):
         if l in struct_lbl: # note the explicit structures
-            sections.append({'name':slugify_tr(l) if slugify else l, 
+            sections.append({'name':l, 'slug':slugify_tr(l), 
                 'startNote':i, 'endNote':[]})
         elif '  ' in l: # lyrics end marker
-            sections.append({'name':"LYRICS_SECTION", 'startNote':[], 
-                'endNote':i})
+            sections.append({'name':u"LYRICS_SECTION", 
+                'slug':u"LYRICS_SECTION",'startNote':[],'endNote':i})
     return sections
 
 def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx):
@@ -64,9 +64,7 @@ def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx):
     startNoteIdx = [s['startNote'] for s in sections] + [len(score['lyrics'])]
     endNoteIdx = [-1] + [s['endNote'] for s in sections]
     for se in reversed(sections): # start from the last section
-        #print se['name'] + ' ' + str(se['startNote']) + ' ' + str(se['endNote'])
-
-        if se['name'] == 'LYRICS_SECTION':
+        if se['slug'] == u'LYRICS_SECTION':
             # carry the 'endNote' to the next closest start
             se['endNote'] = min(x for x in startNoteIdx 
                 if x > se['endNote']) - 1
@@ -118,11 +116,9 @@ def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx):
     # if the first note is not the startNote of a section
     # add an initial instrumental section
     if sections and not any(s['startNote'] == 0 for s in sections):
-        sections.append({'name': 'INSTRUMENTAL_SECTION','startNote': 0, 
+        sections.append({'name': u'INSTRUMENTAL_SECTION',
+            'slug':u'INSTRUMENTAL_SECTION', 'startNote': 0, 
             'endNote': min([s['startNote'] for s in sections])-1})
-
-        #print(' ' + se['name'] + ' ' + str(se['startNote']) + ' '
-        #    '' + str(se['endNote']))
     return sortSections(sections)
 
 def sortSections(sections):
@@ -145,13 +141,13 @@ def validateSections(sections, score, masdeasure_start_idx, ignoreLabels):
     for s in sections:
         # check whether section starts on the measure or not
         if (not isIntegerOffset(score['offset'][s['startNote']]) and 
-            s['name'] not in ignoreLabels):
-            print("    " + str(s['startNote']) + ', ' + s['name'] + ' '
+            s['slug'] not in ignoreLabels):
+            print("    " + str(s['startNote']) + ', ' + s['slug'] + ' '
                 'does not start on a measure: ' + 
                 str(score['offset'][s['startNote']]))
         # check if the end of a section somehow got earlier than its start
         if s['startNote'] > s['endNote']:
             print("    " + str(s['startNote']) + '->'
-                '' + str(s['endNote']) + ', ' + s['name'] + ' '
+                '' + str(s['endNote']) + ', ' + s['slug'] + ' '
                 'ends before it starts: ' + 
                 str(score['offset'][s['startNote']]))

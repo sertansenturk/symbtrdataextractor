@@ -9,7 +9,7 @@ import compmusic.dunya.makam as mk
 compmusic.dunya.conn.set_token('b24315d957c8b5bb5fc78abed762764b2d34ca62')
 
 def extract(scorefile, metadata_source, extractAllLabels = False, 
-    slugify = True, lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
+    lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
         
     # get the metadata
     data = getMetadata(metadata_source)
@@ -28,11 +28,10 @@ def extract(scorefile, metadata_source, extractAllLabels = False,
         print "Unknown format"
         return -1
 
-    data['sections'] = extractSection(score, slugify=slugify, 
-        extractAllLabels=extractAllLabels,lyrics_sim_thres=lyrics_sim_thres,
-        melody_sim_thres=melody_sim_thres)
+    data['sections'] = extractSection(score, extractAllLabels=extractAllLabels,
+        lyrics_sim_thres=lyrics_sim_thres, melody_sim_thres=melody_sim_thres)
 
-    return {'data': data}
+    return data
 
 def getMetadata(source):
     data = dict()
