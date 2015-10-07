@@ -128,7 +128,6 @@ def getMelodicOrganization(sections, scoreFragments, melody_sim_thres):
             chk_mel = ([melodies[i] for i, x in enumerate(melody_labels) 
                 if x == lbl])
             if not all(mel == cm for cm in chk_mel):
-                pdb.set_trace()
                 print '   Mismatch in melody_label: ' + lbl
     else:  # no section information
         sections = []

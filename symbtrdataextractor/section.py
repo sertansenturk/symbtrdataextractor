@@ -6,7 +6,6 @@ from slugify_tr import slugify_tr
 from symbtr import getTrueLyricsIdx
 from structure_label import labelSections, get_symbtr_labels
 from offset import *
-import pdb
 
 def extractSection(score, extractAllLabels=False, 
     lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
