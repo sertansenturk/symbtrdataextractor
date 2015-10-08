@@ -25,8 +25,7 @@ def extract(scorefile, metadata_source, extractAllLabels = False,
     elif extension == ".mu2":
         score = readMu2Score(scorefile)
     else:
-        print "Unknown format"
-        return -1
+        raise IOError("Unknown format")
 
     data['sections'] = extractSection(score, extractAllLabels=extractAllLabels,
         lyrics_sim_thres=lyrics_sim_thres, melody_sim_thres=melody_sim_thres)

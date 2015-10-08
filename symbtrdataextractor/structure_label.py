@@ -117,9 +117,9 @@ def getMelodicOrganization(sections, scoreFragments, melody_sim_thres):
         for i in range(0, len(melody_labels)):
             if sections[i]['name'] not in ['LYRICS_SECTION', 'INSTRUMENTAL_SECTION']:
                 # if it's a mixture clique, keep the label altogether
-                sections[i]['melodic_structure'] = (sections[i]['name'] +
+                sections[i]['melodic_structure'] = (sections[i]['slug'] +
                     '_'+melody_labels[i][1:] if melody_labels[i][1].isdigit()
-                    else sections[i]['name'] + '_' + melody_labels[i])
+                    else sections[i]['slug'] + '_' + melody_labels[i])
             else:
                 sections[i]['melodic_structure'] = melody_labels[i]
 
