@@ -68,9 +68,9 @@ def getLyricOrganization(sections, scoreFragments, lyrics_sim_thres):
         # label the insrumental sections, if present
         for i in range(0, len(lyrics_labels)):
             if not scoreFragments[i]['lyrics']:
-                sections[i]['lyric_structure'] = 'INSTRUMENTAL'
+                sections[i]['lyricStructure'] = 'INSTRUMENTAL'
             else:
-                sections[i]['lyric_structure'] = lyrics_labels[i]
+                sections[i]['lyricStructure'] = lyrics_labels[i]
 
         # sanity check
         lyrics = [sc['lyrics'] for sc in scoreFragments]
@@ -117,11 +117,11 @@ def getMelodicOrganization(sections, scoreFragments, melody_sim_thres):
         for i in range(0, len(melody_labels)):
             if sections[i]['name'] not in ['LYRICS_SECTION', 'INSTRUMENTAL_SECTION']:
                 # if it's a mixture clique, keep the label altogether
-                sections[i]['melodic_structure'] = (sections[i]['slug'] +
+                sections[i]['melodicStructure'] = (sections[i]['slug'] +
                     '_'+melody_labels[i][1:] if melody_labels[i][1].isdigit()
                     else sections[i]['slug'] + '_' + melody_labels[i])
             else:
-                sections[i]['melodic_structure'] = melody_labels[i]
+                sections[i]['melodicStructure'] = melody_labels[i]
 
         # sanity check
         for lbl, mel in zip(melody_labels, melodies):
