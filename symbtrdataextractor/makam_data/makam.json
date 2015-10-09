@@ -327,6 +327,10 @@
 		"kararMidiFrequency": 440,
 		"kararSymbol": "A4"
 	},
+	"murekkep-isfahan": {
+		"kararMidiFrequency": 293.66,
+		"kararSymbol": "D4"
+	},
 	"mustear": {
 		"kararMidiFrequency": 487.46,
 		"kararSymbol": "B4b1"
