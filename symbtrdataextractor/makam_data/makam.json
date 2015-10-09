@@ -119,6 +119,10 @@
 		"kararMidiFrequency": 440,
 		"kararSymbol": "A4"
 	},
+	"eski-sipihr": {
+		"kararMidiFrequency": 440,
+		"kararSymbol": "A4"
+	},
 	"evcara": {
 		"kararMidiFrequency": 367.99,
 		"kararSymbol": "F4#4"
@@ -515,10 +519,6 @@
 		"kararMidiFrequency": 392,
 		"kararSymbol": "G4"
 	},
-	"sevkitarab": {
-		"kararMidiFrequency": 367,
-		"kararSymbol": "F4"
-	},
 	"sevkutarab": {
 		"kararMidiFrequency": 367,
 		"kararSymbol": "F4"
@@ -594,6 +594,10 @@
 	"yegah": {
 		"kararMidiFrequency": 293.66,
 		"kararSymbol": "D4"
+	},
+	"yeni-cargah": {
+		"kararMidiFrequency": 523.25,
+		"kararSymbol": "C5"
 	},
 	"zavil": {
 		"kararMidiFrequency": 392,
