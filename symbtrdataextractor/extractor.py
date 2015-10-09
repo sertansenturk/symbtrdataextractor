@@ -4,9 +4,8 @@ __author__ = 'sertansenturk'
 from section import *
 from symbtr import *
 
-import compmusic
-import compmusic.dunya.makam as mk
-compmusic.dunya.conn.set_token('b24315d957c8b5bb5fc78abed762764b2d34ca62')
+import musicbrainzngs as mb
+mb.set_useragent("SymbTr metadata", "0.1", "compmusic.upf.edu")
 
 def extract(scorefile, metadata_source, extractAllLabels = False, 
     lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
@@ -33,17 +32,23 @@ def extract(scorefile, metadata_source, extractAllLabels = False,
     return data
 
 def getMetadata(source):
-    data = dict()
-    try:  # SymbTr name
-        [data['makam'], data['form'], data['usul'], data['name'], 
-            data['composer']] = source.split('--')
-    except ValueError:  # musicbrainz id
-        try:
-            data = getMetadataFromMusicBrainz(source)
-        except ValueError:
-            print('The metadata source input should either be the symbtrname '
-                '(makam--form--usul--name--composer) or MusicBrainz work id')
-    data['tonic'] = getTonic(data['makam'])
+    try:  # only SymbTr-name is given
+        data = ({'makam':dict(),'form':dict(),'usul':dict(),'name':dict(),
+            'composer':dict(),'lyricist':dict()})
+        scoreName_splitted = source.split('--')
+        data['symbTr'] = source
+        data['composer']['symbtr_slug'] = scoreName_splitted[4]
+    except AttributeError:  # dictionary given, SymbTr name and mbid
+        scoreName_splitted = source['name'].split('--')  
+        data = getMetadataFromMusicBrainz(source['uuid'])
+        data['symbTr'] = source['name']
+
+    data['makam']['symbtr_slug'] = scoreName_splitted[0]
+    data['form']['symbtr_slug'] = scoreName_splitted[1]
+    data['usul']['symbtr_slug'] = scoreName_splitted[2]
+    data['name']['symbtr_slug'] = scoreName_splitted[3]
+
+    data['tonic'] = getTonic(data['makam']['symbtr_slug'])
     return data
 
 def getTonic(makam):
@@ -53,19 +58,46 @@ def getTonic(makam):
 
     return makam_tonic[makam]['kararSymbol']
 
-def getMetadataFromMusicBrainz(work_mbid):
-    work = mk.get_work(work_mbid)
-    data = dict()
+def getMetadataFromMusicBrainz(uuid):
+    if uuid['type'] == 'work':
+        work = mb.get_work_by_id(uuid['mbid'], includes=['artist-rels'])['work']
 
-    data['makam'] = (work['makams'][0] if len(work['makams']) == 1
-        else work['makams'])
-    data['form'] = (work['forms'][0] if len(work['forms']) == 1
-        else work['forms'])
-    data['usul'] = (work['usuls'][0] if len(work['usuls']) == 1
-        else work['usuls'])
-    data['name'] = work['title']
-    data['composer'] = (work['composers'][0] if len(work['composers']) == 1
-        else work['composers'])
-    data['mbid'] = work_mbid
+        work_attributes = work['attribute-list']
+        data = ({'makam':dict(),'form':dict(),'usul':dict(),
+            'name':{'uuid':uuid},'composer':dict(),'lyricist':dict()})
 
+        makam = [a['attribute'] for a in work_attributes if 'Makam' in a['type']]
+        data['makam'] = {'name': makam[0] if len(makam) == 1 else makam}
+
+        form = [a['attribute'] for a in work_attributes if 'Form' in a['type']]
+        data['form'] = {'name': form[0] if len(form) == 1 else form}
+
+        usul = [a['attribute'] for a in work_attributes if 'Usul' in a['type']]
+        data['usul'] = {'name': usul[0] if len(usul) == 1 else usul}
+
+        data['name']['title'] = work['title']
+
+        for a in work['artist-relation-list']:
+            if a['type'] == 'composer':
+                data['composer'] = {'name':a['artist']['name'],'mbid':a['artist']['id']}
+            elif a['type'] == 'lyricist':
+                data['lyricist'] = {'name':a['artist']['name'],'mbid':a['artist']['id']}
+    elif uuid['type'] == 'recording':
+        rec = mb.get_recording_by_id(uuid['mbid'], includes=['artist-rels', 'tags'])['recording']
+
+        data = ({'makam':[],'form':[],'usul':[],'name':{'uuid':uuid},'performers':[]})
+
+        for t in rec['tag-list']:
+            key, val = t['name'].split(': ')
+            data[key].append({'name':val})
+
+        data['makam'] = data['makam'][0] if len(data['makam']) == 1 else data['makam']
+        data['form'] = data['form'][0] if len(data['form']) == 1 else data['form']
+        data['usul'] = data['usul'][0] if len(data['usul']) == 1 else data['usul']
+
+        for a in rec['artist-relation-list']:
+            if a['type'] in ['instrument', 'vocal']:
+                data['performers'].append({'name':a['artist']['name'],'mbid':a['artist']['id']})
+
+        data['name']['title'] = rec['title']
     return data
