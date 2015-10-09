@@ -114,5 +114,5 @@ def getMetadataFromMusicBrainz(uuid, get_recording_rels = False):
             if a['type'] in ['instrument', 'vocal']:
                 data['performers'].append({'name':a['artist']['name'],'mbid':a['artist']['id']})
 
-        data['work']['title'] = rec['title']
+        data['recording']['title'] = rec['title']
     return data
