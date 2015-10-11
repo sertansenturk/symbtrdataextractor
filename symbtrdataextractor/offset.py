@@ -6,8 +6,11 @@ def findMeasureStartIdx(offsets):
         measure_start_idx.append(min(i for i, o in enumerate(offsets) 
             if o > int_offsets - tol))
 
-    if not all(isIntegerOffset(offsets[i]) for i in measure_start_idx):
+    nonIntegerMeasureStart = ([offsets[i] for i in measure_start_idx 
+        if not isIntegerOffset(offsets[i])])
+    if nonIntegerMeasureStart:
         print "    " + "Some measures are skipped by the offsets"
+        print nonIntegerMeasureStart
     
     return measure_start_idx
 
