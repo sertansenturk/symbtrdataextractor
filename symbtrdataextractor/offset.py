@@ -2,9 +2,9 @@ def findMeasureStartIdx(offsets):
     measure_start_idx = []
 
     tol = 0.001
-    for int_offsets in range(0, int(max(offsets))+1):
-        measure_start_idx.append(min(i for i, o in enumerate(offsets) 
-            if o > int_offsets - tol))
+    for int_offset in range(0, int(max(offsets))+1):
+        idx = min(i for i, o in enumerate(offsets) if o > int_offset - tol)
+        measure_start_idx.append(idx)
 
     nonIntegerMeasureStart = ([offsets[i] for i in measure_start_idx 
         if not isIntegerOffset(offsets[i])])
