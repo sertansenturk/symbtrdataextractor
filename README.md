@@ -20,7 +20,7 @@ All the relevant data can be easily obtained:
 from symbtrdataextractor import extractor
 
 data = extractor.extract("scorefile", metadata_source, extractAllLabels=False, 
-    slugify=True, lyrics_sim_thres=0.25, melody_sim_thres=0.25)
+    lyrics_sim_thres=0.25, melody_sim_thres=0.25)
 ```
 
 The inputs are:
@@ -30,9 +30,6 @@ The inputs are:
 #					(makam--form--usul--name--composer).
 # extractAllLabels: whether to treat all (explicit) annotations in the lyrics as 
 #					a section or not (e.g. ISTRUMENTATION labels). Default is False.
-# slugify		  : whether to replace the Turkish characters with the ASCII 
-#					equivalent and replace all special characters with "-". Default 
-#				    is True.
 # lyrics_sim_thres: The maximum similarity threshold for two lyric stuctures to be 
 #					considered as variant of each other. Default is 0.25.
 # melody_sim_thres: The maximum similarity threshold for two melodic stuctures to 
