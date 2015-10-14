@@ -23,24 +23,6 @@ data = extractor.extract("scorefile", metadata_source, extractAllLabels=False,
     slugify=True, lyrics_sim_thres=0.25, melody_sim_thres=0.25)
 ```
 
-Installation
-============
-
-If you want to install symbtrmetadataextractor, ut is recommended to install symbtrmetadataextractor and dependencies into a virtualenv. In the terminal, do the following:
-
-    virtualenv env
-    source env/bin/activate
-    python setup.py install
-
-If you want to be able to edit files and have the changes be reflected, then
-install compmusic like this instead
-
-    pip install -e .
-
-Now you can install the rest of the dependencies:
-
-    pip install -r requirements
-
 The inputs are:
 ```python
 # scorefile: the filepath of the SymbTr score
@@ -56,6 +38,24 @@ The inputs are:
 # melody_sim_thres: The maximum similarity threshold for two melodic stuctures to 
 #					be considered as variant of each other. Default is 0.25.
 ```
+
+Installation
+============
+
+If you want to install symbtrmetadataextractor, it is recommended to install symbtrmetadataextractor and dependencies into a virtualenv. In the terminal, do the following:
+
+    virtualenv env
+    source env/bin/activate
+    python setup.py install
+
+If you want to be able to edit files and have the changes be reflected, then
+install compmusic like this instead
+
+    pip install -e .
+
+Now you can install the rest of the dependencies:
+
+    pip install -r requirements
 
 Authors
 -------
