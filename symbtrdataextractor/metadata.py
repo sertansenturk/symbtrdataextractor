@@ -46,31 +46,34 @@ def getWorkMetadataFromMusicBrainz(mbid, get_recording_rels = False):
     included_rels = (['artist-rels', 'recording-rels'] 
         if get_recording_rels else ['artist-rels'])
     
-    work = mb.get_work_by_id(mbid,  includes=included_rels)['work']
-    work_attributes = work['attribute-list']
+    work = mb.get_work_by_id(mbid, includes=included_rels)['work']
 
     data = ({'makam':dict(),'form':dict(),'usul':dict(),
         'work':{'mbid':mbid},'composer':dict(),'lyricist':dict()})
 
-    makam = [a['attribute'] for a in work_attributes if 'Makam' in a['type']]
-    data['makam'] = {'name': makam[0] if len(makam) == 1 else makam}
-
-    form = [a['attribute'] for a in work_attributes if 'Form' in a['type']]
-    data['form'] = {'name': form[0] if len(form) == 1 else form}
-
-    usul = [a['attribute'] for a in work_attributes if 'Usul' in a['type']]
-    data['usul'] = {'name': usul[0] if len(usul) == 1 else usul}
-
     data['work']['title'] = work['title']
+
+    if 'attribute-list' in work.keys():
+        w_attrb = work['attribute-list']
+
+        makam = [a['attribute'] for a in w_attrb if 'Makam' in a['type']]
+        data['makam'] = {'name': makam[0] if len(makam) == 1 else makam}
+
+        form = [a['attribute'] for a in w_attrb if 'Form' in a['type']]
+        data['form'] = {'name': form[0] if len(form) == 1 else form}
+
+        usul = [a['attribute'] for a in w_attrb if 'Usul' in a['type']]
+        data['usul'] = {'name': usul[0] if len(usul) == 1 else usul}
 
     if 'language' in work.keys():
         data['language'] = work['language']
 
-    for a in work['artist-relation-list']:
-        if a['type'] == 'composer':
-            data['composer'] = {'name':a['artist']['name'],'mbid':a['artist']['id']}
-        elif a['type'] == 'lyricist':
-            data['lyricist'] = {'name':a['artist']['name'],'mbid':a['artist']['id']}
+    if 'artist-relation-list' in work.keys():
+        for a in work['artist-relation-list']:
+            if a['type'] == 'composer':
+                data['composer'] = {'name':a['artist']['name'],'mbid':a['artist']['id']}
+            elif a['type'] == 'lyricist':
+                data['lyricist'] = {'name':a['artist']['name'],'mbid':a['artist']['id']}
 
     if get_recording_rels:
         data['recordings'] = []
