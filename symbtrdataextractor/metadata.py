@@ -2,24 +2,25 @@ import os
 import json
 
 import musicbrainzngs as mb
-mb.set_useragent("SymbTr metadata", "0.1", "compmusic.upf.edu")
+mb.set_useragent("SymbTr metadata", "0.2", "compmusic.upf.edu")
 
-def getMetadata(source, get_recording_rels = False):
-    try:  # only SymbTr-name is given
-        data = ({'makam':dict(),'form':dict(),'usul':dict(),'name':dict(),
-            'composer':dict(),'lyricist':dict()})
-        scoreName_splitted = source.split('--')
-        data['symbTr'] = source
-        data['composer']['symbtr_slug'] = scoreName_splitted[4]
-    except AttributeError:  # dictionary given, SymbTr name and mbid
-        scoreName_splitted = source['name'].split('--')  
-        data = getMetadataFromMusicBrainz(source['uuid'],
+def getMetadata(scorename, mbid='', get_recording_rels=False):
+    if mbid:
+        data = getMetadataFromMusicBrainz(mbid,
             get_recording_rels=get_recording_rels)
-        data['symbTr'] = source['name']
+    else:
+        data = ({'makam':{},'form':{},'usul':{},'name':{},
+        'composer':{},'lyricist':{}})
 
+    data['symbtr'] = scorename
+
+    scoreName_splitted = scorename.split('--')
     data['makam']['symbtr_slug'] = scoreName_splitted[0]
     data['form']['symbtr_slug'] = scoreName_splitted[1]
     data['usul']['symbtr_slug'] = scoreName_splitted[2]
+
+    if 'composer' in data.keys():
+        data['composer']['symbtr_slug'] = scoreName_splitted[4]
 
     data['tonic'] = getTonic(data['makam']['symbtr_slug'])
     return data
@@ -31,15 +32,13 @@ def getTonic(makam):
 
     return makam_tonic[makam]['kararSymbol']
 
-def getMetadataFromMusicBrainz(uuid, get_recording_rels = False):
-    if uuid['type'] == 'work':
-        data = getWorkMetadataFromMusicBrainz(uuid['mbid'], get_recording_rels = False)
-
-    elif uuid['type'] == 'recording':
+def getMetadataFromMusicBrainz(mbid, get_recording_rels = False):
+    try:  # assume mbid is a work
+        data = getWorkMetadataFromMusicBrainz(mbid, get_recording_rels = False)
+    except:  # assume mbid is a recording
         if get_recording_rels:
             print "Recording mbid is given. Ignoring get_recording_rels input"
-        data = getRecordingMetadataFromMusicBrainz(uuid['mbid'])
-
+        data = getRecordingMetadataFromMusicBrainz(mbid)
     return data
 
 def getWorkMetadataFromMusicBrainz(mbid, get_recording_rels = False):
@@ -48,8 +47,8 @@ def getWorkMetadataFromMusicBrainz(mbid, get_recording_rels = False):
     
     work = mb.get_work_by_id(mbid, includes=included_rels)['work']
 
-    data = ({'makam':dict(),'form':dict(),'usul':dict(),
-        'work':{'mbid':mbid},'composer':dict(),'lyricist':dict()})
+    data = ({'makam':{},'form':{},'usul':{},
+        'work':{'mbid':mbid},'composer':{},'lyricist':{}})
 
     data['work']['title'] = work['title']
 
@@ -57,13 +56,13 @@ def getWorkMetadataFromMusicBrainz(mbid, get_recording_rels = False):
         w_attrb = work['attribute-list']
 
         makam = [a['attribute'] for a in w_attrb if 'Makam' in a['type']]
-        data['makam'] = {'name': makam[0] if len(makam) == 1 else makam}
+        data['makam'] = {'mb_attribute': makam[0] if len(makam) == 1 else makam}
 
         form = [a['attribute'] for a in w_attrb if 'Form' in a['type']]
-        data['form'] = {'name': form[0] if len(form) == 1 else form}
+        data['form'] = {'mb_attribute': form[0] if len(form) == 1 else form}
 
         usul = [a['attribute'] for a in w_attrb if 'Usul' in a['type']]
-        data['usul'] = {'name': usul[0] if len(usul) == 1 else usul}
+        data['usul'] = {'mb_attribute': usul[0] if len(usul) == 1 else usul}
 
     if 'language' in work.keys():
         data['language'] = work['language']
@@ -91,7 +90,7 @@ def getRecordingMetadataFromMusicBrainz(mbid):
 
     for t in rec['tag-list']:
         key, val = t['name'].split(': ')
-        data[key].append({'name':val})
+        data[key].append({'mb_tag':val})
 
     data['makam'] = data['makam'][0] if len(data['makam']) == 1 else data['makam']
     data['form'] = data['form'][0] if len(data['form']) == 1 else data['form']

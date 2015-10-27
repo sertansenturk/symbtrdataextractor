@@ -4,14 +4,17 @@ __author__ = 'sertansenturk'
 from section import *
 from symbtr import *
 from metadata import *
+import os
 
-def extract(scorefile, metadata_source, extractAllLabels = False, 
-    lyrics_sim_thres = 0.25, melody_sim_thres = 0.25, 
-    get_recording_rels = False):
-        
+def extract(scorefile, symbtrname='', mbid='', 
+    extractAllLabels=False, lyrics_sim_thres=0.25, 
+    melody_sim_thres=0.25, get_recording_rels=False):
+    
     # get the metadata
-    data = getMetadata(metadata_source, get_recording_rels = 
-        get_recording_rels)
+    if not symbtrname:
+        symbtrname = os.path.splitext(os.path.basename(scorefile))[0]
+    data = getMetadata(symbtrname, mbid=mbid,
+        get_recording_rels=get_recording_rels)
 
     # get the extension to determine the SymbTr-score format
     extension = os.path.splitext(scorefile)[1]
