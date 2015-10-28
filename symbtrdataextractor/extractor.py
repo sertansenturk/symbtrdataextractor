@@ -5,7 +5,6 @@ from section import *
 from symbtrreader import *
 from metadata import *
 import os
-import pdb
 
 def extract(scorefile, symbtrname='', mbid='', 
     extractAllLabels=False, lyrics_sim_thres=0.25, 
@@ -52,6 +51,6 @@ def merge(*data_dicts):
                 result[key] = val
             else:
                 result[key] = merge(result[key], val)
-        
+
     return result
 

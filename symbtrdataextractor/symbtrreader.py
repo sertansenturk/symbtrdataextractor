@@ -61,6 +61,9 @@ def readMu2Header(scorefile):
                     header['tempo'] = {'value':float(row[4]), 'unit':'bpm'}
                 if not int(row[3]) == header['usul']['mertebe']:
                     print '   Mertebe and tempo unit are different!'
+            elif code == 56:
+                header['usul']['subdivision'] = {'mertebe':int(row[3]), 
+                    'number_of_pulses':int(row[2])}
             elif code == 57:
                 header['form'] = {'mu2_name':row[7]}
             elif code == 58:
