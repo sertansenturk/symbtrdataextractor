@@ -5,6 +5,7 @@ from section import *
 from symbtrreader import *
 from metadata import *
 import os
+import pdb
 
 def extract(scorefile, symbtrname='', mbid='', 
     extractAllLabels=False, lyrics_sim_thres=0.25, 
@@ -33,3 +34,24 @@ def extract(scorefile, symbtrname='', mbid='',
         lyrics_sim_thres=lyrics_sim_thres, melody_sim_thres=melody_sim_thres)
 
     return data
+
+def merge(*data_dicts):
+    '''
+    Given any number of dicts, shallow copy and merge into a new dict,
+    precedence goes to key value pairs in latter dicts.
+    '''
+    result = {}
+    for dictionary in data_dicts:
+        dict_cp = dictionary.copy()
+        for key, val in dict_cp.iteritems():
+            if not key in result.keys():
+                result[key] = val
+            elif not isinstance(result[key], dict):
+                # overwrite
+                print '   ' + key + 'already exists! Overwriting...'
+                result[key] = val
+            else:
+                result[key] = merge(result[key], val)
+        
+    return result
+

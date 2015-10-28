@@ -1,6 +1,5 @@
 import csv
 import string
-import pdb
 
 def readTxtScore(scorefile):
     with open(scorefile, "rb") as f:
