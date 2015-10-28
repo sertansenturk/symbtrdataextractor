@@ -2,7 +2,7 @@
 __author__ = 'sertansenturk'
 
 from section import *
-from symbtr import *
+from symbtrreader import *
 from metadata import *
 import os
 
@@ -19,7 +19,7 @@ def extract(scorefile, symbtrname='', mbid='',
     # get the extension to determine the SymbTr-score format
     extension = os.path.splitext(scorefile)[1]
 
-    # read the scre
+    # read the score
     if extension == ".txt":
         score = readTxtScore(scorefile)
     elif extension == ".xml":
