@@ -7,6 +7,8 @@ from symbtr import getTrueLyricsIdx
 from structure_label import labelSections, get_symbtr_labels
 from offset import *
 
+import pdb
+
 def extractSection(score, extractAllLabels=False, 
     lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
     all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list] 
@@ -28,8 +30,7 @@ def extractSection(score, extractAllLabels=False,
         sections = labelSections(sections, score, lyrics_sim_thres,
             melody_sim_thres)
 
-    validateSections(sections, score, measure_start_idx, 
-        set(all_labels)- set(struct_lbl))
+    validateSections(sections, score, set(all_labels)- set(struct_lbl))
 
     # map the python indices in startNote and endNote to SymbTr index
     for se in sections:
@@ -135,7 +136,7 @@ def sortSections(sections):
         for s in sections]),  key=lambda x:x[1])]
     return [sections[s] for s in sortIdx]
 
-def validateSections(sections, score, masdeasure_start_idx, ignoreLabels):
+def validateSections(sections, score, ignoreLabels):
     if not sections: # check section presence
         print "    Missing section info in lyrics."
     else: # check section continuity
@@ -159,3 +160,10 @@ def validateSections(sections, score, masdeasure_start_idx, ignoreLabels):
                 '' + str(s['endNote']) + ', ' + s['slug'] + ' '
                 'ends before it starts: ' + 
                 str(score['offset'][s['startNote']]))
+
+    # check if there are any structure labels with a space, e.g. it is not found
+    all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list]
+    for i, ll in enumerate(score['lyrics']):
+        for label in all_labels:
+            if (label + ' ') == ll or (label + '  ') == ll:  # invalid lyrics end 
+                print "    " + str(i) + ": Extra space in " + ll
