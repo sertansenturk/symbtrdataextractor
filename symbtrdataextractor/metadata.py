@@ -30,7 +30,7 @@ def getTonic(makam):
         os.path.abspath(__file__)), 'makam_data', 'makam.json')
     makam_tonic = json.load(open(makam_tonic_file, 'r'))
 
-    return makam_tonic[makam]['kararSymbol']
+    return makam_tonic[makam]['karar_symbol']
 
 def getMetadataFromMusicBrainz(mbid, get_recording_rels = False):
     try:  # assume mbid is a work
