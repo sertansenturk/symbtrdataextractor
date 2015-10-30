@@ -162,7 +162,7 @@ def validateSections(sections, score, ignoreLabels):
                 str(score['offset'][s['startNote']]))
 
     # check if there are any structure labels with a space, e.g. it is not found
-    all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list]
+    all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list] + ['.']
     for i, ll in enumerate(score['lyrics']):
         for label in all_labels:
             if (label + ' ') == ll or (label + '  ') == ll:  # invalid lyrics end 
