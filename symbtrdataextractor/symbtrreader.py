@@ -72,8 +72,10 @@ def readMu2Header(scorefile):
                 header['lyricist'] = {'mu2_name':row[7]}
             elif code == 60:
                 header['mu2_title'] = row[7]
+            elif code == 62:
+                header['genre'] = 'folk' if row[7] == 'E' else 'classical'
             elif code == 63:
-                header['genre'] = row[7]
+                header['notation'] = row[7]
             elif code in range(50, 64): 
                 print '   Unparsed code: ' + ' '.join(row)
             else:  # end of header
