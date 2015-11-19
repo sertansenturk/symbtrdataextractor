@@ -6,6 +6,8 @@ import string
 from symbtr import getTrueLyricsIdx, synthMelody, mel2str
 from section_graph import normalizedLevenshtein, getCliques
 
+import pdb
+
 def get_symbtr_labels(): 
     symbtr_label_file = os.path.join(os.path.dirname(
         os.path.abspath(__file__)), 'makam_data', 'symbTrLabels.json')
@@ -13,11 +15,11 @@ def get_symbtr_labels():
 
     return symbtr_label
 
-def labelSections(sections, score, lyrics_sim_thres, 
+def labelStructures(structures, score, lyrics_sim_thres, 
     melody_sim_thres):
     # get the duration, pitch and lyrics related to the section
     scoreFragments = []
-    for s in sections:
+    for s in structures:
         durs = score['duration'][s['startNote']:s['endNote']+1]
         nums = score['numerator'][s['startNote']:s['endNote']+1]
         denums = score['denumerator'][s['startNote']:s['endNote']+1]
@@ -28,19 +30,19 @@ def labelSections(sections, score, lyrics_sim_thres,
             'denums':denums, 'notes':notes, 'lyrics':lyrics})
 
     # get the lyric organization
-    sections = getLyricOrganization(sections, scoreFragments, 
+    structures = getLyricOrganization(structures, scoreFragments, 
         lyrics_sim_thres)
-
+    pdb.set_trace()
     # get the melodic organization
-    section = getMelodicOrganization(sections, scoreFragments, 
+    structures = getMelodicOrganization(structures, scoreFragments, 
         melody_sim_thres)
 
-    return sections
+    return structures
 
-def getLyricOrganization(sections, scoreFragments, lyrics_sim_thres):
+def getLyricOrganization(structures, scoreFragments, lyrics_sim_thres):
     # Here we only check whether the lyrics are similar to others
     # We don't check whether they are sung on the same note / with 
-    # the same duration, or not. As a results, two sections having
+    # the same duration, or not. As a results, two structures having
     # exactly the same melody but different sylallable onset/offsets
     # would be considered the same. Nevertheless this situation 
     # would occur in very rare occasions.
@@ -48,7 +50,7 @@ def getLyricOrganization(sections, scoreFragments, lyrics_sim_thres):
     # using only melody, this function does not give any extra info
     # This part is done for future needs; e.g. audio-lyrics alignment
 
-    if sections:
+    if structures:
         # get the lyrics stripped of section information
         all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list] 
         all_labels += ['.', '', ' ']
@@ -65,12 +67,12 @@ def getLyricOrganization(sections, scoreFragments, lyrics_sim_thres):
 
         lyrics_labels = semiotize(cliques)
 
-        # label the insrumental sections, if present
+        # label the insrumental structures, if present
         for i in range(0, len(lyrics_labels)):
             if not scoreFragments[i]['lyrics']:
-                sections[i]['lyricStructure'] = 'INSTRUMENTAL'
+                structures[i]['lyricStructure'] = 'INSTRUMENTAL'
             else:
-                sections[i]['lyricStructure'] = lyrics_labels[i]
+                structures[i]['lyricStructure'] = lyrics_labels[i]
 
         # sanity check
         lyrics = [sc['lyrics'] for sc in scoreFragments]
@@ -80,12 +82,12 @@ def getLyricOrganization(sections, scoreFragments, lyrics_sim_thres):
             if not all(lyr == cl for cl in chk_lyr):
                 print '   Mismatch in lyrics_label: ' + lbl        
     else:  # no section information
-        sections = []
+        structures = []
 
-    return sections
+    return structures
 
-def getMelodicOrganization(sections, scoreFragments, melody_sim_thres):
-    if sections:
+def getMelodicOrganization(structures, scoreFragments, melody_sim_thres):
+    if structures:
         # remove annotation/control row; i.e. entries w 0 duration
         for sf in scoreFragments:
             for i in reversed(range(0, len(sf['durs']))):
@@ -112,16 +114,16 @@ def getMelodicOrganization(sections, scoreFragments, melody_sim_thres):
 
         melody_labels = semiotize(cliques)
 
-        # label the insrumental sections, if present
+        # label the insrumental structures, if present
         all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list]
         for i in range(0, len(melody_labels)):
-            if sections[i]['name'] not in ['LYRICS_SECTION', 'INSTRUMENTAL_SECTION']:
+            if structures[i]['name'] not in ['LYRICS_SECTION', 'INSTRUMENTAL_SECTION']:
                 # if it's a mixture clique, keep the label altogether
-                sections[i]['melodicStructure'] = (sections[i]['slug'] +
+                structures[i]['melodicStructure'] = (structures[i]['slug'] +
                     '_'+melody_labels[i][1:] if melody_labels[i][1].isdigit()
-                    else sections[i]['slug'] + '_' + melody_labels[i])
+                    else structures[i]['slug'] + '_' + melody_labels[i])
             else:
-                sections[i]['melodicStructure'] = melody_labels[i]
+                structures[i]['melodicStructure'] = melody_labels[i]
 
         # sanity check
         for lbl, mel in zip(melody_labels, melodies):
@@ -130,9 +132,9 @@ def getMelodicOrganization(sections, scoreFragments, melody_sim_thres):
             if not all(mel == cm for cm in chk_mel):
                 print '   Mismatch in melody_label: ' + lbl
     else:  # no section information
-        sections = []
+        structures = []
 
-    return sections
+    return structures
 
 def semiotize(cliques):
     # Here we follow the annotation conventions explained in:

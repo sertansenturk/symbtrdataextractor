@@ -1,13 +1,9 @@
-import os
-import json
 from math import floor
 
 from slugify_tr import slugify_tr
 from symbtr import getTrueLyricsIdx
-from structure_label import labelSections, get_symbtr_labels
+from structure_label import labelStructures, get_symbtr_labels
 from offset import *
-
-import pdb
 
 def extractSection(score, extractAllLabels=False, 
     lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
@@ -16,7 +12,6 @@ def extractSection(score, extractAllLabels=False,
 
     measure_start_idx = findMeasureStartIdx(score['offset'])
     
-    sections = []
     # Check lyrics information
     if all(l == '' for l in score['lyrics']):
         # empty lyrics field; we cannot really do anything wo symbolic analysis
@@ -27,7 +22,7 @@ def extractSection(score, extractAllLabels=False,
             measure_start_idx)
 
         # the refine section names according to the lyrics, pitch and durations
-        sections = labelSections(sections, score, lyrics_sim_thres,
+        sections = labelStructures(sections, score, lyrics_sim_thres,
             melody_sim_thres)
 
     validateSections(sections, score, set(all_labels)- set(struct_lbl))
