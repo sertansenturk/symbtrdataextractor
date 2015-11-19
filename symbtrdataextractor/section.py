@@ -51,8 +51,8 @@ def getSections(score, struct_lbl):
                 'startNote':i, 'endNote':[], 'lyrics':''})
         elif '  ' in l: # lyrics end marker
             # lyrics will be updated in locateSectionBoundaries
-            sections.append({'name':u"LYRICS_SECTION", 
-                'slug':u"LYRICS_SECTION",'startNote':[],'endNote':i,
+            sections.append({'name':u"VOCAL_SECTION", 
+                'slug':u"VOCAL_SECTION",'startNote':[],'endNote':i,
                 'lyrics':''})
     return sections
 
@@ -62,7 +62,7 @@ def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx):
     startNoteIdx = [s['startNote'] for s in sections] + [len(score['lyrics'])]
     endNoteIdx = [-1] + [s['endNote'] for s in sections]
     for se in reversed(sections): # start from the last section
-        if se['slug'] == u'LYRICS_SECTION':
+        if se['slug'] == u'VOCAL_SECTION':
             # carry the 'endNote' to the next closest start
             se['endNote'] = min(x for x in startNoteIdx 
                 if x > se['endNote']) - 1

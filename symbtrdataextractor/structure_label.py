@@ -6,8 +6,6 @@ import string
 from symbtr import getTrueLyricsIdx, synthMelody, mel2str
 from section_graph import normalizedLevenshtein, getCliques
 
-import pdb
-
 def get_symbtr_labels(): 
     symbtr_label_file = os.path.join(os.path.dirname(
         os.path.abspath(__file__)), 'makam_data', 'symbTrLabels.json')
@@ -32,7 +30,7 @@ def labelStructures(structures, score, lyrics_sim_thres,
     # get the lyric organization
     structures = getLyricOrganization(structures, scoreFragments, 
         lyrics_sim_thres)
-    pdb.set_trace()
+
     # get the melodic organization
     structures = getMelodicOrganization(structures, scoreFragments, 
         melody_sim_thres)
@@ -117,7 +115,7 @@ def getMelodicOrganization(structures, scoreFragments, melody_sim_thres):
         # label the insrumental structures, if present
         all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list]
         for i in range(0, len(melody_labels)):
-            if structures[i]['name'] not in ['LYRICS_SECTION', 'INSTRUMENTAL_SECTION']:
+            if structures[i]['name'] not in ['VOCAL_SECTION', 'INSTRUMENTAL_SECTION']:
                 # if it's a mixture clique, keep the label altogether
                 structures[i]['melodicStructure'] = (structures[i]['slug'] +
                     '_'+melody_labels[i][1:] if melody_labels[i][1].isdigit()
