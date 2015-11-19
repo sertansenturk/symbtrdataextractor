@@ -3,9 +3,11 @@ from structure_label import labelStructures, get_symbtr_labels
 
 def extractAnnotatedPhrase(score, sections = [], lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
     bound_codes = [51,53,54,55]
+    anno_codes = [53,54,55]
 
     all_bounds = [i for i, code in enumerate(score['code']) if code in bound_codes]
-    if all_bounds:
+    anno_bounds = [i for i, code in enumerate(score['code']) if code in anno_codes]
+    if anno_bounds:
         # add start and end if they are not already in the list
         if not 0 in all_bounds:
             all_bounds = [0] + all_bounds
@@ -44,16 +46,19 @@ def extractAnnotatedPhrase(score, sections = [], lyrics_sim_thres = 0.25, melody
             lyrics = ''.join(syllables)
 
             # sections
-            startSectionIdx = [i for i, sec in enumerate(sections) 
-                if startNote >= sec['startNote'] and startNote <= sec['endNote']][0]
-            endSectionIdx = [i for i, sec in enumerate(sections) 
-                if endNote >= sec['startNote'] and endNote <= sec['endNote']][0]
+            if sections:
+                startSectionIdx = [i for i, sec in enumerate(sections) 
+                    if startNote >= sec['startNote'] and startNote <= sec['endNote']][0]
+                endSectionIdx = [i for i, sec in enumerate(sections) 
+                    if endNote >= sec['startNote'] and endNote <= sec['endNote']][0]
 
-            for idx, sec in zip(range(startSectionIdx,endSectionIdx+1), 
-                sections[startSectionIdx:endSectionIdx+1]):
+                for idx, sec in zip(range(startSectionIdx,endSectionIdx+1), 
+                    sections[startSectionIdx:endSectionIdx+1]):
 
-                phraseSections = [{'section_idx':idx, 'melodicStructure':
-                    sec['melodicStructure'], 'lyricStructure':sec['lyricStructure']} ]
+                    phraseSections = [{'section_idx':idx, 'melodicStructure':
+                        sec['melodicStructure'], 'lyricStructure':sec['lyricStructure']} ]
+            else:
+                phraseSections = []
 
             if lyrics:
                 name = u"VOCAL_SECTION"
