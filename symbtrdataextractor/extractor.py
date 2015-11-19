@@ -33,8 +33,9 @@ def extract(scorefile, symbtrname='', mbid='',
     data['sections'] = extractSection(score, extractAllLabels=extractAllLabels,
         lyrics_sim_thres=lyrics_sim_thres, melody_sim_thres=melody_sim_thres)
 
-    data['phrases'] = extractPhrase(score, sections=data['sections'], 
-        lyrics_sim_thres=lyrics_sim_thres, melody_sim_thres=melody_sim_thres)
+    data['phrases'] = {'annotated':extractAnnotatedPhrase(score, 
+        sections=data['sections'], lyrics_sim_thres=lyrics_sim_thres, 
+        melody_sim_thres=melody_sim_thres)}
 
     return data
 

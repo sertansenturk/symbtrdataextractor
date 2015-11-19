@@ -1,7 +1,7 @@
 from symbtr import getTrueLyricsIdx
 from structure_label import labelStructures, get_symbtr_labels
 
-def extractPhrase(score, sections = [], lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
+def extractAnnotatedPhrase(score, sections = [], lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
     bound_codes = [51,53,54,55]
 
     all_bounds = [i for i, code in enumerate(score['code']) if code in bound_codes]
@@ -25,8 +25,17 @@ def extractPhrase(score, sections = [], lyrics_sim_thres = 0.25, melody_sim_thre
 
         phrases = []
         for pp in range(0, len(phrase_bounds)-1):
-            startNote = score['index'][phrase_bounds[pp]]
-            endNote = score['index'][phrase_bounds[pp+1]-1]
+            startNote_idx = phrase_bounds[pp]
+            endNote_idx = phrase_bounds[pp+1]-1
+
+            # start and endNotes
+            startNote = score['index'][startNote_idx]
+            endNote = score['index'][endNote_idx]
+
+            # cesni/flavor
+            flavor = [score['lyrics'][startNote_idx+i] 
+                for i, code in enumerate(score['code'][startNote_idx:endNote_idx+1]) 
+                if code == 54]
 
             # lyrics
             phrase_lyrics_idx = ([rl for rl in real_lyrics_idx 
@@ -40,9 +49,11 @@ def extractPhrase(score, sections = [], lyrics_sim_thres = 0.25, melody_sim_thre
             endSectionIdx = [i for i, sec in enumerate(sections) 
                 if endNote >= sec['startNote'] and endNote <= sec['endNote']][0]
 
-            for idx, sec in zip(range(startSectionIdx,endSectionIdx+1), sections[startSectionIdx:endSectionIdx+1]):
-                phraseSections = [{'section_idx':idx, 'melodicStructure':sec['melodicStructure'], 
-                    'lyricStructure':sec['lyricStructure']} ]
+            for idx, sec in zip(range(startSectionIdx,endSectionIdx+1), 
+                sections[startSectionIdx:endSectionIdx+1]):
+
+                phraseSections = [{'section_idx':idx, 'melodicStructure':
+                    sec['melodicStructure'], 'lyricStructure':sec['lyricStructure']} ]
 
             if lyrics:
                 name = u"VOCAL_SECTION"
@@ -51,8 +62,8 @@ def extractPhrase(score, sections = [], lyrics_sim_thres = 0.25, melody_sim_thre
                 name = u"INSTRUMENTAL_SECTION"
                 slug = u"INSTRUMENTAL_SECTION"
 
-            phrases.append({'name':name, 'slug':slug,'startNote':startNote,
-                'endNote':endNote, 'lyrics':lyrics, 'sections':phraseSections})
+            phrases.append({'name':name, 'slug':slug,'startNote':startNote, 'endNote':endNote, 
+                'lyrics':lyrics, 'sections':phraseSections, 'flavor':flavor})
 
         phrases = labelStructures(phrases, score, lyrics_sim_thres, melody_sim_thres)
     else:
