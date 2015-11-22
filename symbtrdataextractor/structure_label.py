@@ -1,7 +1,6 @@
 import os 
 import json
 from numpy import matrix
-import string
 
 from symbtr import getTrueLyricsIdx, synthMelody, mel2str
 from section_graph import normalizedLevenshtein, getCliques
@@ -152,11 +151,11 @@ def semiotize(cliques):
     sim_clq_it = [1] * len(cliques['similar'])  # the index to label similar cliques
     mix_clq_it = dict()  # the index to label mixture cliques, if they exist
 
-    # define the ascci letters for semiotic labeling; use capital first
-    ascii_letters = string.ascii_uppercase + string.ascii_lowercase
+    # define the upper case unicode letters for semiotic labeling
+    unicode_letters = [unichr(i) for i in range(0,1000) if unicode.isupper(unichr(i))]
 
     # similar cliques give us the base structure
-    basenames = [ascii_letters[i] for i in range(0,len(cliques['similar']))]
+    basenames = [unicode_letters[i] for i in range(0,len(cliques['similar']))]
     for ec in cliques['exact']:
         
         # find the similar cliques of which the currect exact clique is subset of 
