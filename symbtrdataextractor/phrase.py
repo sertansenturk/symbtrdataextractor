@@ -17,12 +17,16 @@ def extractAnnotatedPhrase(score, sections = [], lyrics_sim_thres = 0.25, melody
 
 def extractAutoSegPhrase(score, autoSegBounds, sections = [], lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
     # Boundaries start from 1, convert them to python indexing (0) by subtracting 1
-    autoSegBound_idx = [a-1 for a in autoSegBounds]
+    try:
+        autoSegBound_idx = [a-1 for a in autoSegBounds]
 
-    if autoSegBound_idx:
-        phrases = extractPhrases(autoSegBound_idx, score, sections = sections, lyrics_sim_thres = 0.25, 
-            melody_sim_thres = 0.25)
-    else:
+        if autoSegBound_idx:
+            phrases = extractPhrases(autoSegBound_idx, score, sections = sections, lyrics_sim_thres = 0.25, 
+                melody_sim_thres = 0.25)
+        else:
+            phrases = []
+    except TypeError:  # the json saved by MATLAB phrase segmentation sends a special structure 
+        # specifying the 0 dimensional array 
         phrases = []
 
     return phrases
