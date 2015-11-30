@@ -39,6 +39,12 @@ def readMu2Score(scorefile):
     # TODO
     pass
 
+def readMu2HeaderRow(scorefile):
+    with open(scorefile, "rb") as f:
+        reader = csv.reader(f, delimiter='\t')
+        header_row = [unicode(cell, 'utf-8') for cell in next(reader, None)]
+    return header_row
+
 def readMu2Header(scorefile):
     with open(scorefile, "rb") as f:
         reader = csv.reader(f, delimiter='\t')
@@ -46,7 +52,8 @@ def readMu2Header(scorefile):
         header_row = next(reader, None)
 
         header = dict()
-        for row in reader:
+        for rowtemp in reader:
+            row = [unicode(cell, 'utf-8') for cell in rowtemp]
             code = int(row[0])
             if code == 50:
                 header['makam'] = {'mu2_name':row[7]}
