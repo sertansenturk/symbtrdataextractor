@@ -5,10 +5,10 @@ from symbtr import getTrueLyricsIdx
 from structure_label import labelStructures, get_symbtr_labels
 from offset import *
 
-def extractSection(score, extractAllLabels=False, 
+def extractSection(score, extract_all_labels=False, 
     lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
     all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list] 
-    struct_lbl = all_labels if extractAllLabels else get_symbtr_labels()['structure'] 
+    struct_lbl = all_labels if extract_all_labels else get_symbtr_labels()['structure'] 
 
     measure_start_idx = findMeasureStartIdx(score['offset'])
     

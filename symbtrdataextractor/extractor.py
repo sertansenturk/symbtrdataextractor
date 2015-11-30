@@ -7,8 +7,8 @@ from symbtrreader import *
 from metadata import *
 import os
 
-def extract(scorefile, symbtrname='', autoSegBounds = [], mbid='', 
-    extractAllLabels=False, lyrics_sim_thres=0.25, 
+def extract(scorefile, symbtrname='', seg_note_idx = [], mbid='', 
+    extract_all_labels=False, lyrics_sim_thres=0.25, 
     melody_sim_thres=0.25, get_recording_rels=False):
     
     # get the metadata
@@ -30,13 +30,13 @@ def extract(scorefile, symbtrname='', autoSegBounds = [], mbid='',
     else:
         raise IOError("Unknown format")
 
-    data['sections'] = extractSection(score, extractAllLabels=extractAllLabels,
+    data['sections'] = extractSection(score, extract_all_labels=extract_all_labels,
         lyrics_sim_thres=lyrics_sim_thres, melody_sim_thres=melody_sim_thres)
 
     annoPhrase = extractAnnotatedPhrase(score, sections=data['sections'], 
         lyrics_sim_thres=lyrics_sim_thres, melody_sim_thres=melody_sim_thres)
     autoPhrase = extractAutoSegPhrase(score, sections=data['sections'], 
-        autoSegBounds = autoSegBounds, lyrics_sim_thres=lyrics_sim_thres, 
+        seg_note_idx = seg_note_idx, lyrics_sim_thres=lyrics_sim_thres, 
         melody_sim_thres=melody_sim_thres)
 
     data['phrases'] = {'annotated':annoPhrase, 'automatic': autoPhrase}

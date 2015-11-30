@@ -1,3 +1,4 @@
 python-Levenshtein
 networkx
 numpy
+git+https://github.com/alastair/python-musicbrainzngs.git

@@ -15,10 +15,10 @@ def extractAnnotatedPhrase(score, sections = [], lyrics_sim_thres = 0.25, melody
 
     return phrases
 
-def extractAutoSegPhrase(score, autoSegBounds, sections = [], lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
+def extractAutoSegPhrase(score, seg_note_idx, sections = [], lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
     # Boundaries start from 1, convert them to python indexing (0) by subtracting 1
     try:
-        autoSegBound_idx = [a-1 for a in autoSegBounds]
+        autoSegBound_idx = [a-1 for a in seg_note_idx]
 
         if autoSegBound_idx:
             phrases = extractPhrases(autoSegBound_idx, score, sections = sections, lyrics_sim_thres = 0.25, 
