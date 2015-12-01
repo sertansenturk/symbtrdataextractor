@@ -39,17 +39,11 @@ def readMu2Score(scorefile):
     # TODO
     pass
 
-def readMu2HeaderRow(scorefile):
-    with open(scorefile, "rb") as f:
-        reader = csv.reader(f, delimiter='\t')
-        header_row = [unicode(cell, 'utf-8') for cell in next(reader, None)]
-    return header_row
-
 def readMu2Header(scorefile):
     with open(scorefile, "rb") as f:
         reader = csv.reader(f, delimiter='\t')
 
-        header_row = next(reader, None)
+        header_row = [unicode(cell, 'utf-8') for cell in next(reader, None)]
 
         header = dict()
         for rowtemp in reader:
@@ -88,4 +82,4 @@ def readMu2Header(scorefile):
             else:  # end of header
                 break
 
-    return header
+    return header, header_row
