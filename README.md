@@ -24,7 +24,7 @@ from symbtrdataextractor import extractor
 
 data = extractor.extract(txtfilename, symbtrname=scorename, mbid='', 
                         extractAllLabels=False, get_recording_rels=False, 
-                        autoSegBounds=[], melody_sim_thres=0.25, 
+                        seg_note_idx=[], melody_sim_thres=0.25, 
                         lyrics_sim_thres=0.25)
                         
 mu2header = symbtrreader.readMu2Header(mu2filename)
@@ -38,7 +38,7 @@ The inputs for extractor.extract are:
 # extract_all_labels: whether to treat all (explicit) annotations in the lyrics as 
 #					a section or not (e.g. INSTRUMENTATION labels). Default is False.
 # get_recording_rels: boolean to extract the relevant recording relations from MusicBrainz
-# autoSegBounds     : automatic segmentation boundaries (e.g. computed by 
+# seg_note_idx      : automatic segmentation boundaries (e.g. computed by 
 #                   [makam-symbolic-phrase-segmentation](https://github.com/MTG/makam-symbolic-phrase-segmentation))
 # melody_sim_thres  : The maximum similarity threshold for two melodic stuctures to 
 #					be considered as variant of each other. Default is 0.25.
