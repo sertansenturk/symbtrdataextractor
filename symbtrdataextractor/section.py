@@ -5,7 +5,7 @@ from symbtr import getTrueLyricsIdx
 from structure_label import labelStructures, get_symbtr_labels
 from offset import *
 
-def extractSection(score, extract_all_labels=False, 
+def extractSection(score, symbtrname, extract_all_labels=False, 
     lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
     all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list] 
     struct_lbl = all_labels if extract_all_labels else get_symbtr_labels()['structure'] 
@@ -25,14 +25,15 @@ def extractSection(score, extract_all_labels=False,
         sections = labelStructures(sections, score, lyrics_sim_thres,
             melody_sim_thres)
 
-    validateSections(sections, score, set(all_labels)- set(struct_lbl))
+    validBool = validateSections(sections, score, set(all_labels)-set(struct_lbl), 
+        symbtrname)
 
     # map the python indices in startNote and endNote to SymbTr index
     for se in sections:
         se['startNote'] = score['index'][se['startNote']]
         se['endNote'] = score['index'][se['endNote']]
 
-    return sections
+    return sections, validBool 
 
 def extractSectionFromXML(score):
     pass
@@ -131,34 +132,40 @@ def sortSections(sections):
         for s in sections]),  key=lambda x:x[1])]
     return [sections[s] for s in sortIdx]
 
-def validateSections(sections, score, ignoreLabels):
+def validateSections(sections, score, ignoreLabels, symbtrname):
+    validBool = True  # treat some of these are warning; they'll be made stricter later
     if not sections: # check section presence
-        print "    Missing section info in lyrics."
+        print symbtrname + ", Missing section info in lyrics."
     else: # check section continuity
         ends = [-1] + [s['endNote'] for s in sections]
         starts = [s['startNote'] for s in sections] + [len(score['offset'])]
         for s, e in zip(starts, ends):
             if not s - e == 1:
-                print("    " + str(e) + '->' + str(s) + ', '
+                print(symbtrname + ", " + str(e) + '->' + str(s) + ', '
                     'Gap between the sections')
+                validBool = False
 
     for s in sections:
         # check whether section starts on the measure or not
         if (not isIntegerOffset(score['offset'][s['startNote']]) and 
             s['slug'] not in ignoreLabels):
-            print("    " + str(s['startNote']) + ', ' + s['slug'] + ' '
+            print(symbtrname + ", " + str(s['startNote']) + ', ' + s['slug'] + ' '
                 'does not start on a measure: ' + 
                 str(score['offset'][s['startNote']]))
         # check if the end of a section somehow got earlier than its start
         if s['startNote'] > s['endNote']:
-            print("    " + str(s['startNote']) + '->'
+            print(symbtrname + ", " + str(s['startNote']) + '->'
                 '' + str(s['endNote']) + ', ' + s['slug'] + ' '
                 'ends before it starts: ' + 
                 str(score['offset'][s['startNote']]))
+            validBool = False
 
     # check if there are any structure labels with a space, e.g. it is not found
     all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list] + ['.']
     for i, ll in enumerate(score['lyrics']):
         for label in all_labels:
             if (label + ' ') == ll or (label + '  ') == ll:  # invalid lyrics end 
-                print "    " + str(i) + ": Extra space in " + ll
+                print symbtrname + ', ' + str(i) + ": Extra space in " + ll
+                validBool = False
+
+    return validBool

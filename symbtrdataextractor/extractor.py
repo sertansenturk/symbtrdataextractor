@@ -30,8 +30,9 @@ def extract(scorefile, symbtrname='', seg_note_idx = [], mbid='',
     else:
         raise IOError("Unknown format")
 
-    data['sections'] = extractSection(score, extract_all_labels=extract_all_labels,
-        lyrics_sim_thres=lyrics_sim_thres, melody_sim_thres=melody_sim_thres)
+    data['sections'], isSectionDataValid = extractSection(score, symbtrname, 
+        extract_all_labels=extract_all_labels, lyrics_sim_thres=lyrics_sim_thres, 
+        melody_sim_thres=melody_sim_thres)
 
     annoPhrase = extractAnnotatedPhrase(score, sections=data['sections'], 
         lyrics_sim_thres=lyrics_sim_thres, melody_sim_thres=melody_sim_thres)
@@ -40,8 +41,9 @@ def extract(scorefile, symbtrname='', seg_note_idx = [], mbid='',
         melody_sim_thres=melody_sim_thres)
 
     data['phrases'] = {'annotated':annoPhrase, 'automatic': autoPhrase}
+    isDataValid = all([isSectionDataValid])
 
-    return data
+    return data, isDataValid
 
 def merge(*data_dicts):
     '''
