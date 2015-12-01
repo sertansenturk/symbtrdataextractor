@@ -4,8 +4,11 @@ from setuptools import setup
 
 setup(name='symbtrdataextractor',
       version='0.1',
-      description='Tools for extracting data from SymbTr scores and relevant sources',
       author='Sertan Senturk',
+      author_email='contact AT sertansenturk DOT com',
+      license='agpl 3.0',
+      description='Tools to extract (meta)data related to SymbTr from the information in score file and MusicBrainz',
       url='http://sertansenturk.com',
       packages=['symbtrdataextractor'],
+      include_package_data=True,
 )
