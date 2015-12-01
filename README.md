@@ -39,7 +39,7 @@ The inputs for extractor.extract are:
 #					a section or not (e.g. INSTRUMENTATION labels). Default is False.
 # get_recording_rels: boolean to extract the relevant recording relations from MusicBrainz
 # seg_note_idx      : automatic segmentation boundaries (e.g. computed by 
-#                   [makam-symbolic-phrase-segmentation](https://github.com/MTG/makam-symbolic-phrase-segmentation))
+#                   https://github.com/MTG/makam-symbolic-phrase-segmentation)
 # melody_sim_thres  : The maximum similarity threshold for two melodic stuctures to 
 #					be considered as variant of each other. Default is 0.25.
 # lyrics_sim_thres  : The maximum similarity threshold for two lyric stuctures to be 
