@@ -23,11 +23,11 @@ def extract(scorefile, symbtrname='', mbid='', seg_note_idx = [],
 
     # read the score
     if extension == ".txt":
-        score = readTxtScore(scorefile)
+        score, isScoreContentValid = readTxtScore(scorefile)
     elif extension == ".xml":
-        score = readXMLScore(scorefile)
+        score, isScoreValid = readXMLScore(scorefile)
     elif extension == ".mu2":
-        score = readMu2Score(scorefile)
+        score, isScoreValid = readMu2Score(scorefile)
     else:
         raise IOError("Unknown format")
 
@@ -42,7 +42,7 @@ def extract(scorefile, symbtrname='', mbid='', seg_note_idx = [],
         melody_sim_thres=melody_sim_thres)
 
     data['phrases'] = {'annotated':annoPhrase, 'automatic': autoPhrase}
-    isDataValid = all([isSectionDataValid])
+    isDataValid = all([isSectionDataValid, isScoreContentValid])
 
     return data, isDataValid
 

@@ -20,7 +20,7 @@ def labelStructures(structures, score, lyrics_sim_thres,
         durs = score['duration'][s['startNote']:s['endNote']+1]
         nums = score['numerator'][s['startNote']:s['endNote']+1]
         denums = score['denumerator'][s['startNote']:s['endNote']+1]
-        notes = score['comma'][s['startNote']:s['endNote']+1]
+        notes = score['comma53'][s['startNote']:s['endNote']+1]
         lyrics = score['lyrics'][s['startNote']:s['endNote']+1]
 
         scoreFragments.append({'durs':durs, 'nums': nums, 
