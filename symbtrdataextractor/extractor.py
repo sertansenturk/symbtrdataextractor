@@ -7,9 +7,10 @@ from symbtrreader import *
 from metadata import *
 import os
 
-def extract(scorefile, symbtrname='', seg_note_idx = [], mbid='', 
+def extract(scorefile, symbtrname='', mbid='', seg_note_idx = [], 
     extract_all_labels=False, lyrics_sim_thres=0.25, 
-    melody_sim_thres=0.25, get_recording_rels=False):
+    melody_sim_thres=0.25, get_recording_rels=False,
+    print_warnings=True):
     
     # get the metadata
     if not symbtrname:
@@ -32,7 +33,7 @@ def extract(scorefile, symbtrname='', seg_note_idx = [], mbid='',
 
     data['sections'], isSectionDataValid = extractSection(score, symbtrname, 
         extract_all_labels=extract_all_labels, lyrics_sim_thres=lyrics_sim_thres, 
-        melody_sim_thres=melody_sim_thres)
+        melody_sim_thres=melody_sim_thres, print_warnings=print_warnings)
 
     annoPhrase = extractAnnotatedPhrase(score, sections=data['sections'], 
         lyrics_sim_thres=lyrics_sim_thres, melody_sim_thres=melody_sim_thres)

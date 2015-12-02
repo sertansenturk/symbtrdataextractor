@@ -6,11 +6,11 @@ from structure_label import labelStructures, get_symbtr_labels
 from offset import *
 
 def extractSection(score, symbtrname, extract_all_labels=False, 
-    lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
+    lyrics_sim_thres=0.25, melody_sim_thres=0.25, print_warnings=True):
     all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list] 
     struct_lbl = all_labels if extract_all_labels else get_symbtr_labels()['structure'] 
 
-    measure_start_idx = findMeasureStartIdx(score['offset'])
+    measure_start_idx = findMeasureStartIdx(score['offset'],print_warnings=print_warnings)
     
     # Check lyrics information
     if all(l == '' for l in score['lyrics']):
@@ -19,14 +19,14 @@ def extractSection(score, symbtrname, extract_all_labels=False,
     else:
         sections = getSections(score, struct_lbl)
         sections = locateSectionBoundaries(sections, score, all_labels, 
-            measure_start_idx)
+            measure_start_idx, print_warnings=print_warnings)
 
         # the refine section names according to the lyrics, pitch and durations
         sections = labelStructures(sections, score, lyrics_sim_thres,
             melody_sim_thres)
 
     validBool = validateSections(sections, score, set(all_labels)-set(struct_lbl), 
-        symbtrname)
+        symbtrname, print_warnings=print_warnings)
 
     # map the python indices in startNote and endNote to SymbTr index
     for se in sections:
@@ -57,7 +57,9 @@ def getSections(score, struct_lbl):
                 'lyrics':''})
     return sections
 
-def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx):
+def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx, 
+    print_warnings=True):
+
     real_lyrics_idx = getTrueLyricsIdx(score['lyrics'], struct_lbl, score['duration'])
 
     startNoteIdx = [s['startNote'] for s in sections] + [len(score['lyrics'])]
@@ -91,11 +93,13 @@ def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx):
 
             # check if nextLyricsStartInd and prevClosestEndInd are in the 
             # same measure. Ideally they should be in different measures
-            if nextLyricsMeasureOffset == floor(score['offset'][prevClosestEndInd]):
-                print ("    " + str(nextLyricsMeasureOffset) + ':'
-                ' ' + score['lyrics'][prevClosestEndInd] + ' and' 
-                ' ' + score['lyrics'][nextLyricsStartInd] + ' '
-                'are in the same measure!')
+            if (nextLyricsMeasureOffset == 
+                floor(score['offset'][prevClosestEndInd])):
+                if print_warnings:
+                    print ("    " + str(nextLyricsMeasureOffset) + ':'
+                        ' ' + score['lyrics'][prevClosestEndInd] + ' and' 
+                        ' ' + score['lyrics'][nextLyricsStartInd] + ' '
+                        'are in the same measure!')
 
                 se['startNote'] = nextLyricsStartInd
             else: # The section starts on the first measure the lyrics start
@@ -132,10 +136,11 @@ def sortSections(sections):
         for s in sections]),  key=lambda x:x[1])]
     return [sections[s] for s in sortIdx]
 
-def validateSections(sections, score, ignoreLabels, symbtrname):
+def validateSections(sections, score, ignoreLabels, symbtrname, print_warnings=True):
     validBool = True  # treat some of these are warning; they'll be made stricter later
     if not sections: # check section presence
-        print symbtrname + ", Missing section info in lyrics."
+        if print_warnings:
+            print symbtrname + ", Missing section info in lyrics."
     else: # check section continuity
         ends = [-1] + [s['endNote'] for s in sections]
         starts = [s['startNote'] for s in sections] + [len(score['offset'])]
@@ -148,7 +153,7 @@ def validateSections(sections, score, ignoreLabels, symbtrname):
     for s in sections:
         # check whether section starts on the measure or not
         if (not isIntegerOffset(score['offset'][s['startNote']]) and 
-            s['slug'] not in ignoreLabels):
+            s['slug'] not in ignoreLabels) and print_warnings:
             print(symbtrname + ", " + str(s['startNote']) + ', ' + s['slug'] + ' '
                 'does not start on a measure: ' + 
                 str(score['offset'][s['startNote']]))
