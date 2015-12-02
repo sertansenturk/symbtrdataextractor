@@ -77,7 +77,8 @@ def getLyricOrganization(structures, scoreFragments, lyrics_sim_thres):
             chk_lyr = ([lyrics[i] for i, x in enumerate(lyrics_labels) 
                 if x == lbl])
             if not all(lyr == cl for cl in chk_lyr):
-                print '   Mismatch in lyrics_label: ' + lbl        
+                raise RuntimeError('Mismatch in lyrics_label: ' + lbl)
+
     else:  # no section information
         structures = []
 
@@ -127,7 +128,8 @@ def getMelodicOrganization(structures, scoreFragments, melody_sim_thres):
             chk_mel = ([melodies[i] for i, x in enumerate(melody_labels) 
                 if x == lbl])
             if not all(mel == cm for cm in chk_mel):
-                print '   Mismatch in melody_label: ' + lbl
+                raise RuntimeError('Mismatch in melody_label: ' + lbl)
+                
     else:  # no section information
         structures = []
 
@@ -177,6 +179,7 @@ def semiotize(cliques):
             
             mix_clq_it[mix_str] += 1
         else: # in no cliques; impossible
-            print ("   The exact clique is not in the similar cliques list. "
+            raise RuntimeError("The exact clique is not in the similar cliques list. "
                 "This shouldn't happen.")
+
     return labels
