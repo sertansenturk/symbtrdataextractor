@@ -23,10 +23,10 @@ All the relevant data can be easily obtained:
 from symbtrdataextractor import extractor
 
 data, isDataValid = extractor.extract(txtfilename, symbtrname=scorename, mbid='', 
-                        extractAllLabels=False, get_recording_rels=False, 
+                        extract_all_labels=False, get_recording_rels=False, 
                         seg_note_idx=[], melody_sim_thres=0.25, 
-                        lyrics_sim_thres=0.25)
-                        
+                        lyrics_sim_thres=0.25, print_warnings=True)
+
 mu2header = symbtrreader.readMu2Header(mu2filename)
 ```
 
