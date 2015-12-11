@@ -15,7 +15,7 @@ def extract(scorefile, symbtrname='', mbid='', seg_note_idx = [],
     # get the metadata
     if not symbtrname:
         symbtrname = os.path.splitext(os.path.basename(scorefile))[0]
-    data = getMetadata(symbtrname, mbid=mbid,
+    data, isMetadataValid = getMetadata(symbtrname, mbid=mbid,
         get_recording_rels=get_recording_rels)
 
     # get the extension to determine the SymbTr-score format
@@ -42,7 +42,7 @@ def extract(scorefile, symbtrname='', mbid='', seg_note_idx = [],
         melody_sim_thres=melody_sim_thres)
 
     data['phrases'] = {'annotated':annoPhrase, 'automatic': autoPhrase}
-    isDataValid = all([isSectionDataValid, isScoreContentValid])
+    isDataValid = all([isSectionDataValid, isScoreContentValid, isMetadataValid])
 
     return data, isDataValid
 
