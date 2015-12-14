@@ -15,7 +15,7 @@ def extract(scorefile, symbtrname='', mbid='', seg_note_idx = [],
     # get the metadata
     if not symbtrname:
         symbtrname = os.path.splitext(os.path.basename(scorefile))[0]
-    data, isMetadataValid = getMetadata(symbtrname, mbid=mbid,
+    data, isMetadataValid = getMetadata(symbtrname, mbid=mbid, 
         get_recording_rels=get_recording_rels)
 
     # get the extension to determine the SymbTr-score format
@@ -25,9 +25,9 @@ def extract(scorefile, symbtrname='', mbid='', seg_note_idx = [],
     if extension == ".txt":
         score, isScoreContentValid = readTxtScore(scorefile)
     elif extension == ".xml":
-        score, isScoreValid = readXMLScore(scorefile)
+        score, isScoreContentValid = readXMLScore(scorefile)
     elif extension == ".mu2":
-        score, isScoreValid = readMu2Score(scorefile)
+        score, isScoreContentValid = readMu2Score(scorefile)
     else:
         raise IOError("Unknown format")
 
@@ -42,11 +42,26 @@ def extract(scorefile, symbtrname='', mbid='', seg_note_idx = [],
         melody_sim_thres=melody_sim_thres)
 
     data['phrases'] = {'annotated':annoPhrase, 'automatic': autoPhrase}
-    isDataValid = all([isSectionDataValid, isScoreContentValid, isMetadataValid])
+    isDataValid = all([isMetadataValid, isSectionDataValid, isScoreContentValid])
 
     return data, isDataValid
 
-def merge(*data_dicts):
+def merge(txt_dict, mu2_dict):
+    '''
+    Merge the extracted data, precedence goes to key value pairs in latter dicts.
+    '''
+
+    if 'work' in txt_dict.keys():
+        mu2_dict['work'] = {'mu2_title':mu2_dict.pop('title')}
+    elif 'recording' in txt_dict.keys():
+        mu2_dict['recording'] = {'mu2_title':mu2_dict.pop('title')}
+    else:
+        print '   Unknown title target.'
+        mu2_dict.pop('title')
+
+    return dictmerge(txt_dict, mu2_dict)
+
+def dictmerge(*data_dicts):
     '''
     Given any number of dicts, shallow copy and merge into a new dict,
     precedence goes to key value pairs in latter dicts.
@@ -58,11 +73,11 @@ def merge(*data_dicts):
             if not key in result.keys():
                 result[key] = val
             elif not isinstance(result[key], dict):
-                # overwrite
-                print '   ' + key + 'already exists! Overwriting...'
-                result[key] = val
+                if not result[key] == val:
+                    # overwrite
+                    print '   ' + key + ' already exists! Overwriting...'
+                    result[key] = val
             else:
-                result[key] = merge(result[key], val)
+                result[key] = dictmerge(result[key], val)
 
     return result
-

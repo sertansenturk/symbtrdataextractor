@@ -27,7 +27,7 @@ data, isDataValid = extractor.extract(txtfilename, symbtrname=scorename, mbid=''
                         seg_note_idx=[], melody_sim_thres=0.25, 
                         lyrics_sim_thres=0.25, print_warnings=True)
 
-mu2header = symbtrreader.readMu2Header(mu2filename)
+mu2header, headerRow, isHeaderValid = symbtrreader.readMu2Header(mu2filename)
 ```
 
 The inputs for extractor.extract are:

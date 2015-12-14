@@ -4,8 +4,12 @@ import json
 import musicbrainzngs as mb
 mb.set_useragent("SymbTr metadata", "0.2", "compmusic.upf.edu")
 
+def getSlug(scorename):
+    splitted = scorename.split('--')
+    return {'makam':splitted[0], 'form':splitted[1], 'usul':splitted[2], 
+        'name':splitted[3], 'composer':splitted[4]}
+
 def getMetadata(scorename, mbid='', get_recording_rels=False):
-    isMetadataValid = True  # initialize valid metadata boolean flag
     if mbid:
         data = getMetadataFromMusicBrainz(mbid,
             get_recording_rels=get_recording_rels)
@@ -15,78 +19,33 @@ def getMetadata(scorename, mbid='', get_recording_rels=False):
 
     data['symbtr'] = scorename
 
-    scoreName_splitted = scorename.split('--')
-    data['makam']['symbtr_slug'] = scoreName_splitted[0]
-    data['form']['symbtr_slug'] = scoreName_splitted[1]
-    data['usul']['symbtr_slug'] = scoreName_splitted[2]
-
+    slugs = getSlug(scorename)
+    data['makam']['symbtr_slug'] = slugs['makam']
+    data['form']['symbtr_slug'] = slugs['form']
+    data['usul']['symbtr_slug'] = slugs['usul']
+    if 'work' in data.keys():
+        data['work']['symbtr_slug'] = slugs['name']
+    elif 'recording' in data.keys():
+        data['recording']['symbtr_slug'] = slugs['name']
+    else:
+        pass
     if 'composer' in data.keys():
-        data['composer']['symbtr_slug'] = scoreName_splitted[4]
+        data['composer']['symbtr_slug'] = slugs['composer']
 
-    # get the makam & validate
+    # get and validate the attributes
     makam = getMakam(data['makam']['symbtr_slug'])
-    if 'symbtr_slug' in makam.keys():
-        if not makam['symbtr_slug'] == data['makam']['symbtr_slug']:
-            isMetadataValid = False
-            print scorename + ': The makam slug and the filename makam slug does not match'
-        if mbid:
-            if ('mb_attribute' in data['makam'].keys() and  # work
-                not data['makam']['mb_attribute'] == makam['dunya_name']):  
-                # (dunya_names are (or should be) a superset of the musicbainz attributes)
-                isMetadataValid = False
-                print scorename + ': The makam slug in the filename and the MusicBrainz/Dunya name does not match.'
-            elif ('mb_tag' in data['makam'].keys() and  # recording
-                not data['makam']['mb_tag'] in makam['mb_tag']):  
-                isMetadataValid = False
-                print scorename + ': The makam slug in the filename and the MusicBrainz tag does not match.'
-        # tonic
-        data['tonic'] = makam['karar_symbol']
-    else:
-        isMetadataValid = False
-        print scorename + ': The makam slug is not known'
+    isMakamValid = validateAttribute(data['makam'], makam, scorename)
 
-    # get the form & validate
     form = getForm(data['form']['symbtr_slug'])
-    if 'symbtr_slug' in form.keys():
-        if not form['symbtr_slug'] == data['form']['symbtr_slug']:
-            isMetadataValid = False
-            print scorename + ': The form slug and the filename form slug does not match'
-        if mbid:
-            if ('mb_attribute' in data['form'].keys() and  # work
-                not data['form']['mb_attribute'] == form['dunya_name']):  
-                # (dunya_names are (or should be) a superset of the musicbainz attributes)
-                isMetadataValid = False
-                print scorename + ': The form slug in the filename and the MusicBrainz/Dunya name does not match.'
-            elif ('mb_tag' in data['form'].keys() and  # recording
-                not data['form']['mb_tag'] in form['mb_tag']):  
-                isMetadataValid = False
-                print scorename + ': The form slug in the filename and the MusicBrainz tag does not match.'
-    else:
-        isMetadataValid = False
-        print scorename + ': The form slug is not known'
+    isFormValid = validateAttribute(data['form'], form, scorename)
 
-    # get the usul & validate
     usul = getUsul(data['usul']['symbtr_slug'])
-    if 'symbtr_slug' in usul.keys():
-        if not usul['symbtr_slug'] == data['usul']['symbtr_slug']:
-            isMetadataValid = False
-            print scorename + ': The usul slug and the filename usul slug does not match'
-        # skip usul labels, which are not actualy a definite usul but a specific rhythmic structure 
-        # in folk music, and hence not in musicbrainz
-        usuls_not_in_mb = ['12212212', '22222221', '223', '232223', '262', '3223323', '3334', '14_4']   
-        if usul['symbtr_slug'] not in usuls_not_in_mb and mbid:
-            if ('mb_attribute' in data['usul'].keys() and  # work
-                not data['usul']['mb_attribute'] == usul['dunya_name']):  
-                # (dunya_names are (or should be) a superset of the musicbainz attributes)
-                isMetadataValid = False
-                print scorename + ': The usul slug in the filename and the MusicBrainz/Dunya name does not match.'
-            elif ('mb_tag' in data['usul'].keys() and  # recording
-                not data['usul']['mb_tag'] in usul['mb_tag']):  
-                isMetadataValid = False
-                print scorename + ': The usul slug in the filename and the MusicBrainz tag does not match.'
-    else:
-        isMetadataValid = False
-        print scorename + ': The form slug is not known'
+    isUsulValid = validateAttribute(data['usul'], usul, scorename)
+
+    isMetadataValid = isMakamValid and isFormValid and isUsulValid
+
+    # get the tonic
+    data['tonic'] = makam['karar_symbol']
 
     return data, isMetadataValid
 
@@ -101,6 +60,47 @@ def getMakam(makam_slug):
     
     # no match
     return {}
+
+def validateAttribute(score_attribute, attribute_dict, scorename):
+    isAttributeValid = True  # initialize
+    if 'symbtr_slug' in score_attribute.keys():
+        if not score_attribute['symbtr_slug'] ==  attribute_dict['symbtr_slug']:
+            isAttributeValid = False
+            print(scorename + ', ' + score_attribute['symbtr_slug'] + ''
+                ': The slug does not match.')
+
+    if 'mu2_name' in score_attribute.keys():  # work
+        try:  # usuls
+            mu2_names = [adv['mu2_name'] for adv in attribute_dict['variants']]
+        except:
+            mu2_names = [attribute_dict['mu2_name']]
+        
+        if not score_attribute['mu2_name'] in mu2_names:  
+            isAttributeValid = False
+            print(scorename + ', ' + score_attribute['mu2_name'] + ''
+                ': The Mu2 attribute does not match.')
+    
+    if 'mb_attribute' in score_attribute.keys():  # work
+        skip_makam_slug = ['12212212','22222221','223','232223','262','3223323','3334','14_4']
+        if score_attribute['symbtr_slug'] in skip_makam_slug:
+            print(scorename + ': The usul attribute is not stored in MusicBrainz.')
+        else:
+            if not score_attribute['mb_attribute'] == attribute_dict['dunya_name']:  
+                # dunya_names are (or should be) a superset of the musicbainz attributes 
+                isAttributeValid = False
+                if score_attribute['mb_attribute']:
+                    print(scorename + ', ' + score_attribute['mb_attribute'] + ''
+                        ': The MusicBrainz attribute does not match.')
+                else:
+                    print(scorename + ': The MusicBrainz attribute does not exist.')
+    
+    if 'mb_tag' in score_attribute.keys():  # recording
+        if not score_attribute['mb_tag'] in attribute_dict['mb_tag']:  
+            isAttributeValid = False
+            print(scorename + ', ' + score_attribute['mb_tag'] + ''
+                ': The MusicBrainz tag does not match.')
+
+    return isAttributeValid
 
 def getForm(form_slug):
     form_file = os.path.join(os.path.dirname(

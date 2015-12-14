@@ -1,6 +1,7 @@
 import csv
 import string
 import os
+from metadata import getSlug, getMakam, getForm, getUsul, validateAttribute
 
 def readTxtScore(scorefile):
     with open(scorefile, "rb") as f:
@@ -68,11 +69,11 @@ def readMu2Score(scorefile):
     # TODO
     pass
 
-def readMu2Header(scorefile):
+def readMu2Header(scorefile, symbtrname=''):
     with open(scorefile, "rb") as f:
         reader = csv.reader(f, delimiter='\t')
 
-        header_row = [unicode(cell, 'utf-8') for cell in next(reader, None)]
+        headerRow = [unicode(cell, 'utf-8') for cell in next(reader, None)]
 
         header = dict()
         for rowtemp in reader:
@@ -101,7 +102,7 @@ def readMu2Header(scorefile):
             elif code == 59:
                 header['lyricist'] = {'mu2_name':row[7]}
             elif code == 60:
-                header['mu2_title'] = row[7]
+                header['title'] = {'mu2_title':row[7]}
             elif code == 62:
                 header['genre'] = 'folk' if row[7] == 'E' else 'classical'
             elif code == 63:
@@ -111,4 +112,27 @@ def readMu2Header(scorefile):
             else:  # end of header
                 break
 
-    return header, header_row
+    # get the metadata
+    if not symbtrname:
+        symbtrname = os.path.splitext(os.path.basename(scorefile))[0]
+
+    slugs = getSlug(symbtrname)
+    header['makam']['symbtr_slug'] = slugs['makam']
+    header['form']['symbtr_slug'] = slugs['form']
+    header['usul']['symbtr_slug'] = slugs['usul']
+    header['title']['symbtr_slug'] = slugs['name']
+    header['composer']['symbtr_slug'] = slugs['composer']
+
+    # validate the header content
+    makam = getMakam(header['makam']['symbtr_slug'])
+    isMakamValid = validateAttribute(header['makam'], makam, symbtrname)
+
+    form = getForm(header['form']['symbtr_slug'])
+    isFormValid = validateAttribute(header['form'], form, symbtrname)
+
+    usul = getUsul(header['usul']['symbtr_slug'])
+    isUsulValid = validateAttribute(header['usul'], usul, symbtrname)
+
+    isHeaderValid = isMakamValid and isFormValid and isUsulValid
+
+    return header, headerRow, isHeaderValid
