@@ -70,15 +70,29 @@ def validateAttribute(score_attribute, attribute_dict, scorename):
                 ': The slug does not match.')
 
     if 'mu2_name' in score_attribute.keys():  # work
-        try:  # usuls
-            mu2_names = [adv['mu2_name'] for adv in attribute_dict['variants']]
-        except:
-            mu2_names = [attribute_dict['mu2_name']]
-        
-        if not score_attribute['mu2_name'] in mu2_names:  
-            isAttributeValid = False
-            print(scorename + ', ' + score_attribute['mu2_name'] + ''
-                ': The Mu2 attribute does not match.')
+        try:  # usul
+            mu2_name = ''
+            for uv in attribute_dict['variants']:
+                if uv['mu2_name'] == score_attribute['mu2_name']:  # found variant
+                    mu2_name = uv['mu2_name']
+                    if not uv['mertebe'] == score_attribute['mertebe']:
+                        isAttributeValid = False
+                        print(scorename + ', ' + uv['mu2_name'] + ''
+                            ': The mertebe of the score does not match.')
+                    if not uv['num_pulses'] == score_attribute['number_of_pulses']:
+                        isAttributeValid = False
+                        print(scorename + ', ' + uv['mu2_name'] + ''
+                            ': The number of pulses in an usul cycle does not match.')
+            if not mu2_name:  # no matching variant
+                isAttributeValid = False
+                print(scorename + ', ' + score_attribute['mu2_name'] + ''
+                    ': The Mu2 attribute does not match.')
+        except KeyError:  # makam, form
+            mu2_name = attribute_dict['mu2_name']
+            if not score_attribute['mu2_name'] == mu2_name:  
+                isAttributeValid = False
+                print(scorename + ', ' + score_attribute['mu2_name'] + ''
+                    ': The Mu2 attribute does not match.')
     
     if 'mb_attribute' in score_attribute.keys():  # work
         skip_makam_slug = ['12212212','22222221','223','232223','262','3223323','3334','14_4']
