@@ -3,7 +3,7 @@ import json
 from numpy import matrix
 
 from symbtr import getTrueLyricsIdx, synthMelody, mel2str
-from section_graph import normalizedLevenshtein, getCliques
+from structure_graph import normalizedLevenshtein, getCliques
 
 def get_symbtr_labels(): 
     symbtr_label_file = os.path.join(os.path.dirname(
