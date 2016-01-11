@@ -79,6 +79,7 @@ def readMu2Header(scorefile, symbtrname=''):
         headerRow = [unicode(cell, 'utf-8') for cell in next(reader, None)]
 
         header = dict()
+        isTempoUnitValid = True
         for rowtemp in reader:
             row = [unicode(cell, 'utf-8') for cell in rowtemp]
             code = int(row[0])
@@ -96,6 +97,7 @@ def readMu2Header(scorefile, symbtrname=''):
                 if not int(row[3]) == header['usul']['mertebe']:
                     if not header['usul']['mu2_name'] == '(Serbest)':  # ignore serbest usul
                         print symbtrname + ': Mertebe and tempo unit are different!'
+                        isTempoUnitValid = False
             elif code == 56:
                 header['usul']['subdivision'] = {'mertebe':int(row[3]), 
                     'number_of_pulses':int(row[2])}
@@ -134,6 +136,6 @@ def readMu2Header(scorefile, symbtrname=''):
     usul = getUsul(header['usul']['symbtr_slug'])
     isUsulValid = validateAttribute(header['usul'], usul, symbtrname)
 
-    isHeaderValid = isMakamValid and isFormValid and isUsulValid
+    isHeaderValid = isTempoUnitValid and isMakamValid and isFormValid and isUsulValid
 
     return header, headerRow, isHeaderValid
