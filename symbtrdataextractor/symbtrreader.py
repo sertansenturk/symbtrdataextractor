@@ -94,7 +94,8 @@ def readMu2Header(scorefile, symbtrname=''):
                 except ValueError:  # the bpm might be a float for low tempo
                     header['tempo'] = {'value':float(row[4]), 'unit':'bpm'}
                 if not int(row[3]) == header['usul']['mertebe']:
-                    print symbtrname + ': Mertebe and tempo unit are different!'
+                    if not header['usul']['mu2_name'] == '(Serbest)':  # ignore serbest usul
+                        print symbtrname + ': Mertebe and tempo unit are different!'
             elif code == 56:
                 header['usul']['subdivision'] = {'mertebe':int(row[3]), 
                     'number_of_pulses':int(row[2])}
