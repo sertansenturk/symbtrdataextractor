@@ -48,7 +48,9 @@ def readTxtScore(scorefile):
     return score, isScoreValid
 
 def validateTxtScore(score, scorename):
-    isScoreValid = True
+    isRestValid = True
+    isDurationValid = True
+    dur_dict = {}
     for ii in range(0, len(score['index'])):
         if score['duration'][ii] > 0:  # note or rest
             # check rest
@@ -63,6 +65,19 @@ def validateTxtScore(score, scorename):
                     isScoreValid = False
                     print scorename + ' ' + str(score['index'][ii]) + ': Invalid Rest'
 
+            # note duration
+            dursym = str(score['numerator'][ii]) + '_' + str(score['denumerator'][ii]) 
+            if dursym in dur_dict.keys():
+                dur_dict[dursym] = list(set([score['duration'][ii]] + dur_dict[dursym]))
+            else:
+                dur_dict[dursym] = [score['duration'][ii]]
+
+    for key, val in dur_dict.items():
+        if not len(val)==1:
+            print scorename + ": " + key + " note has multiple duration values; " + ', '.join([str(v) for v in val])
+            #isDurationValid = False  # USUL/TEMPO CHANGES ARE NOT HANDLED, DON'T ASSIGN FALSE YET
+
+    isScoreValid = isRestValid and isDurationValid
     return isScoreValid
 
 def readMu2Score(scorefile):
