@@ -122,9 +122,11 @@ def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx,
             # update endNoteIdx
             endNoteIdx = [-1] + [s['endNote'] for s in sections]
 
-    # if the first note is not the startNote of a section
+    # if the second note is not the startNote of a section
     # add an initial instrumental section
-    if sections and not any(s['startNote'] == 0 for s in sections):
+    # note starting from SymbTr 2.4, the first row always indicates the usul
+    firstnoteidx = 1 if score['code'][0] in range(50,57) else 0
+    if sections and not any(s['startNote'] == firstnoteidx for s in sections):
         sections.append({'name': u'INSTRUMENTAL_SECTION',
             'slug':u'INSTRUMENTAL_SECTION', 'startNote': 0, 
             'endNote': min([s['startNote'] for s in sections])-1})
