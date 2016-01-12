@@ -124,20 +124,21 @@ def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx,
 
     # if the first rows are control rows and the first section starts 
     # afterwards add the control rows to the section
-    for ii, code in enumerate(score['code']):
-        if not code in range(50,57):
-            firstnoteidx = ii
-            break
+    if sections:
+        for ii, code in enumerate(score['code']):
+            if not code in range(50,57):
+                firstnoteidx = ii
+                break
 
-    firstsec = sections[0]
-    firstsec_idx = -1
-    for ii, sec in enumerate(sections):
-        if sec['startNote'] < firstsec['startNote']:
-            firstsec = sec
-            firstsec_idx = ii
+        firstsec = sections[0]
+        firstsec_idx = -1
+        for ii, sec in enumerate(sections):
+            if sec['startNote'] < firstsec['startNote']:
+                firstsec = sec
+                firstsec_idx = ii
 
-    if firstsec['startNote'] <= firstnoteidx:
-        firstsec['startNote'] = 0
+        if firstsec['startNote'] <= firstnoteidx:
+            firstsec['startNote'] = 0
 
     # if there is a gap in the start, create a new section
     if sections and not any(s['startNote'] == 0 for s in sections):
