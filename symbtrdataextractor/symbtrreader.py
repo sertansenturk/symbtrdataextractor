@@ -73,10 +73,10 @@ def validateTxtScore(score, scorename):
             else:
                 dur_dict[dursym] = [score['duration'][ii]]
 
-    for key, val in dur_dict.items():
-        if not len(val)==1:
-            print scorename + ": " + key + " note has multiple duration values; " + ', '.join([str(v) for v in val])
-            #isDurationValid = False  # USUL/TEMPO CHANGES ARE NOT HANDLED, DON'T ASSIGN FALSE YET
+    #for key, val in dur_dict.items():
+    #    if not len(val)==1:
+    #        print scorename + ": " + key + " note has multiple duration values; " + ', '.join([str(v) for v in val])
+    #        isDurationValid = False  # USUL/TEMPO CHANGES ARE NOT HANDLED, DON'T ASSIGN FALSE YET
 
     # note index
     for ii in range(0, len(score['index'])-1):
