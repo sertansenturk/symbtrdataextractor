@@ -78,9 +78,10 @@ def validateTxtScore(score, scorename):
             print scorename + ": " + key + " note has multiple duration values; " + ', '.join([str(v) for v in val])
             #isDurationValid = False  # USUL/TEMPO CHANGES ARE NOT HANDLED, DON'T ASSIGN FALSE YET
 
-    for ii in range(0, len(score['Sira'])-1):
-        if not score['Sira'][ii+1] - score['Sira'][ii] == 1:
-            print scorename + ": " + score['Sira'][ii] + ", note index jump."
+    # note index
+    for ii in range(0, len(score['index'])-1):
+        if not score['index'][ii+1] - score['index'][ii] == 1:
+            print scorename + ": " + score['index'][ii] + ", note index jump."
             isIndexValid = False
     isScoreValid = isRestValid and isDurationValid and isIndexValid
     return isScoreValid
