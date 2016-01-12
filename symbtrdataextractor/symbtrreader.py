@@ -81,7 +81,7 @@ def validateTxtScore(score, scorename):
     # note index
     for ii in range(0, len(score['index'])-1):
         if not score['index'][ii+1] - score['index'][ii] == 1:
-            print scorename + ": " + score['index'][ii] + ", note index jump."
+            print scorename + ": " + str(score['index'][ii]) + ", note index jump."
             isIndexValid = False
     isScoreValid = isRestValid and isDurationValid and isIndexValid
     return isScoreValid
