@@ -20,7 +20,7 @@ def extractSection(score, symbtrname, extract_all_labels=False,
         sections = getSections(score, struct_lbl)
         sections = locateSectionBoundaries(sections, score, all_labels, 
             measure_start_idx, print_warnings=print_warnings)
-
+        
         # the refine section names according to the lyrics, pitch and durations
         sections = labelStructures(sections, score, lyrics_sim_thres,
             melody_sim_thres)
@@ -124,7 +124,7 @@ def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx,
 
     # if the second note is not the startNote of a section
     # add an initial instrumental section
-    # note starting from SymbTr 2.4, the first row always indicates the usul
+    # note: starting from SymbTr 2.4, the first row always indicates the usul
     firstnoteidx = 1 if score['code'][0] in range(50,57) else 0
     if sections and not any(s['startNote'] == firstnoteidx for s in sections):
         sections.append({'name': u'INSTRUMENTAL_SECTION',
@@ -144,7 +144,10 @@ def validateSections(sections, score, ignoreLabels, symbtrname, print_warnings=T
         if print_warnings:
             print symbtrname + ", Missing section info in lyrics."
     else: # check section continuity
-        ends = [-1] + [s['endNote'] for s in sections]
+        # note: starting from SymbTr 2.4, the first row always indicates the usul
+        tempend = 0 if score['code'][0] in range(50,57) else -1
+
+        ends = [tempend] + [s['endNote'] for s in sections]
         starts = [s['startNote'] for s in sections] + [len(score['offset'])]
         for s, e in zip(starts, ends):
             if not s - e == 1:
