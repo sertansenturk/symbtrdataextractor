@@ -1,4 +1,4 @@
-from symbtr import getTrueLyricsIdx
+from symbtr import getTrueLyricsIdx, getFirstNoteIndex
 from structure_label import labelStructures, get_symbtr_labels
 
 def extractAnnotatedPhrase(score, sections = [], lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
@@ -33,8 +33,9 @@ def extractAutoSegPhrase(score, seg_note_idx, sections = [], lyrics_sim_thres = 
 
 def extractPhrases(bounds, score, sections = [], lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
     # add start and end if they are not already in the list
-    if not 0 in bounds:
-        bounds = [0] + bounds
+    firstnoteidx = getFirstNoteIndex(score)
+    if not firstnoteidx in bounds:
+        bounds = [firstnoteidx] + bounds
     bounds = bounds + [len(score['code'])] # create the boundary outside the score idx
     
     # remove consecutive boundaries

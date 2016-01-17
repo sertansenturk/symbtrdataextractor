@@ -1,7 +1,7 @@
 from math import floor
 
 from slugify_tr import slugify_tr
-from symbtr import getTrueLyricsIdx
+from symbtr import getTrueLyricsIdx, getFirstNoteIndex
 from structure_label import labelStructures, get_symbtr_labels
 from offset import *
 
@@ -122,13 +122,9 @@ def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx,
             # update endNoteIdx
             endNoteIdx = [-1] + [s['endNote'] for s in sections]
 
-    # if the first rows are control rows and the first section starts 
-    # afterwards add the control rows to the section
+    # if the first rows are control rows and the first section starts afterwards
     if sections:
-        for ii, code in enumerate(score['code']):
-            if not code in range(50,57):
-                firstnoteidx = ii
-                break
+        firstnoteidx = getFirstNoteIndex(score)
 
         firstsec = sections[0]
         firstsec_idx = -1
@@ -138,10 +134,12 @@ def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx,
                 firstsec_idx = ii
 
         if firstsec['startNote'] <= firstnoteidx:
-            firstsec['startNote'] = 0
+            startsWithFirstNote = True
+        else:
+            startsWithFirstNote = False
 
     # if there is a gap in the start, create a new section
-    if sections and not any(s['startNote'] == 0 for s in sections):
+    if not startsWithFirstNote:
         sections.append({'name': u'INSTRUMENTAL_SECTION',
             'slug':u'INSTRUMENTAL_SECTION', 'startNote': 0, 
             'endNote': min([s['startNote'] for s in sections])-1})
@@ -159,7 +157,9 @@ def validateSections(sections, score, ignoreLabels, symbtrname, print_warnings=T
         if print_warnings:
             print symbtrname + ", Missing section info in lyrics."
     else: # check section continuity
-        ends = [-1] + [s['endNote'] for s in sections]
+        firstnoteidx = getFirstNoteIndex(score)
+
+        ends = [firstnoteidx-1] + [s['endNote'] for s in sections]
         starts = [s['startNote'] for s in sections] + [len(score['offset'])]
         for s, e in zip(starts, ends):
             if not s - e == 1:
