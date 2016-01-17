@@ -59,7 +59,7 @@ def getSections(score, struct_lbl):
 
 def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx, 
     print_warnings=True):
-
+    firstnoteidx = getFirstNoteIndex(score)
     real_lyrics_idx = getTrueLyricsIdx(score['lyrics'], struct_lbl, score['duration'])
 
     startNoteIdx = [s['startNote'] for s in sections] + [len(score['lyrics'])]
@@ -103,9 +103,9 @@ def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx,
 
                 se['startNote'] = nextLyricsStartInd
             else: # The section starts on the first measure the lyrics start
-                se['startNote'] = getMeasureOffsetId(nextLyricsMeasureOffset, 
-                    score['offset'], measure_start_idx)
-
+                se['startNote'] = max([getMeasureOffsetId(nextLyricsMeasureOffset, 
+                    score['offset'], measure_start_idx), firstnoteidx])
+                
             # update startNoteIdx
             startNoteIdx = ([s['startNote'] for s in sections] + 
                 [len(score['lyrics'])])
@@ -139,7 +139,7 @@ def locateSectionBoundaries(sections, score, struct_lbl, measure_start_idx,
             startsWithFirstNote = False
 
     # if there is a gap in the start, create a new section
-    if not startsWithFirstNote:
+    if sections and not startsWithFirstNote:
         sections.append({'name': u'INSTRUMENTAL_SECTION',
             'slug':u'INSTRUMENTAL_SECTION', 'startNote': 0, 
             'endNote': min([s['startNote'] for s in sections])-1})
@@ -163,6 +163,8 @@ def validateSections(sections, score, ignoreLabels, symbtrname, print_warnings=T
         starts = [s['startNote'] for s in sections] + [len(score['offset'])]
         for s, e in zip(starts, ends):
             if not s - e == 1:
+                import pdb
+                pdb.set_trace()
                 print(symbtrname + ", " + str(e) + '->' + str(s) + ', '
                     'Gap between the sections')
                 validBool = False
