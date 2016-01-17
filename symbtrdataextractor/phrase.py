@@ -5,8 +5,13 @@ def extractAnnotatedPhrase(score, sections = [], lyrics_sim_thres = 0.25, melody
     bound_codes = [51,53,54,55]
     anno_codes = [53,54,55]
 
-    all_bounds = [i for i, code in enumerate(score['code']) if code in bound_codes]
+    firstnoteidx = getFirstNoteIndex(score)
+
+    # start bounds with the first note, ignore the control rows in the start
+    all_bounds = [firstnoteidx] + [i for i, code in enumerate(score['code']) 
+        if code in bound_codes if i > firstnoteidx]
     anno_bounds = [i for i, code in enumerate(score['code']) if code in anno_codes]
+
     if anno_bounds:
         phrases = extractPhrases(all_bounds, score, sections = sections, lyrics_sim_thres = 0.25, 
             melody_sim_thres = 0.25)
@@ -37,7 +42,7 @@ def extractPhrases(bounds, score, sections = [], lyrics_sim_thres = 0.25, melody
     if not firstnoteidx in bounds:
         bounds = [firstnoteidx] + bounds
     bounds = bounds + [len(score['code'])] # create the boundary outside the score idx
-    
+
     # remove consecutive boundaries
     phrase_bounds = sorted([bounds[i] for i in reversed(range(0, len(bounds)-1)) 
         if not bounds[i+1] - bounds[i] == 1]) + [len(score['code'])]
