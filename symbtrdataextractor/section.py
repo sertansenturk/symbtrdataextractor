@@ -163,8 +163,9 @@ def validateSections(sections, score, ignoreLabels, symbtrname, print_warnings=T
         starts = [s['startNote'] for s in sections] + [len(score['offset'])]
         for s, e in zip(starts, ends):
             if not s - e == 1:
-                print(symbtrname + ", " + str(e) + '->' + str(s) + ', '
-                    'Gap between the sections')
+                if print_warnings:
+                    print(symbtrname + ", " + str(e) + '->' + str(s) + ', '
+                        'Gap between the sections')
                 validBool = False
 
     for s in sections:
