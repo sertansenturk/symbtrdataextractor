@@ -51,8 +51,14 @@ def validateTxtScore(score, scorename):
     isRestValid = True
     isDurationValid = True
     isIndexValid = True
+    startUsulRow = True
     dur_dict = {}
     for ii in range(0, len(score['index'])):
+        # check usul row in the start
+        if ii == 0 and not score['code'][ii] == 51:
+            print scorename + ' Missing the usul row in the start'
+            startUsulRow = False
+
         if score['duration'][ii] > 0:  # note or rest
             # check rest
             if (-1 in [score['comma53'][ii], score['commaAE'][ii]] or 
@@ -63,7 +69,7 @@ def validateTxtScore(score, scorename):
                     score['note53'][ii] == 'Es' and
                     score['noteAE'][ii] == 'Es' and
                     score['code'][ii] == 9):
-                    isScoreValid = False
+                    isRestValid = False
                     print scorename + ' ' + str(score['index'][ii]) + ': Invalid Rest'
 
             # note duration
@@ -83,7 +89,8 @@ def validateTxtScore(score, scorename):
         if not score['index'][ii+1] - score['index'][ii] == 1:
             print scorename + ": " + str(score['index'][ii]) + ", note index jump."
             isIndexValid = False
-    isScoreValid = isRestValid and isDurationValid and isIndexValid
+            
+    isScoreValid = startUsulRow and isRestValid and isDurationValid and isIndexValid
     return isScoreValid
 
 def readMu2Score(scorefile):

@@ -10,6 +10,11 @@ def getTrueLyricsIdx(lyrics, all_labels, dur):
             real_lyrics_idx.append(i)
     return real_lyrics_idx
 
+def getFirstNoteIndex(score):
+    for ii, code in enumerate(score['code']):
+        if not code in range(50,57):
+            return ii
+
 def synthMelody(score, max_denum):
     melody = []
     for i, note in enumerate(score['notes']):

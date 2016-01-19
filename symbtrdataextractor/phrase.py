@@ -1,12 +1,17 @@
-from symbtr import getTrueLyricsIdx
+from symbtr import getTrueLyricsIdx, getFirstNoteIndex
 from structure_label import labelStructures, get_symbtr_labels
 
 def extractAnnotatedPhrase(score, sections = [], lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
     bound_codes = [51,53,54,55]
     anno_codes = [53,54,55]
 
-    all_bounds = [i for i, code in enumerate(score['code']) if code in bound_codes]
+    firstnoteidx = getFirstNoteIndex(score)
+
+    # start bounds with the first note, ignore the control rows in the start
+    all_bounds = [firstnoteidx] + [i for i, code in enumerate(score['code']) 
+        if code in bound_codes if i > firstnoteidx]
     anno_bounds = [i for i, code in enumerate(score['code']) if code in anno_codes]
+
     if anno_bounds:
         phrases = extractPhrases(all_bounds, score, sections = sections, lyrics_sim_thres = 0.25, 
             melody_sim_thres = 0.25)
@@ -33,10 +38,11 @@ def extractAutoSegPhrase(score, seg_note_idx, sections = [], lyrics_sim_thres = 
 
 def extractPhrases(bounds, score, sections = [], lyrics_sim_thres = 0.25, melody_sim_thres = 0.25):
     # add start and end if they are not already in the list
-    if not 0 in bounds:
-        bounds = [0] + bounds
+    firstnoteidx = getFirstNoteIndex(score)
+    if not firstnoteidx in bounds:
+        bounds = [firstnoteidx] + bounds
     bounds = bounds + [len(score['code'])] # create the boundary outside the score idx
-    
+
     # remove consecutive boundaries
     phrase_bounds = sorted([bounds[i] for i in reversed(range(0, len(bounds)-1)) 
         if not bounds[i+1] - bounds[i] == 1]) + [len(score['code'])]
