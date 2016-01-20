@@ -6,18 +6,18 @@ def extractRhythmicStructure(score):
 
 	rhythmic_structure = []
 	for ii, ub in enumerate(usul_bounds):
-		start = ub
+		start = score['index'][ub]
 		if ii < len(usul_bounds)-1:
-			end = usul_bounds[ii+1]  
+			end = score['index'][usul_bounds[ii+1]-1]
 		else:  # end of file
-			end = len(score['code'])
+			end = score['index'][len(score['code'])-1]
 
-		usul = {'mu2_name':score['lyrics'][ii],'mertebe':score['denumerator'][ii],
-				'number_of_pulses':score['numerator'][ii], 'symbtr_internal':score['lns'][ii]}
+		usul = {'mu2_name':score['lyrics'][ub],'mertebe':score['denumerator'][ub],
+				'number_of_pulses':score['numerator'][ub], 'symbtr_internal':score['lns'][ub]}
 
 		# compute the tempo from the next note
 		tempo = []
-		it = ii+1
+		it = ub+1
 		while not tempo:
 			if score['code'][it] == 9:  # proper note
 				tempo = computeTempoFromNote(score['numerator'][it], score['denumerator'][it], 
@@ -25,14 +25,15 @@ def extractRhythmicStructure(score):
 			else:
 				it += 1
 
-		rhythmic_structure.append({'usul':usul, 'tempo':tempo, 
-			'start_note':start, 'end_note':end})
+		rhythmic_structure.append({'usul':usul, 'tempo':{'value':tempo, 'unit':'bpm'}, 
+			'startNote':start, 'endNote':end})
 
 	return rhythmic_structure
 
 def computeTempoFromNote(note_num, note_denum, note_dur, mertebe):
 	sym_dur = float(note_num)/note_denum
 	rel_dur_wrt_mertebe = mertebe * sym_dur * 0.001
+
 	tempo = int(round(60.0 / (note_dur * rel_dur_wrt_mertebe)))
 	
 	return tempo
