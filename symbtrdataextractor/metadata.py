@@ -49,18 +49,6 @@ def getMetadata(scorename, mbid='', get_recording_rels=False):
 
     return data, isMetadataValid
 
-def getMakam(makam_slug):
-    makam_file = os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), 'makam_data', 'makam.json')
-    makam_dict = json.load(open(makam_file, 'r'))
-
-    for makam in makam_dict.values():
-        if makam['symbtr_slug'] == makam_slug:
-            return makam
-    
-    # no match
-    return {}
-
 def validateAttribute(score_attribute, attribute_dict, scorename):
     isAttributeValid = True  # initialize
     if 'symbtr_slug' in score_attribute.keys():
@@ -116,6 +104,19 @@ def validateAttribute(score_attribute, attribute_dict, scorename):
 
     return isAttributeValid
 
+
+def getMakam(makam_slug):
+    makam_file = os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), 'makam_data', 'makam.json')
+    makam_dict = json.load(open(makam_file, 'r'))
+
+    for makam in makam_dict.values():
+        if makam['symbtr_slug'] == makam_slug:
+            return makam
+    
+    # no match
+    return {}
+    
 def getForm(form_slug):
     form_file = os.path.join(os.path.dirname(
         os.path.abspath(__file__)), 'makam_data', 'form.json')
