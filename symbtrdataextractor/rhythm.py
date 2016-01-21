@@ -13,17 +13,22 @@ def extractRhythmicStructure(score):
 			end = score['index'][len(score['code'])-1]
 
 		usul = {'mu2_name':score['lyrics'][ub],'mertebe':score['denumerator'][ub],
-				'number_of_pulses':score['numerator'][ub], 'symbtr_internal':score['lns'][ub]}
+				'number_of_pulses':score['numerator'][ub], 'symbtr_internal_id':score['lns'][ub]}
 
 		# compute the tempo from the next note
 		tempo = []
-		it = ub+1
-		while not tempo:
-			if score['code'][it] == 9:  # proper note
-				tempo = computeTempoFromNote(score['numerator'][it], score['denumerator'][it], 
-					score['duration'][it],usul['mertebe'])
-			else:
+		if usul['mu2_name'] == '(Serbest)':
+			pass  # no tempo for non-metered score
+		else:
+			import pdb
+			pdb.set_trace()
+			it = ub
+			while not tempo:
 				it += 1
+				if score['code'][it] == 9:  # proper note
+					tempo = computeTempoFromNote(score['numerator'][it], 
+						score['denumerator'][it], score['duration'][it], 
+						usul['mertebe'])
 
 		rhythmic_structure.append({'usul':usul, 'tempo':{'value':tempo, 'unit':'bpm'}, 
 			'startNote':start, 'endNote':end})
