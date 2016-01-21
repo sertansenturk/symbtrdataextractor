@@ -23,7 +23,7 @@ def extractRhythmicStructure(score):
 					usul_key = uk
 					key_set = True
 
-		usul = {'usul_key':usul_key, 'mu2_name':score['lyrics'][ub], 
+		usul = {'attribute_key':usul_key, 'mu2_name':score['lyrics'][ub], 
 				'mertebe':score['denumerator'][ub],
 				'number_of_pulses':score['numerator'][ub],
 				'symbtr_internal_id':score['lns'][ub]}

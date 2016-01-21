@@ -21,8 +21,14 @@ def getMetadata(scorename, mbid='', get_recording_rels=False):
 
     slugs = getSlug(scorename)
     data['makam']['symbtr_slug'] = slugs['makam']
+    data['makam']['attribute_key'] = getAttributeKey(data['makam']['symbtr_slug'], 'makam')
+
     data['form']['symbtr_slug'] = slugs['form']
+    data['form']['attribute_key'] = getAttributeKey(data['form']['symbtr_slug'], 'form')
+
     data['usul']['symbtr_slug'] = slugs['usul']
+    data['usul']['attribute_key'] = getAttributeKey(data['usul']['symbtr_slug'], 'usul')
+
     if 'work' in data.keys():
         data['work']['symbtr_slug'] = slugs['name']
     elif 'recording' in data.keys():
@@ -48,6 +54,12 @@ def getMetadata(scorename, mbid='', get_recording_rels=False):
     data['tonic'] = makam['karar_symbol']
 
     return data, isMetadataValid
+
+def getAttributeKey(attr_str, attr_type):
+    attr_dict = getAttributeDict(attr_type)
+    for attr_key, attr_val in attr_dict.iteritems():
+        if attr_val['symbtr_slug'] == attr_str:
+            return attr_key
 
 def validateAttribute(score_attribute, attribute_dict, scorename):
     isAttributeValid = True  # initialize
