@@ -3,7 +3,9 @@ import copy
 
 def extractRhythmicStructure(score):
 	usul_bounds = [ii for ii, code in enumerate(score['code']) if code == 51]
+	usul_dict = getAttributeDict('usul')
 
+		
 	rhythmic_structure = []
 	for ii, ub in enumerate(usul_bounds):
 		start = score['index'][ub]
@@ -12,8 +14,19 @@ def extractRhythmicStructure(score):
 		else:  # end of file
 			end = score['index'][len(score['code'])-1]
 
-		usul = {'mu2_name':score['lyrics'][ub],'mertebe':score['denumerator'][ub],
-				'number_of_pulses':score['numerator'][ub], 'symbtr_internal_id':score['lns'][ub]}
+		key_set = False
+		for uk, dd in usul_dict.iteritems():
+			if key_set:
+				break
+			for var in dd['variants']:
+				if score['lyrics'][ub] == var['mu2_name']:
+					usul_key = uk
+					key_set = True
+
+		usul = {'usul_key':usul_key, 'mu2_name':score['lyrics'][ub], 
+				'mertebe':score['denumerator'][ub],
+				'number_of_pulses':score['numerator'][ub],
+				'symbtr_internal_id':score['lns'][ub]}
 
 		# compute the tempo from the next note
 		tempo = []
