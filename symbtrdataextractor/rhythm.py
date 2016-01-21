@@ -20,8 +20,6 @@ def extractRhythmicStructure(score):
 		if usul['mu2_name'] == '(Serbest)':
 			pass  # no tempo for non-metered score
 		else:
-			import pdb
-			pdb.set_trace()
 			it = ub
 			while not tempo:
 				it += 1
