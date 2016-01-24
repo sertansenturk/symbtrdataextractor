@@ -1,5 +1,6 @@
 import os
 import json
+from urlparse import urlparse
 
 import musicbrainzngs as mb
 mb.set_useragent("SymbTr metadata", "0.2", "compmusic.upf.edu")
@@ -141,12 +142,22 @@ def getUsul(usul_slug):
     return {}
 
 def getMetadataFromMusicBrainz(mbid, get_recording_rels = False):
-    try:  # assume mbid is a work
-        data = getWorkMetadataFromMusicBrainz(mbid, get_recording_rels = False)
-    except:  # assume mbid is a recording
-        if get_recording_rels:
-            print "Recording mbid is given. Ignoring get_recording_rels input"
-        data = getRecordingMetadataFromMusicBrainz(mbid)
+    o = urlparse(mbid)
+    if o.netloc:  # url supplied
+        o_splitted = o.path.split('/')
+        if o_splitted[1] == 'work':
+            data = getWorkMetadataFromMusicBrainz(o_splitted[2], get_recording_rels = False)
+        elif o_splitted[1] == 'recording':
+            if get_recording_rels:
+                print "Recording mbid is given. Ignoring get_recording_rels input"
+            data = getRecordingMetadataFromMusicBrainz(o_splitted[1])
+    else:  # mbid supplied
+        try:  # assume mbid is a work
+            data = getWorkMetadataFromMusicBrainz(mbid, get_recording_rels = False)
+        except:  # assume mbid is a recording
+            if get_recording_rels:
+                print "Recording mbid is given. Ignoring get_recording_rels input"
+            data = getRecordingMetadataFromMusicBrainz(mbid)
     return data
 
 def getWorkMetadataFromMusicBrainz(mbid, get_recording_rels = False):
