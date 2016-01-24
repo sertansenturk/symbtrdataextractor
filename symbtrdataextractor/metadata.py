@@ -22,8 +22,14 @@ def getMetadata(scorename, mbid='', get_recording_rels=False):
 
     slugs = getSlug(scorename)
     data['makam']['symbtr_slug'] = slugs['makam']
+    data['makam']['attribute_key'] = getAttributeKey(data['makam']['symbtr_slug'], 'makam')
+
     data['form']['symbtr_slug'] = slugs['form']
+    data['form']['attribute_key'] = getAttributeKey(data['form']['symbtr_slug'], 'form')
+
     data['usul']['symbtr_slug'] = slugs['usul']
+    data['usul']['attribute_key'] = getAttributeKey(data['usul']['symbtr_slug'], 'usul')
+
     if 'work' in data.keys():
         data['work']['symbtr_slug'] = slugs['name']
     elif 'recording' in data.keys():
@@ -50,17 +56,11 @@ def getMetadata(scorename, mbid='', get_recording_rels=False):
 
     return data, isMetadataValid
 
-def getMakam(makam_slug):
-    makam_file = os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), 'makam_data', 'makam.json')
-    makam_dict = json.load(open(makam_file, 'r'))
-
-    for makam in makam_dict.values():
-        if makam['symbtr_slug'] == makam_slug:
-            return makam
-    
-    # no match
-    return {}
+def getAttributeKey(attr_str, attr_type):
+    attr_dict = getAttributeDict(attr_type)
+    for attr_key, attr_val in attr_dict.iteritems():
+        if attr_val['symbtr_slug'] == attr_str:
+            return attr_key
 
 def validateAttribute(score_attribute, attribute_dict, scorename):
     isAttributeValid = True  # initialize
@@ -117,11 +117,23 @@ def validateAttribute(score_attribute, attribute_dict, scorename):
 
     return isAttributeValid
 
-def getForm(form_slug):
-    form_file = os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), 'makam_data', 'form.json')
-    form_dict = json.load(open(form_file, 'r'))
+def getAttributeDict(attrstr):
+    attrfile = os.path.join(os.path.dirname(
+        os.path.abspath(__file__)), 'makam_data', attrstr + '.json')
+    return json.load(open(attrfile, 'r'))
 
+def getMakam(makam_slug):
+    makam_dict = getAttributeDict('makam')
+
+    for makam in makam_dict.values():
+        if makam['symbtr_slug'] == makam_slug:
+            return makam
+    
+    # no match
+    return {}
+
+def getForm(form_slug):
+    form_dict = getAttributeDict('form')
     for form in form_dict.values():
         if form['symbtr_slug'] == form_slug:
             return form
@@ -130,9 +142,7 @@ def getForm(form_slug):
     return {}
 
 def getUsul(usul_slug):
-    usul_file = os.path.join(os.path.dirname(
-        os.path.abspath(__file__)), 'makam_data', 'usul.json')
-    usul_dict = json.load(open(usul_file, 'r'))
+    usul_dict = getAttributeDict('usul')
 
     for usul in usul_dict.values():
         if usul['symbtr_slug'] == usul_slug:

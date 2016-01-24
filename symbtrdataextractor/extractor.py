@@ -5,6 +5,7 @@ from section import *
 from phrase import *
 from symbtrreader import *
 from metadata import *
+from rhythm import *
 import os
 
 def extract(scorefile, symbtrname='', mbid='', seg_note_idx = [], 
@@ -40,6 +41,8 @@ def extract(scorefile, symbtrname='', mbid='', seg_note_idx = [],
     autoPhrase = extractAutoSegPhrase(score, sections=data['sections'], 
         seg_note_idx = seg_note_idx, lyrics_sim_thres=lyrics_sim_thres, 
         melody_sim_thres=melody_sim_thres)
+
+    data['rhythmic_structure'] = extractRhythmicStructure(score)
 
     data['phrases'] = {'annotated':annoPhrase, 'automatic': autoPhrase}
     isDataValid = all([isMetadataValid, isSectionDataValid, isScoreContentValid])

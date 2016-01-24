@@ -1,9 +1,9 @@
 symbtrmetadataextractor
 ===========
+Python tools for extracting relevant data from SymbTr-scores
 
 Introduction
 ------------
-Python tools for extracting relevant data from SymbTr-scores
 
 This repository contains to algorithms to extract metadata, related music knowledge and section information from [SymbTr-scores](https://github.com/MTG/SymbTr) and related information sources. 
 
@@ -63,7 +63,7 @@ If you want to install symbtrmetadataextractor, it is recommended to install sym
     python setup.py install
 
 If you want to be able to edit files and have the changes be reflected, then
-install compmusic like this instead
+install the repository like this instead:
 
     pip install -e .
 
