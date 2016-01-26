@@ -156,7 +156,7 @@ def validateSections(sections, score, ignoreLabels, symbtrname, print_warnings=T
     validBool = True  # treat some of these are warning; they'll be made stricter later
     if not sections: # check section presence
         if print_warnings:
-            print symbtrname + ", Missing section info in lyrics."
+            print "    " + symbtrname + ", Missing section info in lyrics."
     else: # check section continuity
         firstnoteidx = getFirstNoteIndex(score)
 
@@ -165,7 +165,7 @@ def validateSections(sections, score, ignoreLabels, symbtrname, print_warnings=T
         for s, e in zip(starts, ends):
             if not s - e == 1:
                 if print_warnings:
-                    print(symbtrname + ", " + str(e) + '->' + str(s) + ', '
+                    print("    " + symbtrname + ", " + str(e) + '->' + str(s) + ', '
                         'Gap between the sections')
                 validBool = False
 
@@ -173,12 +173,12 @@ def validateSections(sections, score, ignoreLabels, symbtrname, print_warnings=T
         # check whether section starts on the measure or not
         if (not isIntegerOffset(score['offset'][s['startNote']]) and 
             s['slug'] not in ignoreLabels) and print_warnings:
-            print(symbtrname + ", " + str(s['startNote']) + ', ' + s['slug'] + ' '
+            print("    " + symbtrname + ", " + str(s['startNote']) + ', ' + s['slug'] + ' '
                 'does not start on a measure: ' + 
                 str(score['offset'][s['startNote']]))
         # check if the end of a section somehow got earlier than its start
         if s['startNote'] > s['endNote']:
-            print(symbtrname + ", " + str(s['startNote']) + '->'
+            print("    " + symbtrname + ", " + str(s['startNote']) + '->'
                 '' + str(s['endNote']) + ', ' + s['slug'] + ' '
                 'ends before it starts: ' + 
                 str(score['offset'][s['startNote']]))
@@ -189,7 +189,7 @@ def validateSections(sections, score, ignoreLabels, symbtrname, print_warnings=T
     for i, ll in enumerate(score['lyrics']):
         for label in all_labels:
             if (label + ' ') == ll or (label + '  ') == ll:  # invalid lyrics end 
-                print symbtrname + ', ' + str(i) + ": Extra space in " + ll
+                print "    " + symbtrname + ', ' + str(i) + ": Extra space in " + ll
                 validBool = False
 
     return validBool

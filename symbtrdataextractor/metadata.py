@@ -67,7 +67,7 @@ def validateAttribute(score_attribute, attribute_dict, scorename):
     if 'symbtr_slug' in score_attribute.keys():
         if not score_attribute['symbtr_slug'] ==  attribute_dict['symbtr_slug']:
             isAttributeValid = False
-            print(scorename + ', ' + score_attribute['symbtr_slug'] + ''
+            print("    " + scorename + ', ' + score_attribute['symbtr_slug'] + ''
                 ': The slug does not match.')
 
     if 'mu2_name' in score_attribute.keys():  # work
@@ -78,41 +78,41 @@ def validateAttribute(score_attribute, attribute_dict, scorename):
                     mu2_name = uv['mu2_name']
                     if not uv['mertebe'] == score_attribute['mertebe']:
                         isAttributeValid = False
-                        print(scorename + ', ' + uv['mu2_name'] + ''
+                        print("    " + scorename + ', ' + uv['mu2_name'] + ''
                             ': The mertebe of the score does not match.')
                     if not uv['num_pulses'] == score_attribute['number_of_pulses']:
                         isAttributeValid = False
-                        print(scorename + ', ' + uv['mu2_name'] + ''
+                        print("    " + scorename + ', ' + uv['mu2_name'] + ''
                             ': The number of pulses in an usul cycle does not match.')
             if not mu2_name:  # no matching variant
                 isAttributeValid = False
-                print(scorename + ', ' + score_attribute['mu2_name'] + ''
+                print("    " + scorename + ', ' + score_attribute['mu2_name'] + ''
                     ': The Mu2 attribute does not match.')
         except KeyError:  # makam, form
             mu2_name = attribute_dict['mu2_name']
             if not score_attribute['mu2_name'] == mu2_name:  
                 isAttributeValid = False
-                print(scorename + ', ' + score_attribute['mu2_name'] + ''
+                print("    " + scorename + ', ' + score_attribute['mu2_name'] + ''
                     ': The Mu2 attribute does not match.')
     
     if 'mb_attribute' in score_attribute.keys():  # work
         skip_makam_slug = ['12212212','22222221','223','232223','262','3223323','3334','14_4']
         if score_attribute['symbtr_slug'] in skip_makam_slug:
-            print(scorename + ': The usul attribute is not stored in MusicBrainz.')
+            print("    " + scorename + ': The usul attribute is not stored in MusicBrainz.')
         else:
             if not score_attribute['mb_attribute'] == attribute_dict['dunya_name']:  
                 # dunya_names are (or should be) a superset of the musicbainz attributes 
                 isAttributeValid = False
                 if score_attribute['mb_attribute']:
-                    print(scorename + ', ' + score_attribute['mb_attribute'] + ''
+                    print("    " + scorename + ', ' + score_attribute['mb_attribute'] + ''
                         ': The MusicBrainz attribute does not match.')
                 else:
-                    print(scorename + ': The MusicBrainz attribute does not exist.')
+                    print("    " + scorename + ': The MusicBrainz attribute does not exist.')
     
     if 'mb_tag' in score_attribute.keys():  # recording
         if not score_attribute['mb_tag'] in attribute_dict['mb_tag']:  
             isAttributeValid = False
-            print(scorename + ', ' + score_attribute['mb_tag'] + ''
+            print("    " + scorename + ', ' + score_attribute['mb_tag'] + ''
                 ': The MusicBrainz tag does not match.')
 
     return isAttributeValid
@@ -159,14 +159,14 @@ def getMetadataFromMusicBrainz(mbid, get_recording_rels = False):
             data = getWorkMetadataFromMusicBrainz(o_splitted[2], get_recording_rels = False)
         elif o_splitted[1] == 'recording':
             if get_recording_rels:
-                print "Recording mbid is given. Ignoring get_recording_rels input"
+                print "    " + "Recording mbid is given. Ignoring get_recording_rels input"
             data = getRecordingMetadataFromMusicBrainz(o_splitted[1])
     else:  # mbid supplied
         try:  # assume mbid is a work
             data = getWorkMetadataFromMusicBrainz(mbid, get_recording_rels = False)
         except:  # assume mbid is a recording
             if get_recording_rels:
-                print "Recording mbid is given. Ignoring get_recording_rels input"
+                print "    " + "Recording mbid is given. Ignoring get_recording_rels input"
             data = getRecordingMetadataFromMusicBrainz(mbid)
     return data
 
