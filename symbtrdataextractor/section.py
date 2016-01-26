@@ -10,7 +10,8 @@ def extractSection(score, symbtrname, extract_all_labels=False,
     all_labels = [l for sub_list in get_symbtr_labels().values() for l in sub_list] 
     struct_lbl = all_labels if extract_all_labels else get_symbtr_labels()['structure'] 
 
-    measure_start_idx = findMeasureStartIdx(score['offset'],print_warnings=print_warnings)
+    measure_start_idx, is_measure_start_valid = findMeasureStartIdx(
+        score['offset'],print_warnings=print_warnings)
     
     # Check lyrics information
     if all(l == '' for l in score['lyrics']):
@@ -26,7 +27,7 @@ def extractSection(score, symbtrname, extract_all_labels=False,
             melody_sim_thres)
 
     validBool = validateSections(sections, score, set(all_labels)-set(struct_lbl), 
-        symbtrname, print_warnings=print_warnings)
+        symbtrname, print_warnings=print_warnings) and is_measure_start_valid 
 
     # map the python indices in startNote and endNote to SymbTr index
     for se in sections:

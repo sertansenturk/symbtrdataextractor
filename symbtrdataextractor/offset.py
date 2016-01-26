@@ -1,5 +1,6 @@
 def findMeasureStartIdx(offsets, print_warnings=True):
     measure_start_idx = []
+    isMeasureStartValid = True
 
     tol = 0.001
     for int_offset in range(0, int(max(offsets))+1):
@@ -9,10 +10,9 @@ def findMeasureStartIdx(offsets, print_warnings=True):
     nonIntegerMeasureStart = ([offsets[i] for i in measure_start_idx 
         if not isIntegerOffset(offsets[i])])
     if nonIntegerMeasureStart and print_warnings:
-        print "    " + "Some measures are skipped by the offsets"
-        print nonIntegerMeasureStart
-    
-    return measure_start_idx
+        print "    " + "Some measures are skipped by the offsets: " + ', '.join(str(e) for e in nonIntegerMeasureStart)
+        isMeasureStartValid = False
+    return measure_start_idx, isMeasureStartValid
 
 def isIntegerOffset(offset):
     # The measure changes when the offset is an integer
