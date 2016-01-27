@@ -60,7 +60,7 @@ def validateTxtScore(score, scorename):
     for ii in range(0, len(score['index'])):
         # check usul row in the start
         if ii == 0 and not score['code'][ii] == 51:
-            print scorename + ' Missing the usul row in the start'
+            print "    " + scorename + ' Missing the usul row in the start'
             startUsulRow = False
 
         if score['duration'][ii] > 0:  # note or rest
@@ -74,7 +74,7 @@ def validateTxtScore(score, scorename):
                     score['noteAE'][ii] == 'Es' and
                     score['code'][ii] == 9):
                     isRestValid = False
-                    print scorename + ' ' + str(score['index'][ii]) + ': Invalid Rest'
+                    print "    " + scorename + ' ' + str(score['index'][ii]) + ': Invalid Rest'
 
             # note duration
             dursym = str(score['numerator'][ii]) + '_' + str(score['denumerator'][ii]) 
@@ -85,13 +85,13 @@ def validateTxtScore(score, scorename):
 
     #for key, val in dur_dict.items():
     #    if not len(val)==1:
-    #        print scorename + ": " + key + " note has multiple duration values; " + ', '.join([str(v) for v in val])
+    #        print "    " + scorename + ": " + key + " note has multiple duration values; " + ', '.join([str(v) for v in val])
     #        isDurationValid = False  # USUL/TEMPO CHANGES ARE NOT HANDLED, DON'T ASSIGN FALSE YET
 
     # note index
     for ii in range(0, len(score['index'])-1):
         if not score['index'][ii+1] - score['index'][ii] == 1:
-            print scorename + ": " + str(score['index'][ii]) + ", note index jump."
+            print "    " + scorename + ": " + str(score['index'][ii]) + ", note index jump."
             isIndexValid = False
             
     isScoreValid = startUsulRow and isRestValid and isDurationValid and isIndexValid
@@ -128,7 +128,7 @@ def readMu2Header(scorefile, symbtrname=''):
                     header['tempo'] = {'value':float(row[4]), 'unit':'bpm'}
                 if not int(row[3]) == header['usul']['mertebe']:
                     if not header['usul']['mu2_name'] == '(Serbest)':  # ignore serbest usul
-                        print symbtrname + ': Mertebe and tempo unit are different!'
+                        print "    " + symbtrname + ': Mertebe and tempo unit are different!'
                         isTempoUnitValid = False
             elif code == 56:
                 header['usul']['subdivision'] = {'mertebe':int(row[3]), 
