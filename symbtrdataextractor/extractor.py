@@ -32,6 +32,9 @@ def extract(scorefile, symbtrname='', mbid='', seg_note_idx = [],
     else:
         raise IOError("Unknown format")
 
+    data['duration'] = {'value':sum(score['duration'])*0.001, 'unit':'second'}
+    data['number_of_notes'] = len(score['duration'])
+
     data['sections'], isSectionDataValid = extractSection(score, symbtrname, 
         extract_all_labels=extract_all_labels, lyrics_sim_thres=lyrics_sim_thres, 
         melody_sim_thres=melody_sim_thres, print_warnings=print_warnings)
