@@ -52,7 +52,7 @@ def extract(scorefile, symbtrname='', mbid='', seg_note_idx=[],
     return data, is_data_valid
 
 
-def merge(txt_data, mu2_data):
+def merge(txt_data, mu2_data, verbose=True):
     '''
     Merge the extracted data, precedence goes to key value pairs in latter dicts.
     '''
@@ -64,7 +64,8 @@ def merge(txt_data, mu2_data):
     elif 'recording' in txt_dict.keys():
         mu2_dict['recording'] = mu2_dict.pop('title')
     else:
-        print '   Unknown title target.'
+    	if verbose
+	        print '   Unknown title target.'
         mu2_dict.pop('title')
 
     return dictmerge(txt_dict, mu2_dict)
