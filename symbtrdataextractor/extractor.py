@@ -64,7 +64,7 @@ def merge(txt_data, mu2_data, verbose=True):
     elif 'recording' in txt_dict.keys():
         mu2_dict['recording'] = mu2_dict.pop('title')
     else:
-    	if verbose
+    	if verbose:
 	        print '   Unknown title target.'
         mu2_dict.pop('title')
 
