@@ -1,9 +1,10 @@
 import csv
-import string
 import os
-from metadata import getSlug, getMakam, getForm, getUsul, validateAttribute, getAttributeKey
+from metadata import get_slug, get_makam, get_form, get_usul, \
+    validate_attribute, get_attribute_key
 
-def readTxtScore(scorefile):
+
+def read_txt_score(scorefile):
     with open(scorefile, "rb") as f:
         reader = csv.reader(f, delimiter='\t')
 
@@ -24,9 +25,9 @@ def readTxtScore(scorefile):
         offset_col = header.index('Offset')
 
         score = {'index': [], 'code': [], 'note53': [], 'noteAE': [],
-                'comma53': [], 'commaAE': [], 'numerator': [],
-                'denumerator': [], 'duration': [], 'lyrics': [], 
-                'offset': [], 'lns': [], 'bas': []}
+                 'comma53': [], 'commaAE': [], 'numerator': [],
+                 'denumerator': [], 'duration': [], 'lyrics': [],
+                 'offset': [], 'lns': [], 'bas': []}
         for row in reader:
             score['index'].append(int(row[index_col]))
             score['code'].append(int(row[code_col]))
@@ -42,138 +43,162 @@ def readTxtScore(scorefile):
             score['lyrics'].append(row[lyrics_col].decode('utf-8'))
             score['offset'].append(float(row[offset_col]))
 
-    # shift offset such that the first note of each measure has an integer offset
+    # shift offset such that the first note of each measure has an int offset
     score['offset'].insert(0, 0)
     score['offset'] = score['offset'][:-1]
 
     # validate
-    isScoreValid = validateTxtScore(score, os.path.splitext(os.path.basename(scorefile))[0])
+    is_score_valid = validate_txt_score(score, os.path.splitext(
+        os.path.basename(scorefile))[0])
 
-    return score, isScoreValid
+    return score, is_score_valid
 
-def validateTxtScore(score, scorename):
-    isRestValid = True
-    isDurationValid = True
-    isIndexValid = True
-    startUsulRow = True
+
+def validate_txt_score(score, scorename):
+    is_rest_valid = True
+    is_duration_valid = True
+    is_index_valid = True
+    start_usul_row = True
     dur_dict = {}
     for ii in range(0, len(score['index'])):
         # check usul row in the start
         if ii == 0 and not score['code'][ii] == 51:
             print "    " + scorename + ' Missing the usul row in the start'
-            startUsulRow = False
+            start_usul_row = False
 
         if score['duration'][ii] > 0:  # note or rest
             # check rest
-            if (-1 in [score['comma53'][ii], score['commaAE'][ii]] or 
-                any(rs in [score['note53'][ii], score['noteAE'][ii]] for rs in ['Es', 'Sus', ''])):
+            if (-1 in [score['comma53'][ii], score['commaAE'][ii]] or
+                    any(rs in [score['note53'][ii], score['noteAE'][ii]]
+                        for rs in ['Es', 'Sus', ''])):
                 # it should be rest, validate
-                if not (score['comma53'][ii] == -1 and 
-                    score['commaAE'][ii] == -1 and
-                    score['note53'][ii] == 'Es' and
-                    score['noteAE'][ii] == 'Es' and
-                    score['code'][ii] == 9):
-                    isRestValid = False
-                    print "    " + scorename + ' ' + str(score['index'][ii]) + ': Invalid Rest'
+                if not (score['comma53'][ii] == -1 and
+                        score['commaAE'][ii] == -1 and
+                        score['note53'][ii] == 'Es' and
+                        score['noteAE'][ii] == 'Es' and
+                        score['code'][ii] == 9):
+                    is_rest_valid = False
+                    print("    " + scorename + ' ' + str(score['index'][ii]) +
+                          ': Invalid Rest')
 
             # note duration
-            dursym = str(score['numerator'][ii]) + '_' + str(score['denumerator'][ii]) 
+            dursym = (str(score['numerator'][ii]) + '_' +
+                      str(score['denumerator'][ii]))
             if dursym in dur_dict.keys():
-                dur_dict[dursym] = list(set([score['duration'][ii]] + dur_dict[dursym]))
+                dur_dict[dursym] = list(set([score['duration'][ii]] +
+                                            dur_dict[dursym]))
             else:
                 dur_dict[dursym] = [score['duration'][ii]]
 
-    #for key, val in dur_dict.items():
+    # for key, val in dur_dict.items():
     #    if not len(val)==1:
-    #        print "    " + scorename + ": " + key + " note has multiple duration values; " + ', '.join([str(v) for v in val])
-    #        isDurationValid = False  # USUL/TEMPO CHANGES ARE NOT HANDLED, DON'T ASSIGN FALSE YET
+    #        print("    " + scorename + ": " + key +
+    #              " note has multiple duration values; " +
+    #              ', '.join([str(v) for v in val]))
+    #        # USUL/TEMPO CHANGES ARE NOT HANDLED, DON'T ASSIGN FALSE YET
+    #        is_duration_valid = True
 
     # note index
-    for ii in range(0, len(score['index'])-1):
-        if not score['index'][ii+1] - score['index'][ii] == 1:
-            print "    " + scorename + ": " + str(score['index'][ii]) + ", note index jump."
-            isIndexValid = False
-            
-    isScoreValid = startUsulRow and isRestValid and isDurationValid and isIndexValid
-    return isScoreValid
+    for ii in range(0, len(score['index']) - 1):
+        if not score['index'][ii + 1] - score['index'][ii] == 1:
+            print("    " + scorename + ": " + str(score['index'][ii]) +
+                  ", note index jump.")
+            is_index_valid = False
 
-def readMu2Score(scorefile):
+    is_score_valid = (start_usul_row and is_rest_valid and
+                      is_duration_valid and is_index_valid)
+    return is_score_valid
+
+
+def read_mu2_score(scorefile):
     # TODO
     pass
 
-def readMu2Header(scorefile, symbtrname=''):
+
+def read_musicxml_score(scorefile):
+    # TODO
+    pass
+
+
+def read_mu2_header(scorefile, symbtrname=''):
     if not symbtrname:
         symbtrname = os.path.splitext(os.path.basename(scorefile))[0]
 
     with open(scorefile, "rb") as f:
         reader = csv.reader(f, delimiter='\t')
 
-        headerRow = [unicode(cell, 'utf-8') for cell in next(reader, None)]
+        header_row = [unicode(cell, 'utf-8') for cell in next(reader, None)]
 
         header = dict()
-        isTempoUnitValid = True
+        is_tempo_unit_valid = True
         for rowtemp in reader:
             row = [unicode(cell, 'utf-8') for cell in rowtemp]
             code = int(row[0])
             if code == 50:
-                header['makam'] = {'mu2_name':row[7]}
+                header['makam'] = {'mu2_name': row[7]}
                 header['key_signature'] = row[8].split('/')
             elif code == 51:
-                header['usul'] = {'mu2_name':row[7], 'mertebe':int(row[3]), 
-                    'number_of_pulses':int(row[2])}
+                header['usul'] = {'mu2_name': row[7], 'mertebe': int(row[3]),
+                                  'number_of_pulses': int(row[2])}
             elif code == 52:
                 try:
-                    header['tempo'] = {'value':int(row[4]), 'unit':'bpm'}
+                    header['tempo'] = {'value': int(row[4]), 'unit': 'bpm'}
                 except ValueError:  # the bpm might be a float for low tempo
-                    header['tempo'] = {'value':float(row[4]), 'unit':'bpm'}
+                    header['tempo'] = {'value': float(row[4]), 'unit': 'bpm'}
                 if not int(row[3]) == header['usul']['mertebe']:
-                    if not header['usul']['mu2_name'] == '[Serbest]':  # ignore serbest usul
-                        print "    " + symbtrname + ': Mertebe and tempo unit are different!'
-                        isTempoUnitValid = False
+                    if not header['usul']['mu2_name'] == '[Serbest]':  # ignore
+                        print("    " + symbtrname +
+                              ': Mertebe and tempo unit are different!')
+                        is_tempo_unit_valid = False
             elif code == 56:
-                header['usul']['subdivision'] = {'mertebe':int(row[3]), 
-                    'number_of_pulses':int(row[2])}
+                header['usul']['subdivision'] = {'mertebe': int(row[3]),
+                                                 'number_of_pulses':
+                                                     int(row[2])}
             elif code == 57:
-                header['form'] = {'mu2_name':row[7]}
+                header['form'] = {'mu2_name': row[7]}
             elif code == 58:
-                header['composer'] = {'mu2_name':row[7]}
+                header['composer'] = {'mu2_name': row[7]}
             elif code == 59:
-                header['lyricist'] = {'mu2_name':row[7]}
+                header['lyricist'] = {'mu2_name': row[7]}
             elif code == 60:
-                header['title'] = {'mu2_title':row[7]}
+                header['title'] = {'mu2_title': row[7]}
             elif code == 62:
                 header['genre'] = 'folk' if row[7] == 'E' else 'classical'
             elif code == 63:
                 header['notation'] = row[7]
-            elif code in range(50, 64): 
+            elif code in range(50, 64):
                 print '   Unparsed code: ' + ' '.join(row)
             else:  # end of header
                 break
 
     # get the metadata
-    slugs = getSlug(symbtrname)
+    slugs = get_slug(symbtrname)
     header['makam']['symbtr_slug'] = slugs['makam']
-    header['makam']['attribute_key'] = getAttributeKey(header['makam']['symbtr_slug'], 'makam')
+    header['makam']['attribute_key'] = get_attribute_key(
+        header['makam']['symbtr_slug'], 'makam')
 
     header['form']['symbtr_slug'] = slugs['form']
-    header['form']['attribute_key'] = getAttributeKey(header['form']['symbtr_slug'], 'form')
+    header['form']['attribute_key'] = get_attribute_key(
+        header['form']['symbtr_slug'], 'form')
 
     header['usul']['symbtr_slug'] = slugs['usul']
-    header['usul']['attribute_key'] = getAttributeKey(header['usul']['symbtr_slug'], 'usul')
+    header['usul']['attribute_key'] = get_attribute_key(
+        header['usul']['symbtr_slug'], 'usul')
 
     header['title']['symbtr_slug'] = slugs['name']
     header['composer']['symbtr_slug'] = slugs['composer']
 
     # validate the header content
-    makam = getMakam(header['makam']['symbtr_slug'])
-    isMakamValid = validateAttribute(header['makam'], makam, symbtrname)
+    makam = get_makam(header['makam']['symbtr_slug'])
+    is_makam_valid = validate_attribute(header['makam'], makam, symbtrname)
 
-    form = getForm(header['form']['symbtr_slug'])
-    isFormValid = validateAttribute(header['form'], form, symbtrname)
+    form = get_form(header['form']['symbtr_slug'])
+    is_form_valid = validate_attribute(header['form'], form, symbtrname)
 
-    usul = getUsul(header['usul']['symbtr_slug'])
-    isUsulValid = validateAttribute(header['usul'], usul, symbtrname)
+    usul = get_usul(header['usul']['symbtr_slug'])
+    is_usul_valid = validate_attribute(header['usul'], usul, symbtrname)
 
-    isHeaderValid = isTempoUnitValid and isMakamValid and isFormValid and isUsulValid
+    is_header_valid = (is_tempo_unit_valid and is_makam_valid and
+                       is_form_valid and is_usul_valid)
 
-    return header, headerRow, isHeaderValid
+    return header, header_row, is_header_valid

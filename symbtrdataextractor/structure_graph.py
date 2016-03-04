@@ -1,31 +1,33 @@
 import Levenshtein
 import networkx as nx
 
-def normalizedLevenshtein(str1, str2):
-    avLen = (len(str1) + len(str2)) * .5
+
+def normalized_levenshtein(str1, str2):
+    av_len = (len(str1) + len(str2)) * .5
 
     try:
-        return Levenshtein.distance(str1, str2) / avLen
-    except ZeroDivisionError: # both sections are instrumental
+        return Levenshtein.distance(str1, str2) / av_len
+    except ZeroDivisionError:  # both sections are instrumental
         return 0
 
-def getCliques(dists, simThres):
-    # cliques of similar nodes
-    G_similar = nx.from_numpy_matrix(dists<=simThres)
-    C_similar = nx.find_cliques(G_similar)
 
+def get_cliques(dists, sim_thres):
+    # cliques of similar nodes
+    g_similar = nx.from_numpy_matrix(dists <= sim_thres)
+    c_similar = nx.find_cliques(g_similar)
 
     # cliques of exact nodes
-    G_exact = nx.from_numpy_matrix(dists<=0.001) # inexact matching
-    C_exact = nx.find_cliques(G_exact)
+    g_exact = nx.from_numpy_matrix(dists <= 0.001)  # inexact matching
+    c_exact = nx.find_cliques(g_exact)
 
     # convert the cliques to list of sets
-    C_similar = sortCliques([set(s) for s in list(C_similar)])
-    C_exact = sortCliques([set(s) for s in list(C_exact)])
+    c_similar = sort_cliques([set(s) for s in list(c_similar)])
+    c_exact = sort_cliques([set(s) for s in list(c_exact)])
 
-    return {'exact': C_exact, 'similar': C_similar}
+    return {'exact': c_exact, 'similar': c_similar}
 
-def sortCliques(cliques):
+
+def sort_cliques(cliques):
     min_idx = [min(c) for c in cliques]  # get the minimum in each clique
 
     # sort minimum indices to get the actual sort indices for the clique list
