@@ -5,6 +5,7 @@ from metadata import get_metadata
 from rhythm import extract_rhythmic_structure
 import os
 
+
 class SymbTrDataExtractor:
     _version = "1.1"
     _sourcetype = "txt"
@@ -17,8 +18,6 @@ class SymbTrDataExtractor:
             extract_all_labels=False, lyrics_sim_thres=0.25,
             melody_sim_thres=0.25, get_recording_rels=False,):
         self.symbtrname = symbtrname
-        if not self.symbtrname:
-            symbtrname = os.path.splitext(os.path.basename(self.scorefile))[0]
         self.mbid = mbid
         self.seg_note_idx = seg_note_idx
         self.extract_all_labels = extract_all_labels
@@ -28,6 +27,9 @@ class SymbTrDataExtractor:
 
     def extract(self, print_warnings=True):
         # get the metadata
+        if not self.symbtrname:
+            self.symbtrname = os.path.splitext(os.path.basename(
+                self.scorefile))[0]
 
         data, is_metadata_valid = get_metadata(
             self.symbtrname, mbid=self.mbid,
