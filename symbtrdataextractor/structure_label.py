@@ -1,8 +1,7 @@
 import os
 import json
 from numpy import matrix
-
-from symbtr import get_true_lyrics_idx, synth_melody, mel2str
+from symbtr import ScoreProcessor
 from structure_graph import normalized_levenshtein, get_cliques
 
 
@@ -55,8 +54,8 @@ def get_lyric_organization(structures, score_fragments, lyrics_sim_thres):
                       for l in sub_list]
         all_labels += ['.', '', ' ']
         for sf in score_fragments:
-            real_lyrics_idx = get_true_lyrics_idx(sf['lyrics'], all_labels,
-                                                  sf['durs'])
+            real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
+                sf['lyrics'], all_labels, sf['durs'])
             sf['lyrics'] = u''.join([sf['lyrics'][i].replace(u' ', u'')
                                      for i in real_lyrics_idx])
 
@@ -102,12 +101,14 @@ def get_melodic_organization(structures, score_fragments, melody_sim_thres):
         # synthesize the score according taking the shortest note as the unit
         # shortest note has the greatest denumerator
         max_denum = max(max(sf['denums']) for sf in score_fragments)
-        melodies = [synth_melody(sf, max_denum) for sf in score_fragments]
+        melodies = [ScoreProcessor.synth_melody(sf, max_denum)
+                    for sf in score_fragments]
 
         # convert the numbers in melodies to unique strings for Levenstein
         unique_notes = list(set(x for sf in score_fragments
                                 for x in sf['notes']))
-        melodies_str = [mel2str(m, unique_notes) for m in melodies]
+        melodies_str = [ScoreProcessor.mel2str(m, unique_notes)
+                        for m in melodies]
 
         dists = matrix([[normalized_levenshtein(m1, m2)
                          for m1 in melodies_str] for m2 in melodies_str])
@@ -116,7 +117,7 @@ def get_melodic_organization(structures, score_fragments, melody_sim_thres):
 
         melody_labels = semiotize(cliques)
 
-        # label the insrumental structures, if present
+        # label the instrumental structures, if present
         all_labels = [l for sub_list in get_symbtr_labels().values()
                       for l in sub_list]
         for i in range(0, len(melody_labels)):

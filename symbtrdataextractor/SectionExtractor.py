@@ -1,7 +1,7 @@
 from math import floor
 
 from slugify_tr import slugify_tr
-from symbtr import get_true_lyrics_idx, get_first_note_index
+from symbtr import ScoreProcessor
 from structure_label import label_structures, get_symbtr_labels
 from OffsetProcessor import OffsetProcessor
 
@@ -98,9 +98,9 @@ class SectionExtractor(object):
 
     def _locate_section_boundaries(self, sections, score, struct_lbl,
                                    measure_start_idx):
-        first_note_idx = get_first_note_index(score)
-        real_lyrics_idx = get_true_lyrics_idx(score['lyrics'], struct_lbl,
-                                              score['duration'])
+        first_note_idx = ScoreProcessor.get_first_note_index(score)
+        real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
+            score['lyrics'], struct_lbl, score['duration'])
 
         start_note_idx = [s['start_note'] for s in sections] + \
                          [len(score['lyrics'])]
@@ -172,7 +172,7 @@ class SectionExtractor(object):
 
         # if the first rows are control rows and the first section starts next
         if sections:
-            first_note_idx = get_first_note_index(score)
+            first_note_idx = ScoreProcessor.get_first_note_index(score)
 
             first_sec = sections[0]
             first_sec_idx = -1
@@ -210,7 +210,7 @@ class SectionExtractor(object):
             if self.print_warnings:
                 print "    " + symbtrname + ", Missing section info in lyrics."
         else:  # check section continuity
-            first_note_idx = get_first_note_index(score)
+            first_note_idx = ScoreProcessor.get_first_note_index(score)
 
             ends = [first_note_idx - 1] + [s['end_note'] for s in sections]
             starts = [s['start_note'] for s in sections] + \

@@ -1,4 +1,4 @@
-from symbtr import get_true_lyrics_idx, get_first_note_index
+from symbtr import ScoreProcessor
 from structure_label import label_structures, get_symbtr_labels
 
 
@@ -32,7 +32,7 @@ class PhraseExtractor(object):
         bound_codes = [51, 53, 54, 55]
         anno_codes = [53, 54, 55]
 
-        first_note_idx = get_first_note_index(score)
+        first_note_idx = ScoreProcessor.get_first_note_index(score)
 
         # start bounds with the first note, ignore the control rows in the
         # start
@@ -68,7 +68,7 @@ class PhraseExtractor(object):
 
     def extract(self, bounds, score, sections=None):
         # add start and end if they are not already in the list
-        firstnoteidx = get_first_note_index(score)
+        firstnoteidx = ScoreProcessor.get_first_note_index(score)
         if firstnoteidx not in bounds:
             bounds = [firstnoteidx] + bounds
 
@@ -90,8 +90,8 @@ class PhraseExtractor(object):
 
         all_labels = [l for sub_list in get_symbtr_labels().values()
                       for l in sub_list]
-        real_lyrics_idx = get_true_lyrics_idx(score['lyrics'], all_labels,
-                                              score['duration'])
+        real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
+            score['lyrics'], all_labels, score['duration'])
 
         phrases = []
         for pp in range(0, len(phrase_bounds) - 1):
