@@ -2,7 +2,7 @@ import os
 import json
 from numpy import matrix
 from ScoreProcessor import ScoreProcessor
-from structure_graph import GraphOperations
+from GraphOperations import GraphOperations
 
 
 class StructureLabeler(object):
