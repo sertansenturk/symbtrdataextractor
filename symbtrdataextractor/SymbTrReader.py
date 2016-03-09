@@ -12,7 +12,28 @@ class SymbTrReader(object):
         pass
 
     @classmethod
-    def read_txt_score(cls, score_file):
+    def read_txt_score(cls, score_file, symbtr_name=None):
+        """
+        Reader method for the SymbTr-txt scores
+
+        Parameters
+        ----------
+        score_file : str
+            The path of the SymbTr score
+        symbtr_name : str, optional
+            The name of the score in SymbTr naming convention
+            (makam--form--usul--name--composer).
+        Returns
+        ----------
+        dict
+            A dictionary of the read SymbTr-txt score, where each key is the
+            name of a column in the SymbTr-txt
+        bool
+            True if the read SymbTr-txt score is valid, False otherwise
+        """
+        if symbtr_name is None:
+            symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
+
         with open(score_file, "rb") as f:
             reader = csv.reader(f, delimiter='\t')
 
@@ -57,13 +78,27 @@ class SymbTrReader(object):
         score['offset'] = score['offset'][:-1]
 
         # validate
-        is_score_valid = cls._validate_txt_score(score, os.path.splitext(
-            os.path.basename(score_file))[0])
+        is_score_valid = cls._validate_txt_score(score, symbtr_name)
 
         return score, is_score_valid
 
     @staticmethod
     def _validate_txt_score(score, score_name):
+        """
+        Validation method for the SymbTr-txt score
+
+        Parameters
+        ----------
+        score : dict
+            A dictionary of the read SymbTr-txt score, where each key is a row
+        symbtr_name : str, optional
+            The name of the score in SymbTr naming convention
+            (makam--form--usul--name--composer).
+        Returns
+        ----------
+        bool
+            True if the read SymbTr-txt score is valid, False otherwise
+        """
         is_rest_valid = True
         is_duration_valid = True
         is_index_valid = True
@@ -120,18 +155,74 @@ class SymbTrReader(object):
         return is_score_valid
 
     @classmethod
-    def read_mu2_score(cls, score_file):
+    def read_mu2_score(cls, score_file, symbtr_name=None):
+        """
+        Reader method for the SymbTr-mu2 scores. This method is not
+        implemented yet.
+
+        Parameters
+        ----------
+        score_file : str
+            The path of the SymbTr score
+        symbtr_name : str, optional
+            The name of the score in SymbTr naming convention
+            (makam--form--usul--name--composer).
+        Returns
+        ----------
+        NotImplemented
+        """
+        if symbtr_name is None:
+            symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
+
         # TODO
         return NotImplemented
 
     @classmethod
-    def read_musicxml_score(cls, score_file):
+    def read_musicxml_score(cls, score_file, symbtr_name=None):
+        """
+        Reader method for the SymbTr-MusicXML scores. This method is not
+        implemented yet.
+
+        Parameters
+        ----------
+        score_file : str
+            The path of the SymbTr score
+        symbtr_name : str, optional
+            The name of the score in SymbTr naming convention
+            (makam--form--usul--name--composer).
+        Returns
+        ----------
+        NotImplemented
+        """
+        if symbtr_name is None:
+            symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
+
         # TODO
         return NotImplemented
 
     @staticmethod
-    def read_mu2_header(score_file, symbtr_name=''):
-        if not symbtr_name:
+    def read_mu2_header(score_file, symbtr_name=None):
+        """
+        Reads the metadata in the header of the SymbTr-mu2 scores.
+
+        Parameters
+        ----------
+        score_file : str
+            The path of the SymbTr score
+        symbtr_name : str, optional
+            The name of the score in SymbTr naming convention
+            (makam--form--usul--name--composer).
+        Returns
+        ----------
+        dict
+            A dictionary storing the metadata extracted from the header
+        list of str
+            The names of the columns in the mu2 file
+        bool
+            True if the metadata in the mu2 header is valid/consistent,
+            False otherwise
+        """
+        if symbtr_name is None:
             symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
 
         with open(score_file, "rb") as f:

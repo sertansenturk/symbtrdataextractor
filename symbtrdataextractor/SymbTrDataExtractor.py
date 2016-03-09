@@ -133,7 +133,7 @@ class SymbTrDataExtractor(object):
             raise ValueError('melody_sim_thres should be a float between [0, '
                              '1]')
 
-        if not symbtr_name:
+        if symbtr_name is None:
             symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
 
         # get the metadata
@@ -147,13 +147,13 @@ class SymbTrDataExtractor(object):
         # read the score
         if extension == ".txt":
             score, is_score_content_valid = SymbTrReader.read_txt_score(
-                score_file)
+                score_file, symbtr_name=symbtr_name)
         elif extension == ".xml":
             score, is_score_content_valid = SymbTrReader.read_musicxml_score(
-                score_file)
+                score_file, symbtr_name=symbtr_name)
         elif extension == ".mu2":
             score, is_score_content_valid = SymbTrReader.read_mu2_score(
-                score_file)
+                score_file, symbtr_name=symbtr_name)
         else:
             raise IOError("Unknown format")
 
