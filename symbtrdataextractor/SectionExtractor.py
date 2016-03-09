@@ -3,7 +3,7 @@ from math import floor
 from slugify_tr import slugify_tr
 from symbtr import get_true_lyrics_idx, get_first_note_index
 from structure_label import label_structures, get_symbtr_labels
-from offset import OffsetProcessor
+from OffsetProcessor import OffsetProcessor
 
 
 class SectionExtractor(object):
