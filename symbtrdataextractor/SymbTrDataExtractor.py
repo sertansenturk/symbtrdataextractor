@@ -6,13 +6,55 @@ from rhythm import extract_rhythmic_structure
 import os
 
 
-class SymbTrDataExtractor:
+class SymbTrDataExtractor(object):
+    """
+    The class to extract the relevant information from a SymbTr score.
+
+    The information include:
+        * Obtain the makam, usul, form, name and composer of the given SymbTr
+    score
+        * Extract section boundaries from both the implicit and explicit
+    section information given in the SymbTr scores. Analyse the melody and the
+    lyrics of each section independently and apply semiotic labeling to each
+    section accordingly.
+        * Extract phrases from the annotated phrase boundaries in the SymbTr
+    scores.
+        * Add and analyze phrases in the SymbTr-txt scores from computed
+    boundaries.
+        * Query relevant metadata from MusicBrainz, if the MBID is supplied.
+
+    Currently only the SymbTr-txt scores are supported. MusicXML and mu2
+    support can be added, if demanded.
+    """
     _version = "1.1"
     _sourcetype = "txt"
     _slug = "symbtrdataextractor"
 
-    def __init__(self, extract_all_labels=False, lyrics_sim_thres=0.25,
-                 melody_sim_thres=0.25, get_recording_rels=False):
+    def __init__(self, lyrics_sim_thres=0.75, melody_sim_thres=0.75,
+                 extract_all_labels=False, get_recording_rels=False):
+        """
+        Class constructor
+
+        Parameters
+        ----------
+        lyrics_sim_thres : float[0, 1], optional
+            The similarity threshold for the lyrics of two sections/phrases
+            to be regarded as similar. (the default is 0.75)
+        melody_sim_thres : float[0, 1], optional
+            The similarity threshold for the melody of two sections/phrases
+            to be regarded as similar. (the default is 0.75)
+        extract_all_labels : bool, optional
+            True to extract all labels in written in the lyrics field
+            regardless they are a structural marking etc., False to only
+            extract the lyrics. (the default is False)
+        get_recording_rels : bool, optional
+            True to query the recording relations related to the score from
+            MusicBrainz False otherwise. When calling the extract method the
+            relevant (work) MBID should be supplied. If the supplied MBID
+            belongs to a recording, this flag will not provide to extra
+            information, since the recording metadata will be crawled anyways.
+            (the default is False)
+        """
         self.extract_all_labels = extract_all_labels
         self.lyrics_sim_thres = lyrics_sim_thres
         self.melody_sim_thres = melody_sim_thres
@@ -20,6 +62,62 @@ class SymbTrDataExtractor:
 
     def extract(self, score_file, symbtr_name=None, mbid=None,
                 segment_note_bound_idx=None, print_warnings=True):
+        """
+        Extracts the relevant (meta)data from the SymbTr score.
+
+        Parameters
+        ----------
+        score_file : str
+            The path of the SymbTr score
+        symbtr_name : str, optional
+            The name of the score in SymbTr naming convention
+            (makam--form--usul--name--composer). Needed if the filename does
+            not obey this convention. If not provided the method will
+            attempt to recover the symbtr_name from the score_file input.
+            (the default is None, which implies the name will be recovered
+            from symbtr_file)
+        mbid : str, optional
+            The `MBID <https://musicbrainz.org/doc/MusicBrainz_Identifier>`_
+            relevant to the SymbTr score. For the score of a composition the
+            work mbid of the composition should be supplied. For the score
+            of a transcribed recording the identifier should be a recording
+            MBID. The MBID can either be given as the 36 character uuid
+            (83291c8a-4ef1-4ffc-8b50-3fc03890f5a4) or as an html link
+            (https://musicbrainz.org/work/83291c8a-4ef1-4ffc-8b50
+            -3fc03890f5a4). In the first case the method will try to find
+            whether the MBID belongs to a work or a recording automatically.
+            (the default is None)
+        segment_note_bound_idx list[ind], optional
+            Boundary indices obtained from automatic phrase segmentation.
+            Currently this parameter is only supported for the SymbTr-txt
+            scores. For automatic segmentation from the SymbTr-txt
+            scores, you can use the `makam-symbolic-phrase-segmentation
+            <https://github.com/MTG/makam-symbolic-phrase-segmentation>`_
+            package. (the default is None)
+        print_warnings : bool, optional
+            True to display warnings, False otherwise (the default is True)
+
+        Returns
+        ----------
+        dict
+            A dictionary storing all the relevant (meta)data
+        bool
+            True if the information bout the score is all valid/consistent,
+            False otherwise
+
+        Raises
+        ------
+        ValueError
+            If either of melody_sim_thres or lyrics_sim_thres imputs is
+            outside [0,1]
+        """
+        if not 0 <= self.lyrics_sim_thres <= 1:
+            raise ValueError('lyrics_sim_thres should be a float between [0, '
+                             '1]')
+        if not 0 <= self.melody_sim_thres <= 1:
+            raise ValueError('melody_sim_thres should be a float between [0, '
+                             '1]')
+
         if not symbtr_name:
             symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
         
@@ -70,46 +168,68 @@ class SymbTrDataExtractor:
         return data, is_data_valid
 
     @staticmethod
-    def merge(txt_data, mu2_data, verbose=True):
+    def merge(data1, data2, verbose=True):
         """
-        Merge the extracted data, precedence goes to key value pairs in latter
-        dicts.
-        :param txt_data: data extracted from SymbTr-txt file
-        :param mu2_data: data extracted from SymbTr-mu2 file
-        :param verbose: boolean to print the process or not
-        """
-        txt_dict = txt_data.copy()
-        mu2_dict = mu2_data.copy()
+        Merge the extracted score data from different formats (txt, mu2,
+        MusicXML), the precedence goes to key value pairs in latter dicts.
 
-        if 'work' in txt_dict.keys():
-            mu2_dict['work'] = mu2_dict.pop('title')
-        elif 'recording' in txt_dict.keys():
-            mu2_dict['recording'] = mu2_dict.pop('title')
+        Parameters
+        ----------
+        data1 : dict
+            The data extracted from SymbTr score
+        data2 : dict
+            The data extracted from SymbTr-mu2 file (or header)
+        verbose : bool
+            True to to print the warnings in the merge process, False otherwise
+
+        Returns
+        ----------
+        dict
+            Merged data extracted from the SymbTr scores
+        """
+        data1_dict = data1.copy()
+        data2_dict = data2.copy()
+
+        if 'work' in data1_dict.keys():
+            data2_dict['work'] = data2_dict.pop('title')
+        elif 'recording' in data1_dict.keys():
+            data2_dict['recording'] = data2_dict.pop('title')
         else:
             if verbose:
                 print '   Unknown title target.'
-            mu2_dict.pop('title')
+            data2_dict.pop('title')
 
-        return dictmerge(txt_dict, mu2_dict)
+        return SymbTrDataExtractor._dictmerge(data1_dict, data2_dict)
 
+    @staticmethod
+    def _dictmerge(*data_dicts):
+        """
+        Given any number of dicts, shallow copy and merge into a new dict,
+        precedence goes to key value pairs in latter dicts.
 
-def dictmerge(*data_dicts):
-    """
-    Given any number of dicts, shallow copy and merge into a new dict,
-    precedence goes to key value pairs in latter dicts.
-    """
-    result = {}
-    for dictionary in data_dicts:
-        dict_cp = dictionary.copy()
-        for key, val in dict_cp.iteritems():
-            if key not in result.keys():
-                result[key] = val
-            elif not isinstance(result[key], dict):
-                if not result[key] == val:
-                    # overwrite
-                    print '   ' + key + ' already exists! Overwriting...'
+        Parameters
+        ----------
+        *data_dicts : *dict
+            Dictionaries of variable number to merge
+
+        Returns
+        ----------
+        dict
+            Merged dictionaries
+        """
+        result = {}
+        for dictionary in data_dicts:
+            dict_cp = dictionary.copy()
+            for key, val in dict_cp.iteritems():
+                if key not in result.keys():
                     result[key] = val
-            else:
-                result[key] = dictmerge(result[key], val)
+                elif not isinstance(result[key], dict):
+                    if not result[key] == val:
+                        # overwrite
+                        print '   ' + key + ' already exists! Overwriting...'
+                        result[key] = val
+                else:
+                    result[key] = SymbTrDataExtractor._dictmerge(
+                        result[key], val)
 
-    return result
+        return result
