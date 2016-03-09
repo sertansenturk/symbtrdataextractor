@@ -22,7 +22,7 @@ before_script:
 
 # command to run tests
 script: 
-#  - nosetests unittests/symbtr_data_extraction_test.py
+  - nosetests unittests/extractor_test.py
 #  - nosetests --with-coverage
 
 # final commands
