@@ -2,7 +2,7 @@ from math import floor
 
 from slugify_tr import slugify_tr
 from ScoreProcessor import ScoreProcessor
-from structure_label import label_structures, get_symbtr_labels
+from structure_label import StructureLabeler
 from OffsetProcessor import OffsetProcessor
 
 
@@ -39,12 +39,16 @@ class SectionExtractor(object):
 
         self.offsetProcessor = OffsetProcessor(
             print_warnings=self.print_warnings)
+        self.sectionLabeler = StructureLabeler(
+            lyrics_sim_thres=self.lyrics_sim_thres,
+            melody_sim_thres=self.melody_sim_thres)
 
     def extract(self, score, symbtrname):
-        all_labels = [l for sub_list in get_symbtr_labels().values()
+        all_labels = [l for sub_list in
+                      StructureLabeler.get_symbtr_labels().values()
                       for l in sub_list]
         struct_lbl = all_labels if self.extract_all_labels else \
-            get_symbtr_labels()['structure']
+            StructureLabeler.get_symbtr_labels()['structure']
 
         measure_start_idx, is_measure_start_valid = \
             self.offsetProcessor.find_measure_start_idx(
@@ -61,8 +65,7 @@ class SectionExtractor(object):
                 sections, score, all_labels, measure_start_idx)
 
             # the refine section names according to the lyrics, pitch and durs
-            sections = label_structures(sections, score, self.lyrics_sim_thres,
-                                        self.melody_sim_thres)
+            sections = self.sectionLabeler.label_structures(sections, score)
 
         sections_valid = self._validate_sections(
             sections, score, set(all_labels) - set(struct_lbl), symbtrname)
@@ -236,7 +239,8 @@ class SectionExtractor(object):
 
         # check if there are any structure labels with a space
         # e.g. it is not found
-        all_labels = [l for sub_list in get_symbtr_labels().values()
+        all_labels = [l for sub_list in
+                      StructureLabeler.get_symbtr_labels().values()
                       for l in sub_list] + ['.']
         for i, ll in enumerate(score['lyrics']):
             for label in all_labels:

@@ -1,5 +1,5 @@
 from ScoreProcessor import ScoreProcessor
-from structure_label import label_structures, get_symbtr_labels
+from structure_label import StructureLabeler
 
 
 class PhraseExtractor(object):
@@ -27,6 +27,10 @@ class PhraseExtractor(object):
         self.extract_all_labels = extract_all_labels
         self.lyrics_sim_thres = lyrics_sim_thres
         self.melody_sim_thres = melody_sim_thres
+
+        self.phraseLabeler = StructureLabeler(
+            lyrics_sim_thres=self.lyrics_sim_thres,
+            melody_sim_thres=self.melody_sim_thres)
 
     def extract_annotated(self, score, sections=None):
         bound_codes = [51, 53, 54, 55]
@@ -88,7 +92,8 @@ class PhraseExtractor(object):
                               if not pb == len(score['code']) - 1] +
                              [len(score['code'])])
 
-        all_labels = [l for sub_list in get_symbtr_labels().values()
+        all_labels = [l for sub_list in
+                      StructureLabeler.get_symbtr_labels().values()
                       for l in sub_list]
         real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
             score['lyrics'], all_labels, score['duration'])
@@ -144,5 +149,4 @@ class PhraseExtractor(object):
                             'start_note': start_note, 'end_note': end_note,
                             'lyrics': lyrics, 'sections': phrase_sections})
 
-        return label_structures(phrases, score, self.lyrics_sim_thres,
-                                self.melody_sim_thres)
+        return self.phraseLabeler.label_structures(phrases, score)
