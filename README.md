@@ -17,40 +17,51 @@ Currently you can:
 
 Usage
 =======
-All the relevant data can be easily obtained:
+Extracting (meta)data from the txt-score:
 
 ```python
-from symbtrdataextractor import extractor
+from symbtrdataextractor.SymbTrDataExtractor import SymbTrDataExtractor
 
-data, isDataValid = extractor.extract(txtfilename, symbtrname=scorename, mbid='', 
-                        extract_all_labels=False, get_recording_rels=False, 
-                        seg_note_idx=[], melody_sim_thres=0.25, 
-                        lyrics_sim_thres=0.25, print_warnings=True)
+extractor = SymbTrDataExtractor(extract_all_labels=False, melody_sim_thres=0.75, 
+                                lyrics_sim_thres=0.75, get_recording_rels=False,
+                                print_warnings=True)
+"""
+Class constructor
+extract_all_labels: (optional) boolean to treat all (explicit) annotations in the lyrics as 
+                    a section or not (e.g. INSTRUMENTATION labels). The default is False.
+get_recording_rels: (optional) boolean to extract the relevant recording relations from MusicBrainz.
+                    The default is False.
+melody_sim_thres  : (optional) the maximum similarity threshold for two melodic stuctures to 
+                    be considered as variant of each other. The default is 0.75.
+lyrics_sim_thres  : (optional) the maximum similarity threshold for two lyric stuctures to be 
+                    considered as variant of each other. The default is 0.75.
+print_warnings    : (optional) boolean to print possible warnings during reading the scores. 
+                    Note that errors will always be printed. The default is True
+"""
 
-mu2header, headerRow, isHeaderValid = symbtrreader.readMu2Header(mu2filename)
+txt_data, is_data_valid = extractor.extract(txt_filename, symbtr_name=scorename, mbid=mbid, 
+                                            segment_note_bound_idx=auto_seg_bounds)
+"""
+method 
+txt_filename            : the filepath of the SymbTr-txt score
+symbtr_name             : (optional) the SymbTr-name in the "makam--form--usul--name--composer" format.
+mbid                    : (optional) the work or recording mbid of the composition/performance related 
+                          to the score
+segment_note_bound_idx  : (optional) automatic segmentation boundaries (e.g. computed by 
+                          https://github.com/MTG/makam-symbolic-phrase-segmentation)
+"""
 ```
 
-The inputs for extractor.extract are:
+Extracting the metadata stored in the mu2 headers: 
 ```python
-# txtfilename       : the filepath of the SymbTr-txt score
-# symbtrname        : the SymbTr-name in the "makam--form--usul--name--composer" format.
-# mbid              : the work ro recording mbid of the composition/performance related to the score
-# seg_note_idx      : automatic segmentation boundaries (e.g. computed by 
-#                     https://github.com/MTG/makam-symbolic-phrase-segmentation)
-# extract_all_labels: boolean to treat all (explicit) annotations in the lyrics as 
-#                     a section or not (e.g. INSTRUMENTATION labels). Default is False.
-# get_recording_rels: boolean to extract the relevant recording relations from MusicBrainz
-# melody_sim_thres  : the maximum similarity threshold for two melodic stuctures to 
-#                     be considered as variant of each other. Default is 0.25.
-# lyrics_sim_thres  : the maximum similarity threshold for two lyric stuctures to be 
-#                     considered as variant of each other. Default is 0.25.
-# print_warnings    : boolean to print possible warnings during reading the scores. Note: errors will
-#                     always be printed 
-```
+from symbtrdataextractor.SymbTrReader import SymbTrReader
+mu2_header, header_row, is_header_valid = SymbTrReader.read_mu2_header(mu2_filename, symbtr_name=scorename)
 
-The input for symbtrreader.readMu2Header is:
-```python
-# mu2filename       : the filepath of the mu2 score
+"""
+static method
+mu2filename       : the filepath of the mu2 score
+symbtr_name       : (optional) the SymbTr-name in the "makam--form--usul--name--composer" format.
+"""
 ```
 
 Installation
