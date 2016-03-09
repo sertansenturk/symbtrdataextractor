@@ -2,7 +2,7 @@ import os
 import json
 from numpy import matrix
 from ScoreProcessor import ScoreProcessor
-from structure_graph import normalized_levenshtein, get_cliques
+from structure_graph import GraphOperations
 
 
 class StructureLabeler(object):
@@ -65,11 +65,11 @@ class StructureLabeler(object):
                 sf['lyrics'] = u''.join([sf['lyrics'][i].replace(u' ', u'')
                                          for i in real_lyrics_idx])
 
-            dists = matrix([[normalized_levenshtein(a['lyrics'], b['lyrics'])
-                             for a in score_fragments]
+            dists = matrix([[GraphOperations.normalized_levenshtein(
+                a['lyrics'], b['lyrics']) for a in score_fragments]
                             for b in score_fragments])
 
-            cliques = get_cliques(dists, self.lyrics_sim_thres)
+            cliques = GraphOperations.get_cliques(dists, self.lyrics_sim_thres)
 
             lyrics_labels = self.semiotize(cliques)
 
@@ -116,10 +116,10 @@ class StructureLabeler(object):
             melodies_str = [ScoreProcessor.mel2str(m, unique_notes)
                             for m in melodies]
 
-            dists = matrix([[normalized_levenshtein(m1, m2)
+            dists = matrix([[GraphOperations.normalized_levenshtein(m1, m2)
                              for m1 in melodies_str] for m2 in melodies_str])
 
-            cliques = get_cliques(dists, self.melody_sim_thres)
+            cliques = GraphOperations.get_cliques(dists, self.melody_sim_thres)
 
             melody_labels = StructureLabeler.semiotize(cliques)
 
