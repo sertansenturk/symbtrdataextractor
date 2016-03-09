@@ -26,7 +26,8 @@ extractor = SymbTrDataExtractor(extract_all_labels=False, melody_sim_thres=0.75,
                                 lyrics_sim_thres=0.75, get_recording_rels=False,
                                 print_warnings=True)
 """
-Class constructor
+Inputs
+----------
 extract_all_labels: (optional) boolean to treat all (explicit) annotations in the lyrics as 
                     a section or not (e.g. INSTRUMENTATION labels). The default is False.
 get_recording_rels: (optional) boolean to extract the relevant recording relations from MusicBrainz.
@@ -42,7 +43,8 @@ print_warnings    : (optional) boolean to print possible warnings during reading
 txt_data, is_data_valid = extractor.extract(txt_filename, symbtr_name=scorename, mbid=mbid, 
                                             segment_note_bound_idx=auto_seg_bounds)
 """
-method 
+Inputs
+----------
 txt_filename            : the filepath of the SymbTr-txt score
 symbtr_name             : (optional) the SymbTr-name in the "makam--form--usul--name--composer" format.
 mbid                    : (optional) the work or recording mbid of the composition/performance related 
