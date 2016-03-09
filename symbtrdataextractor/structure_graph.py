@@ -12,8 +12,11 @@ def normalized_levenshtein(str1, str2):
 
 
 def get_cliques(dists, sim_thres):
+    # convert the similarity threshold to distance threshold
+    dist_thres = 1 - sim_thres
+
     # cliques of similar nodes
-    g_similar = nx.from_numpy_matrix(dists <= sim_thres)
+    g_similar = nx.from_numpy_matrix(dists <= dist_thres)
     c_similar = nx.find_cliques(g_similar)
 
     # cliques of exact nodes
