@@ -1,4 +1,4 @@
-from metadata import MetadataExtractor
+from MetadataExtractor import MetadataExtractor
 
 
 class RhythmicFeatureExtractor(object):

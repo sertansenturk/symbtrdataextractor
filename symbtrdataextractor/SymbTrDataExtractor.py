@@ -1,7 +1,7 @@
 from SectionExtractor import SectionExtractor
 from PhraseExtractor import PhraseExtractor
 from SymbTrReader import SymbTrReader
-from metadata import MetadataExtractor
+from MetadataExtractor import MetadataExtractor
 from RhythmicFeatureExtractor import RhythmicFeatureExtractor
 import os
 
