@@ -1,5 +1,5 @@
 from SectionExtractor import SectionExtractor
-from phrase import extract_annotated_phrase, extract_auto_seg_phrase
+from phrase import PhraseExtractor
 from SymbTrReader import SymbTrReader
 from metadata import get_metadata
 from rhythm import extract_rhythmic_structure
@@ -71,6 +71,11 @@ class SymbTrDataExtractor(object):
             melody_sim_thres=self.melody_sim_thres,
             extract_all_labels=self.extract_all_labels,
             print_warnings=self.print_warnings)
+
+        self.phraseExtractor = PhraseExtractor(
+            lyrics_sim_thres=self.lyrics_sim_thres,
+            melody_sim_thres=self.melody_sim_thres,
+            extract_all_labels=self.extract_all_labels)
 
     def extract(self, score_file, symbtr_name=None, mbid=None,
                 segment_note_bound_idx=None):
@@ -159,15 +164,10 @@ class SymbTrDataExtractor(object):
         data['sections'], is_section_data_valid = self.sectionExtractor.\
             extract(score, symbtr_name)
 
-        anno_phrase = extract_annotated_phrase(
-            score, sections=data['sections'],
-            lyrics_sim_thres=self.lyrics_sim_thres,
-            melody_sim_thres=self.melody_sim_thres)
-        auto_phrase = extract_auto_seg_phrase(
-            score, sections=data['sections'],
-            seg_note_idx=segment_note_bound_idx,
-            lyrics_sim_thres=self.lyrics_sim_thres,
-            melody_sim_thres=self.melody_sim_thres)
+        anno_phrase = self.phraseExtractor.extract_annotated(
+            score, sections=data['sections'])
+        auto_phrase = self.phraseExtractor.extract_auto_segment(
+            score, segment_note_bound_idx, sections=data['sections'])
 
         data['rhythmic_structure'] = extract_rhythmic_structure(score)
 
