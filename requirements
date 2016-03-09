@@ -2,3 +2,4 @@ python-Levenshtein
 networkx
 numpy
 git+https://github.com/alastair/python-musicbrainzngs.git
+git+https://github.com/sertansenturk/fileoperations_python.git

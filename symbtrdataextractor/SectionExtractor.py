@@ -1,6 +1,5 @@
 from math import floor
-
-from slugify_tr import slugify_tr
+from fileoperations.slugify_tr import slugify_tr
 from ScoreProcessor import ScoreProcessor
 from StructureLabeler import StructureLabeler
 from OffsetProcessor import OffsetProcessor
