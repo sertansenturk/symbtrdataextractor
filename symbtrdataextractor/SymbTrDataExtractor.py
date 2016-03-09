@@ -1,6 +1,6 @@
 from section import extract_section
 from phrase import extract_annotated_phrase, extract_auto_seg_phrase
-from symbtrreader import read_mu2_score, read_txt_score, read_musicxml_score
+from SymbTrReader import read_mu2_score, read_txt_score, read_musicxml_score
 from metadata import get_metadata
 from rhythm import extract_rhythmic_structure
 import os
