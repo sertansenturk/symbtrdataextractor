@@ -239,7 +239,7 @@ class SymbTrDataExtractor(object):
                 elif not isinstance(result[key], dict):
                     if not result[key] == val:
                         # overwrite
-                        print '   ' + key + ' already exists! Overwriting...'
+                        print('   ' + key + ' already exists! Overwriting...')
                         result[key] = val
                 else:
                     result[key] = SymbTrDataExtractor._dictmerge(

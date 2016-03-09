@@ -273,7 +273,7 @@ class SymbTrReader(object):
                 elif code == 63:
                     header['notation'] = row[7]
                 elif code in range(50, 64):
-                    print '   Unparsed code: ' + ' '.join(row)
+                    print('   Unparsed code: ' + ' '.join(row))
                 else:  # end of header
                     break
 
