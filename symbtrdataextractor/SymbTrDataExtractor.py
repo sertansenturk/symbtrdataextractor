@@ -11,40 +11,33 @@ class SymbTrDataExtractor:
     _sourcetype = "txt"
     _slug = "symbtrdataextractor"
 
-    def __init__(self, scorefile):
-        self.scorefile = scorefile
-
-    def set_instances(self, symbtrname='', mbid='', seg_note_idx=None,
-            extract_all_labels=False, lyrics_sim_thres=0.25,
-            melody_sim_thres=0.25, get_recording_rels=False,):
-        self.symbtrname = symbtrname
-        self.mbid = mbid
-        self.seg_note_idx = seg_note_idx
+    def __init__(self, extract_all_labels=False, lyrics_sim_thres=0.25,
+                 melody_sim_thres=0.25, get_recording_rels=False):
         self.extract_all_labels = extract_all_labels
         self.lyrics_sim_thres = lyrics_sim_thres
         self.melody_sim_thres = melody_sim_thres
         self.get_recording_rels = get_recording_rels
 
-    def extract(self, print_warnings=True):
+    def extract(self, score_file, symbtr_name=None, mbid=None,
+                segment_note_bound_idx=None, print_warnings=True):
+        if not symbtr_name:
+            symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
+        
         # get the metadata
-        if not self.symbtrname:
-            self.symbtrname = os.path.splitext(os.path.basename(
-                self.scorefile))[0]
-
         data, is_metadata_valid = get_metadata(
-            self.symbtrname, mbid=self.mbid,
+            symbtr_name, mbid=mbid,
             get_recording_rels=self.get_recording_rels)
 
         # get the extension to determine the SymbTr-score format
-        extension = os.path.splitext(self.scorefile)[1]
+        extension = os.path.splitext(score_file)[1]
 
         # read the score
         if extension == ".txt":
-            score, is_score_content_valid = read_txt_score(self.scorefile)
+            score, is_score_content_valid = read_txt_score(score_file)
         elif extension == ".xml":
-            score, is_score_content_valid = read_musicxml_score(self.scorefile)
+            score, is_score_content_valid = read_musicxml_score(score_file)
         elif extension == ".mu2":
-            score, is_score_content_valid = read_mu2_score(self.scorefile)
+            score, is_score_content_valid = read_mu2_score(score_file)
         else:
             raise IOError("Unknown format")
 
@@ -53,7 +46,7 @@ class SymbTrDataExtractor:
         data['number_of_notes'] = len(score['duration'])
 
         data['sections'], is_section_data_valid = extract_section(
-            score, self.symbtrname, extract_all_labels=self.extract_all_labels,
+            score, symbtr_name, extract_all_labels=self.extract_all_labels,
             lyrics_sim_thres=self.lyrics_sim_thres,
             melody_sim_thres=self.melody_sim_thres,
             print_warnings=print_warnings)
@@ -63,7 +56,8 @@ class SymbTrDataExtractor:
             lyrics_sim_thres=self.lyrics_sim_thres,
             melody_sim_thres=self.melody_sim_thres)
         auto_phrase = extract_auto_seg_phrase(
-            score, sections=data['sections'], seg_note_idx=self.seg_note_idx,
+            score, sections=data['sections'],
+            seg_note_idx=segment_note_bound_idx,
             lyrics_sim_thres=self.lyrics_sim_thres,
             melody_sim_thres=self.melody_sim_thres)
 
