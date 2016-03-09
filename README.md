@@ -16,7 +16,7 @@ Currently you can:
 - Read the metadata stored in the header of the mu2 file.
 
 Usage
-=======
+----------
 Extracting (meta)data from the txt-score:
 
 ```python
@@ -70,7 +70,7 @@ symbtr_name       : (optional) the SymbTr-name in the "makam--form--usul--name--
 For an interactive demo please refer to [extractsymbtrdata.ipynb](https://github.com/sertansenturk/symbtrdataextractor/blob/master/extractsymbtrdata.ipynb)
 
 Installation
-============
+----------
 
 If you want to install symbtrmetadataextractor, it is recommended to install symbtrmetadataextractor and dependencies into a virtualenv. In the terminal, do the following:
 
