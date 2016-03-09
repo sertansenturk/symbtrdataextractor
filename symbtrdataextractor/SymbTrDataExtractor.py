@@ -1,5 +1,5 @@
 from SectionExtractor import SectionExtractor
-from phrase import PhraseExtractor
+from PhraseExtractor import PhraseExtractor
 from SymbTrReader import SymbTrReader
 from metadata import get_metadata
 from rhythm import extract_rhythmic_structure
