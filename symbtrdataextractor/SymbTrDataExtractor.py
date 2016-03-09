@@ -1,6 +1,6 @@
 from section import extract_section
 from phrase import extract_annotated_phrase, extract_auto_seg_phrase
-from SymbTrReader import read_mu2_score, read_txt_score, read_musicxml_score
+from SymbTrReader import SymbTrReader
 from metadata import get_metadata
 from rhythm import extract_rhythmic_structure
 import os
@@ -131,11 +131,14 @@ class SymbTrDataExtractor(object):
 
         # read the score
         if extension == ".txt":
-            score, is_score_content_valid = read_txt_score(score_file)
+            score, is_score_content_valid = SymbTrReader.read_txt_score(
+                score_file)
         elif extension == ".xml":
-            score, is_score_content_valid = read_musicxml_score(score_file)
+            score, is_score_content_valid = SymbTrReader.read_musicxml_score(
+                score_file)
         elif extension == ".mu2":
-            score, is_score_content_valid = read_mu2_score(score_file)
+            score, is_score_content_valid = SymbTrReader.read_mu2_score(
+                score_file)
         else:
             raise IOError("Unknown format")
 
@@ -167,8 +170,8 @@ class SymbTrDataExtractor(object):
 
         return data, is_data_valid
 
-    @staticmethod
-    def merge(data1, data2, verbose=True):
+    @classmethod
+    def merge(cls, data1, data2, verbose=True):
         """
         Merge the extracted score data from different formats (txt, mu2,
         MusicXML), the precedence goes to key value pairs in latter dicts.
@@ -199,7 +202,7 @@ class SymbTrDataExtractor(object):
                 print '   Unknown title target.'
             data2_dict.pop('title')
 
-        return SymbTrDataExtractor._dictmerge(data1_dict, data2_dict)
+        return cls._dictmerge(data1_dict, data2_dict)
 
     @staticmethod
     def _dictmerge(*data_dicts):
