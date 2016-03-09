@@ -4,8 +4,8 @@ from metadata import get_slug, get_makam, get_form, get_usul, \
     validate_attribute, get_attribute_key
 
 
-def read_txt_score(scorefile):
-    with open(scorefile, "rb") as f:
+def read_txt_score(score_file):
+    with open(score_file, "rb") as f:
         reader = csv.reader(f, delimiter='\t')
 
         header = next(reader, None)
@@ -49,12 +49,12 @@ def read_txt_score(scorefile):
 
     # validate
     is_score_valid = validate_txt_score(score, os.path.splitext(
-        os.path.basename(scorefile))[0])
+        os.path.basename(score_file))[0])
 
     return score, is_score_valid
 
 
-def validate_txt_score(score, scorename):
+def validate_txt_score(score, score_name):
     is_rest_valid = True
     is_duration_valid = True
     is_index_valid = True
@@ -63,7 +63,7 @@ def validate_txt_score(score, scorename):
     for ii in range(0, len(score['index'])):
         # check usul row in the start
         if ii == 0 and not score['code'][ii] == 51:
-            print "    " + scorename + ' Missing the usul row in the start'
+            print "    " + score_name + ' Missing the usul row in the start'
             start_usul_row = False
 
         if score['duration'][ii] > 0:  # note or rest
@@ -78,7 +78,7 @@ def validate_txt_score(score, scorename):
                         score['noteAE'][ii] == 'Es' and
                         score['code'][ii] == 9):
                     is_rest_valid = False
-                    print("    " + scorename + ' ' + str(score['index'][ii]) +
+                    print("    " + score_name + ' ' + str(score['index'][ii]) +
                           ': Invalid Rest')
 
             # note duration
@@ -101,7 +101,7 @@ def validate_txt_score(score, scorename):
     # note index
     for ii in range(0, len(score['index']) - 1):
         if not score['index'][ii + 1] - score['index'][ii] == 1:
-            print("    " + scorename + ": " + str(score['index'][ii]) +
+            print("    " + score_name + ": " + str(score['index'][ii]) +
                   ", note index jump.")
             is_index_valid = False
 
@@ -110,29 +110,29 @@ def validate_txt_score(score, scorename):
     return is_score_valid
 
 
-def read_mu2_score(scorefile):
+def read_mu2_score(score_file):
     # TODO
-    pass
+    return NotImplemented
 
 
-def read_musicxml_score(scorefile):
+def read_musicxml_score(score_file):
     # TODO
-    pass
+    return NotImplemented
 
 
-def read_mu2_header(scorefile, symbtrname=''):
-    if not symbtrname:
-        symbtrname = os.path.splitext(os.path.basename(scorefile))[0]
+def read_mu2_header(score_file, symbtr_name=''):
+    if not symbtr_name:
+        symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
 
-    with open(scorefile, "rb") as f:
+    with open(score_file, "rb") as f:
         reader = csv.reader(f, delimiter='\t')
 
         header_row = [unicode(cell, 'utf-8') for cell in next(reader, None)]
 
         header = dict()
         is_tempo_unit_valid = True
-        for rowtemp in reader:
-            row = [unicode(cell, 'utf-8') for cell in rowtemp]
+        for row_temp in reader:
+            row = [unicode(cell, 'utf-8') for cell in row_temp]
             code = int(row[0])
             if code == 50:
                 header['makam'] = {'mu2_name': row[7]}
@@ -147,7 +147,7 @@ def read_mu2_header(scorefile, symbtrname=''):
                     header['tempo'] = {'value': float(row[4]), 'unit': 'bpm'}
                 if not int(row[3]) == header['usul']['mertebe']:
                     if not header['usul']['mu2_name'] == '[Serbest]':  # ignore
-                        print("    " + symbtrname +
+                        print("    " + symbtr_name +
                               ': Mertebe and tempo unit are different!')
                         is_tempo_unit_valid = False
             elif code == 56:
@@ -172,7 +172,7 @@ def read_mu2_header(scorefile, symbtrname=''):
                 break
 
     # get the metadata
-    slugs = get_slug(symbtrname)
+    slugs = get_slug(symbtr_name)
     header['makam']['symbtr_slug'] = slugs['makam']
     header['makam']['attribute_key'] = get_attribute_key(
         header['makam']['symbtr_slug'], 'makam')
@@ -190,13 +190,13 @@ def read_mu2_header(scorefile, symbtrname=''):
 
     # validate the header content
     makam = get_makam(header['makam']['symbtr_slug'])
-    is_makam_valid = validate_attribute(header['makam'], makam, symbtrname)
+    is_makam_valid = validate_attribute(header['makam'], makam, symbtr_name)
 
     form = get_form(header['form']['symbtr_slug'])
-    is_form_valid = validate_attribute(header['form'], form, symbtrname)
+    is_form_valid = validate_attribute(header['form'], form, symbtr_name)
 
     usul = get_usul(header['usul']['symbtr_slug'])
-    is_usul_valid = validate_attribute(header['usul'], usul, symbtrname)
+    is_usul_valid = validate_attribute(header['usul'], usul, symbtr_name)
 
     is_header_valid = (is_tempo_unit_valid and is_makam_valid and
                        is_form_valid and is_usul_valid)
