@@ -202,7 +202,8 @@ class SectionExtractor(object):
         valid_bool = True
         if not sections:  # check section presence
             if self.print_warnings:
-                print "    " + symbtrname + ", Missing section info in lyrics."
+                print("    " + symbtrname + ", Missing section info in "
+                                            "lyrics.")
         else:  # check section continuity
             first_note_idx = ScoreProcessor.get_first_note_index(score)
 

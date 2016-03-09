@@ -209,7 +209,7 @@ class SymbTrDataExtractor(object):
             data2_dict['recording'] = data2_dict.pop('title')
         else:
             if verbose:
-                print '   Unknown title target.'
+                print('   Unknown title target.')
             data2_dict.pop('title')
 
         return cls._dictmerge(data1_dict, data2_dict)

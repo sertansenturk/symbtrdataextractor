@@ -106,8 +106,8 @@ class SymbTrReader(object):
         for ii in range(0, len(score['index'])):
             # check usul row in the start
             if ii == 0 and not score['code'][ii] == 51:
-                print "    " + score_name + ' Missing the usul row in the ' \
-                                            'start'
+                print("    " + score_name + ' Missing the usul row in the '
+                                            'start')
                 start_usul_row = False
 
             if score['duration'][ii] > 0:  # note or rest
