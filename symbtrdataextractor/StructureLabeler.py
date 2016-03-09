@@ -1,8 +1,8 @@
 import os
 import json
 from numpy import matrix
-from ScoreProcessor import ScoreProcessor
-from GraphOperations import GraphOperations
+from . ScoreProcessor import ScoreProcessor
+from . GraphOperations import GraphOperations
 
 
 class StructureLabeler(object):

@@ -1,8 +1,8 @@
-from SectionExtractor import SectionExtractor
-from PhraseExtractor import PhraseExtractor
-from SymbTrReader import SymbTrReader
-from MetadataExtractor import MetadataExtractor
-from RhythmicFeatureExtractor import RhythmicFeatureExtractor
+from . SectionExtractor import SectionExtractor
+from . PhraseExtractor import PhraseExtractor
+from . SymbTrReader import SymbTrReader
+from . MetadataExtractor import MetadataExtractor
+from . RhythmicFeatureExtractor import RhythmicFeatureExtractor
 import os
 
 

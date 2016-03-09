@@ -1,5 +1,5 @@
-from ScoreProcessor import ScoreProcessor
-from StructureLabeler import StructureLabeler
+from . ScoreProcessor import ScoreProcessor
+from . StructureLabeler import StructureLabeler
 
 
 class PhraseExtractor(object):
