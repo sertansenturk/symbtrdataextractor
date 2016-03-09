@@ -120,7 +120,7 @@ class SymbTrDataExtractor(object):
 
         if not symbtr_name:
             symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
-        
+
         # get the metadata
         data, is_metadata_valid = get_metadata(
             symbtr_name, mbid=mbid,
