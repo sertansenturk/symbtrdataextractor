@@ -1,6 +1,6 @@
-symbtrmetadataextractor
+symbtrdataextractor
 ===========
-Python tools for extracting relevant data from SymbTr-scores
+Python tools for extracting relevant (meta)data from SymbTr-scores
 
 Introduction
 ------------
