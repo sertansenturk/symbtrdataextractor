@@ -1,7 +1,7 @@
 import os
 import json
 from numpy import matrix
-from symbtr import ScoreProcessor
+from ScoreProcessor import ScoreProcessor
 from structure_graph import normalized_levenshtein, get_cliques
 
 

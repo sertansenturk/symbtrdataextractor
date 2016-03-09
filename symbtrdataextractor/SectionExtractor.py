@@ -1,7 +1,7 @@
 from math import floor
 
 from slugify_tr import slugify_tr
-from symbtr import ScoreProcessor
+from ScoreProcessor import ScoreProcessor
 from structure_label import label_structures, get_symbtr_labels
 from OffsetProcessor import OffsetProcessor
 
