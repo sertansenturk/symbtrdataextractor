@@ -3,8 +3,7 @@ from math import floor
 from slugify_tr import slugify_tr
 from symbtr import get_true_lyrics_idx, get_first_note_index
 from structure_label import label_structures, get_symbtr_labels
-from offset import find_measure_start_idx, get_measure_offset_id, \
-    is_integer_offset
+from offset import OffsetProcessor
 
 
 class SectionExtractor(object):
@@ -28,13 +27,6 @@ class SectionExtractor(object):
             True to extract all labels in written in the lyrics field
             regardless they are a structural marking etc., False to only
             extract the lyrics. (the default is False)
-        get_recording_rels : bool, optional
-            True to query the recording relations related to the score from
-            MusicBrainz False otherwise. When calling the extract method the
-            relevant (work) MBID should be supplied. If the supplied MBID
-            belongs to a recording, this flag will not provide to extra
-            information, since the recording metadata will be crawled anyways.
-            (the default is False)
         print_warnings : bool, optional
             True to display warnings, False otherwise. Note that the errors
             and the inconsistencies in the scores will be always displayed
@@ -45,14 +37,18 @@ class SectionExtractor(object):
         self.melody_sim_thres = melody_sim_thres
         self.print_warnings = print_warnings
 
+        self.offsetProcessor = OffsetProcessor(
+            print_warnings=self.print_warnings)
+
     def extract(self, score, symbtrname):
         all_labels = [l for sub_list in get_symbtr_labels().values()
                       for l in sub_list]
         struct_lbl = all_labels if self.extract_all_labels else \
             get_symbtr_labels()['structure']
 
-        measure_start_idx, is_measure_start_valid = find_measure_start_idx(
-            score['offset'], print_warnings=self.print_warnings)
+        measure_start_idx, is_measure_start_valid = \
+            self.offsetProcessor.find_measure_start_idx(
+                score['offset'])
 
         # Check lyrics information
         if all(l == '' for l in score['lyrics']):
@@ -153,7 +149,7 @@ class SectionExtractor(object):
                 else:  # The section starts on the first measure the lyrics
                     # start
                     se['start_note'] = max(
-                        [get_measure_offset_id(
+                        [OffsetProcessor.get_measure_offset_id(
                             next_lyrics_measure_offset, score['offset'],
                             measure_start_idx), first_note_idx])
 
@@ -228,8 +224,9 @@ class SectionExtractor(object):
 
         for s in sections:
             # check whether section starts on the measure or not
-            starts_on_measure = not is_integer_offset(score['offset'][s[
-                'start_note']]) and s['slug'] not in ignore_labels
+            starts_on_measure = not OffsetProcessor.is_integer_offset(
+                score['offset'][s['start_note']]) \
+                                and s['slug'] not in ignore_labels
             if starts_on_measure and self.print_warnings:
                 print("    " + symbtrname + ", " + str(s['start_note']) +
                       ', ' + s['slug'] + ' does not start on a measure: ' +
