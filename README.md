@@ -1,6 +1,6 @@
-symbtrmetadataextractor
+symbtrdataextractor
 ===========
-Python tools for extracting relevant data from SymbTr-scores
+Python tools for extracting relevant (meta)data from SymbTr-scores
 
 Introduction
 ------------
@@ -60,7 +60,8 @@ from symbtrdataextractor.SymbTrReader import SymbTrReader
 mu2_header, header_row, is_header_valid = SymbTrReader.read_mu2_header(mu2_filename, symbtr_name=scorename)
 
 """
-static method
+Inputs
+----------
 mu2filename       : the filepath of the mu2 score
 symbtr_name       : (optional) the SymbTr-name in the "makam--form--usul--name--composer" format.
 """
