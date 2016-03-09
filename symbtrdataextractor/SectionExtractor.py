@@ -181,18 +181,13 @@ class SectionExtractor(object):
                     first_sec = sec
                     first_sec_idx = ii
 
-            if first_sec['start_note'] <= first_note_idx:
-                starts_with_first_note = True
-            else:
-                starts_with_first_note = False
-
-        # if there is a gap in the start, create a new section
-        if sections and not starts_with_first_note:
-            sections.append({'name': u'INSTRUMENTAL_SECTION',
-                             'slug': u'INSTRUMENTAL_SECTION',
-                             'start_note': first_note_idx,
-                             'end_note': min([s['start_note']
-                                              for s in sections]) - 1})
+            # if there is a gap in the start, create a new section
+            if first_sec['start_note'] > first_note_idx:
+                sections.append({'name': u'INSTRUMENTAL_SECTION',
+                                 'slug': u'INSTRUMENTAL_SECTION',
+                                 'start_note': first_note_idx,
+                                 'end_note': min([s['start_note']
+                                                  for s in sections]) - 1})
         return self._sort_sections(sections)
 
     @staticmethod
