@@ -52,7 +52,7 @@ segment_note_bound_idx  : (optional) automatic segmentation boundaries (e.g. com
 """
 ```
 
-Extracting the metadata stored in the mu2 headers: 
+Extracting metadata stored in the mu2 headers: 
 ```python
 from symbtrdataextractor.SymbTrReader import SymbTrReader
 mu2_header, header_row, is_header_valid = SymbTrReader.read_mu2_header(mu2_filename, symbtr_name=scorename)
@@ -63,6 +63,8 @@ mu2filename       : the filepath of the mu2 score
 symbtr_name       : (optional) the SymbTr-name in the "makam--form--usul--name--composer" format.
 """
 ```
+
+For an interactive demo please refer to [extractsymbtrdata.ipynb](https://github.com/sertansenturk/symbtrdataextractor/blob/master/extractsymbtrdata.ipynb)
 
 Installation
 ============
