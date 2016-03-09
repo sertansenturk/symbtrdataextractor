@@ -2,7 +2,7 @@ from SectionExtractor import SectionExtractor
 from PhraseExtractor import PhraseExtractor
 from SymbTrReader import SymbTrReader
 from metadata import get_metadata
-from rhythm import RhythmicFeatureExtractor
+from RhythmicFeatureExtractor import RhythmicFeatureExtractor
 import os
 
 
