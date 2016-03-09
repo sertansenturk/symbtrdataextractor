@@ -2,7 +2,7 @@ from math import floor
 
 from slugify_tr import slugify_tr
 from ScoreProcessor import ScoreProcessor
-from structure_label import StructureLabeler
+from StructureLabeler import StructureLabeler
 from OffsetProcessor import OffsetProcessor
 
 
