@@ -65,9 +65,10 @@ class StructureLabeler(object):
                 sf['lyrics'] = u''.join([sf['lyrics'][i].replace(u' ', u'')
                                          for i in real_lyrics_idx])
 
-            dists = matrix([[GraphOperations.normalized_levenshtein(
-                a['lyrics'], b['lyrics']) for a in score_fragments]
-                            for b in score_fragments])
+            dists = matrix(
+                [[GraphOperations.norm_levenshtein(a['lyrics'], b['lyrics'])
+                  for a in score_fragments]
+                 for b in score_fragments])
 
             cliques = GraphOperations.get_cliques(dists, self.lyrics_sim_thres)
 
@@ -116,7 +117,7 @@ class StructureLabeler(object):
             melodies_str = [ScoreProcessor.mel2str(m, unique_notes)
                             for m in melodies]
 
-            dists = matrix([[GraphOperations.normalized_levenshtein(m1, m2)
+            dists = matrix([[GraphOperations.norm_levenshtein(m1, m2)
                              for m1 in melodies_str] for m2 in melodies_str])
 
             cliques = GraphOperations.get_cliques(dists, self.melody_sim_thres)
@@ -124,8 +125,8 @@ class StructureLabeler(object):
             melody_labels = StructureLabeler.semiotize(cliques)
 
             # label the instrumental structures, if present
-            all_labels = [l for sub_list in self.get_symbtr_labels().values()
-                          for l in sub_list]
+            # all_labels = [l for sub_list in self.get_symbtr_labels().values()
+            #              for l in sub_list]
             for i in range(0, len(melody_labels)):
                 if all(lbl not in structures[i]['name']
                        for lbl in ['VOCAL', 'INSTRUMENTAL']):

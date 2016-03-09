@@ -7,7 +7,7 @@ class GraphOperations(object):
 
     """
     @staticmethod
-    def normalized_levenshtein(str1, str2):
+    def norm_levenshtein(str1, str2):
         av_len = (len(str1) + len(str2)) * .5
 
         try:

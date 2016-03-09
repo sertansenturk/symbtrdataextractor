@@ -106,7 +106,7 @@ class SectionExtractor(object):
 
         start_note_idx = [s['start_note'] for s in sections] + \
                          [len(score['lyrics'])]
-        end_note_idx = [-1] + [s['end_note'] for s in sections]
+        # end_note_idx = [-1] + [s['end_note'] for s in sections]
         for se in reversed(sections):  # start from the last section
             if se['slug'] == u'VOCAL_SECTION':
                 # carry the 'end_note' to the next closest start
@@ -169,19 +169,16 @@ class SectionExtractor(object):
                 se['end_note'] = min(x for x in start_note_idx
                                      if x > se['start_note']) - 1
 
-                # update end_note_idx
-                end_note_idx = [-1] + [s['end_note'] for s in sections]
-
         # if the first rows are control rows and the first section starts next
         if sections:
             first_note_idx = ScoreProcessor.get_first_note_index(score)
 
             first_sec = sections[0]
-            first_sec_idx = -1
+            # first_sec_idx = -1
             for ii, sec in enumerate(sections):
                 if sec['start_note'] < first_sec['start_note']:
                     first_sec = sec
-                    first_sec_idx = ii
+                    # first_sec_idx = ii
 
             # if there is a gap in the start, create a new section
             if first_sec['start_note'] > first_note_idx:
@@ -222,8 +219,8 @@ class SectionExtractor(object):
         for s in sections:
             # check whether section starts on the measure or not
             starts_on_measure = not OffsetProcessor.is_integer_offset(
-                score['offset'][s['start_note']]) \
-                                and s['slug'] not in ignore_labels
+                score['offset'][s['start_note']]) and (s['slug'] not in
+                                                       ignore_labels)
             if starts_on_measure and self.print_warnings:
                 print("    " + symbtrname + ", " + str(s['start_note']) +
                       ', ' + s['slug'] + ' does not start on a measure: ' +
