@@ -1,4 +1,4 @@
-from section import extract_section
+from SectionExtractor import SectionExtractor
 from phrase import extract_annotated_phrase, extract_auto_seg_phrase
 from SymbTrReader import SymbTrReader
 from metadata import get_metadata
@@ -32,7 +32,7 @@ class SymbTrDataExtractor(object):
 
     def __init__(self, lyrics_sim_thres=0.75, melody_sim_thres=0.75,
                  extract_all_labels=False, get_recording_rels=False,
-                 print_warnings = True):
+                 print_warnings=True):
         """
         Class constructor
 
@@ -60,11 +60,17 @@ class SymbTrDataExtractor(object):
             and the inconsistencies in the scores will be always displayed
             (the default is True)
         """
-        self.extract_all_labels = extract_all_labels
         self.lyrics_sim_thres = lyrics_sim_thres
         self.melody_sim_thres = melody_sim_thres
+        self.extract_all_labels = extract_all_labels
         self.get_recording_rels = get_recording_rels
         self.print_warnings = print_warnings
+
+        self.sectionExtractor = SectionExtractor(
+            lyrics_sim_thres=self.lyrics_sim_thres,
+            melody_sim_thres=self.melody_sim_thres,
+            extract_all_labels=self.extract_all_labels,
+            print_warnings=self.print_warnings)
 
     def extract(self, score_file, symbtr_name=None, mbid=None,
                 segment_note_bound_idx=None):
@@ -93,7 +99,7 @@ class SymbTrDataExtractor(object):
             -3fc03890f5a4). In the first case the method will try to find
             whether the MBID belongs to a work or a recording automatically.
             (the default is None)
-        segment_note_bound_idx list[ind], optional
+        segment_note_bound_idx : list[ind], optional
             Boundary indices obtained from automatic phrase segmentation.
             Currently this parameter is only supported for the SymbTr-txt
             scores. For automatic segmentation from the SymbTr-txt
@@ -150,11 +156,8 @@ class SymbTrDataExtractor(object):
                             'unit': 'second'}
         data['number_of_notes'] = len(score['duration'])
 
-        data['sections'], is_section_data_valid = extract_section(
-            score, symbtr_name, extract_all_labels=self.extract_all_labels,
-            lyrics_sim_thres=self.lyrics_sim_thres,
-            melody_sim_thres=self.melody_sim_thres,
-            print_warnings=self.print_warnings)
+        data['sections'], is_section_data_valid = self.sectionExtractor.\
+            extract(score, symbtr_name)
 
         anno_phrase = extract_annotated_phrase(
             score, sections=data['sections'],
