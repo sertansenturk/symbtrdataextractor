@@ -1,7 +1,6 @@
 import csv
 import os
-from metadata import get_slug, get_makam, get_form, get_usul, \
-    validate_attribute, get_attribute_key
+from metadata import MetadataExtractor
 
 
 class SymbTrReader(object):
@@ -91,7 +90,7 @@ class SymbTrReader(object):
         ----------
         score : dict
             A dictionary of the read SymbTr-txt score, where each key is a row
-        symbtr_name : str, optional
+        score_name : str, optional
             The name of the score in SymbTr naming convention
             (makam--form--usul--name--composer).
         Returns
@@ -279,32 +278,34 @@ class SymbTrReader(object):
                     break
 
         # get the metadata
-        slugs = get_slug(symbtr_name)
+        slugs = MetadataExtractor.get_slugs(symbtr_name)
         header['makam']['symbtr_slug'] = slugs['makam']
-        header['makam']['attribute_key'] = get_attribute_key(
+        header['makam']['attribute_key'] = MetadataExtractor.get_attribute_key(
             header['makam']['symbtr_slug'], 'makam')
 
         header['form']['symbtr_slug'] = slugs['form']
-        header['form']['attribute_key'] = get_attribute_key(
+        header['form']['attribute_key'] = MetadataExtractor.get_attribute_key(
             header['form']['symbtr_slug'], 'form')
 
         header['usul']['symbtr_slug'] = slugs['usul']
-        header['usul']['attribute_key'] = get_attribute_key(
+        header['usul']['attribute_key'] = MetadataExtractor.get_attribute_key(
             header['usul']['symbtr_slug'], 'usul')
 
         header['title']['symbtr_slug'] = slugs['name']
         header['composer']['symbtr_slug'] = slugs['composer']
 
         # validate the header content
-        makam = get_makam(header['makam']['symbtr_slug'])
-        is_makam_valid = validate_attribute(header['makam'], makam,
-                                            symbtr_name)
+        makam = MetadataExtractor.get_makam(header['makam']['symbtr_slug'])
+        is_makam_valid = MetadataExtractor.validate_attribute(
+            header['makam'], makam, symbtr_name)
 
-        form = get_form(header['form']['symbtr_slug'])
-        is_form_valid = validate_attribute(header['form'], form, symbtr_name)
+        form = MetadataExtractor.get_form(header['form']['symbtr_slug'])
+        is_form_valid = MetadataExtractor.validate_attribute(
+            header['form'], form, symbtr_name)
 
-        usul = get_usul(header['usul']['symbtr_slug'])
-        is_usul_valid = validate_attribute(header['usul'], usul, symbtr_name)
+        usul = MetadataExtractor.get_usul(header['usul']['symbtr_slug'])
+        is_usul_valid = MetadataExtractor.validate_attribute(
+            header['usul'], usul, symbtr_name)
 
         is_header_valid = (is_tempo_unit_valid and is_makam_valid and
                            is_form_valid and is_usul_valid)

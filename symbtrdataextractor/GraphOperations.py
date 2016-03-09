@@ -1,6 +1,7 @@
 import Levenshtein
 import networkx as nx
 
+
 class GraphOperations(object):
     """
 

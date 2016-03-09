@@ -1,7 +1,7 @@
 from SectionExtractor import SectionExtractor
 from PhraseExtractor import PhraseExtractor
 from SymbTrReader import SymbTrReader
-from metadata import get_metadata
+from metadata import MetadataExtractor
 from RhythmicFeatureExtractor import RhythmicFeatureExtractor
 import os
 
@@ -65,6 +65,9 @@ class SymbTrDataExtractor(object):
         self.extract_all_labels = extract_all_labels
         self.get_recording_rels = get_recording_rels
         self.print_warnings = print_warnings
+
+        self.metadataExtractor = MetadataExtractor(
+            get_recording_rels=self.get_recording_rels)
 
         self.sectionExtractor = SectionExtractor(
             lyrics_sim_thres=self.lyrics_sim_thres,
@@ -137,9 +140,8 @@ class SymbTrDataExtractor(object):
             symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
 
         # get the metadata
-        data, is_metadata_valid = get_metadata(
-            symbtr_name, mbid=mbid,
-            get_recording_rels=self.get_recording_rels)
+        data, is_metadata_valid = self.metadataExtractor.get_metadata(
+            symbtr_name, mbid=mbid)
 
         # get the extension to determine the SymbTr-score format
         extension = os.path.splitext(score_file)[1]

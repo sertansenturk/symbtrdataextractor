@@ -1,16 +1,15 @@
-from metadata import get_attribute_dict
+from metadata import MetadataExtractor
 
 
 class RhythmicFeatureExtractor(object):
     """
 
     """
-
     @classmethod
     def extract_rhythmic_structure(cls, score):
         usul_bounds = [ii for ii, code in enumerate(score['code'])
                        if code == 51]
-        usul_dict = get_attribute_dict('usul')
+        usul_dict = MetadataExtractor.get_attribute_dict('usul')
 
         rhythmic_structure = []
         for ii, ub in enumerate(usul_bounds):
