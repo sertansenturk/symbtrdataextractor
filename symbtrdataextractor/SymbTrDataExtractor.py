@@ -2,7 +2,7 @@ from SectionExtractor import SectionExtractor
 from PhraseExtractor import PhraseExtractor
 from SymbTrReader import SymbTrReader
 from metadata import get_metadata
-from rhythm import extract_rhythmic_structure
+from rhythm import RhythmicFeatureExtractor
 import os
 
 
@@ -169,7 +169,8 @@ class SymbTrDataExtractor(object):
         auto_phrase = self.phraseExtractor.extract_auto_segment(
             score, segment_note_bound_idx, sections=data['sections'])
 
-        data['rhythmic_structure'] = extract_rhythmic_structure(score)
+        data['rhythmic_structure'] = \
+            RhythmicFeatureExtractor.extract_rhythmic_structure(score)
 
         data['phrases'] = {'annotated': anno_phrase, 'automatic': auto_phrase}
         is_data_valid = all([is_metadata_valid, is_section_data_valid,
