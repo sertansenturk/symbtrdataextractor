@@ -31,7 +31,8 @@ class SymbTrDataExtractor(object):
     _slug = "symbtrdataextractor"
 
     def __init__(self, lyrics_sim_thres=0.75, melody_sim_thres=0.75,
-                 extract_all_labels=False, get_recording_rels=False):
+                 extract_all_labels=False, get_recording_rels=False,
+                 print_warnings = True):
         """
         Class constructor
 
@@ -54,14 +55,19 @@ class SymbTrDataExtractor(object):
             belongs to a recording, this flag will not provide to extra
             information, since the recording metadata will be crawled anyways.
             (the default is False)
+        print_warnings : bool, optional
+            True to display warnings, False otherwise. Note that the errors
+            and the inconsistencies in the scores will be always displayed
+            (the default is True)
         """
         self.extract_all_labels = extract_all_labels
         self.lyrics_sim_thres = lyrics_sim_thres
         self.melody_sim_thres = melody_sim_thres
         self.get_recording_rels = get_recording_rels
+        self.print_warnings = print_warnings
 
     def extract(self, score_file, symbtr_name=None, mbid=None,
-                segment_note_bound_idx=None, print_warnings=True):
+                segment_note_bound_idx=None):
         """
         Extracts the relevant (meta)data from the SymbTr score.
 
@@ -94,8 +100,6 @@ class SymbTrDataExtractor(object):
             scores, you can use the `makam-symbolic-phrase-segmentation
             <https://github.com/MTG/makam-symbolic-phrase-segmentation>`_
             package. (the default is None)
-        print_warnings : bool, optional
-            True to display warnings, False otherwise (the default is True)
 
         Returns
         ----------
@@ -150,7 +154,7 @@ class SymbTrDataExtractor(object):
             score, symbtr_name, extract_all_labels=self.extract_all_labels,
             lyrics_sim_thres=self.lyrics_sim_thres,
             melody_sim_thres=self.melody_sim_thres,
-            print_warnings=print_warnings)
+            print_warnings=self.print_warnings)
 
         anno_phrase = extract_annotated_phrase(
             score, sections=data['sections'],
