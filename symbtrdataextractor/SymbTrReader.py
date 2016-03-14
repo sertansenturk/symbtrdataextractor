@@ -250,7 +250,9 @@ class SymbTrReader(object):
                     is_key_sig_valid = header['key_signature'] == key_sig
                     if not is_key_sig_valid:
                         print("    " + symbtr_name +
-                              ': Key signature is different!')
+                              ': Key signature is different! ' +
+                              ' '.join(header['key_signature']) +
+                              ' -> ' + ' '.join(key_sig))
 
                 elif code == 51:
                     header['usul'] = {'mu2_name': row[7],

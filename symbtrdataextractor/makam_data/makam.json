@@ -5,7 +5,7 @@
         "karar_midi_freq": 367.0, 
         "karar_symbol": "F4", 
         "key_signature": [
-            "B4b2"
+            "B4b1"
         ], 
         "mb_tag": [
             "acem"
@@ -266,8 +266,8 @@
         "karar_midi_freq": 440.0, 
         "karar_symbol": "A4", 
         "key_signature": [
-            "B4b2", 
-            "E5b2"
+            "B4b1", 
+            "E5b1"
         ], 
         "mb_tag": [
             "arazbarbuselik"
@@ -384,7 +384,7 @@
         "karar_midi_freq": 367.99, 
         "karar_symbol": "F4#4", 
         "key_signature": [
-            "B4b2"
+            "B4b1"
         ], 
         "mb_tag": [
             ""
@@ -428,7 +428,7 @@
         "karar_midi_freq": 440.0, 
         "karar_symbol": "A4", 
         "key_signature": [
-            "B4b2", 
+            "B4b1", 
             "E5b4", 
             "F5#4"
         ], 
@@ -714,8 +714,8 @@
         "karar_midi_freq": 440.0, 
         "karar_symbol": "A4", 
         "key_signature": [
-            "B4b2", 
-            "D5b3"
+            "B4b1", 
+            "D5b4"
         ], 
         "mb_tag": [
             "d\u00fcgah"
@@ -767,8 +767,8 @@
         "karar_midi_freq": 440.0, 
         "karar_symbol": "A4", 
         "key_signature": [
-            "B4b2", 
-            "D5b3"
+            "B4b1", 
+            "D5b4"
         ], 
         "mb_tag": [
             "eski-sipihr"
@@ -1532,7 +1532,7 @@
         "karar_midi_freq": 440.0, 
         "karar_symbol": "A4", 
         "key_signature": [
-            "B4b2"
+            "B4b1"
         ], 
         "mb_tag": [
             "hisar"
@@ -1735,8 +1735,8 @@
         "karar_symbol": "F4#4", 
         "key_signature": [
             "B4b1", 
-            "E5b3", 
-            "F5#3"
+            "E5b4", 
+            "F5#4"
         ], 
         "mb_tag": [
             ""
@@ -1919,8 +1919,8 @@
         "karar_midi_freq": 440.0, 
         "karar_symbol": "A4", 
         "key_signature": [
-            "B4b2", 
-            "D5b3"
+            "B4b1", 
+            "D5b4"
         ], 
         "mb_tag": [
             ""
@@ -2255,7 +2255,7 @@
         "karar_midi_freq": 293.66, 
         "karar_symbol": "D4", 
         "key_signature": [
-            "B4b2"
+            "B4b1"
         ], 
         "mb_tag": [
             ""
@@ -2358,7 +2358,7 @@
         "karar_symbol": "A4", 
         "key_signature": [
             "B4b2", 
-            "F5#4"
+            "F5#3"
         ], 
         "mb_tag": [
             "neva"
@@ -2652,7 +2652,7 @@
         "karar_midi_freq": 392.0, 
         "karar_symbol": "G4", 
         "key_signature": [
-            "B4b2", 
+            "B4b1", 
             "F5#4"
         ], 
         "mb_tag": [
@@ -3477,8 +3477,8 @@
         "karar_midi_freq": 367.0, 
         "karar_symbol": "F4", 
         "key_signature": [
-            "B4b2", 
-            "D5b3"
+            "B4b1", 
+            "D5b4"
         ], 
         "mb_tag": [
             "\u015fevkutarab"
