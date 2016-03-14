@@ -241,6 +241,9 @@ class SymbTrReader(object):
                     header['makam'] = {'mu2_name': row[7]}
                     header['key_signature'] = row[8].split('/')
 
+                    if not header['key_signature'][0]:
+                        header['key_signature'] = []
+
                     # validate key signature
                     key_sig = MetadataExtractor.\
                         get_key_signature_from_makam_slug(makam_slug)
