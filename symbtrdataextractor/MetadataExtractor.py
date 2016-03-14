@@ -151,6 +151,13 @@ class MetadataExtractor(object):
         return json.load(open(attrfile, 'r'))
 
     @staticmethod
+    def get_key_signature_from_makam_slug(makam_slug):
+        attr_dict = MetadataExtractor.get_attribute_dict('makam')
+        for attr_key, attr_val in attr_dict.iteritems():
+            if attr_val['symbtr_slug'] == makam_slug:
+                return attr_val['key_signature']
+
+    @staticmethod
     def get_makam(makam_slug):
         makam_dict = MetadataExtractor.get_attribute_dict('makam')
 

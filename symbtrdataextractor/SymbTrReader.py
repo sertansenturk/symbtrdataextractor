@@ -223,6 +223,7 @@ class SymbTrReader(object):
         """
         if symbtr_name is None:
             symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
+        makam_slug = symbtr_name.split('--')[0]
 
         with open(score_file, "rb") as f:
             reader = csv.reader(f, delimiter='\t')
@@ -232,12 +233,23 @@ class SymbTrReader(object):
 
             header = dict()
             is_tempo_unit_valid = True
+            is_key_sig_valid = True
             for row_temp in reader:
                 row = [unicode(cell, 'utf-8') for cell in row_temp]
                 code = int(row[0])
                 if code == 50:
                     header['makam'] = {'mu2_name': row[7]}
                     header['key_signature'] = row[8].split('/')
+
+                    # validate key signature
+                    key_sig = MetadataExtractor.\
+                        get_key_signature_from_makam_slug(makam_slug)
+                    is_key_sig_valid = header['key_signature'] == key_sig
+                    if not is_key_sig_valid:
+                        print("    " + symbtr_name +
+                              ': Key signature is different!')
+                        import pdb
+                        pdb.set_trace()
                 elif code == 51:
                     header['usul'] = {'mu2_name': row[7],
                                       'mertebe': int(row[3]),
@@ -308,6 +320,7 @@ class SymbTrReader(object):
             header['usul'], usul, symbtr_name)
 
         is_header_valid = (is_tempo_unit_valid and is_makam_valid and
-                           is_form_valid and is_usul_valid)
+                           is_form_valid and is_usul_valid and
+                           is_key_sig_valid)
 
         return header, header_row, is_header_valid
