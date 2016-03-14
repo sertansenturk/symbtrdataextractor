@@ -248,8 +248,7 @@ class SymbTrReader(object):
                     if not is_key_sig_valid:
                         print("    " + symbtr_name +
                               ': Key signature is different!')
-                        import pdb
-                        pdb.set_trace()
+
                 elif code == 51:
                     header['usul'] = {'mu2_name': row[7],
                                       'mertebe': int(row[3]),
