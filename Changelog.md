@@ -1,3 +1,6 @@
+#### symbtrmetadataextractor 2.0.0-alpha.1
+ - Added key signature checking in the mu2_headers
+
 #### symbtrmetadataextractor 2.0.0-alpha
  - Refactoring code according to PEP8 standarts
  - Moved all methods to newly created classes
