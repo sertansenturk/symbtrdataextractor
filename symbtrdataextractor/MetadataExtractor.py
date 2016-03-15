@@ -170,7 +170,7 @@ class MetadataExtractor(object):
             if k1 == k2:  # same note
                 pass
             elif k1[:3] == k2[:3]:  # same note symbol
-                if abs(int(k1[3:]) - int(k2[3:])) <= 0:  # 1 comma deviation
+                if abs(int(k1[3:]) - int(k2[3:])) <= 1:  # 1 comma deviation
                     pass
                 else:  # more than one comma deviation
                     is_key_sig_valid = False
