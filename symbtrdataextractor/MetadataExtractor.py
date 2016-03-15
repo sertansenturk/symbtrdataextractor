@@ -156,13 +156,13 @@ class MetadataExtractor(object):
         return attr_dict[makam_slug]['key_signature']
 
     @staticmethod
-    def validate_key_signature(key_signature, makam_slug):
+    def validate_key_signature(key_signature, makam_slug, symbtr_name):
         attr_dict = MetadataExtractor.get_attribute_dict('makam')
         key_sig_makam = attr_dict[makam_slug]['key_signature']
-
+        is_key_sig_valid = True
         # the number of accidentals should be the same
         if len(key_signature) != len(key_sig_makam):
-            return False
+            is_key_sig_valid = False
 
         # the sequence should be the same, allow a single comma deviation
         # due to AEU theory and practice mismatch
@@ -173,11 +173,17 @@ class MetadataExtractor(object):
                 if abs(int(k1[3:]) - int(k2[3:])) <= 0:  # 1 comma deviation
                     pass
                 else:  # more than one comma deviation
-                    return False
+                    is_key_sig_valid = False
             else:  # different notes
                 return False
 
-        return True
+            if not is_key_sig_valid:
+                print("    " + symbtr_name +
+                      ': Key signature is different! ' +
+                      ' '.join(key_signature) +
+                      ' -> ' + ' '.join(key_sig_makam))
+
+        return is_key_sig_valid
 
     @staticmethod
     def get_makam(makam_slug):

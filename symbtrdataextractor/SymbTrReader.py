@@ -247,13 +247,7 @@ class SymbTrReader(object):
                     # validate key signature
                     is_key_sig_valid = MetadataExtractor.\
                         validate_key_signature(header['key_signature'],
-                                               makam_slug)
-
-                    if not is_key_sig_valid:
-                        print("    " + symbtr_name +
-                              ': Key signature is different! ' +
-                              ' '.join(header['key_signature']) +
-                              ' -> ' + ' '.join(key_sig))
+                                               makam_slug, symbtr_name)
 
                 elif code == 51:
                     header['usul'] = {'mu2_name': row[7],
