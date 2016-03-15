@@ -175,13 +175,13 @@ class MetadataExtractor(object):
                 else:  # more than one comma deviation
                     is_key_sig_valid = False
             else:  # different notes
-                return False
+                is_key_sig_valid = False
 
-            if not is_key_sig_valid:
-                print("    " + symbtr_name +
-                      ': Key signature is different! ' +
-                      ' '.join(key_signature) +
-                      ' -> ' + ' '.join(key_sig_makam))
+        if not is_key_sig_valid:
+            print("    " + symbtr_name +
+                  ': Key signature is different! ' +
+                  ' '.join(key_signature) +
+                  ' -> ' + ' '.join(key_sig_makam))
 
         return is_key_sig_valid
 
