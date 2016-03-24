@@ -8,10 +8,10 @@ class GraphOperations(object):
     """
     @staticmethod
     def norm_levenshtein(str1, str2):
-        av_len = (len(str1) + len(str2)) * .5
+        max_len = float(max([len(str1), len(str2)]))
 
         try:
-            return Levenshtein.distance(str1, str2) / av_len
+            return Levenshtein.distance(str1, str2) / max_len
         except ZeroDivisionError:  # both sections are instrumental
             return 0
 
