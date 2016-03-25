@@ -1,5 +1,5 @@
 #### symbtrmetadataextractor 2.0.0-alpha.2
- - Changed the Levenshtein normalization in Graph computation to max length of the two strings.
+ - Changed the Levenshtein normalization to the max length of the two strings.
 
 #### symbtrmetadataextractor 2.0.0-alpha.1
  - Added key signature checking in the mu2_headers
