@@ -17,6 +17,10 @@ Currently you can:
 - Query relevant metadata from MusicBrainz, if the [MBID](https://musicbrainz.org/doc/MusicBrainz_Identifier) is supplied.
 - Read the metadata stored in the header of the mu2 file.
 
+If you are using this code for academic purposes please cite the software as:
+
+> Sertan Senturk. (2016). symbtrdataextractor: symbtrdataextractor v2.0.0-alpha.2. Zenodo. 10.5281/zenodo.48367
+
 Usage
 ----------
 Extracting (meta)data from the txt-score:
