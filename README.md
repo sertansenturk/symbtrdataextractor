@@ -1,3 +1,5 @@
+[![DOI](https://zenodo.org/badge/21104/sertansenturk/symbtrdataextractor.svg)](https://zenodo.org/badge/latestdoi/21104/sertansenturk/symbtrdataextractor) [![Build Status](https://travis-ci.org/sertansenturk/symbtrdataextractor.svg?branch=master)](https://travis-ci.org/sertansenturk/symbtrdataextractor)
+
 symbtrdataextractor
 ===========
 Python tools for extracting relevant (meta)data from SymbTr-scores
