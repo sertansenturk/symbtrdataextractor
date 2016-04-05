@@ -66,16 +66,16 @@ class SymbTrDataExtractor(object):
         self.get_recording_rels = get_recording_rels
         self.print_warnings = print_warnings
 
-        self.metadataExtractor = MetadataExtractor(
+        self._metadataExtractor = MetadataExtractor(
             get_recording_rels=self.get_recording_rels)
 
-        self.sectionExtractor = SectionExtractor(
+        self._sectionExtractor = SectionExtractor(
             lyrics_sim_thres=self.lyrics_sim_thres,
             melody_sim_thres=self.melody_sim_thres,
             extract_all_labels=self.extract_all_labels,
             print_warnings=self.print_warnings)
 
-        self.phraseExtractor = PhraseExtractor(
+        self._phraseExtractor = PhraseExtractor(
             lyrics_sim_thres=self.lyrics_sim_thres,
             melody_sim_thres=self.melody_sim_thres,
             extract_all_labels=self.extract_all_labels)
@@ -140,7 +140,7 @@ class SymbTrDataExtractor(object):
             symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
 
         # get the metadata
-        data, is_metadata_valid = self.metadataExtractor.get_metadata(
+        data, is_metadata_valid = self._metadataExtractor.get_metadata(
             symbtr_name, mbid=mbid)
 
         # get the extension to determine the SymbTr-score format
@@ -163,12 +163,12 @@ class SymbTrDataExtractor(object):
                             'unit': 'second'}
         data['number_of_notes'] = len(score['duration'])
 
-        data['sections'], is_section_data_valid = self.sectionExtractor.\
+        data['sections'], is_section_data_valid = self._sectionExtractor.\
             extract(score, symbtr_name)
 
-        anno_phrase = self.phraseExtractor.extract_annotated(
+        anno_phrase = self._phraseExtractor.extract_annotated(
             score, sections=data['sections'])
-        auto_phrase = self.phraseExtractor.extract_auto_segment(
+        auto_phrase = self._phraseExtractor.extract_auto_segment(
             score, segment_note_bound_idx, sections=data['sections'])
 
         data['rhythmic_structure'] = \
