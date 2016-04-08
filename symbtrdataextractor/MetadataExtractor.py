@@ -220,8 +220,6 @@ class MetadataExtractor(object):
         return {}
 
     def get_metadata_from_musicbrainz(self, mbid):
-        data = {}  # initialize
-
         o = urlparse(mbid)
         if o.netloc:  # url supplied
             o_splitted = o.path.split('/')
@@ -234,7 +232,7 @@ class MetadataExtractor(object):
         except:  # assume mbid is a recording
             data = self.get_recording_metadata_from_musicbrainz(mbid)
             data['recording'] = {'title': data.pop("title", None),
-                            'mbid': data.pop('mbid', None)}
+                                 'mbid': data.pop('mbid', None)}
             if self.get_recording_rels:
                 print("    " + "Recording mbid is given. Ignored "
                                "get_recording_rels boolean.")

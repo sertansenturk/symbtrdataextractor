@@ -3,7 +3,7 @@
 from setuptools import setup
 
 setup(name='symbtrdataextractor',
-    version='2.0.0-alpha.2',
+    version='2.0.0-alpha.3',
     author='Sertan Senturk',
     author_email='contact AT sertansenturk DOT com',
     license='agpl 3.0',

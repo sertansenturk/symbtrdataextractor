@@ -1,3 +1,6 @@
+#### symbtrmetadataextractor 2.0.0-alpha.3
+ - Musicbrainz metadata is now fetched using makammusicbrainz repository
+
 #### symbtrmetadataextractor 2.0.0-alpha.2
  - Changed the Levenshtein normalization to the max length of the two strings.
 
