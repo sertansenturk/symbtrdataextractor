@@ -52,8 +52,8 @@ class PhraseExtractor(object):
 
         return phrases
 
-    def extract_auto_segment(self, score, segment_note_bound_idx,
-                             sections=None):
+    def extract_segment(self, score, segment_note_bound_idx,
+                        sections=None):
         # Boundaries start from 1, convert them to python indexing (0) by
         # subtracting 1
         try:

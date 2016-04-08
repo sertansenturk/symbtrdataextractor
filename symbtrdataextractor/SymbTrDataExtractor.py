@@ -165,7 +165,8 @@ class SymbTrDataExtractor(object):
             whether the MBID belongs to a work or a recording automatically.
             (the default is None)
         segment_note_bound_idx : list[ind], optional
-            Boundary indices obtained from automatic phrase segmentation.
+            Boundary indices obtained from user provided (automatic)
+            segmentation.
             Currently this parameter is only supported for the SymbTr-txt
             scores. For automatic segmentation from the SymbTr-txt
             scores, you can use the `makam-symbolic-phrase-segmentation
@@ -209,13 +210,13 @@ class SymbTrDataExtractor(object):
 
         anno_phrase = self._phraseExtractor.extract_annotated(
             score, sections=data['sections'])
-        auto_phrase = self._phraseExtractor.extract_auto_segment(
+        seg_phrase = self._phraseExtractor.extract_segment(
             score, segment_note_bound_idx, sections=data['sections'])
 
         data['rhythmic_structure'] = \
             RhythmicFeatureExtractor.extract_rhythmic_structure(score)
 
-        data['phrases'] = {'annotated': anno_phrase, 'automatic': auto_phrase}
+        data['phrases'] = {'annotated': anno_phrase, 'segmented': seg_phrase}
         is_data_valid = all([is_metadata_valid, is_section_data_valid,
                              is_score_content_valid])
 
