@@ -1,5 +1,7 @@
 git+https://github.com/alastair/python-musicbrainzngs.git
 git+https://github.com/sertansenturk/fileoperations_python.git@v1.1#egg=fileoperations
+git+https://github.com/sertansenturk/makammusicbrainz.git@v1.2.0#egg=makammusicbrainz
+
 python-Levenshtein
 networkx
 numpy

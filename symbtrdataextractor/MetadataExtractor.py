@@ -1,9 +1,8 @@
 import os
 import json
 from urlparse import urlparse
-import musicbrainzngs as mb
-
-mb.set_useragent("SymbTr metadata", "0.2", "compmusic.upf.edu")
+from makammusicbrainz.AudioMetadata import AudioMetadata
+from makammusicbrainz.WorkMetadata import WorkMetadata
 
 
 class MetadataExtractor(object):
@@ -12,6 +11,10 @@ class MetadataExtractor(object):
     """
     def __init__(self, get_recording_rels=False):
         self.get_recording_rels = get_recording_rels
+        self._audioMetadata = AudioMetadata(get_work_attributes=False,
+                                            print_warnings=False)
+        self._workMetadata = WorkMetadata(get_recording_rels=False,
+                                          print_warnings=False)
 
     @staticmethod
     def get_slugs(scorename):
@@ -21,7 +24,7 @@ class MetadataExtractor(object):
 
     def get_metadata(self, scorename, mbid=''):
         if mbid:
-            data = self.get_metadata_from_muscbrainz(mbid)
+            data = self.get_metadata_from_musicbrainz(mbid)
         else:
             data = {'makam': {}, 'form': {}, 'usul': {}, 'name': {},
                     'composer': {}, 'lyricist': {}}
@@ -43,10 +46,9 @@ class MetadataExtractor(object):
 
         if 'work' in data.keys():
             data['work']['symbtr_slug'] = slugs['name']
-        elif 'recording' in data.keys():
-            data['recording']['symbtr_slug'] = slugs['name']
         else:
-            pass
+            data['recording']['symbtr_slug'] = slugs['name']
+
         if 'composer' in data.keys():
             data['composer']['symbtr_slug'] = slugs['composer']
 
@@ -217,105 +219,38 @@ class MetadataExtractor(object):
         # no match
         return {}
 
-    def get_metadata_from_muscbrainz(self, mbid):
+    def get_metadata_from_musicbrainz(self, mbid):
         data = {}  # initialize
 
         o = urlparse(mbid)
         if o.netloc:  # url supplied
             o_splitted = o.path.split('/')
-            if o_splitted[1] == 'work':
-                data = self.get_work_metadata_from_musicbrainz(o_splitted[2])
-            elif o_splitted[1] == 'recording':
-                if self.get_recording_rels:
-                    print("    " + "Recording mbid is given. Ignoring "
-                                   "get_recording_rels input")
-                data = \
-                    MetadataExtractor.get_recording_metadata_from_musicbrainz(
-                        o_splitted[1])
-        else:  # mbid supplied
-            try:  # assume mbid is a work
-                data = self.get_work_metadata_from_musicbrainz(mbid)
-            except:  # assume mbid is a recording
-                if self.get_recording_rels:
-                    print("    " + "Recording mbid is given. Ignoring "
-                                   "get_recording_rels input")
-                data = \
-                    MetadataExtractor.get_recording_metadata_from_musicbrainz(
-                        mbid)
+            mbid = o_splitted[2]
+
+        try:  # assume mbid is a work
+            data = self.get_work_metadata_from_musicbrainz(mbid)
+            data['work'] = {'title': data.pop("title", None),
+                            'mbid': data.pop('mbid', None)}
+        except:  # assume mbid is a recording
+            data = self.get_recording_metadata_from_musicbrainz(mbid)
+            data['recording'] = {'title': data.pop("title", None),
+                            'mbid': data.pop('mbid', None)}
+            if self.get_recording_rels:
+                print("    " + "Recording mbid is given. Ignored "
+                               "get_recording_rels boolean.")
+
+        # scores should have one attribute per type
+        if len(data['makam']) == 1:
+            data['makam'] = data['makam'][0]
+        if len(data['form']) == 1:
+            data['form'] = data['form'][0]
+        if len(data['usul']) == 1:
+            data['usul'] = data['usul'][0]
+
         return data
 
     def get_work_metadata_from_musicbrainz(self, mbid):
-        included_rels = (['artist-rels', 'recording-rels']
-                         if self.get_recording_rels else ['artist-rels'])
+        return self._workMetadata.from_musicbrainz(mbid)
 
-        work = mb.get_work_by_id(mbid, includes=included_rels)['work']
-
-        data = ({'makam': {}, 'form': {}, 'usul': {},
-                 'work': {'mbid': mbid}, 'composer': {}, 'lyricist': {}})
-
-        data['work']['title'] = work['title']
-
-        if 'attribute-list' in work.keys():
-            w_attrb = work['attribute-list']
-
-            makam = [a['attribute'] for a in w_attrb if 'Makam' in a['type']]
-            data['makam'] = {'mb_attribute': makam[0]
-                             if len(makam) == 1 else makam}
-
-            form = [a['attribute'] for a in w_attrb if 'Form' in a['type']]
-            data['form'] = \
-                {'mb_attribute': form[0] if len(form) == 1 else form}
-
-            usul = [a['attribute'] for a in w_attrb if 'Usul' in a['type']]
-            data['usul'] = \
-                {'mb_attribute': usul[0] if len(usul) == 1 else usul}
-
-        if 'language' in work.keys():
-            data['language'] = work['language']
-
-        if 'artist-relation-list' in work.keys():
-            for a in work['artist-relation-list']:
-                if a['type'] == 'composer':
-                    data['composer'] = {'name': a['artist']['name'],
-                                        'mbid': a['artist']['id']}
-                elif a['type'] == 'lyricist':
-                    data['lyricist'] = {'name': a['artist']['name'],
-                                        'mbid': a['artist']['id']}
-
-        if self.get_recording_rels:
-            data['recordings'] = []
-            if 'recording-relation-list' in work.keys():
-                for r in work['recording-relation-list']:
-                    rr = r['recording']
-                    data['recordings'].append({'mbid': rr['id'],
-                                               'title': rr['title']})
-
-        return data
-
-    @staticmethod
-    def get_recording_metadata_from_musicbrainz(mbid):
-        rec = mb.get_recording_by_id(
-            mbid, includes=['artist-rels', 'tags'])['recording']
-
-        data = ({'makam': [], 'form': [], 'usul': [],
-                 'recording': {'mbid': mbid}, 'performers': []})
-
-        for t in rec['tag-list']:
-            key, val = t['name'].split(': ')
-            data[key].append({'mb_tag': val})
-
-        data['makam'] = \
-            data['makam'][0] if len(data['makam']) == 1 else data['makam']
-        data['form'] = \
-            data['form'][0] if len(data['form']) == 1 else data['form']
-        data['usul'] = \
-            data['usul'][0] if len(data['usul']) == 1 else data['usul']
-
-        for a in rec['artist-relation-list']:
-            if a['type'] in ['instrument', 'vocal']:
-                data['performers'].append({'name': a['artist']['name'],
-                                           'mbid': a['artist']['id']})
-
-        data['recording']['title'] = rec['title']
-
-        return data
+    def get_recording_metadata_from_musicbrainz(self, mbid):
+        return self._audioMetadata.from_musicbrainz(mbid)
