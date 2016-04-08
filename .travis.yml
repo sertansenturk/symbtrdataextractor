@@ -17,12 +17,12 @@ install:
 #  - pip install coveralls
 
 # command to run before the tests
-before_script: 
-  - "flake8 symbtrdataextractor unittests --ignore=E501"
+before_script:
+  - "flake8 symbtrdataextractor --ignore=E501"
 
 # command to run tests
 script: 
-  - nosetests unittests/extractor_test.py --with-coverage
+  - nosetests symbtrdataextractor/unittests/extractor_test.py --with-coverage
 
 # final commands
 after_success:
