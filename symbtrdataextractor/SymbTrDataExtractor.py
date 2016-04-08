@@ -1,8 +1,8 @@
-from . SectionExtractor import SectionExtractor
-from . PhraseExtractor import PhraseExtractor
-from . SymbTrReader import SymbTrReader
-from . MetadataExtractor import MetadataExtractor
-from . RhythmicFeatureExtractor import RhythmicFeatureExtractor
+from .SectionExtractor import SectionExtractor
+from .PhraseExtractor import PhraseExtractor
+from .SymbTrReader import SymbTrReader
+from .MetadataExtractor import MetadataExtractor
+from .RhythmicFeatureExtractor import RhythmicFeatureExtractor
 import os
 
 
@@ -132,8 +132,9 @@ class SymbTrDataExtractor(object):
         self._chk_bool(value)
         self._get_recording_rels = value
 
-    def _chk_bool(self, value):
-        if type(value) != type(True):
+    @staticmethod
+    def _chk_bool(value):
+        if isinstance(value, type(True)):
             raise ValueError('The property should be a boolean')
 
     def extract(self, score_file, symbtr_name=None, mbid=None,
@@ -203,7 +204,7 @@ class SymbTrDataExtractor(object):
                             'unit': 'second'}
         data['number_of_notes'] = len(score['duration'])
 
-        data['sections'], is_section_data_valid = self._sectionExtractor.\
+        data['sections'], is_section_data_valid = self._sectionExtractor. \
             extract(score, symbtr_name)
 
         anno_phrase = self._phraseExtractor.extract_annotated(
