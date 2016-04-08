@@ -60,8 +60,8 @@ class SymbTrDataExtractor(object):
             and the inconsistencies in the scores will be always displayed
             (the default is True)
         """
-        self.lyrics_sim_thres = lyrics_sim_thres
-        self.melody_sim_thres = melody_sim_thres
+        self._lyrics_sim_thres = lyrics_sim_thres
+        self._melody_sim_thres = melody_sim_thres
         self.extract_all_labels = extract_all_labels
         self.get_recording_rels = get_recording_rels
         self.print_warnings = print_warnings
@@ -70,15 +70,39 @@ class SymbTrDataExtractor(object):
             get_recording_rels=self.get_recording_rels)
 
         self._sectionExtractor = SectionExtractor(
-            lyrics_sim_thres=self.lyrics_sim_thres,
-            melody_sim_thres=self.melody_sim_thres,
+            lyrics_sim_thres=self._lyrics_sim_thres,
+            melody_sim_thres=self._melody_sim_thres,
             extract_all_labels=self.extract_all_labels,
             print_warnings=self.print_warnings)
 
         self._phraseExtractor = PhraseExtractor(
-            lyrics_sim_thres=self.lyrics_sim_thres,
-            melody_sim_thres=self.melody_sim_thres,
+            lyrics_sim_thres=self._lyrics_sim_thres,
+            melody_sim_thres=self._melody_sim_thres,
             extract_all_labels=self.extract_all_labels)
+
+    @property
+    def lyrics_sim_thres(self):
+        return self._lyrics_sim_thres
+
+    @lyrics_sim_thres.setter
+    def lyrics_sim_thres(self, value):
+        self._chk_sim_thres_val(value)
+        self._lyrics_sim_thres = value
+
+    @property
+    def melody_sim_thres(self):
+        return self._melody_sim_thres
+
+    @melody_sim_thres.setter
+    def melody_sim_thres(self, value):
+        self._chk_sim_thres_val(value)
+        self._melody_sim_thres = value
+
+    @staticmethod
+    def _chk_sim_thres_val(value):
+        if not 0 <= value <= 1:
+            raise ValueError('The similarity threshold should be a float '
+                             'between [0, 1]')
 
     def extract(self, score_file, symbtr_name=None, mbid=None,
                 segment_note_bound_idx=None):
@@ -129,13 +153,6 @@ class SymbTrDataExtractor(object):
             If either of melody_sim_thres or lyrics_sim_thres imputs is
             outside [0,1]
         """
-        if not 0 <= self.lyrics_sim_thres <= 1:
-            raise ValueError('lyrics_sim_thres should be a float between [0, '
-                             '1]')
-        if not 0 <= self.melody_sim_thres <= 1:
-            raise ValueError('melody_sim_thres should be a float between [0, '
-                             '1]')
-
         if symbtr_name is None:
             symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
 
@@ -171,7 +188,8 @@ class SymbTrDataExtractor(object):
 
         return data, is_data_valid
 
-    def _read_score(self, extension, score_file, symbtr_name):
+    @staticmethod
+    def _read_score(extension, score_file, symbtr_name):
         if extension == ".txt":
             score, is_score_content_valid = SymbTrReader.read_txt_score(
                 score_file, symbtr_name=symbtr_name)
