@@ -1,4 +1,4 @@
-[![DOI](https://zenodo.org/badge/21104/sertansenturk/symbtrdataextractor.svg)](https://zenodo.org/badge/latestdoi/21104/sertansenturk/symbtrdataextractor) [![Build Status](https://travis-ci.org/sertansenturk/symbtrdataextractor.svg?branch=master)](https://travis-ci.org/sertansenturk/symbtrdataextractor) [![codecov.io](https://codecov.io/github/sertansenturk/symbtrdataextractor/coverage.svg?branch=master)](https://codecov.io/github/sertansenturk/symbtrdataextractor?branch=master)
+[![DOI](https://zenodo.org/badge/21104/sertansenturk/symbtrdataextractor.svg)](https://zenodo.org/badge/latestdoi/21104/sertansenturk/symbtrdataextractor) [![Build Status](https://travis-ci.org/sertansenturk/symbtrdataextractor.svg?branch=master)](https://travis-ci.org/sertansenturk/symbtrdataextractor) [![codecov.io](https://codecov.io/github/sertansenturk/symbtrdataextractor/coverage.svg?branch=master)](https://codecov.io/github/sertansenturk/symbtrdataextractor?branch=master) [![GitHub version](https://badge.fury.io/gh/sertansenturk%2Fsymbtrdataextractor.svg)](https://badge.fury.io/gh/sertansenturk%2Fsymbtrdataextractor)
 
 symbtrdataextractor
 ===========
