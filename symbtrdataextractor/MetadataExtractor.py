@@ -46,7 +46,7 @@ class MetadataExtractor(object):
 
         if 'work' in data.keys():
             data['work']['symbtr_slug'] = slugs['name']
-        else:
+        elif 'recording' in data.keys():
             data['recording']['symbtr_slug'] = slugs['name']
 
         if 'composer' in data.keys():
