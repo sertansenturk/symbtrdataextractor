@@ -147,17 +147,8 @@ class SymbTrDataExtractor(object):
         extension = os.path.splitext(score_file)[1]
 
         # read the score
-        if extension == ".txt":
-            score, is_score_content_valid = SymbTrReader.read_txt_score(
-                score_file, symbtr_name=symbtr_name)
-        elif extension == ".xml":
-            score, is_score_content_valid = SymbTrReader.read_musicxml_score(
-                score_file, symbtr_name=symbtr_name)
-        elif extension == ".mu2":
-            score, is_score_content_valid = SymbTrReader.read_mu2_score(
-                score_file, symbtr_name=symbtr_name)
-        else:
-            raise IOError("Unknown format")
+        score, is_score_content_valid = self._read_score(
+            extension, score_file, symbtr_name)
 
         data['duration'] = {'value': sum(score['duration']) * 0.001,
                             'unit': 'second'}
@@ -179,6 +170,20 @@ class SymbTrDataExtractor(object):
                              is_score_content_valid])
 
         return data, is_data_valid
+
+    def _read_score(self, extension, score_file, symbtr_name):
+        if extension == ".txt":
+            score, is_score_content_valid = SymbTrReader.read_txt_score(
+                score_file, symbtr_name=symbtr_name)
+        elif extension == ".xml":
+            score, is_score_content_valid = SymbTrReader.read_musicxml_score(
+                score_file, symbtr_name=symbtr_name)
+        elif extension == ".mu2":
+            score, is_score_content_valid = SymbTrReader.read_mu2_score(
+                score_file, symbtr_name=symbtr_name)
+        else:
+            raise IOError("Unknown format")
+        return score, is_score_content_valid
 
     @classmethod
     def merge(cls, data1, data2, verbose=True):
