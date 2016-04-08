@@ -62,24 +62,25 @@ class SymbTrDataExtractor(object):
         """
         self._lyrics_sim_thres = lyrics_sim_thres
         self._melody_sim_thres = melody_sim_thres
-        self.extract_all_labels = extract_all_labels
-        self.get_recording_rels = get_recording_rels
-        self.print_warnings = print_warnings
+        self._extract_all_labels = extract_all_labels
+        self._get_recording_rels = get_recording_rels
+        self._print_warnings = print_warnings
 
         self._metadataExtractor = MetadataExtractor(
-            get_recording_rels=self.get_recording_rels)
+            get_recording_rels=self._get_recording_rels)
 
         self._sectionExtractor = SectionExtractor(
             lyrics_sim_thres=self._lyrics_sim_thres,
             melody_sim_thres=self._melody_sim_thres,
-            extract_all_labels=self.extract_all_labels,
-            print_warnings=self.print_warnings)
+            extract_all_labels=self._extract_all_labels,
+            print_warnings=self._print_warnings)
 
         self._phraseExtractor = PhraseExtractor(
             lyrics_sim_thres=self._lyrics_sim_thres,
             melody_sim_thres=self._melody_sim_thres,
-            extract_all_labels=self.extract_all_labels)
+            extract_all_labels=self._extract_all_labels)
 
+    # getter and setters
     @property
     def lyrics_sim_thres(self):
         return self._lyrics_sim_thres
@@ -103,6 +104,37 @@ class SymbTrDataExtractor(object):
         if not 0 <= value <= 1:
             raise ValueError('The similarity threshold should be a float '
                              'between [0, 1]')
+
+    @property
+    def extract_all_labels(self):
+        return self._extract_all_labels
+
+    @extract_all_labels.setter
+    def extract_all_labels(self, value):
+        self._chk_bool(value)
+        self._extract_all_labels = value
+
+    @property
+    def print_warnings(self):
+        return self._print_warnings
+
+    @print_warnings.setter
+    def print_warnings(self, value):
+        self._chk_bool(value)
+        self._print_warnings = value
+
+    @property
+    def get_recording_rels(self):
+        return self._get_recording_rels
+
+    @get_recording_rels.setter
+    def get_recording_rels(self, value):
+        self._chk_bool(value)
+        self._get_recording_rels = value
+
+    def _chk_bool(self, value):
+        if type(value) != type(True):
+            raise ValueError('The property should be a boolean')
 
     def extract(self, score_file, symbtr_name=None, mbid=None,
                 segment_note_bound_idx=None):
