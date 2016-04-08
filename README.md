@@ -55,8 +55,9 @@ txt_filename            : the filepath of the SymbTr-txt score
 symbtr_name             : (optional) the SymbTr-name in the "makam--form--usul--name--composer" format.
 mbid                    : (optional) the work or recording mbid of the composition/performance related 
                           to the score
-segment_note_bound_idx  : (optional) automatic segmentation boundaries (e.g. computed by 
-                          https://github.com/MTG/makam-symbolic-phrase-segmentation)
+segment_note_bound_idx  : (optional) user provided segment boundaries. makam-symbolic-phrase-segmentation
+                          (https://github.com/MTG/makam-symbolic-phrase-segmentation) can be used to 
+                          segment the SymbTr-txt scores automatically.
 """
 ```
 
