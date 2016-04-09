@@ -1,4 +1,5 @@
 import csv
+import warnings
 from SymbTrReader import SymbTrReader
 
 
@@ -98,42 +99,34 @@ class TxtReader(SymbTrReader):
         bool
             True if the read SymbTr-txt score is valid, False otherwise
         """
+        start_usul_row = TxtReader._starts_with_usul_row(score, score_name)
+
         is_rest_valid = True
         is_duration_valid = True
         is_index_valid = True
-        start_usul_row = True
-        dur_dict = {}
+        jump_ii = 0
         for ii in range(0, len(score['index'])):
-            # check usul row in the start
-            if ii == 0 and not score['code'][ii] == 51:
-                print("    " + score_name + ' Missing the usul row in the '
-                                            'start')
-                start_usul_row = False
+            # note index
+            is_index_valid, jump_ii = TxtReader._validate_index_jump(
+                score['index'][ii], jump_ii, is_index_valid, score_name)
 
             if score['duration'][ii] > 0:  # note or rest
-                # check rest
-                if (-1 in [score['comma53'][ii], score['commaAE'][ii]] or
-                        any(rs in [score['note53'][ii], score['noteAE'][ii]]
-                            for rs in ['Es', 'Sus', ''])):
-                    # it should be rest, validate
-                    if not (score['comma53'][ii] == -1 and
-                            score['commaAE'][ii] == -1 and
-                            score['note53'][ii] == 'Es' and
-                            score['noteAE'][ii] == 'Es' and
-                            score['code'][ii] == 9):
-                        is_rest_valid = False
-                        print("    " + score_name + ' ' +
-                              str(score['index'][ii]) + ': Invalid Rest')
+                if TxtReader._is_rest(score, ii):  # check rest
+                    is_rest_valid = TxtReader._validate_rest(
+                        score, ii, is_rest_valid, score_name)
 
-                # note duration
-                dursym = (str(score['numerator'][ii]) + '_' +
-                          str(score['denumerator'][ii]))
-                if dursym in dur_dict.keys():
-                    dur_dict[dursym] = list(set([score['duration'][ii]] +
-                                                dur_dict[dursym]))
-                else:
-                    dur_dict[dursym] = [score['duration'][ii]]
-
+        #         !! BELOW IS COMMENTED FOR CHECKING NOTE DURATIONS IN   !!
+        #         !! MS AGAINST THE SYMBOLIC NOTE DURATION, WHICH IS NOT !!
+        #         !! IMPLEMENTED YET !!
+        #         # note duration
+        #         dursym = (str(score['numerator'][ii]) + '_' +
+        #                   str(score['denumerator'][ii]))
+        #         if dursym in dur_dict.keys():
+        #             dur_dict[dursym] = list(set([score['duration'][ii]] +
+        #                                         dur_dict[dursym]))
+        #         else:
+        #             dur_dict[dursym] = [score['duration'][ii]]
+        #
         # for key, val in dur_dict.items():
         #    if not len(val)==1:
         #        print("    " + scorename + ": " + key +
@@ -142,13 +135,50 @@ class TxtReader(SymbTrReader):
         #        # USUL/TEMPO CHANGES ARE NOT HANDLED, DON'T ASSIGN FALSE YET
         #        is_duration_valid = True
 
-        # note index
-        for ii in range(0, len(score['index']) - 1):
-            if not score['index'][ii + 1] - score['index'][ii] == 1:
-                print("    " + score_name + ": " + str(score['index'][ii]) +
-                      ", note index jump.")
-                is_index_valid = False
+        return (start_usul_row and is_rest_valid and is_duration_valid and
+                is_index_valid)
 
-        is_score_valid = (start_usul_row and is_rest_valid and
-                          is_duration_valid and is_index_valid)
-        return is_score_valid
+    @staticmethod
+    def _is_rest(score, ii):
+        return (-1 in [score['comma53'][ii], score['commaAE'][ii]] or
+                any(rs in [score['note53'][ii], score['noteAE'][ii]]
+                    for rs in ['Es', 'Sus', '']))
+
+    @staticmethod
+    def _validate_index_jump(score_idx, jump_ii, is_index_valid, score_name):
+        if score_idx - jump_ii != 1:
+            warnings.warn("    " + score_name + ": " + str(score_idx) +
+                          ", note index jump.")
+            is_index_valid = False
+            import pdb
+            pdb.set_trace()
+
+        jump_ii = score_idx  # we assign to the score_idx so the we can warn
+        # where the jumps are happening
+
+        return is_index_valid, jump_ii
+
+    @staticmethod
+    def _validate_rest(score, ii, is_rest_valid, score_name):
+        # it should be rest, validate
+        if not (score['comma53'][ii] == -1 and
+                        score['commaAE'][ii] == -1 and
+                        score['note53'][ii] == 'Es' and
+                        score['noteAE'][ii] == 'Es' and
+                        score['code'][ii] == 9):
+            is_rest_valid = False
+            warnings.warn("    " + score_name + ' ' +
+                          str(score['index'][ii]) + ': Invalid Rest')
+
+        return is_rest_valid
+
+    @staticmethod
+    def _starts_with_usul_row(score, score_name):
+        # check usul row in the start
+        if not score['code'][0] == 51:
+            warnings.warn("    " + score_name +
+                          ' Missing the usul row in the start')
+            start_usul_row = False
+        else:
+            start_usul_row = True
+        return start_usul_row

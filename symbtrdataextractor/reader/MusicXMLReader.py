@@ -1,4 +1,3 @@
-import os
 from SymbTrReader import SymbTrReader
 
 class MusicXMLReader(SymbTrReader):
