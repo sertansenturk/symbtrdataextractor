@@ -25,11 +25,11 @@ class StructureLabeler(object):
         # get the duration, pitch and lyrics related to the section
         score_fragments = []
         for s in structures:
-            durs = score['duration'][s['start_note']:s['end_note'] + 1]
-            nums = score['numerator'][s['start_note']:s['end_note'] + 1]
-            denums = score['denumerator'][s['start_note']:s['end_note'] + 1]
-            notes = score['comma53'][s['start_note']:s['end_note'] + 1]
-            lyrics = score['lyrics'][s['start_note']:s['end_note'] + 1]
+            durs = self._get_score_key_in_structure(s, score, 'duration')
+            nums = self._get_score_key_in_structure(s, score, 'numerator')
+            denums = self._get_score_key_in_structure(s, score, 'denumerator')
+            notes = self._get_score_key_in_structure(s, score, 'comma53')
+            lyrics = self._get_score_key_in_structure(s, score, 'lyrics')
 
             score_fragments.append({'durs': durs, 'nums': nums,
                                     'denums': denums, 'notes': notes,
@@ -42,6 +42,10 @@ class StructureLabeler(object):
         structures = self.get_melodic_organization(structures, score_fragments)
 
         return structures
+
+    @staticmethod
+    def _get_score_key_in_structure(s, score, name):
+        return score[name][s['start_note']:s['end_note'] + 1]
 
     def get_lyric_organization(self, structures, score_fragments):
         # Here we only check whether the lyrics are similar to others
