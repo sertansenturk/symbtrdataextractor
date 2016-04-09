@@ -1,8 +1,10 @@
 import Levenshtein
 import networkx as nx
+from numpy import matrix
 
 
 class GraphOperations(object):
+    _metrics = ['norm_levenshtein']
     """
 
     """
@@ -14,6 +16,18 @@ class GraphOperations(object):
             return Levenshtein.distance(str1, str2) / max_len
         except ZeroDivisionError:  # both sections are instrumental
             return 0
+
+    @staticmethod
+    def get_dist_matrix(stream1, stream2=None, metric='norm_levenshtein'):
+        if metric not in GraphOperations._metrics:
+            raise ValueError("The distance metric can be: %s"
+                             %', '.join(GraphOperations._metrics))
+        dist_metric = getattr(GraphOperations, metric)
+
+        if stream2 == None:  # return self distance matrix
+            stream2 = stream1
+
+        return matrix([[dist_metric(a, b) for a in stream1] for b in stream2])
 
     @classmethod
     def get_cliques(cls, dists, sim_thres):

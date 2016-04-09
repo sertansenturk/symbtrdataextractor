@@ -2,6 +2,7 @@ import string
 import os
 import json
 
+
 class ScoreProcessor(object):
     """
 
@@ -58,6 +59,6 @@ class ScoreProcessor(object):
         # concatanate to a single string. This step converts the melody into
         # the format required by Levenhstein distance
 
-        # define the ascci letters, use capital first
+        # define the ascii letters, use capital first
         ascii_letters = string.ascii_uppercase + string.ascii_lowercase
         return ''.join([ascii_letters[unique_notes.index(m)] for m in melody])

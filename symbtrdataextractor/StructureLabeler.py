@@ -1,4 +1,3 @@
-from numpy import matrix
 from .ScoreProcessor import ScoreProcessor
 from .GraphOperations import GraphOperations
 
@@ -53,25 +52,31 @@ class StructureLabeler(object):
         # get the lyrics stripped of section information
         ScoreProcessor.get_true_lyrics(score_fragments)
 
-        dists = matrix(
-            [[GraphOperations.norm_levenshtein(a['lyrics'], b['lyrics'])
-              for a in score_fragments]
-             for b in score_fragments])
-
+        # graph analysis
+        lyrics_stream = [a['lyrics'] for a in score_fragments]
+        dists = GraphOperations.get_dist_matrix(lyrics_stream,
+                                                metric='norm_levenshtein')
         cliques = GraphOperations.get_cliques(dists, self.lyrics_sim_thres)
 
+        # semiotic labeling
         lyrics_labels = self._semiotize(cliques)
-
-        # label the insrumental structures, if present
-        for i in range(0, len(lyrics_labels)):
-            if not score_fragments[i]['lyrics']:
-                structures[i]['lyric_structure'] = 'INSTRUMENTAL'
-            else:
-                structures[i]['lyric_structure'] = lyrics_labels[i]
+        self._apply_labels_to_lyrics_structure(
+            structures, lyrics_labels, score_fragments)
 
         # sanity check
         lyrics = [sc['lyrics'] for sc in score_fragments]
         self._assert_labels(lyrics, lyrics_labels, 'lyrics')
+
+    @staticmethod
+    def _apply_labels_to_lyrics_structure(
+            structures, lyrics_labels, score_fragments):
+
+        for i in range(0, len(lyrics_labels)):
+            # if there's no lyrics, label instrumental
+            if not score_fragments[i]['lyrics']:
+                structures[i]['lyric_structure'] = 'INSTRUMENTAL'
+            else:
+                structures[i]['lyric_structure'] = lyrics_labels[i]
 
     def get_melodic_organization(self, structures, score_fragments):
         # remove annotation/control row; i.e. entries w 0 duration
@@ -95,9 +100,8 @@ class StructureLabeler(object):
         melodies_str = [ScoreProcessor.mel2str(m, unique_notes)
                         for m in melodies]
 
-        dists = matrix([[GraphOperations.norm_levenshtein(m1, m2)
-                         for m1 in melodies_str] for m2 in melodies_str])
-
+        dists = GraphOperations.get_dist_matrix(melodies_str,
+                                                metric='norm_levenshtein')
         cliques = GraphOperations.get_cliques(dists, self.melody_sim_thres)
 
         melody_labels = StructureLabeler._semiotize(cliques)
@@ -189,8 +193,8 @@ class StructureLabeler(object):
     def _get_similar_cliques(cliques, ec):
         in_cliques_idx = [i for i, x in enumerate(cliques['similar'])
                           if ec <= x]
-        assert (len(in_cliques_idx) > 0,
-                "The exact clique is not in the similar cliques list. "
-                "This shouldn't happen.")
+        assert len(in_cliques_idx) > 0,\
+            "The exact clique is not in the similar cliques list. " \
+            "This shouldn't happen."
 
         return in_cliques_idx
