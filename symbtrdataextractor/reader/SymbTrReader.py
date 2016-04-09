@@ -1,6 +1,6 @@
 import csv
 import os
-from . MetadataExtractor import MetadataExtractor
+from symbtrdataextractor.MetadataExtractor import MetadataExtractor
 
 
 class SymbTrReader(object):

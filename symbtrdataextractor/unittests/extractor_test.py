@@ -1,7 +1,8 @@
-from symbtrdataextractor.SymbTrDataExtractor import SymbTrDataExtractor
-from symbtrdataextractor.SymbTrReader import SymbTrReader
 import json
 import os
+
+from symbtrdataextractor.SymbTrDataExtractor import SymbTrDataExtractor
+from symbtrdataextractor.reader.SymbTrReader import SymbTrReader
 
 _curr_folder = os.path.dirname(os.path.abspath(__file__))
 

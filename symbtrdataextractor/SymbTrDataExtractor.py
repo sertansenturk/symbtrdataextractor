@@ -1,11 +1,11 @@
 import os
 
-from .SymbTrDataMerger import SymbTrDataMerger
+from symbtrdataextractor.reader.SymbTrReader import SymbTrReader
 from .MetadataExtractor import MetadataExtractor
-from .SegmentExtractor import SegmentExtractor
 from .RhythmicFeatureExtractor import RhythmicFeatureExtractor
 from .SectionExtractor import SectionExtractor
-from .SymbTrReader import SymbTrReader
+from .SegmentExtractor import SegmentExtractor
+from .SymbTrDataMerger import SymbTrDataMerger
 
 
 class SymbTrDataExtractor(SymbTrDataMerger):
