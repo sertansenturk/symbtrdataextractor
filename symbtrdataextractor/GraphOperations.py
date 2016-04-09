@@ -21,10 +21,10 @@ class GraphOperations(object):
     def get_dist_matrix(stream1, stream2=None, metric='norm_levenshtein'):
         if metric not in GraphOperations._metrics:
             raise ValueError("The distance metric can be: %s"
-                             %', '.join(GraphOperations._metrics))
+                             % ', '.join(GraphOperations._metrics))
         dist_metric = getattr(GraphOperations, metric)
 
-        if stream2 == None:  # return self distance matrix
+        if stream2 is None:  # return self distance matrix
             stream2 = stream1
 
         return matrix([[dist_metric(a, b) for a in stream1] for b in stream2])

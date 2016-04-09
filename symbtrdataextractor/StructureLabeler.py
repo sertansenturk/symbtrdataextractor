@@ -1,5 +1,6 @@
 from .ScoreProcessor import ScoreProcessor
 from .GraphOperations import GraphOperations
+from copy import deepcopy
 
 
 class StructureLabeler(object):
@@ -50,11 +51,13 @@ class StructureLabeler(object):
         # This part is done for future needs; e.g. audio-lyrics alignment
 
         # get the lyrics stripped of section information
-        ScoreProcessor.get_true_lyrics(score_fragments)
+        lyrics = ScoreProcessor.get_true_lyrics(score_fragments)
+        for (sf, ly) in zip(score_fragments):  # assign to the score_fragments
+            sf['lyrics'] = ly
 
         # graph analysis
-        lyrics_stream = [a['lyrics'] for a in score_fragments]
-        dists = GraphOperations.get_dist_matrix(lyrics_stream,
+        lyrics_strings = [a['lyrics'] for a in score_fragments]
+        dists = GraphOperations.get_dist_matrix(lyrics_strings,
                                                 metric='norm_levenshtein')
         cliques = GraphOperations.get_cliques(dists, self.lyrics_sim_thres)
 
@@ -64,43 +67,12 @@ class StructureLabeler(object):
             structures, lyrics_labels, score_fragments)
 
         # sanity check
-        lyrics = [sc['lyrics'] for sc in score_fragments]
         self._assert_labels(lyrics, lyrics_labels, 'lyrics')
 
-    @staticmethod
-    def _apply_labels_to_lyrics_structure(
-            structures, lyrics_labels, score_fragments):
-
-        for i in range(0, len(lyrics_labels)):
-            # if there's no lyrics, label instrumental
-            if not score_fragments[i]['lyrics']:
-                structures[i]['lyric_structure'] = 'INSTRUMENTAL'
-            else:
-                structures[i]['lyric_structure'] = lyrics_labels[i]
-
     def get_melodic_organization(self, structures, score_fragments):
-        # remove annotation/control row; i.e. entries w 0 duration
-        for sf in score_fragments:
-            for i in reversed(range(0, len(sf['durs']))):
-                if sf['durs'][i] == 0:
-                    sf['notes'].pop(i)
-                    sf['nums'].pop(i)
-                    sf['denums'].pop(i)
-                    sf['durs'].pop(i)
+        melodies, melody_strings = self.get_melodies(score_fragments)
 
-        # synthesize the score according taking the shortest note as the
-        # unit shortest note has the greatest denumerator
-        max_denum = max(max(sf['denums']) for sf in score_fragments)
-        melodies = [ScoreProcessor.synth_melody(sf, max_denum)
-                    for sf in score_fragments]
-
-        # convert the numbers in melodies to unique strings for Levenstein
-        unique_notes = list(set(x for sf in score_fragments
-                                for x in sf['notes']))
-        melodies_str = [ScoreProcessor.mel2str(m, unique_notes)
-                        for m in melodies]
-
-        dists = GraphOperations.get_dist_matrix(melodies_str,
+        dists = GraphOperations.get_dist_matrix(melody_strings,
                                                 metric='norm_levenshtein')
         cliques = GraphOperations.get_cliques(dists, self.melody_sim_thres)
 
@@ -124,12 +96,61 @@ class StructureLabeler(object):
         # sanity check
         self._assert_labels(melodies, melody_labels, 'melody')
 
+    def get_melodies(self, score_fragments):
+        score_fragments_copy = self._remove_zero_dur_events(score_fragments)
+
+        # synthesize the score by taking the shortest note as the unit
+        # (i.e. the shortest note has the largest denumerator)
+        max_denum = max(max(sf['denums']) for sf in score_fragments_copy)
+        melodies = [ScoreProcessor.synth_melody(sf, max_denum)
+                    for sf in score_fragments_copy]
+
+        # convert the numbers in melodies to unique strings for Levenstein dist
+        melody_strings = self._melodies_to_strings(
+            melodies, score_fragments_copy)
+
+        return melodies, melody_strings
+
+    @staticmethod
+    def _melodies_to_strings(melodies, score_fragments_copy):
+        unique_notes = list(set(x for sf in score_fragments_copy
+                                for x in sf['notes']))
+        melody_strings = [ScoreProcessor.mel2str(m, unique_notes)
+                          for m in melodies]
+        return melody_strings
+
+    @staticmethod
+    def _remove_zero_dur_events(score_fragments):
+        copy_fragments = deepcopy(score_fragments)
+
+        # remove annotation/control row; i.e. entries w 0 duration
+        for sf in copy_fragments:
+            for i in reversed(range(0, len(sf['durs']))):
+                if sf['durs'][i] == 0:
+                    sf['notes'].pop(i)
+                    sf['nums'].pop(i)
+                    sf['denums'].pop(i)
+                    sf['durs'].pop(i)
+
+        return copy_fragments
+
+    @staticmethod
+    def _apply_labels_to_lyrics_structure(
+            structures, lyrics_labels, score_fragments):
+
+        for i in range(0, len(lyrics_labels)):
+            # if there's no lyrics, label instrumental
+            if not score_fragments[i]['lyrics']:
+                structures[i]['lyric_structure'] = 'INSTRUMENTAL'
+            else:
+                structures[i]['lyric_structure'] = lyrics_labels[i]
+
     @staticmethod
     def _assert_labels(stream, labels, name):
-        for lbl, lyr in zip(labels, stream):
-            chk_lyr = ([stream[i] for i, x in enumerate(labels)
-                        if x == lbl])
-            assert all(lyr == cl for cl in chk_lyr), \
+        for lbl, strm in zip(labels, stream):
+            chk_strm = ([stream[i] for i, x in enumerate(labels)
+                         if x == lbl])
+            assert all(strm == cl for cl in chk_strm), \
                 'Mismatch in %s label: %s' % (name, lbl)
 
     @staticmethod

@@ -1,6 +1,7 @@
 import string
 import os
 import json
+from copy import deepcopy
 
 
 class ScoreProcessor(object):
@@ -9,15 +10,18 @@ class ScoreProcessor(object):
     """
     @staticmethod
     def get_true_lyrics(score_fragments):
+        copy_fragments = deepcopy(score_fragments)
         all_labels = [l for sub_list in
                       ScoreProcessor.get_symbtr_labels().values()
                       for l in sub_list]
         all_labels += ['.', '', ' ']
-        for sf in score_fragments:
+        for sf in copy_fragments:
             real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
                 sf['lyrics'], all_labels, sf['durs'])
             sf['lyrics'] = u''.join([sf['lyrics'][i].replace(u' ', u'')
                                      for i in real_lyrics_idx])
+
+        return [sf['lyrics'] for sf in copy_fragments]
 
     @staticmethod
     def get_true_lyrics_idx(lyrics, all_labels, dur):
