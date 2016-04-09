@@ -183,32 +183,34 @@ class SymbTrDataExtractor(SymbTrDataMerger):
     # getter and setters
     @property
     def lyrics_sim_thres(self):
-        assert self._phraseExtractor.lyrics_sim_thres == \
-               self._sectionExtractor.lyrics_sim_thres, \
-            'The lyrics similarity of the phrase and section extractions ' \
-            'should be equal'
+        self._assert_sim_threshold('lyrics')
         return self._phraseExtractor.lyrics_sim_thres
 
     @lyrics_sim_thres.setter
     def lyrics_sim_thres(self, value):
-        self._chk_sim_thres_val(value)
-        self._phraseExtractor.lyrics_sim_thres = value
-        self._sectionExtractor.lyrics_sim_thres = value
+        self._set_sim_thres(value, 'lyrics')
 
     @property
     def melody_sim_thres(self):
-        assert self._phraseExtractor.melody_sim_thres == \
-               self._sectionExtractor.melody_sim_thres, \
-            'The melodic similarity of the phrase and section extractions ' \
-            'should be equal'
+        self._assert_sim_threshold('melody')
 
         return self._phraseExtractor.melody_sim_thres
 
     @melody_sim_thres.setter
     def melody_sim_thres(self, value):
+        self._set_sim_thres(value, 'melody')
+
+    def _assert_sim_threshold(self, name):
+        p = name + '_sim_thres'
+        phrase_sim_thres = getattr(self._phraseExtractor, p)
+        section_sim_thres = getattr(self._sectionExtractor, p)
+        assert phrase_sim_thres == section_sim_thres, \
+            'The %s of the phrase and section extractors should the same' % (p)
+
+    def _set_sim_thres(self, value, name):
         self._chk_sim_thres_val(value)
-        self._phraseExtractor.melody_sim_thres = value
-        self._sectionExtractor.melody_sim_thres = value
+        setattr(self._phraseExtractor, name + '_sim_thres', value)
+        setattr(self._sectionExtractor, name + '_sim_thres', value)
 
     @staticmethod
     def _chk_sim_thres_val(value):
