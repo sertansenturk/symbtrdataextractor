@@ -45,8 +45,8 @@ class SymbTrDataExtractor(object):
             The similarity threshold for the melody of two sections/phrases
             to be regarded as similar. (the default is 0.75)
         extract_all_labels : bool, optional
-            True to extract all labels in written in the lyrics field
-            regardless they are a structural marking etc., False to only
+            True to extract sections using all labels in written in the lyrics
+            field regardless they are a section marking etc., False to only
             extract the lyrics. (the default is False)
         crop_consec_bounds : bool, optional
             True to remove the first of the two consecutive boundaries inside
@@ -76,7 +76,6 @@ class SymbTrDataExtractor(object):
         self._phraseExtractor = PhraseExtractor(
             lyrics_sim_thres=lyrics_sim_thres,
             melody_sim_thres=melody_sim_thres,
-            extract_all_labels=extract_all_labels,
             crop_consecutive_bounds=crop_consec_bounds)
 
         self._lyrics_sim_thres = lyrics_sim_thres
@@ -89,23 +88,30 @@ class SymbTrDataExtractor(object):
     # getter and setters
     @property
     def lyrics_sim_thres(self):
-        return self._lyrics_sim_thres
+        assert self._phraseExtractor.lyrics_sim_thres == \
+               self._sectionExtractor.lyrics_sim_thres, \
+            'The lyrics similarity of the phrase and section extractions ' \
+            'should be equal'
+        return self._phraseExtractor.lyrics_sim_thres
 
     @lyrics_sim_thres.setter
     def lyrics_sim_thres(self, value):
         self._chk_sim_thres_val(value)
-        self._lyrics_sim_thres = value
         self._phraseExtractor.lyrics_sim_thres = value
         self._sectionExtractor.lyrics_sim_thres = value
 
     @property
     def melody_sim_thres(self):
-        return self._melody_sim_thres
+        assert self._phraseExtractor.melody_sim_thres == \
+               self._sectionExtractor.melody_sim_thres, \
+            'The melodic similarity of the phrase and section extractions ' \
+            'should be equal'
+
+        return self._phraseExtractor.melody_sim_thres
 
     @melody_sim_thres.setter
     def melody_sim_thres(self, value):
         self._chk_sim_thres_val(value)
-        self._melody_sim_thres = value
         self._phraseExtractor.melody_sim_thres = value
         self._sectionExtractor.melody_sim_thres = value
 
@@ -122,7 +128,6 @@ class SymbTrDataExtractor(object):
     @extract_all_labels.setter
     def extract_all_labels(self, value):
         self._chk_bool(value)
-        self._extract_all_labels = value
         self._sectionExtractor.extract_all_labels = value
         self._phraseExtractor.extract_all_labels = value
 
@@ -158,7 +163,7 @@ class SymbTrDataExtractor(object):
 
     @staticmethod
     def _chk_bool(value):
-        if isinstance(value, type(True)):
+        if not isinstance(value, type(True)):
             raise ValueError('The property should be a boolean')
 
     def extract(self, score_file, symbtr_name=None, mbid=None,

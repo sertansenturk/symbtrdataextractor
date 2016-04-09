@@ -7,7 +7,7 @@ class PhraseExtractor(object):
 
     """
     def __init__(self, lyrics_sim_thres=0.75, melody_sim_thres=0.75,
-                 extract_all_labels=False, crop_consecutive_bounds=True):
+                 crop_consecutive_bounds=True):
         """
         Class constructor
 
@@ -19,15 +19,10 @@ class PhraseExtractor(object):
         melody_sim_thres : float[0, 1], optional
             The similarity threshold for the melody of two sections/phrases
             to be regarded as similar. (the default is 0.75)
-        extract_all_labels : bool, optional
-            True to extract all labels in written in the lyrics field
-            regardless they are a structural marking etc., False to only
-            extract the lyrics. (the default is False)
         crop_consecutive_bounds : bool, optional
             True to remove the first of the two consecutive boundaries,
             False otherwise. (the default is True)
         """
-        self.extract_all_labels = extract_all_labels
         self.lyrics_sim_thres = lyrics_sim_thres
         self.melody_sim_thres = melody_sim_thres
         self.crop_consecutive_bounds = crop_consecutive_bounds
