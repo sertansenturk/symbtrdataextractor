@@ -2,7 +2,7 @@ import os
 
 from .SymbTrDataMerger import SymbTrDataMerger
 from .MetadataExtractor import MetadataExtractor
-from .PhraseExtractor import PhraseExtractor
+from .SegmentExtractor import SegmentExtractor
 from .RhythmicFeatureExtractor import RhythmicFeatureExtractor
 from .SectionExtractor import SectionExtractor
 from .SymbTrReader import SymbTrReader
@@ -14,16 +14,14 @@ class SymbTrDataExtractor(SymbTrDataMerger):
 
     The information include:
         * Obtain the makam, usul, form, name and composer of the given SymbTr
-    score
+        score
         * Extract section boundaries from both the implicit and explicit
-    section information given in the SymbTr scores. Analyse the melody and the
-    lyrics of each section independently and apply semiotic labeling to each
-    section accordingly.
-        * Extract phrases from the annotated phrase boundaries in the SymbTr
-    scores.
-        * Add and analyze phrases in the SymbTr-txt scores from computed
-    boundaries.
-        * Query relevant metadata from MusicBrainz, if the MBID is supplied.
+        section information given in the SymbTr scores
+        * Extract annotated phrase boundaries in the SymbTr scores
+        * Add user provided segment boundaries in the SymbTr scores
+        * Analyse the melody and the lyrics of the sections, phrase
+        annotations and user provided segmentations, and apply semiotic labels
+        * Query relevant metadata from MusicBrainz (if the MBID is supplied)
 
     Currently only the SymbTr-txt scores are supported. MusicXML and mu2
     support can be added, if demanded.
@@ -41,10 +39,10 @@ class SymbTrDataExtractor(SymbTrDataMerger):
         Parameters
         ----------
         lyrics_sim_thres : float[0, 1], optional
-            The similarity threshold for the lyrics of two sections/phrases
+            The similarity threshold for the lyrics of two sections/segments
             to be regarded as similar. (the default is 0.75)
         melody_sim_thres : float[0, 1], optional
-            The similarity threshold for the melody of two sections/phrases
+            The similarity threshold for the melody of two sections/segments
             to be regarded as similar. (the default is 0.75)
         extract_all_labels : bool, optional
             True to extract sections using all labels in written in the lyrics
@@ -75,7 +73,7 @@ class SymbTrDataExtractor(SymbTrDataMerger):
             extract_all_labels=extract_all_labels,
             print_warnings=print_warnings)
 
-        self._phraseExtractor = PhraseExtractor(
+        self._segmentExtractor = SegmentExtractor(
             lyrics_sim_thres=lyrics_sim_thres,
             melody_sim_thres=melody_sim_thres,
             crop_consecutive_bounds=crop_consec_bounds)
@@ -151,15 +149,17 @@ class SymbTrDataExtractor(SymbTrDataMerger):
         data['sections'], is_section_data_valid = self._sectionExtractor. \
             extract(score, symbtr_name)
 
-        anno_phrase = self._phraseExtractor.extract_annotations(
+        anno_phrases = self._segmentExtractor.extract_annotations(
             score, sections=data['sections'])
-        seg_phrase = self._phraseExtractor.extract_segments(
+        segments = self._segmentExtractor.extract_segments(
             score, segment_note_bound_idx, sections=data['sections'])
 
         data['rhythmic_structure'] = \
             RhythmicFeatureExtractor.extract_rhythmic_structure(score)
 
-        data['phrases'] = {'annotated': anno_phrase, 'segmented': seg_phrase}
+        data['segmentations'] = segments
+        data['phrase_annotations'] = anno_phrases
+
         is_data_valid = all([is_metadata_valid, is_section_data_valid,
                              is_score_content_valid])
 
@@ -184,7 +184,7 @@ class SymbTrDataExtractor(SymbTrDataMerger):
     @property
     def lyrics_sim_thres(self):
         self._assert_sim_threshold('lyrics')
-        return self._phraseExtractor.lyrics_sim_thres
+        return self._segmentExtractor.lyrics_sim_thres
 
     @lyrics_sim_thres.setter
     def lyrics_sim_thres(self, value):
@@ -194,7 +194,7 @@ class SymbTrDataExtractor(SymbTrDataMerger):
     def melody_sim_thres(self):
         self._assert_sim_threshold('melody')
 
-        return self._phraseExtractor.melody_sim_thres
+        return self._segmentExtractor.melody_sim_thres
 
     @melody_sim_thres.setter
     def melody_sim_thres(self, value):
@@ -202,14 +202,15 @@ class SymbTrDataExtractor(SymbTrDataMerger):
 
     def _assert_sim_threshold(self, name):
         p = name + '_sim_thres'
-        phrase_sim_thres = getattr(self._phraseExtractor, p)
+        segment_sim_thres = getattr(self._segmentExtractor, p)
         section_sim_thres = getattr(self._sectionExtractor, p)
-        assert phrase_sim_thres == section_sim_thres, \
-            'The %s of the phrase and section extractors should the same' % (p)
+        assert segment_sim_thres == section_sim_thres, \
+            'The %s of the _segmentExtractor and _sectionExtractor should ' \
+            'have the same value' % p
 
     def _set_sim_thres(self, value, name):
         self._chk_sim_thres_val(value)
-        setattr(self._phraseExtractor, name + '_sim_thres', value)
+        setattr(self._segmentExtractor, name + '_sim_thres', value)
         setattr(self._sectionExtractor, name + '_sim_thres', value)
 
     @staticmethod
@@ -247,12 +248,12 @@ class SymbTrDataExtractor(SymbTrDataMerger):
 
     @property
     def crop_consecutive_bounds(self):
-        return self._phraseExtractor.crop_consecutive_bounds
+        return self._segmentExtractor.crop_consecutive_bounds
 
     @crop_consecutive_bounds.setter
     def crop_consecutive_bounds(self, value):
         self._chk_bool(value)
-        self._phraseExtractor.crop_consecutive_bounds = value
+        self._segmentExtractor.crop_consecutive_bounds = value
 
     @staticmethod
     def _chk_bool(value):

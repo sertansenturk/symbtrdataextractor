@@ -11,9 +11,10 @@ This repository contains to algorithms to extract metadata, related music knowle
 
 Currently you can:
 - Obtain the makam, usul, form, name and composer of the given SymbTr score
-- Extract section boundaries from both the implicit and explicit section information given in the SymbTr scores. Analyse the melody and lyrics of each section independently and apply semiotic labeling to each section accordingly.
-- Extract phrases from the annotated phrase boundaries in the SymbTr-txt scores.
-- Add and analyze phrases in the SymbTr-txt scores from [computed boundaries](https://github.com/MTG/makam-symbolic-phrase-segmentation).
+- Extract section boundaries from both the implicit and explicit section information given in the SymbTr scores
+- Extract annotated phrase boundaries in the SymbTr scores
+- Add user provided segment boundaries in the SymbTr scores
+- Analyse the melody and the lyrics of the sections, phrase annotations and user provided segments, and apply semiotic labels
 - Query relevant metadata from MusicBrainz, if the [MBID](https://musicbrainz.org/doc/MusicBrainz_Identifier) is supplied.
 - Read the metadata stored in the header of the mu2 file.
 

@@ -2,7 +2,7 @@ from . ScoreProcessor import ScoreProcessor
 from . StructureLabeler import StructureLabeler
 
 
-class PhraseExtractor(object):
+class SegmentExtractor(object):
     """
 
     """
@@ -14,10 +14,10 @@ class PhraseExtractor(object):
         Parameters
         ----------
         lyrics_sim_thres : float[0, 1], optional
-            The similarity threshold for the lyrics of two sections/phrases
+            The similarity threshold for the lyrics of two segments
             to be regarded as similar. (the default is 0.75)
         melody_sim_thres : float[0, 1], optional
-            The similarity threshold for the melody of two sections/phrases
+            The similarity threshold for the melody of two segments
             to be regarded as similar. (the default is 0.75)
         crop_consecutive_bounds : bool, optional
             True to remove the first of the two consecutive boundaries,
@@ -27,12 +27,12 @@ class PhraseExtractor(object):
         self.melody_sim_thres = melody_sim_thres
         self.crop_consecutive_bounds = crop_consecutive_bounds
 
-        self.phraseLabeler = StructureLabeler(
+        self.segmentLabeler = StructureLabeler(
             lyrics_sim_thres=self.lyrics_sim_thres,
             melody_sim_thres=self.melody_sim_thres)
 
     def extract_annotations(self, score, sections=None):
-        # code 51 is the usul change and it always marks a phrase boundary
+        # code 51 is the usul change and it always marks a segment boundary
         bound_codes = [51, 53, 54, 55]
         anno_codes = [53, 54, 55]
 
@@ -44,11 +44,11 @@ class PhraseExtractor(object):
                        if code in anno_codes]
 
         if anno_bounds:
-            phrases = self._extract(all_bounds, score, sections=sections)
+            segments = self._extract(all_bounds, score, sections=sections)
         else:
-            phrases = []
+            segments = []
 
-        return phrases
+        return segments
 
     @staticmethod
     def _get_all_bounds_in_score(bound_codes, score):
@@ -69,8 +69,9 @@ class PhraseExtractor(object):
                                          sections=sections)
             else:
                 segments = []
-        except TypeError:  # the json saved by MATLAB phrase segmentation sends
-            # a special structure specifying the 0 dimensional array
+        except TypeError:  # the json saved by automatic phrase segmentation
+            # (https://github.com/MTG/makam-symbolic-phrase-segmentation)
+            # has a special structure specifying the 0 dimensional array
             segments = []
 
         return segments
@@ -86,7 +87,7 @@ class PhraseExtractor(object):
         real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
             score['lyrics'], all_labels, score['duration'])
 
-        phrases = []
+        segments = []
         for pp in range(0, len(bounds) - 1):
             start_note_idx = bounds[pp]
             end_note_idx = bounds[pp + 1] - 1
@@ -102,13 +103,13 @@ class PhraseExtractor(object):
                       if code == 54]
 
             # lyrics
-            phrase_lyrics_idx = ([rl for rl in real_lyrics_idx
+            segment_lyrics_idx = ([rl for rl in real_lyrics_idx
                                   if start_note <= rl <= end_note])
-            syllables = [score['lyrics'][li] for li in phrase_lyrics_idx]
+            syllables = [score['lyrics'][li] for li in segment_lyrics_idx]
             lyrics = ''.join(syllables)
 
-            # sections
-            phrase_sections = []
+            # sections the segment is in
+            segment_sections = []
             if sections:
                 start_section_idx = self._get_section_idx(sections, start_note)
                 end_section_idx = self._get_section_idx(sections, end_note)
@@ -117,23 +118,23 @@ class PhraseExtractor(object):
                                           end_section_idx + 1),
                                     sections[start_section_idx:
                                              end_section_idx + 1]):
-                    phrase_sections.append(
+                    segment_sections.append(
                         {'section_idx': idx,
                          'melodic_structure': sec['melodic_structure'],
                          'lyric_structure': sec['lyric_structure']})
 
             if lyrics:
-                name = u"VOCAL_PHRASE"
-                slug = u"VOCAL_PHRASE"
+                name = u"VOCAL_SEGMENT"
+                slug = u"VOCAL_SEGMENT"
             else:
-                name = u"INSTRUMENTAL_PHRASE"
-                slug = u"INSTRUMENTAL_PHRASE"
+                name = u"INSTRUMENTAL_SEGMENT"
+                slug = u"INSTRUMENTAL_SEGMENT"
 
-            phrases.append({'name': name, 'slug': slug, 'flavor': flavor,
+            segments.append({'name': name, 'slug': slug, 'flavor': flavor,
                             'start_note': start_note, 'end_note': end_note,
-                            'lyrics': lyrics, 'sections': phrase_sections})
+                            'lyrics': lyrics, 'sections': segment_sections})
 
-        return self.phraseLabeler.label_structures(phrases, score)
+        return self.segmentLabeler.label_structures(segments, score)
 
     @staticmethod
     def _get_section_idx(sections, note_idx):
