@@ -76,7 +76,7 @@ class StructureLabeler(object):
 
             cliques = GraphOperations.get_cliques(dists, self.lyrics_sim_thres)
 
-            lyrics_labels = self.semiotize(cliques)
+            lyrics_labels = self._semiotize(cliques)
 
             # label the insrumental structures, if present
             for i in range(0, len(lyrics_labels)):
@@ -87,11 +87,7 @@ class StructureLabeler(object):
 
             # sanity check
             lyrics = [sc['lyrics'] for sc in score_fragments]
-            for lbl, lyr in zip(lyrics_labels, lyrics):
-                chk_lyr = ([lyrics[i] for i, x in enumerate(lyrics_labels)
-                            if x == lbl])
-                if not all(lyr == cl for cl in chk_lyr):
-                    raise RuntimeError('Mismatch in lyrics_label: ' + lbl)
+            self._assert_labels(lyrics, lyrics_labels, 'lyrics')
 
         else:  # no section information
             structures = []
@@ -126,7 +122,7 @@ class StructureLabeler(object):
 
             cliques = GraphOperations.get_cliques(dists, self.melody_sim_thres)
 
-            melody_labels = StructureLabeler.semiotize(cliques)
+            melody_labels = StructureLabeler._semiotize(cliques)
 
             # label the instrumental structures, if present
             # all_labels = [l for sub_list in self.get_symbtr_labels().values()
@@ -144,11 +140,7 @@ class StructureLabeler(object):
                     structures[i]['melodic_structure'] = melody_labels[i]
 
             # sanity check
-            for lbl, mel in zip(melody_labels, melodies):
-                chk_mel = ([melodies[i] for i, x in enumerate(melody_labels)
-                            if x == lbl])
-                if not all(mel == cm for cm in chk_mel):
-                    raise RuntimeError('Mismatch in melody_label: ' + lbl)
+            self._assert_labels(melodies, melody_labels, 'melody')
 
         else:  # no section information
             structures = []
@@ -156,7 +148,15 @@ class StructureLabeler(object):
         return structures
 
     @staticmethod
-    def semiotize(cliques):
+    def _assert_labels(stream, labels, name):
+        for lbl, lyr in zip(labels, stream):
+            chk_lyr = ([stream[i] for i, x in enumerate(labels)
+                        if x == lbl])
+            assert all(lyr == cl for cl in chk_lyr), \
+                'Mismatch in %s label: %s' % (name, lbl)
+
+    @staticmethod
+    def _semiotize(cliques):
         # Here we follow the annotation conventions explained in:
         #
         # Frederic Bimbot, Emmanuel Deruty, Gabriel Sargent, Emmanuel Vincent.
