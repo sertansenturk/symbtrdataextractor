@@ -32,7 +32,6 @@ class Mu2Reader(SymbTrReader):
             symbtr_name = Mu2Reader.get_symbtr_name_from_filepath(score_file,
                                                                   symbtr_name)
 
-        # TODO
         return NotImplemented
 
     @staticmethod

@@ -29,5 +29,4 @@ class MusicXMLReader(SymbTrReader):
             symbtr_name = MusicXMLReader.get_symbtr_name_from_filepath(
                 score_file, symbtr_name)
 
-        # TODO
         return NotImplemented
