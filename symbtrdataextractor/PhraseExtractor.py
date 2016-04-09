@@ -55,7 +55,8 @@ class PhraseExtractor(object):
 
         return phrases
 
-    def _get_all_bounds_in_score(self, bound_codes, first_note_idx, score):
+    @staticmethod
+    def _get_all_bounds_in_score(bound_codes, score):
         # start bounds with the first note
         first_note_idx = ScoreProcessor.get_first_note_index(score)
 
