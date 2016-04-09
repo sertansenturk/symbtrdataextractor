@@ -147,7 +147,7 @@ class SymbTrDataExtractor(SymbTrDataMerger):
         data['number_of_notes'] = len(score['duration'])
 
         data['sections'], is_section_data_valid = self._sectionExtractor. \
-            extract(score, symbtr_name)
+            from_txt_score(score, symbtr_name)
 
         anno_phrases = self._segmentExtractor.extract_annotations(
             score, sections=data['sections'])

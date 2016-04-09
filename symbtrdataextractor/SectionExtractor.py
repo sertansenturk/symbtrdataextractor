@@ -3,6 +3,7 @@ from fileoperations.slugify_tr import slugify_tr
 from . ScoreProcessor import ScoreProcessor
 from . StructureLabeler import StructureLabeler
 from . OffsetProcessor import OffsetProcessor
+import warnings
 
 
 class SectionExtractor(object):
@@ -42,7 +43,7 @@ class SectionExtractor(object):
             lyrics_sim_thres=self.lyrics_sim_thres,
             melody_sim_thres=self.melody_sim_thres)
 
-    def extract(self, score, symbtrname):
+    def from_txt_score(self, score, symbtrname):
         all_labels = ScoreProcessor.get_all_symbtr_labels()
         struct_lbl = all_labels if self.extract_all_labels else \
             ScoreProcessor.get_grouped_symbtr_labels()['structure']
@@ -75,10 +76,10 @@ class SectionExtractor(object):
 
         return sections, valid_bool
 
-    def extract_from_musicxml(self, score):
+    def from_musicxml_score(self, score):
         return NotImplemented
 
-    def extract_from_mu2(self, score):
+    def from_mu2_score(self, score):
         return NotImplemented
 
     @staticmethod
@@ -139,10 +140,11 @@ class SectionExtractor(object):
                 if next_lyrics_measure_offset == floor(
                         score['offset'][prev_closest_end_ind]):
                     if self.print_warnings:
-                        print("    " + str(next_lyrics_measure_offset) + ':' +
-                              score['lyrics'][prev_closest_end_ind] + ' and ' +
-                              score['lyrics'][next_lyrics_start_ind] +
-                              ' are in the same measure!')
+                        warnings.warn(
+                            "    " + str(next_lyrics_measure_offset) + ':' +
+                            score['lyrics'][prev_closest_end_ind] + ' and ' +
+                            score['lyrics'][next_lyrics_start_ind] +
+                            ' are in the same measure!')
 
                     se['start_note'] = next_lyrics_start_ind
                 else:  # The section starts on the first measure the lyrics
@@ -192,54 +194,88 @@ class SectionExtractor(object):
         sort_idx = [i[0] for i in sorted(enumerate([s['start_note']
                                                     for s in sections]),
                                          key=lambda x: x[1])]
+
         return [sections[s] for s in sort_idx]
 
     def _validate_sections(self, sections, score, ignore_labels, symbtrname):
         # treat some of these are warning; they'll be made stricter later
-        valid_bool = True
         if not sections:  # check section presence
             if self.print_warnings:
-                print("    " + symbtrname + ", Missing section info in "
-                                            "lyrics.")
+                warnings.warn("    " + symbtrname + ", Missing section info "
+                                                    "in lyrics.")
+            valid_bool = True  # nothing to validate
         else:  # check section continuity
-            first_note_idx = ScoreProcessor.get_first_note_index(score)
+            section_continuity_bool = self._validate_section_continuity(
+                score, sections, symbtrname)
 
-            ends = [first_note_idx - 1] + [s['end_note'] for s in sections]
-            starts = [s['start_note'] for s in sections] + \
-                     [len(score['offset'])]
-            for s, e in zip(starts, ends):
-                if not s - e == 1:
-                    if self.print_warnings:
-                        print("    " + symbtrname + ", " + str(e) + '->' +
-                              str(s) + ', Gap between the sections')
-                    valid_bool = False
+            self._chk_measure_starts(ignore_labels, sections, score,
+                                     symbtrname)
 
+            section_bound_bool = self._validate_section_start_end(
+                    sections, score, symbtrname)
+
+            # check if there are any structure labels with a space
+            no_space_bool = self._validate_section_labels(score, symbtrname)
+
+            valid_bool = all([section_continuity_bool, no_space_bool,
+                              section_bound_bool])
+
+        return valid_bool
+
+    @staticmethod
+    def _validate_section_start_end(sections, score, symbtrname):
+        # check if the end of a section somehow got earlier than its start
+        section_bound_bool = True
         for s in sections:
-            # check whether section starts on the measure or not
+            if s['start_note'] > s['end_note']:
+                warnings.warn(
+                    "    " + symbtrname + ", " + str(s['start_note']) + '->' +
+                    str(s['end_note']) + ', ' + s['slug'] +
+                    ' ends before it starts: ' +
+                    str(score['offset'][s['start_note']]))
+                section_bound_bool = False
+
+        return section_bound_bool
+
+    def _chk_measure_starts(self, ignore_labels, sections, score, symbtrname):
+        # check whether section starts on the measure or not
+        for s in sections:
             starts_on_measure = not OffsetProcessor.is_integer_offset(
                 score['offset'][s['start_note']]) and (s['slug'] not in
                                                        ignore_labels)
             if starts_on_measure and self.print_warnings:
+                # This is not a warning but a indication to the user as it can
+                # happen occasionally especially in the folk forms
                 print("    " + symbtrname + ", " + str(s['start_note']) +
                       ', ' + s['slug'] + ' does not start on a measure: ' +
                       str(score['offset'][s['start_note']]))
-            # check if the end of a section somehow got earlier than its start
-            if s['start_note'] > s['end_note']:
-                print("    " + symbtrname + ", " + str(s['start_note']) +
-                      '->' + str(s['end_note']) + ', ' + s['slug'] +
-                      ' ends before it starts: ' +
-                      str(score['offset'][s['start_note']]))
-                valid_bool = False
 
-        # check if there are any structure labels with a space
-        # e.g. it is not found
+    @staticmethod
+    def _validate_section_labels(score, symbtrname):
         all_labels = ScoreProcessor.get_all_symbtr_labels() + ['.']
+        no_space_bool = False
         for i, ll in enumerate(score['lyrics']):
             for label in all_labels:
                 # invalid lyrics end
                 if (label + ' ') == ll or (label + '  ') == ll:
-                    print("    " + symbtrname + ', ' + str(i) +
-                          ": Extra space in " + ll)
-                    valid_bool = False
+                    warnings.warn("    " + symbtrname + ', ' + str(i) +
+                                  ": Extra space in " + ll)
+                    no_space_bool = False
 
-        return valid_bool
+        return no_space_bool
+
+    def _validate_section_continuity(self, score, sections, symbtrname):
+        first_note_idx = ScoreProcessor.get_first_note_index(score)
+        ends = [first_note_idx - 1] + [s['end_note'] for s in sections]
+        start_note_idx = [s['start_note'] for s in sections] + \
+                         [len(score['lyrics'])]
+
+        section_continuity_bool = True
+        for s, e in zip(start_note_idx, ends):
+            if not s - e == 1:
+                if self.print_warnings:
+                    warnings.warn("    " + symbtrname + ", " + str(e) + '->' +
+                                  str(s) + ', Gap between the sections')
+                    section_continuity_bool = False
+
+        return section_continuity_bool
