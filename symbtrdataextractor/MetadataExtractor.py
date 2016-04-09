@@ -61,13 +61,14 @@ class MetadataExtractor(object):
 
         return data, is_attr_meta_valid
 
-    def validate_makam_form_usul(self, data, scorename):
+    @staticmethod
+    def validate_makam_form_usul(data, scorename):
         is_makam_valid = MetadataExtractor.validate_attribute(
-            data['makam'], scorename)
+            data, scorename, 'makam')
         is_form_valid = MetadataExtractor.validate_attribute(
-            data['form'], scorename)
+            data, scorename, 'form')
         is_usul_valid = MetadataExtractor.validate_attribute(
-            data['usul'], scorename)
+            data, scorename, 'usul')
         is_attr_meta_valid = is_makam_valid and is_form_valid and is_usul_valid
 
         return is_attr_meta_valid
@@ -80,8 +81,11 @@ class MetadataExtractor(object):
                 return attr_key
 
     @staticmethod
-    def validate_attribute(score_attrib, scorename):
-        attrib_dict = MetadataExtractor.get_makam(score_attrib['symbtr_slug'])
+    def validate_attribute(data, scorename, attrib_name):
+        score_attrib = data[attrib_name]
+
+        attrib_getter = getattr(MetadataExtractor, 'get_'+attrib_name)
+        attrib_dict = attrib_getter(score_attrib['symbtr_slug'])
 
         is_attribute_valid = True  # initialize
         if 'symbtr_slug' in score_attrib.keys():

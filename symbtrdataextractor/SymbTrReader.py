@@ -307,7 +307,8 @@ class SymbTrReader(object):
         return header, header_row, is_header_valid
 
     @staticmethod
-    def _add_attribute_slug_to_header(header, slugs):
-        header['makam']['symbtr_slug'] = slugs['makam']
-        header['makam']['attribute_key'] = MetadataExtractor.get_attribute_key(
-            header['makam']['symbtr_slug'], 'makam')
+    def _add_attribute_slug_to_header(header, slugs, attr_name):
+        header[attr_name]['symbtr_slug'] = slugs[attr_name]
+        header[attr_name]['attribute_key'] = \
+            MetadataExtractor.get_attribute_key(
+                header[attr_name]['symbtr_slug'], attr_name)

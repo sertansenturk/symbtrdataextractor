@@ -52,8 +52,8 @@ class StructureLabeler(object):
 
         # get the lyrics stripped of section information
         lyrics = ScoreProcessor.get_true_lyrics(score_fragments)
-        for (sf, ly) in zip(score_fragments):  # assign to the score_fragments
-            sf['lyrics'] = ly
+        for (sf, ly) in zip(score_fragments, lyrics):
+            sf['lyrics'] = ly  # assign lyrics to the relevant score_fragments
 
         # graph analysis
         lyrics_strings = [a['lyrics'] for a in score_fragments]
