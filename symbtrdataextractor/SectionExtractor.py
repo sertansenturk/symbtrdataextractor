@@ -102,8 +102,7 @@ class SectionExtractor(object):
         real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
             score['lyrics'], score['duration'])
 
-        start_note_idx = [s['start_note'] for s in sections] + \
-                         [len(score['lyrics'])]
+        start_note_idx = self._get_section_start_note_idx(score, sections)
         # end_note_idx = [-1] + [s['end_note'] for s in sections]
         for se in reversed(sections):  # start from the last section
             if se['slug'] == u'VOCAL_SECTION':
@@ -155,8 +154,8 @@ class SectionExtractor(object):
                             measure_start_idx), first_note_idx])
 
                 # update start_note_idx
-                start_note_idx = ([s['start_note'] for s in sections] +
-                                  [len(score['lyrics'])])
+                start_note_idx = SectionExtractor._get_section_start_note_idx(
+                        score, sections)
 
                 # update lyrics
                 section_lyrics_idx = ([rl for rl in real_lyrics_idx
@@ -187,6 +186,10 @@ class SectionExtractor(object):
                                  'end_note': min([s['start_note']
                                                   for s in sections]) - 1})
         return self._sort_sections(sections)
+
+    @staticmethod
+    def _get_section_start_note_idx(score, sections):
+        return [s['start_note'] for s in sections] + [len(score['lyrics'])]
 
     @staticmethod
     def _sort_sections(sections):
@@ -267,8 +270,7 @@ class SectionExtractor(object):
     def _validate_section_continuity(self, score, sections, symbtrname):
         first_note_idx = ScoreProcessor.get_first_note_index(score)
         ends = [first_note_idx - 1] + [s['end_note'] for s in sections]
-        start_note_idx = [s['start_note'] for s in sections] + \
-                         [len(score['lyrics'])]
+        start_note_idx = self._get_section_start_note_idx(score, sections)
 
         section_continuity_bool = True
         for s, e in zip(start_note_idx, ends):
