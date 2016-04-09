@@ -18,6 +18,8 @@ def test_extractor():
     auto_seg_file = os.path.join(_curr_folder, '..', '..', 'sampledata',
                                  scorename + '.autoSeg')
     auto_seg_bounds = json.load(open(auto_seg_file, 'r'))['boundary_noteIdx']
+    # convert from MATLAB indexing to python (1->0)
+    auto_seg_bounds = [a - 1 for a in auto_seg_bounds]
 
     mu2_filename = os.path.join(_curr_folder, '..', '..', 'sampledata',
                                 scorename + '.mu2')
