@@ -176,13 +176,12 @@ class StructureLabeler(object):
         # exist
 
         # define the upper case unicode letters for semiotic labeling
-        unicode_letters = [unichr(i) for i in range(0, 1000)
-                           if unicode.isupper(unichr(i))]
+        unicode_letters = StructureLabeler._get_letters_for_semiotic_labeling()
 
         # similar cliques give us the base structure
         basenames = [unicode_letters[i]
                      for i in range(0, len(cliques['similar']))]
-        
+
         for ec in cliques['exact']:
             # find the similar cliques of which the current exact clique is
             # a subset of
@@ -209,3 +208,8 @@ class StructureLabeler(object):
                 mix_clq_it[mix_str] += 1
 
         return labels
+
+    @staticmethod
+    def _get_letters_for_semiotic_labeling():
+        return [unichr(i) for i in range(0, 1000)
+                if unicode.isupper(unichr(i))]
