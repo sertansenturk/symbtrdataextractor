@@ -1,25 +1,16 @@
-import os
-import json
 from numpy import matrix
-from . ScoreProcessor import ScoreProcessor
-from . GraphOperations import GraphOperations
+from .ScoreProcessor import ScoreProcessor
+from .GraphOperations import GraphOperations
 
 
 class StructureLabeler(object):
     """
 
     """
+
     def __init__(self, lyrics_sim_thres=0.75, melody_sim_thres=0.75):
         self.lyrics_sim_thres = lyrics_sim_thres
         self.melody_sim_thres = melody_sim_thres
-
-    @staticmethod
-    def get_symbtr_labels():
-        symbtr_label_file = os.path.join(os.path.dirname(
-            os.path.abspath(__file__)), 'makam_data', 'symbTrLabels.json')
-        symbtr_label = json.load(open(symbtr_label_file, 'r'))
-
-        return symbtr_label
 
     def label_structures(self, structures, score):
         # get the duration, pitch and lyrics related to the section
@@ -35,11 +26,12 @@ class StructureLabeler(object):
                                     'denums': denums, 'notes': notes,
                                     'lyrics': lyrics})
 
-        # get the lyric organization
-        structures = self.get_lyric_organization(structures, score_fragments)
+        if structures:
+            # get the lyric organization
+            self.get_lyric_organization(structures, score_fragments)
 
-        # get the melodic organization
-        structures = self.get_melodic_organization(structures, score_fragments)
+            # get the melodic organization
+            self.get_melodic_organization(structures, score_fragments)
 
         return structures
 
@@ -58,94 +50,75 @@ class StructureLabeler(object):
         # using only melody, this function does not give any extra info
         # This part is done for future needs; e.g. audio-lyrics alignment
 
-        if structures:
-            # get the lyrics stripped of section information
-            all_labels = [l for sub_list in self.get_symbtr_labels().values()
-                          for l in sub_list]
-            all_labels += ['.', '', ' ']
-            for sf in score_fragments:
-                real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
-                    sf['lyrics'], all_labels, sf['durs'])
-                sf['lyrics'] = u''.join([sf['lyrics'][i].replace(u' ', u'')
-                                         for i in real_lyrics_idx])
+        # get the lyrics stripped of section information
+        ScoreProcessor.get_true_lyrics(score_fragments)
 
-            dists = matrix(
-                [[GraphOperations.norm_levenshtein(a['lyrics'], b['lyrics'])
-                  for a in score_fragments]
-                 for b in score_fragments])
+        dists = matrix(
+            [[GraphOperations.norm_levenshtein(a['lyrics'], b['lyrics'])
+              for a in score_fragments]
+             for b in score_fragments])
 
-            cliques = GraphOperations.get_cliques(dists, self.lyrics_sim_thres)
+        cliques = GraphOperations.get_cliques(dists, self.lyrics_sim_thres)
 
-            lyrics_labels = self._semiotize(cliques)
+        lyrics_labels = self._semiotize(cliques)
 
-            # label the insrumental structures, if present
-            for i in range(0, len(lyrics_labels)):
-                if not score_fragments[i]['lyrics']:
-                    structures[i]['lyric_structure'] = 'INSTRUMENTAL'
-                else:
-                    structures[i]['lyric_structure'] = lyrics_labels[i]
+        # label the insrumental structures, if present
+        for i in range(0, len(lyrics_labels)):
+            if not score_fragments[i]['lyrics']:
+                structures[i]['lyric_structure'] = 'INSTRUMENTAL'
+            else:
+                structures[i]['lyric_structure'] = lyrics_labels[i]
 
-            # sanity check
-            lyrics = [sc['lyrics'] for sc in score_fragments]
-            self._assert_labels(lyrics, lyrics_labels, 'lyrics')
-
-        else:  # no section information
-            structures = []
-
-        return structures
+        # sanity check
+        lyrics = [sc['lyrics'] for sc in score_fragments]
+        self._assert_labels(lyrics, lyrics_labels, 'lyrics')
 
     def get_melodic_organization(self, structures, score_fragments):
-        if structures:
-            # remove annotation/control row; i.e. entries w 0 duration
-            for sf in score_fragments:
-                for i in reversed(range(0, len(sf['durs']))):
-                    if sf['durs'][i] == 0:
-                        sf['notes'].pop(i)
-                        sf['nums'].pop(i)
-                        sf['denums'].pop(i)
-                        sf['durs'].pop(i)
+        # remove annotation/control row; i.e. entries w 0 duration
+        for sf in score_fragments:
+            for i in reversed(range(0, len(sf['durs']))):
+                if sf['durs'][i] == 0:
+                    sf['notes'].pop(i)
+                    sf['nums'].pop(i)
+                    sf['denums'].pop(i)
+                    sf['durs'].pop(i)
 
-            # synthesize the score according taking the shortest note as the
-            # unit shortest note has the greatest denumerator
-            max_denum = max(max(sf['denums']) for sf in score_fragments)
-            melodies = [ScoreProcessor.synth_melody(sf, max_denum)
-                        for sf in score_fragments]
+        # synthesize the score according taking the shortest note as the
+        # unit shortest note has the greatest denumerator
+        max_denum = max(max(sf['denums']) for sf in score_fragments)
+        melodies = [ScoreProcessor.synth_melody(sf, max_denum)
+                    for sf in score_fragments]
 
-            # convert the numbers in melodies to unique strings for Levenstein
-            unique_notes = list(set(x for sf in score_fragments
-                                    for x in sf['notes']))
-            melodies_str = [ScoreProcessor.mel2str(m, unique_notes)
-                            for m in melodies]
+        # convert the numbers in melodies to unique strings for Levenstein
+        unique_notes = list(set(x for sf in score_fragments
+                                for x in sf['notes']))
+        melodies_str = [ScoreProcessor.mel2str(m, unique_notes)
+                        for m in melodies]
 
-            dists = matrix([[GraphOperations.norm_levenshtein(m1, m2)
-                             for m1 in melodies_str] for m2 in melodies_str])
+        dists = matrix([[GraphOperations.norm_levenshtein(m1, m2)
+                         for m1 in melodies_str] for m2 in melodies_str])
 
-            cliques = GraphOperations.get_cliques(dists, self.melody_sim_thres)
+        cliques = GraphOperations.get_cliques(dists, self.melody_sim_thres)
 
-            melody_labels = StructureLabeler._semiotize(cliques)
+        melody_labels = StructureLabeler._semiotize(cliques)
 
-            # label the instrumental structures, if present
-            # all_labels = [l for sub_list in self.get_symbtr_labels().values()
-            #              for l in sub_list]
-            for i in range(0, len(melody_labels)):
-                if all(lbl not in structures[i]['name']
-                       for lbl in ['VOCAL', 'INSTRUMENTAL']):
-                    # if it's a mixture clique, keep the label altogether
-                    mel_str = (
-                        structures[i]['slug'] + '_' + melody_labels[i][1:]
-                        if melody_labels[i][1].isdigit()
-                        else structures[i]['slug'] + '_' + melody_labels[i])
-                    structures[i]['melodic_structure'] = mel_str
-                else:
-                    structures[i]['melodic_structure'] = melody_labels[i]
+        # label the instrumental structures, if present
+        # all_labels = [l for sub_list in self.get_symbtr_labels().values()
+        #              for l in sub_list]
+        for i in range(0, len(melody_labels)):
+            if all(lbl not in structures[i]['name']
+                   for lbl in ['VOCAL', 'INSTRUMENTAL']):
+                # if it's a mixture clique, keep the label altogether
+                mel_str = (
+                    structures[i]['slug'] + '_' + melody_labels[i][1:]
+                    if melody_labels[i][1].isdigit()
+                    else structures[i]['slug'] + '_' + melody_labels[i])
+                structures[i]['melodic_structure'] = mel_str
+            else:
+                structures[i]['melodic_structure'] = melody_labels[i]
 
-            # sanity check
-            self._assert_labels(melodies, melody_labels, 'melody')
-
-        else:  # no section information
-            structures = []
-
-        return structures
+        # sanity check
+        self._assert_labels(melodies, melody_labels, 'melody')
 
     @staticmethod
     def _assert_labels(stream, labels, name):
@@ -209,7 +182,7 @@ class StructureLabeler(object):
         # similar cliques give us the base structure
         basenames = [unicode_letters[i]
                      for i in range(0, len(similar_cliques))]
-        
+
         return basenames
 
     @staticmethod
@@ -221,4 +194,3 @@ class StructureLabeler(object):
                 "This shouldn't happen.")
 
         return in_cliques_idx
-

@@ -82,7 +82,7 @@ class SegmentExtractor(object):
         bounds = self._parse_bounds(bounds, score)
 
         all_labels = [l for sub_list in
-                      StructureLabeler.get_symbtr_labels().values()
+                      ScoreProcessor.get_symbtr_labels().values()
                       for l in sub_list]
         real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
             score['lyrics'], all_labels, score['duration'])

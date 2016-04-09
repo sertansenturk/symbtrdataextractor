@@ -44,10 +44,10 @@ class SectionExtractor(object):
 
     def extract(self, score, symbtrname):
         all_labels = [l for sub_list in
-                      StructureLabeler.get_symbtr_labels().values()
+                      ScoreProcessor.get_symbtr_labels().values()
                       for l in sub_list]
         struct_lbl = all_labels if self.extract_all_labels else \
-            StructureLabeler.get_symbtr_labels()['structure']
+            ScoreProcessor.get_symbtr_labels()['structure']
 
         measure_start_idx, is_measure_start_valid = \
             self.offsetProcessor.find_measure_start_idx(
@@ -237,7 +237,7 @@ class SectionExtractor(object):
         # check if there are any structure labels with a space
         # e.g. it is not found
         all_labels = [l for sub_list in
-                      StructureLabeler.get_symbtr_labels().values()
+                      ScoreProcessor.get_symbtr_labels().values()
                       for l in sub_list] + ['.']
         for i, ll in enumerate(score['lyrics']):
             for label in all_labels:
