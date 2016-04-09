@@ -5,6 +5,7 @@ from makammusicbrainz.AudioMetadata import AudioMetadata
 from makammusicbrainz.WorkMetadata import WorkMetadata
 from musicbrainzngs import ResponseError
 
+
 class MetadataExtractor(object):
     """
 
