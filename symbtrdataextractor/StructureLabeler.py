@@ -175,30 +175,21 @@ class StructureLabeler(object):
         mix_clq_it = dict()  # the index to label mixture cliques, if they
         # exist
 
-        # define the upper case unicode letters for semiotic labeling
-        unicode_letters = StructureLabeler._get_letters_for_semiotic_labeling()
-
         # similar cliques give us the base structure
-        basenames = [unicode_letters[i]
-                     for i in range(0, len(cliques['similar']))]
+        basenames = StructureLabeler._get_basenames(cliques['similar'])
 
         for ec in cliques['exact']:
             # find the similar cliques of which the current exact clique is
             # a subset of
-            in_cliques_idx = [i for i, x in enumerate(cliques['similar'])
-                              if ec <= x]
+            sim_clique_idx = StructureLabeler._get_similar_cliques(cliques, ec)
 
-            assert (len(in_cliques_idx) > 0,
-                    "The exact clique is not in the similar cliques list. "
-                    "This shouldn't happen.")
-
-            if len(in_cliques_idx) == 1:  # belongs to one similar clique
+            if len(sim_clique_idx) == 1:  # belongs to one similar clique
                 for e in sorted(ec):  # label with basename + number
-                    labels[e] = (basenames[in_cliques_idx[0]] +
-                                 str(sim_clq_it[in_cliques_idx[0]]))
-                sim_clq_it[in_cliques_idx[0]] += 1
+                    labels[e] = (basenames[sim_clique_idx[0]] +
+                                 str(sim_clq_it[sim_clique_idx[0]]))
+                sim_clq_it[sim_clique_idx[0]] += 1
             else:  # belongs to more than one similar clique
-                mix_str = ''.join([basenames[i] for i in in_cliques_idx])
+                mix_str = ''.join([basenames[i] for i in sim_clique_idx])
                 if mix_str not in mix_clq_it.keys():
                     mix_clq_it[mix_str] = 1
 
@@ -210,6 +201,24 @@ class StructureLabeler(object):
         return labels
 
     @staticmethod
-    def _get_letters_for_semiotic_labeling():
-        return [unichr(i) for i in range(0, 1000)
-                if unicode.isupper(unichr(i))]
+    def _get_basenames(similar_cliques):
+        # define the upper case unicode letters for semiotic labeling
+        unicode_letters = [unichr(i) for i in range(0, 1000)
+                           if unicode.isupper(unichr(i))]
+
+        # similar cliques give us the base structure
+        basenames = [unicode_letters[i]
+                     for i in range(0, len(similar_cliques))]
+        
+        return basenames
+
+    @staticmethod
+    def _get_similar_cliques(cliques, ec):
+        in_cliques_idx = [i for i, x in enumerate(cliques['similar'])
+                          if ec <= x]
+        assert (len(in_cliques_idx) > 0,
+                "The exact clique is not in the similar cliques list. "
+                "This shouldn't happen.")
+
+        return in_cliques_idx
+
