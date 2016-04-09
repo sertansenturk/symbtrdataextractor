@@ -174,7 +174,7 @@ class TxtReader(SymbTrReader):
                     score['commaAE'][ii], score['note53'][ii],
                     score['noteAE'][ii]]
 
-        if all(v1 == v2 for v1, v2 in zip(val_list, [9, -1. -1, 'Es', 'Es'])):
+        if any(v1 != v2 for v1, v2 in zip(val_list, [9, -1, -1, 'Es', 'Es'])):
             is_rest_valid = False
             warnings.warn("    " + score_name + ' ' +
                           str(score['index'][ii]) + ': Invalid Rest')
