@@ -2,7 +2,7 @@ import csv
 import os
 
 
-class SymbTrReader(object):
+class TxtReader(object):
     def __init__(self):
         """
         Class constructor
@@ -10,7 +10,7 @@ class SymbTrReader(object):
         pass
 
     @classmethod
-    def read_txt_score(cls, score_file, symbtr_name=None):
+    def read(cls, score_file, symbtr_name=None):
         """
         Reader method for the SymbTr-txt scores
 
@@ -76,12 +76,12 @@ class SymbTrReader(object):
         score['offset'] = score['offset'][:-1]
 
         # validate
-        is_score_valid = cls._validate_txt_score(score, symbtr_name)
+        is_score_valid = cls._validate(score, symbtr_name)
 
         return score, is_score_valid
 
     @staticmethod
-    def _validate_txt_score(score, score_name):
+    def _validate(score, score_name):
         """
         Validation method for the SymbTr-txt score
 
