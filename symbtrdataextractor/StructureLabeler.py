@@ -182,20 +182,23 @@ class StructureLabeler(object):
         # similar cliques give us the base structure
         basenames = [unicode_letters[i]
                      for i in range(0, len(cliques['similar']))]
+        
         for ec in cliques['exact']:
-            # find the similar cliques of which the currect exact clique is
+            # find the similar cliques of which the current exact clique is
             # a subset of
             in_cliques_idx = [i for i, x in enumerate(cliques['similar'])
                               if ec <= x]
+
+            assert (len(in_cliques_idx) > 0,
+                    "The exact clique is not in the similar cliques list. "
+                    "This shouldn't happen.")
 
             if len(in_cliques_idx) == 1:  # belongs to one similar clique
                 for e in sorted(ec):  # label with basename + number
                     labels[e] = (basenames[in_cliques_idx[0]] +
                                  str(sim_clq_it[in_cliques_idx[0]]))
                 sim_clq_it[in_cliques_idx[0]] += 1
-
-            elif len(in_cliques_idx) > 1:
-                # belongs to more than one similar clique
+            else:  # belongs to more than one similar clique
                 mix_str = ''.join([basenames[i] for i in in_cliques_idx])
                 if mix_str not in mix_clq_it.keys():
                     mix_clq_it[mix_str] = 1
@@ -204,8 +207,5 @@ class StructureLabeler(object):
                     labels[e] = mix_str + str(mix_clq_it[mix_str])
 
                 mix_clq_it[mix_str] += 1
-            else:  # in no cliques; impossible
-                raise RuntimeError("The exact clique is not in the similar "
-                                   "cliques list. This shouldn't happen.")
 
         return labels
