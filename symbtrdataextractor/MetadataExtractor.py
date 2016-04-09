@@ -3,18 +3,25 @@ import json
 from urlparse import urlparse
 from makammusicbrainz.AudioMetadata import AudioMetadata
 from makammusicbrainz.WorkMetadata import WorkMetadata
-
+from musicbrainzngs import ResponseError
 
 class MetadataExtractor(object):
     """
 
     """
     def __init__(self, get_recording_rels=False):
-        self.get_recording_rels = get_recording_rels
         self._audioMetadata = AudioMetadata(get_work_attributes=False,
                                             print_warnings=False)
-        self._workMetadata = WorkMetadata(get_recording_rels=False,
-                                          print_warnings=False)
+        self._workMetadata = WorkMetadata(
+            get_recording_rels=get_recording_rels, print_warnings=False)
+
+    @property
+    def get_recording_rels(self):
+        return self._workMetadata.get_recording_rels
+
+    @get_recording_rels.setter
+    def get_recording_rels(self, value):
+        self._workMetadata.get_recording_rels = value
 
     @staticmethod
     def get_slugs(scorename):
@@ -232,11 +239,11 @@ class MetadataExtractor(object):
             mbid = o_splitted[2]
 
         try:  # assume mbid is a work
-            data = self.get_work_metadata_from_musicbrainz(mbid)
+            data = self._workMetadata.from_musicbrainz(mbid)
             data['work'] = {'title': data.pop("title", None),
                             'mbid': data.pop('mbid', None)}
-        except:  # assume mbid is a recording
-            data = self.get_recording_metadata_from_musicbrainz(mbid)
+        except ResponseError:  # assume mbid is a recording
+            data = self._audioMetadata.from_musicbrainz(mbid)
             data['recording'] = {'title': data.pop("title", None),
                                  'mbid': data.pop('mbid', None)}
             if self.get_recording_rels:
@@ -252,9 +259,3 @@ class MetadataExtractor(object):
             data['usul'] = data['usul'][0]
 
         return data
-
-    def get_work_metadata_from_musicbrainz(self, mbid):
-        return self._workMetadata.from_musicbrainz(mbid)
-
-    def get_recording_metadata_from_musicbrainz(self, mbid):
-        return self._audioMetadata.from_musicbrainz(mbid)
