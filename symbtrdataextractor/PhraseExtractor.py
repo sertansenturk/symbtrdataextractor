@@ -7,7 +7,7 @@ class PhraseExtractor(object):
 
     """
     def __init__(self, lyrics_sim_thres=0.75, melody_sim_thres=0.75,
-                 extract_all_labels=False):
+                 extract_all_labels=False, crop_consecutive_bounds=True):
         """
         Class constructor
 
@@ -23,10 +23,14 @@ class PhraseExtractor(object):
             True to extract all labels in written in the lyrics field
             regardless they are a structural marking etc., False to only
             extract the lyrics. (the default is False)
+        crop_consecutive_bounds : bool, optional
+            True to remove the first of the two consecutive boundaries,
+            False otherwise. (the default is True)
         """
         self.extract_all_labels = extract_all_labels
         self.lyrics_sim_thres = lyrics_sim_thres
         self.melody_sim_thres = melody_sim_thres
+        self.crop_consecutive_bounds = crop_consecutive_bounds
 
         self.phraseLabeler = StructureLabeler(
             lyrics_sim_thres=self.lyrics_sim_thres,
@@ -51,20 +55,17 @@ class PhraseExtractor(object):
                        if code in anno_codes]
 
         if anno_bounds:
-            phrases = self.extract(all_bounds, score, sections=sections)
+            phrases = self._extract(all_bounds, score, sections=sections)
         else:
             phrases = []
 
         return phrases
 
     def extract_segments(self, score, segment_note_bound_idx, sections=None):
-        # Boundaries start from 1, convert them to python indexing (0) by
-        # subtracting 1
         try:
-            seg_bound_idx = [a - 1 for a in segment_note_bound_idx]
-
-            if seg_bound_idx:
-                segments = self.extract(seg_bound_idx, score, sections=sections)
+            if segment_note_bound_idx:
+                segments = self._extract(segment_note_bound_idx, score,
+                                         sections=sections)
             else:
                 segments = []
         except TypeError:  # the json saved by MATLAB phrase segmentation sends
@@ -73,10 +74,10 @@ class PhraseExtractor(object):
 
         return segments
 
-    def extract(self, bounds, score, sections=None):
+    def _extract(self, bounds, score, sections=None):
         # add the first and the last bound if they are not already given,
         # sort & tidy
-        bounds = self.parse_bounds(bounds, score)
+        bounds = self._parse_bounds(bounds, score)
 
         all_labels = [l for sub_list in
                       StructureLabeler.get_symbtr_labels().values()
@@ -108,12 +109,8 @@ class PhraseExtractor(object):
             # sections
             phrase_sections = []
             if sections:
-                start_section_idx = [i for i, sec in enumerate(sections)
-                                     if sec['start_note'] <= start_note <=
-                                     sec['end_note']][0]
-                end_section_idx = [i for i, sec in enumerate(sections)
-                                   if sec['start_note'] <= end_note <=
-                                   sec['end_note']][0]
+                start_section_idx = self._get_section_idx(sections, start_note)
+                end_section_idx = self._get_section_idx(sections, end_note)
 
                 for idx, sec in zip(range(start_section_idx,
                                           end_section_idx + 1),
@@ -137,7 +134,17 @@ class PhraseExtractor(object):
 
         return self.phraseLabeler.label_structures(phrases, score)
 
-    def parse_bounds(self, bounds, score):
+    @staticmethod
+    def _get_section_idx(sections, note_idx):
+        section_idx = [i for i, sec in enumerate(sections)
+                if sec['start_note'] <= note_idx <= sec['end_note']]
+
+        assert len(section_idx) == 1, 'Unexpected indexing: the note should ' \
+                                      'have been in a single section'
+
+        return section_idx[0]
+
+    def _parse_bounds(self, bounds, score):
         # add start and end if they are not already in the list
         first_bound_idx = ScoreProcessor.get_first_note_index(score)
         bounds = [first_bound_idx] + bounds
@@ -150,15 +157,7 @@ class PhraseExtractor(object):
         bounds = sorted(list(set(bounds)))
 
         # remove consecutive boundaries
-        for i in reversed(range(0, len(bounds) - 1)):
-            if bounds[i + 1] - bounds[i] == 1:
-                if bounds[i] == first_bound_idx:
-                    # if there are two consecutive boundaries in the start,
-                    # pop the second
-                    bounds.pop(i + 1)
-                else:
-                    # if there are two consecutive boundaries, pop the first
-                    bounds.pop(i)
+        self._crop_consec_bounds(bounds, first_bound_idx)
 
         # check boundaries
         all_bounds_in_score = all(last_bound_idx >= b >= first_bound_idx
@@ -166,3 +165,15 @@ class PhraseExtractor(object):
         assert all_bounds_in_score, 'one of the bounds is outside the score.'
 
         return bounds
+
+    def _crop_consec_bounds(self, bounds, first_bound_idx):
+        if self.crop_consecutive_bounds:
+            for i in reversed(range(0, len(bounds) - 1)):
+                if bounds[i + 1] - bounds[i] == 1:
+                    if bounds[i] == first_bound_idx:
+                        # if there are two consecutive bounds in the start,
+                        # pop the second
+                        bounds.pop(i + 1)
+                    else:
+                        # if there are two consecutive bounds, pop the first
+                        bounds.pop(i)
