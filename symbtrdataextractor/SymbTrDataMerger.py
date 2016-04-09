@@ -1,6 +1,3 @@
-from symbtrdataextractor.SymbTrDataExtractor import SymbTrDataExtractor
-
-
 class SymbTrDataMerger(object):
     @staticmethod
     def _dictmerge(*data_dicts):
@@ -25,9 +22,9 @@ class SymbTrDataMerger(object):
                 if key not in result.keys():
                     result[key] = val
                 elif not isinstance(result[key], dict):
-                    SymbTrDataExtractor._chk_dict_key_override(key, result, val)
+                    SymbTrDataMerger._chk_dict_key_override(key, result, val)
                 else:
-                    result[key] = SymbTrDataExtractor._dictmerge(
+                    result[key] = SymbTrDataMerger._dictmerge(
                         result[key], val)
 
         return result
