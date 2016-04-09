@@ -32,16 +32,21 @@ class PhraseExtractor(object):
             lyrics_sim_thres=self.lyrics_sim_thres,
             melody_sim_thres=self.melody_sim_thres)
 
-    def extract_annotated(self, score, sections=None):
+    def extract_annotations(self, score, sections=None):
+        # code 51 is the usul change and it always marks a phrase boundary
         bound_codes = [51, 53, 54, 55]
         anno_codes = [53, 54, 55]
 
+        # start bounds with the first note
         first_note_idx = ScoreProcessor.get_first_note_index(score)
 
-        # start bounds with the first note, ignore the control rows in the
-        # start
-        all_bounds = [first_note_idx] + [i for i, code in enumerate(
-            score['code']) if code in bound_codes if i > first_note_idx]
+        # get all boundaries starting with the first note
+        all_bounds = [first_note_idx]
+        for i, code in enumerate(score['code']):
+            if code in bound_codes and i > first_note_idx:
+                all_bounds.append(i)
+
+        # if there are only usul boundaries the score does not have anotations
         anno_bounds = [i for i, code in enumerate(score['code'])
                        if code in anno_codes]
 
@@ -52,45 +57,26 @@ class PhraseExtractor(object):
 
         return phrases
 
-    def extract_segment(self, score, segment_note_bound_idx,
-                        sections=None):
+    def extract_segments(self, score, segment_note_bound_idx, sections=None):
         # Boundaries start from 1, convert them to python indexing (0) by
         # subtracting 1
         try:
-            auto_seg_bound_idx = [a - 1 for a in segment_note_bound_idx]
+            seg_bound_idx = [a - 1 for a in segment_note_bound_idx]
 
-            if auto_seg_bound_idx:
-                phrases = self.extract(auto_seg_bound_idx, score,
-                                       sections=sections)
+            if seg_bound_idx:
+                segments = self.extract(seg_bound_idx, score, sections=sections)
             else:
-                phrases = []
+                segments = []
         except TypeError:  # the json saved by MATLAB phrase segmentation sends
             # a special structure specifying the 0 dimensional array
-            phrases = []
+            segments = []
 
-        return phrases
+        return segments
 
     def extract(self, bounds, score, sections=None):
-        # add start and end if they are not already in the list
-        firstnoteidx = ScoreProcessor.get_first_note_index(score)
-        if firstnoteidx not in bounds:
-            bounds = [firstnoteidx] + bounds
-
-        # create the boundary outside the score idx
-        bounds = bounds + [len(score['code'])]
-
-        # remove consecutive boundaries
-        phrase_bounds = (sorted([bounds[i]
-                                for i in reversed(range(0, len(bounds) - 1))
-                                if not bounds[i + 1] - bounds[i] == 1]) +
-                         [len(score['code'])])
-
-        # if the the last boundary is removed due to consecutive boundaries,
-        # pop the first to the last and append the last
-        if len(score['code']) - 1 in phrase_bounds:
-            phrase_bounds = ([pb for pb in phrase_bounds
-                              if not pb == len(score['code']) - 1] +
-                             [len(score['code'])])
+        # add the first and the last bound if they are not already given,
+        # sort & tidy
+        bounds = self.parse_bounds(bounds, score)
 
         all_labels = [l for sub_list in
                       StructureLabeler.get_symbtr_labels().values()
@@ -99,9 +85,9 @@ class PhraseExtractor(object):
             score['lyrics'], all_labels, score['duration'])
 
         phrases = []
-        for pp in range(0, len(phrase_bounds) - 1):
-            start_note_idx = phrase_bounds[pp]
-            end_note_idx = phrase_bounds[pp + 1] - 1
+        for pp in range(0, len(bounds) - 1):
+            start_note_idx = bounds[pp]
+            end_note_idx = bounds[pp + 1] - 1
 
             # start and endNotes
             start_note = score['index'][start_note_idx]
@@ -150,3 +136,33 @@ class PhraseExtractor(object):
                             'lyrics': lyrics, 'sections': phrase_sections})
 
         return self.phraseLabeler.label_structures(phrases, score)
+
+    def parse_bounds(self, bounds, score):
+        # add start and end if they are not already in the list
+        first_bound_idx = ScoreProcessor.get_first_note_index(score)
+        bounds = [first_bound_idx] + bounds
+
+        # create the boundary outside the score idx
+        last_bound_idx = len(score['code'])
+        bounds = bounds + [last_bound_idx]
+
+        # sort and tidy
+        bounds = sorted(list(set(bounds)))
+
+        # remove consecutive boundaries
+        for i in reversed(range(0, len(bounds) - 1)):
+            if bounds[i + 1] - bounds[i] == 1:
+                if bounds[i] == first_bound_idx:
+                    # if there are two consecutive boundaries in the start,
+                    # pop the second
+                    bounds.pop(i + 1)
+                else:
+                    # if there are two consecutive boundaries, pop the first
+                    bounds.pop(i)
+
+        # check boundaries
+        all_bounds_in_score = all(last_bound_idx >= b >= first_bound_idx
+                                  for b in bounds)
+        assert all_bounds_in_score, 'one of the bounds is outside the score.'
+
+        return bounds

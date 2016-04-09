@@ -208,9 +208,9 @@ class SymbTrDataExtractor(object):
         data['sections'], is_section_data_valid = self._sectionExtractor. \
             extract(score, symbtr_name)
 
-        anno_phrase = self._phraseExtractor.extract_annotated(
+        anno_phrase = self._phraseExtractor.extract_annotations(
             score, sections=data['sections'])
-        seg_phrase = self._phraseExtractor.extract_segment(
+        seg_phrase = self._phraseExtractor.extract_segments(
             score, segment_note_bound_idx, sections=data['sections'])
 
         data['rhythmic_structure'] = \
