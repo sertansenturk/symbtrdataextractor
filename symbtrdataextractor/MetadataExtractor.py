@@ -53,24 +53,24 @@ class MetadataExtractor(object):
             data['composer']['symbtr_slug'] = slugs['composer']
 
         # get and validate the attributes
-        makam = MetadataExtractor.get_makam(data['makam']['symbtr_slug'])
-        is_makam_valid = MetadataExtractor.validate_attribute(
-            data['makam'], makam, scorename)
-
-        form = MetadataExtractor.get_form(data['form']['symbtr_slug'])
-        is_form_valid = MetadataExtractor.validate_attribute(
-            data['form'], form, scorename)
-
-        usul = MetadataExtractor.get_usul(data['usul']['symbtr_slug'])
-        is_usul_valid = MetadataExtractor.validate_attribute(
-            data['usul'], usul, scorename)
-
-        is_metadata_valid = is_makam_valid and is_form_valid and is_usul_valid
+        is_attr_meta_valid = self.validate_makam_form_usul(data, scorename)
 
         # get the tonic
+        makam = MetadataExtractor.get_makam(data['makam']['symbtr_slug'])
         data['tonic'] = makam['karar_symbol']
 
-        return data, is_metadata_valid
+        return data, is_attr_meta_valid
+
+    def validate_makam_form_usul(self, data, scorename):
+        is_makam_valid = MetadataExtractor.validate_attribute(
+            data['makam'], scorename)
+        is_form_valid = MetadataExtractor.validate_attribute(
+            data['form'], scorename)
+        is_usul_valid = MetadataExtractor.validate_attribute(
+            data['usul'], scorename)
+        is_attr_meta_valid = is_makam_valid and is_form_valid and is_usul_valid
+
+        return is_attr_meta_valid
 
     @staticmethod
     def get_attribute_key(attr_str, attr_type):
@@ -80,7 +80,9 @@ class MetadataExtractor(object):
                 return attr_key
 
     @staticmethod
-    def validate_attribute(score_attrib, attrib_dict, scorename):
+    def validate_attribute(score_attrib, scorename):
+        attrib_dict = MetadataExtractor.get_makam(score_attrib['symbtr_slug'])
+
         is_attribute_valid = True  # initialize
         if 'symbtr_slug' in score_attrib.keys():
             if not score_attrib['symbtr_slug'] == attrib_dict['symbtr_slug']:

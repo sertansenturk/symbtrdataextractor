@@ -290,34 +290,24 @@ class SymbTrReader(object):
 
         # get the metadata
         slugs = MetadataExtractor.get_slugs(symbtr_name)
-        SymbTrReader._read_attribute_slug(header, slugs, 'makam')
-        SymbTrReader._read_attribute_slug(header, slugs, 'form')
-        SymbTrReader._read_attribute_slug(header, slugs, 'usul')
+        SymbTrReader._add_attribute_slug_to_header(header, slugs, 'makam')
+        SymbTrReader._add_attribute_slug_to_header(header, slugs, 'form')
+        SymbTrReader._add_attribute_slug_to_header(header, slugs, 'usul')
 
         header['title']['symbtr_slug'] = slugs['name']
         header['composer']['symbtr_slug'] = slugs['composer']
 
         # validate the header content
-        makam = MetadataExtractor.get_makam(header['makam']['symbtr_slug'])
-        is_makam_valid = MetadataExtractor.validate_attribute(
-            header['makam'], makam, symbtr_name)
+        is_attr_meta_valid = MetadataExtractor.validate_makam_form_usul(
+            header, symbtr_name)
 
-        form = MetadataExtractor.get_form(header['form']['symbtr_slug'])
-        is_form_valid = MetadataExtractor.validate_attribute(
-            header['form'], form, symbtr_name)
-
-        usul = MetadataExtractor.get_usul(header['usul']['symbtr_slug'])
-        is_usul_valid = MetadataExtractor.validate_attribute(
-            header['usul'], usul, symbtr_name)
-
-        is_header_valid = (is_tempo_unit_valid and is_makam_valid and
-                           is_form_valid and is_usul_valid and
+        is_header_valid = (is_tempo_unit_valid and is_attr_meta_valid and
                            is_key_sig_valid)
 
         return header, header_row, is_header_valid
 
     @staticmethod
-    def _read_attribute_slug(header, slugs):
+    def _add_attribute_slug_to_header(header, slugs):
         header['makam']['symbtr_slug'] = slugs['makam']
         header['makam']['attribute_key'] = MetadataExtractor.get_attribute_key(
             header['makam']['symbtr_slug'], 'makam')
