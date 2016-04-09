@@ -29,19 +29,22 @@ Extracting (meta)data from the txt-score:
 from symbtrdataextractor.SymbTrDataExtractor import SymbTrDataExtractor
 
 extractor = SymbTrDataExtractor(extract_all_labels=False, melody_sim_thres=0.75, 
-                                lyrics_sim_thres=0.75, get_recording_rels=False,
-                                print_warnings=True)
+                                lyrics_sim_thres=0.75, crop_consec_bounds=True,
+                                get_recording_rels=False, print_warnings=True)
 """
 Inputs
 ----------
 extract_all_labels: (optional) boolean to treat all (explicit) annotations in the lyrics as 
                     a section or not (e.g. INSTRUMENTATION labels). The default is False.
-get_recording_rels: (optional) boolean to extract the relevant recording relations from MusicBrainz.
-                    The default is False.
+
 melody_sim_thres  : (optional) the maximum similarity threshold for two melodic stuctures to 
                     be considered as variant of each other. The default is 0.75.
 lyrics_sim_thres  : (optional) the maximum similarity threshold for two lyric stuctures to be 
                     considered as variant of each other. The default is 0.75.
+crop_consec_bounds: (optional) remove the first of the two consecutive boundaries inside the
+                    user given segmentation boundaries
+get_recording_rels: (optional) boolean to extract the relevant recording relations from MusicBrainz.
+                    The default is False.
 print_warnings    : (optional) boolean to print possible warnings during reading the scores. 
                     Note that errors will always be printed. The default is True
 """
