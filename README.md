@@ -67,8 +67,8 @@ segment_note_bound_idx  : (optional) user provided segment boundaries. makam-sym
 
 Extracting metadata stored in the mu2 headers: 
 ```python
-from symbtrdataextractor.SymbTrReader import SymbTrReader
-mu2_header, header_row, is_header_valid = SymbTrReader.read_mu2_header(mu2_filename, symbtr_name=scorename)
+from symbtrdataextractor.reader.Mu2Reader import Mu2Reader
+mu2_header, header_row, is_header_valid = Mu2Reader.read_mu2_header(mu2_filename, symbtr_name=scorename)
 
 """
 Inputs
