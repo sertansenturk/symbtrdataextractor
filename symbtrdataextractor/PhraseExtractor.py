@@ -41,14 +41,8 @@ class PhraseExtractor(object):
         bound_codes = [51, 53, 54, 55]
         anno_codes = [53, 54, 55]
 
-        # start bounds with the first note
-        first_note_idx = ScoreProcessor.get_first_note_index(score)
-
         # get all boundaries starting with the first note
-        all_bounds = [first_note_idx]
-        for i, code in enumerate(score['code']):
-            if code in bound_codes and i > first_note_idx:
-                all_bounds.append(i)
+        all_bounds = self._get_all_bounds_in_score(bound_codes, score)
 
         # if there are only usul boundaries the score does not have anotations
         anno_bounds = [i for i, code in enumerate(score['code'])
@@ -60,6 +54,17 @@ class PhraseExtractor(object):
             phrases = []
 
         return phrases
+
+    def _get_all_bounds_in_score(self, bound_codes, first_note_idx, score):
+        # start bounds with the first note
+        first_note_idx = ScoreProcessor.get_first_note_index(score)
+
+        all_bounds = [first_note_idx]
+        for i, code in enumerate(score['code']):
+            if code in bound_codes and i > first_note_idx:
+                all_bounds.append(i)
+
+        return all_bounds
 
     def extract_segments(self, score, segment_note_bound_idx, sections=None):
         try:
@@ -137,7 +142,7 @@ class PhraseExtractor(object):
     @staticmethod
     def _get_section_idx(sections, note_idx):
         section_idx = [i for i, sec in enumerate(sections)
-                if sec['start_note'] <= note_idx <= sec['end_note']]
+                       if sec['start_note'] <= note_idx <= sec['end_note']]
 
         assert len(section_idx) == 1, 'Unexpected indexing: the note should ' \
                                       'have been in a single section'
