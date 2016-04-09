@@ -31,7 +31,7 @@ class SymbTrDataExtractor(object):
     _slug = "symbtrdataextractor"
 
     def __init__(self, lyrics_sim_thres=0.75, melody_sim_thres=0.75,
-                 extract_all_labels=False, crop_consecutive_bounds=True,
+                 extract_all_labels=False, crop_consec_bounds=True,
                  get_recording_rels=False, print_warnings=True):
         """
         Class constructor
@@ -48,8 +48,8 @@ class SymbTrDataExtractor(object):
             True to extract all labels in written in the lyrics field
             regardless they are a structural marking etc., False to only
             extract the lyrics. (the default is False)
-        crop_consecutive_bounds : bool, optional
-            True to remove the first of the two consecutive boundaries in
+        crop_consec_bounds : bool, optional
+            True to remove the first of the two consecutive boundaries inside
             user given segmentation boundaries, False otherwise. (the
             default is True)
         get_recording_rels : bool, optional
@@ -77,12 +77,12 @@ class SymbTrDataExtractor(object):
             lyrics_sim_thres=lyrics_sim_thres,
             melody_sim_thres=melody_sim_thres,
             extract_all_labels=extract_all_labels,
-            crop_consecutive_bounds=crop_consecutive_bounds)
+            crop_consecutive_bounds=crop_consec_bounds)
 
         self._lyrics_sim_thres = lyrics_sim_thres
         self._melody_sim_thres = melody_sim_thres
         self._extract_all_labels = extract_all_labels
-        self._crop_consecutive_bounds = crop_consecutive_bounds
+        self._crop_consecutive_bounds = crop_consec_bounds
         self._get_recording_rels = get_recording_rels
         self._print_warnings = print_warnings
 
