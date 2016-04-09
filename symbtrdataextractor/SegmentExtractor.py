@@ -39,7 +39,7 @@ class SegmentExtractor(object):
         # get all boundaries starting with the first note
         all_bounds = self._get_all_bounds_in_score(bound_codes, score)
 
-        # if there are only usul boundaries the score does not have anotations
+        # if there are only usul boundaries the score does not have annotations
         anno_bounds = [i for i, code in enumerate(score['code'])
                        if code in anno_codes]
 
@@ -131,8 +131,8 @@ class SegmentExtractor(object):
                 slug = u"INSTRUMENTAL_SEGMENT"
 
             segments.append({'name': name, 'slug': slug, 'flavor': flavor,
-                            'start_note': start_note, 'end_note': end_note,
-                            'lyrics': lyrics, 'sections': segment_sections})
+                             'start_note': start_note, 'end_note': end_note,
+                             'lyrics': lyrics, 'sections': segment_sections})
 
         return self.segmentLabeler.label_structures(segments, score)
 
