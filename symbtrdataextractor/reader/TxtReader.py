@@ -112,7 +112,7 @@ class TxtReader(SymbTrReader):
 
             if score['duration'][ii] > 0:  # note or rest
                 if TxtReader._is_rest(score, ii):  # check rest
-                    is_rest_valid = _validate_rest(
+                    is_rest_valid = TxtReader._validate_rest(
                         score, ii, is_rest_valid, score_name)
 
         # !! BELOW IS COMMENTED FOR CHECKING NOTE DURATIONS IN   !!
@@ -135,14 +135,8 @@ class TxtReader(SymbTrReader):
         #        # USUL/TEMPO CHANGES ARE NOT HANDLED, DON'T ASSIGN FALSE YET
         #        is_duration_valid = True
 
-        return (start_usul_row and is_rest_valid and is_duration_valid and
-                is_index_valid)
-
-    @staticmethod
-    def _is_rest(score, ii):
-        return (-1 in [score['comma53'][ii], score['commaAE'][ii]] or
-                any(rs in [score['note53'][ii], score['noteAE'][ii]]
-                    for rs in ['Es', 'Sus', '']))
+        return all([start_usul_row, is_rest_valid, is_duration_valid,
+                    is_index_valid])
 
     @staticmethod
     def _validate_index_jump(score_idx, jump_ii, is_index_valid, score_name):
@@ -167,14 +161,22 @@ class TxtReader(SymbTrReader):
             start_usul_row = True
         return start_usul_row
 
+    @staticmethod
+    def _is_rest(score, ii):
+        val_list = [score['comma53'][ii], score['commaAE'][ii],
+                    score['note53'][ii], score['noteAE'][ii]]
 
-def _validate_rest(score, ii, is_rest_valid, score_name):
-    # it should be rest, validate
-    if not (score['comma53'][ii] == -1 and score['commaAE'][ii] == -1 and
-            score['note53'][ii] == 'Es' and score['noteAE'][ii] == 'Es' and
-            score['code'][ii] == 9):
-        is_rest_valid = False
-        warnings.warn("    " + score_name + ' ' +
-                      str(score['index'][ii]) + ': Invalid Rest')
+        return any(v1 == v2 for v1, v2 in zip(val_list, [-1. - 1, 'Es', 'Es']))
 
-    return is_rest_valid
+    @staticmethod
+    def _validate_rest(score, ii, is_rest_valid, score_name):
+        val_list = [score['code'][ii], score['comma53'][ii],
+                    score['commaAE'][ii], score['note53'][ii],
+                    score['noteAE'][ii]]
+
+        if all(v1 == v2 for v1, v2 in zip(val_list, [9, -1. -1, 'Es', 'Es'])):
+            is_rest_valid = False
+            warnings.warn("    " + score_name + ' ' +
+                          str(score['index'][ii]) + ': Invalid Rest')
+
+        return is_rest_valid

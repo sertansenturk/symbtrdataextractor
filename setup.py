@@ -16,4 +16,4 @@ setup(name='symbtrdataextractor',
           "networkx",
           "numpy"
       ],
-)
+      )
