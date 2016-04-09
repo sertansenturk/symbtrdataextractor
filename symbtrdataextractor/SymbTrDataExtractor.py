@@ -78,13 +78,6 @@ class SymbTrDataExtractor(object):
             melody_sim_thres=melody_sim_thres,
             crop_consecutive_bounds=crop_consec_bounds)
 
-        self._lyrics_sim_thres = lyrics_sim_thres
-        self._melody_sim_thres = melody_sim_thres
-        self._extract_all_labels = extract_all_labels
-        self._crop_consecutive_bounds = crop_consec_bounds
-        self._get_recording_rels = get_recording_rels
-        self._print_warnings = print_warnings
-
     # getter and setters
     @property
     def lyrics_sim_thres(self):
@@ -129,36 +122,32 @@ class SymbTrDataExtractor(object):
     def extract_all_labels(self, value):
         self._chk_bool(value)
         self._sectionExtractor.extract_all_labels = value
-        self._phraseExtractor.extract_all_labels = value
 
     @property
     def print_warnings(self):
-        return self._print_warnings
+        return self._sectionExtractor.print_warnings
 
     @print_warnings.setter
     def print_warnings(self, value):
         self._chk_bool(value)
-        self._print_warnings = value
         self._sectionExtractor.print_warnings = value
 
     @property
     def get_recording_rels(self):
-        return self._get_recording_rels
+        return self._metadataExtractor.get_recording_rels
 
     @get_recording_rels.setter
     def get_recording_rels(self, value):
         self._chk_bool(value)
-        self._get_recording_rels = value
         self._metadataExtractor.get_recording_rels = value
 
     @property
     def crop_consecutive_bounds(self):
-        return self._crop_consecutive_bounds
+        return self._phraseExtractor.crop_consecutive_bounds
 
     @crop_consecutive_bounds.setter
     def crop_consecutive_bounds(self, value):
         self._chk_bool(value)
-        self._crop_consecutive_bounds = value
         self._phraseExtractor.crop_consecutive_bounds = value
 
     @staticmethod
