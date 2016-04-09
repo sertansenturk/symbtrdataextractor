@@ -1,7 +1,7 @@
 import os
+from SymbTrReader import SymbTrReader
 
-
-class MusicXMLReader(object):
+class MusicXMLReader(SymbTrReader):
     def __init__(self):
         """
         Class constructor
@@ -26,7 +26,8 @@ class MusicXMLReader(object):
         NotImplemented
         """
         if symbtr_name is None:
-            symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
+            symbtr_name = MusicXMLReader.get_symbtr_name_from_filepath(
+                score_file, symbtr_name)
 
         # TODO
         return NotImplemented

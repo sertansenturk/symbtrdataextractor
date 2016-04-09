@@ -1,9 +1,10 @@
-import os
 import csv
+import warnings
 from ..MetadataExtractor import MetadataExtractor
+from SymbTrReader import SymbTrReader
 
 
-class Mu2Reader(object):
+class Mu2Reader(SymbTrReader):
     def __init__(self):
         """
         Class constructor
@@ -28,7 +29,8 @@ class Mu2Reader(object):
         NotImplemented
         """
         if symbtr_name is None:
-            symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
+            symbtr_name = Mu2Reader.get_symbtr_name_from_filepath(score_file,
+                                                                  symbtr_name)
 
         # TODO
         return NotImplemented
@@ -56,7 +58,9 @@ class Mu2Reader(object):
             False otherwise
         """
         if symbtr_name is None:
-            symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
+            symbtr_name = Mu2Reader.get_symbtr_name_from_filepath(score_file,
+                                                                  symbtr_name)
+
         makam_slug = symbtr_name.split('--')[0]
 
         with open(score_file, "rb") as f:
@@ -72,35 +76,15 @@ class Mu2Reader(object):
                 row = [unicode(cell, 'utf-8') for cell in row_temp]
                 code = int(row[0])
                 if code == 50:
-                    header['makam'] = {'mu2_name': row[7]}
-                    header['key_signature'] = row[8].split('/')
-
-                    if not header['key_signature'][0]:
-                        header['key_signature'] = []
-
-                    # validate key signature
-                    is_key_sig_valid = MetadataExtractor. \
-                        validate_key_signature(header['key_signature'],
-                                               makam_slug, symbtr_name)
-
+                    is_key_sig_valid = Mu2Reader.read_makam_key_signature_row(
+                        header, is_key_sig_valid, makam_slug, row, symbtr_name)
                 elif code == 51:
                     header['usul'] = {'mu2_name': row[7],
                                       'mertebe': int(row[3]),
                                       'number_of_pulses': int(row[2])}
                 elif code == 52:
-                    try:
-                        header['tempo'] = {'value': int(row[4]),
-                                           'unit': 'bpm'}
-                    except ValueError:
-                        # the bpm might be a float for low tempo
-                        header['tempo'] = {'value': float(row[4]),
-                                           'unit': 'bpm'}
-                    if not int(row[3]) == header['usul']['mertebe']:
-                        if not header['usul']['mu2_name'] == '[Serbest]':
-                            # ignore
-                            print("    " + symbtr_name +
-                                  ': Mertebe and tempo unit are different!')
-                            is_tempo_unit_valid = False
+                    is_tempo_unit_valid = Mu2Reader._read_tempo_row(
+                        row, symbtr_name, header, is_tempo_unit_valid)
                 elif code == 56:
                     header['usul']['subdivision'] = {'mertebe': int(row[3]),
                                                      'number_of_pulses':
@@ -118,7 +102,7 @@ class Mu2Reader(object):
                 elif code == 63:
                     header['notation'] = row[7]
                 elif code in range(50, 64):
-                    print('   Unparsed code: ' + ' '.join(row))
+                    warnings.warn('   Unparsed code: ' + ' '.join(row))
                 else:  # end of header
                     break
 
@@ -139,6 +123,41 @@ class Mu2Reader(object):
                            is_key_sig_valid)
 
         return header, header_row, is_header_valid
+
+    @staticmethod
+    def read_makam_key_signature_row(header, is_key_sig_valid, makam_slug, row,
+                                     symbtr_name):
+        header['makam'] = {'mu2_name': row[7]}
+        header['key_signature'] = row[8].split('/')
+        if not header['key_signature'][0]:
+            header['key_signature'] = []
+
+        # validate key signature
+        is_key_sig_valid = is_key_sig_valid and MetadataExtractor. \
+            validate_key_signature(header['key_signature'],
+                                   makam_slug, symbtr_name)
+        return is_key_sig_valid
+
+    @staticmethod
+    def _read_tempo_row(row, symbtr_name, header, is_tempo_unit_valid):
+        try:
+            header['tempo'] = {'value': int(row[4]),
+                               'unit': 'bpm'}
+        except ValueError:
+            # the bpm might be a float for low tempo
+            header['tempo'] = {'value': float(row[4]),
+                               'unit': 'bpm'}
+
+        if not int(row[3]) == header['usul']['mertebe']:
+            if not header['usul']['mu2_name'] == '[Serbest]':
+                # ignore
+                warn_str = '    ' + symbtr_name + \
+                           ': Mertebe and tempo unit are ' \
+                           'different!'
+                warnings.warn(warn_str)
+                is_tempo_unit_valid = False
+
+        return is_tempo_unit_valid
 
     @staticmethod
     def _add_attribute_slug_to_header(header, slugs, attr_name):
