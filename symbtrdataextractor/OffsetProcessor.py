@@ -19,7 +19,7 @@ class OffsetProcessor(object):
 
         is_measure_start_valid = self._validate_measure_start(
             is_measure_start_valid, measure_start_idx, offsets)
-        
+
         return measure_start_idx, is_measure_start_valid
 
     def _validate_measure_start(self, is_measure_start_valid,
@@ -32,9 +32,10 @@ class OffsetProcessor(object):
         if noninteger_measure_starts:
             is_measure_start_valid = False
             if self.print_warnings:
+                warn_str = ', '.join(str(e) for e in noninteger_measure_starts)
+
                 warnings.warn("    Some measures are skipped by the "
-                              "offsets: %s" + ', '.join(
-                    str(e) for e in noninteger_measure_starts))
+                              "offsets: " + warn_str)
 
         return is_measure_start_valid
 
