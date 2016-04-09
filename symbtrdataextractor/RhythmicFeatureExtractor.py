@@ -19,16 +19,8 @@ class RhythmicFeatureExtractor(object):
             else:  # end of file
                 end = score['index'][len(score['code']) - 1]
 
-            key_set = False
-            usul_key = None
-            for uk, dd in usul_dict.iteritems():
-                if key_set:
-                    break
-                for var in dd['variants']:
-                    if score['lyrics'][ub] == var['mu2_name']:
-                        usul_key = uk
-                        key_set = True
-            assert usul_key is not None  # if not found usul key is missing
+            usul_key = RhythmicFeatureExtractor.get_usul_symbtr_slug(
+                score, ub, usul_dict)
 
             usul = {'attribute_key': usul_key, 'mu2_name': score['lyrics'][ub],
                     'mertebe': score['denumerator'][ub],
@@ -36,23 +28,46 @@ class RhythmicFeatureExtractor(object):
                     'symbtr_internal_id': score['lns'][ub]}
 
             # compute the tempo from the next note
-            tempo = []
-            if usul['mu2_name'] == '[Serbest]':
-                pass  # no tempo for non-metered score
-            else:
-                it = ub
-                while not tempo:
-                    it += 1
-                    if score['code'][it] == 9:  # proper note
-                        tempo = cls._compute_tempo_from_note(
-                            score['numerator'][it], score['denumerator'][it],
-                            score['duration'][it], usul['mertebe'])
+            tempo = cls.compute_tempo_from_next_note(score, ub, usul)
 
             rhythmic_structure.append(
                 {'usul': usul, 'tempo': {'value': tempo, 'unit': 'bpm'},
                  'startNote': start, 'endNote': end})
 
         return rhythmic_structure
+
+    @staticmethod
+    def get_usul_symbtr_slug(score, ub, usul_dict):
+        slug_set = False
+        usul_slug = None
+
+        # search the usul slug
+        for uk, dd in usul_dict.iteritems():
+            for var in dd['variants']:
+                if score['lyrics'][ub] == var['mu2_name']:
+                    usul_slug = uk
+                    slug_set = True
+            if slug_set:
+                break
+
+        assert usul_slug is not None  # if not found usul key is missing
+
+        return usul_slug
+
+    @classmethod
+    def compute_tempo_from_next_note(cls, score, usul_boundary, usul):
+        tempo = None
+        if usul['mu2_name'] == '[Serbest]':
+            pass  # no tempo for non-metered score
+        else:
+            it = usul_boundary
+            while not tempo:
+                it += 1
+                if score['code'][it] == 9:  # proper note
+                    tempo = cls._compute_tempo_from_note(
+                        score['numerator'][it], score['denumerator'][it],
+                        score['duration'][it], usul['mertebe'])
+        return tempo
 
     @staticmethod
     def _compute_tempo_from_note(note_num, note_denum, note_dur, mertebe):
