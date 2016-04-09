@@ -112,10 +112,10 @@ class TxtReader(SymbTrReader):
 
             if score['duration'][ii] > 0:  # note or rest
                 if TxtReader._is_rest(score, ii):  # check rest
-                    is_rest_valid = TxtReader._validate_rest(
+                    is_rest_valid = _validate_rest(
                         score, ii, is_rest_valid, score_name)
 
-        #         !! BELOW IS COMMENTED FOR CHECKING NOTE DURATIONS IN   !!
+        # !! BELOW IS COMMENTED FOR CHECKING NOTE DURATIONS IN   !!
         #         !! MS AGAINST THE SYMBOLIC NOTE DURATION, WHICH IS NOT !!
         #         !! IMPLEMENTED YET !!
         #         # note duration
@@ -150,27 +150,11 @@ class TxtReader(SymbTrReader):
             warnings.warn("    " + score_name + ": " + str(score_idx) +
                           ", note index jump.")
             is_index_valid = False
-            import pdb
-            pdb.set_trace()
 
         jump_ii = score_idx  # we assign to the score_idx so the we can warn
         # where the jumps are happening
 
         return is_index_valid, jump_ii
-
-    @staticmethod
-    def _validate_rest(score, ii, is_rest_valid, score_name):
-        # it should be rest, validate
-        if not (score['comma53'][ii] == -1 and
-                        score['commaAE'][ii] == -1 and
-                        score['note53'][ii] == 'Es' and
-                        score['noteAE'][ii] == 'Es' and
-                        score['code'][ii] == 9):
-            is_rest_valid = False
-            warnings.warn("    " + score_name + ' ' +
-                          str(score['index'][ii]) + ': Invalid Rest')
-
-        return is_rest_valid
 
     @staticmethod
     def _starts_with_usul_row(score, score_name):
@@ -182,3 +166,15 @@ class TxtReader(SymbTrReader):
         else:
             start_usul_row = True
         return start_usul_row
+
+
+def _validate_rest(score, ii, is_rest_valid, score_name):
+    # it should be rest, validate
+    if not (score['comma53'][ii] == -1 and score['commaAE'][ii] == -1 and
+            score['note53'][ii] == 'Es' and score['noteAE'][ii] == 'Es' and
+            score['code'][ii] == 9):
+        is_rest_valid = False
+        warnings.warn("    " + score_name + ' ' +
+                      str(score['index'][ii]) + ': Invalid Rest')
+
+    return is_rest_valid

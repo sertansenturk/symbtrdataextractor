@@ -1,5 +1,6 @@
 from SymbTrReader import SymbTrReader
 
+
 class MusicXMLReader(SymbTrReader):
     def __init__(self):
         """
