@@ -60,25 +60,25 @@ class SymbTrDataExtractor(object):
             and the inconsistencies in the scores will be always displayed
             (the default is True)
         """
+        self._metadataExtractor = MetadataExtractor(
+            get_recording_rels=get_recording_rels)
+
+        self._sectionExtractor = SectionExtractor(
+            lyrics_sim_thres=lyrics_sim_thres,
+            melody_sim_thres=melody_sim_thres,
+            extract_all_labels=extract_all_labels,
+            print_warnings=print_warnings)
+
+        self._phraseExtractor = PhraseExtractor(
+            lyrics_sim_thres=lyrics_sim_thres,
+            melody_sim_thres=melody_sim_thres,
+            extract_all_labels=extract_all_labels)
+
         self._lyrics_sim_thres = lyrics_sim_thres
         self._melody_sim_thres = melody_sim_thres
         self._extract_all_labels = extract_all_labels
         self._get_recording_rels = get_recording_rels
         self._print_warnings = print_warnings
-
-        self._metadataExtractor = MetadataExtractor(
-            get_recording_rels=self._get_recording_rels)
-
-        self._sectionExtractor = SectionExtractor(
-            lyrics_sim_thres=self._lyrics_sim_thres,
-            melody_sim_thres=self._melody_sim_thres,
-            extract_all_labels=self._extract_all_labels,
-            print_warnings=self._print_warnings)
-
-        self._phraseExtractor = PhraseExtractor(
-            lyrics_sim_thres=self._lyrics_sim_thres,
-            melody_sim_thres=self._melody_sim_thres,
-            extract_all_labels=self._extract_all_labels)
 
     # getter and setters
     @property
@@ -89,6 +89,8 @@ class SymbTrDataExtractor(object):
     def lyrics_sim_thres(self, value):
         self._chk_sim_thres_val(value)
         self._lyrics_sim_thres = value
+        self._phraseExtractor.lyrics_sim_thres = value
+        self._sectionExtractor.lyrics_sim_thres = value
 
     @property
     def melody_sim_thres(self):
@@ -98,6 +100,8 @@ class SymbTrDataExtractor(object):
     def melody_sim_thres(self, value):
         self._chk_sim_thres_val(value)
         self._melody_sim_thres = value
+        self._phraseExtractor.melody_sim_thres = value
+        self._sectionExtractor.melody_sim_thres = value
 
     @staticmethod
     def _chk_sim_thres_val(value):
@@ -113,6 +117,8 @@ class SymbTrDataExtractor(object):
     def extract_all_labels(self, value):
         self._chk_bool(value)
         self._extract_all_labels = value
+        self._sectionExtractor.extract_all_labels = value
+        self._phraseExtractor.extract_all_labels = value
 
     @property
     def print_warnings(self):
@@ -122,6 +128,7 @@ class SymbTrDataExtractor(object):
     def print_warnings(self, value):
         self._chk_bool(value)
         self._print_warnings = value
+        self._sectionExtractor.print_warnings = value
 
     @property
     def get_recording_rels(self):
@@ -131,6 +138,7 @@ class SymbTrDataExtractor(object):
     def get_recording_rels(self, value):
         self._chk_bool(value)
         self._get_recording_rels = value
+        self._metadataExtractor.get_recording_rels = value
 
     @staticmethod
     def _chk_bool(value):
