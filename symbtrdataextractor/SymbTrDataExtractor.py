@@ -1,12 +1,14 @@
-from .SectionExtractor import SectionExtractor
-from .PhraseExtractor import PhraseExtractor
-from .SymbTrReader import SymbTrReader
-from .MetadataExtractor import MetadataExtractor
-from .RhythmicFeatureExtractor import RhythmicFeatureExtractor
 import os
 
+from .SymbTrDataMerger import SymbTrDataMerger
+from .MetadataExtractor import MetadataExtractor
+from .PhraseExtractor import PhraseExtractor
+from .RhythmicFeatureExtractor import RhythmicFeatureExtractor
+from .SectionExtractor import SectionExtractor
+from .SymbTrReader import SymbTrReader
 
-class SymbTrDataExtractor(object):
+
+class SymbTrDataExtractor(SymbTrDataMerger):
     """
     The class to extract the relevant information from a SymbTr score.
 
@@ -77,83 +79,6 @@ class SymbTrDataExtractor(object):
             lyrics_sim_thres=lyrics_sim_thres,
             melody_sim_thres=melody_sim_thres,
             crop_consecutive_bounds=crop_consec_bounds)
-
-    # getter and setters
-    @property
-    def lyrics_sim_thres(self):
-        assert self._phraseExtractor.lyrics_sim_thres == \
-               self._sectionExtractor.lyrics_sim_thres, \
-            'The lyrics similarity of the phrase and section extractions ' \
-            'should be equal'
-        return self._phraseExtractor.lyrics_sim_thres
-
-    @lyrics_sim_thres.setter
-    def lyrics_sim_thres(self, value):
-        self._chk_sim_thres_val(value)
-        self._phraseExtractor.lyrics_sim_thres = value
-        self._sectionExtractor.lyrics_sim_thres = value
-
-    @property
-    def melody_sim_thres(self):
-        assert self._phraseExtractor.melody_sim_thres == \
-               self._sectionExtractor.melody_sim_thres, \
-            'The melodic similarity of the phrase and section extractions ' \
-            'should be equal'
-
-        return self._phraseExtractor.melody_sim_thres
-
-    @melody_sim_thres.setter
-    def melody_sim_thres(self, value):
-        self._chk_sim_thres_val(value)
-        self._phraseExtractor.melody_sim_thres = value
-        self._sectionExtractor.melody_sim_thres = value
-
-    @staticmethod
-    def _chk_sim_thres_val(value):
-        if not 0 <= value <= 1:
-            raise ValueError('The similarity threshold should be a float '
-                             'between [0, 1]')
-
-    @property
-    def extract_all_labels(self):
-        return self._extract_all_labels
-
-    @extract_all_labels.setter
-    def extract_all_labels(self, value):
-        self._chk_bool(value)
-        self._sectionExtractor.extract_all_labels = value
-
-    @property
-    def print_warnings(self):
-        return self._sectionExtractor.print_warnings
-
-    @print_warnings.setter
-    def print_warnings(self, value):
-        self._chk_bool(value)
-        self._sectionExtractor.print_warnings = value
-
-    @property
-    def get_recording_rels(self):
-        return self._metadataExtractor.get_recording_rels
-
-    @get_recording_rels.setter
-    def get_recording_rels(self, value):
-        self._chk_bool(value)
-        self._metadataExtractor.get_recording_rels = value
-
-    @property
-    def crop_consecutive_bounds(self):
-        return self._phraseExtractor.crop_consecutive_bounds
-
-    @crop_consecutive_bounds.setter
-    def crop_consecutive_bounds(self, value):
-        self._chk_bool(value)
-        self._phraseExtractor.crop_consecutive_bounds = value
-
-    @staticmethod
-    def _chk_bool(value):
-        if not isinstance(value, type(True)):
-            raise ValueError('The property should be a boolean')
 
     def extract(self, score_file, symbtr_name=None, mbid=None,
                 segment_note_bound_idx=None):
@@ -255,69 +180,79 @@ class SymbTrDataExtractor(object):
             raise IOError("Unknown format")
         return score, is_score_content_valid
 
-    @classmethod
-    def merge(cls, data1, data2, verbose=True):
-        """
-        Merge the extracted score data from different formats (txt, mu2,
-        MusicXML), the precedence goes to key value pairs in latter dicts.
+    # getter and setters
+    @property
+    def lyrics_sim_thres(self):
+        assert self._phraseExtractor.lyrics_sim_thres == \
+               self._sectionExtractor.lyrics_sim_thres, \
+            'The lyrics similarity of the phrase and section extractions ' \
+            'should be equal'
+        return self._phraseExtractor.lyrics_sim_thres
 
-        Parameters
-        ----------
-        data1 : dict
-            The data extracted from SymbTr score
-        data2 : dict
-            The data extracted from SymbTr-mu2 file (or header)
-        verbose : bool
-            True to to print the warnings in the merge process, False otherwise
+    @lyrics_sim_thres.setter
+    def lyrics_sim_thres(self, value):
+        self._chk_sim_thres_val(value)
+        self._phraseExtractor.lyrics_sim_thres = value
+        self._sectionExtractor.lyrics_sim_thres = value
 
-        Returns
-        ----------
-        dict
-            Merged data extracted from the SymbTr scores
-        """
-        data1_dict = data1.copy()
-        data2_dict = data2.copy()
+    @property
+    def melody_sim_thres(self):
+        assert self._phraseExtractor.melody_sim_thres == \
+               self._sectionExtractor.melody_sim_thres, \
+            'The melodic similarity of the phrase and section extractions ' \
+            'should be equal'
 
-        if 'work' in data1_dict.keys():
-            data2_dict['work'] = data2_dict.pop('title')
-        elif 'recording' in data1_dict.keys():
-            data2_dict['recording'] = data2_dict.pop('title')
-        else:
-            if verbose:
-                print('   Unknown title target.')
-            data2_dict.pop('title')
+        return self._phraseExtractor.melody_sim_thres
 
-        return cls._dictmerge(data1_dict, data2_dict)
+    @melody_sim_thres.setter
+    def melody_sim_thres(self, value):
+        self._chk_sim_thres_val(value)
+        self._phraseExtractor.melody_sim_thres = value
+        self._sectionExtractor.melody_sim_thres = value
 
     @staticmethod
-    def _dictmerge(*data_dicts):
-        """
-        Given any number of dicts, shallow copy and merge into a new dict,
-        precedence goes to key value pairs in latter dicts.
+    def _chk_sim_thres_val(value):
+        if not 0 <= value <= 1:
+            raise ValueError('The similarity threshold should be a float '
+                             'between [0, 1]')
 
-        Parameters
-        ----------
-        *data_dicts : *dict
-            Dictionaries of variable number to merge
+    @property
+    def extract_all_labels(self):
+        return self._sectionExtractor.extract_all_labels
 
-        Returns
-        ----------
-        dict
-            Merged dictionaries
-        """
-        result = {}
-        for dictionary in data_dicts:
-            dict_cp = dictionary.copy()
-            for key, val in dict_cp.iteritems():
-                if key not in result.keys():
-                    result[key] = val
-                elif not isinstance(result[key], dict):
-                    if not result[key] == val:
-                        # overwrite
-                        print('   ' + key + ' already exists! Overwriting...')
-                        result[key] = val
-                else:
-                    result[key] = SymbTrDataExtractor._dictmerge(
-                        result[key], val)
+    @extract_all_labels.setter
+    def extract_all_labels(self, value):
+        self._chk_bool(value)
+        self._sectionExtractor.extract_all_labels = value
 
-        return result
+    @property
+    def print_warnings(self):
+        return self._sectionExtractor.print_warnings
+
+    @print_warnings.setter
+    def print_warnings(self, value):
+        self._chk_bool(value)
+        self._sectionExtractor.print_warnings = value
+
+    @property
+    def get_recording_rels(self):
+        return self._metadataExtractor.get_recording_rels
+
+    @get_recording_rels.setter
+    def get_recording_rels(self, value):
+        self._chk_bool(value)
+        self._metadataExtractor.get_recording_rels = value
+
+    @property
+    def crop_consecutive_bounds(self):
+        return self._phraseExtractor.crop_consecutive_bounds
+
+    @crop_consecutive_bounds.setter
+    def crop_consecutive_bounds(self, value):
+        self._chk_bool(value)
+        self._phraseExtractor.crop_consecutive_bounds = value
+
+    @staticmethod
+    def _chk_bool(value):
+        if not isinstance(value, type(True)):
+            raise ValueError('The property should be a boolean')
