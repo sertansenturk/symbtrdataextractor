@@ -92,7 +92,7 @@ class MetadataExtractor(object):
     def validate_attribute(data, scorename, attrib_name):
         score_attrib = data[attrib_name]
 
-        attrib_getter = getattr(MetadataExtractor, 'get_'+attrib_name)
+        attrib_getter = getattr(MetadataExtractor, 'get_' + attrib_name)
         attrib_dict = attrib_getter(score_attrib['symbtr_slug'])
 
         is_attribute_valid = True  # initialize

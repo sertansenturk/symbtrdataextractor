@@ -1,3 +1,6 @@
+import warnings
+
+
 class OffsetProcessor(object):
     """
 
@@ -14,14 +17,34 @@ class OffsetProcessor(object):
             idx = min(i for i, o in enumerate(offsets) if o > int_offset - tol)
             measure_start_idx.append(idx)
 
-        non_integer_measure_start = \
-            [offsets[i] for i in measure_start_idx
-             if not self.is_integer_offset(offsets[i])]
-        if non_integer_measure_start and self.print_warnings:
-            print("    " + "Some measures are skipped by the offsets: " +
-                  ', '.join(str(e) for e in non_integer_measure_start))
-            is_measure_start_valid = False
+        is_measure_start_valid = self._validate_measure_start(
+            is_measure_start_valid, measure_start_idx, offsets)
+        
         return measure_start_idx, is_measure_start_valid
+
+    def _validate_measure_start(self, is_measure_start_valid,
+                                measure_start_idx, offsets):
+        # find the measures starts which does not coincide to an integer offset
+        noninteger_measure_starts = self._find_non_integer_measure_starts(
+            measure_start_idx, offsets)
+
+        # all measures should start on integer offsets
+        if noninteger_measure_starts:
+            is_measure_start_valid = False
+            if self.print_warnings:
+                warnings.warn("    Some measures are skipped by the "
+                              "offsets: %s" + ', '.join(
+                    str(e) for e in noninteger_measure_starts))
+
+        return is_measure_start_valid
+
+    def _find_non_integer_measure_starts(self, measure_start_idx, offsets):
+        noninteger_measure_starts = []
+        for i in measure_start_idx:
+            if not self.is_integer_offset(offsets[i]):
+                noninteger_measure_starts.append(offsets[i])
+
+        return noninteger_measure_starts
 
     @staticmethod
     def is_integer_offset(offset):
