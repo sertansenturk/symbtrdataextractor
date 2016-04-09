@@ -50,18 +50,6 @@ class SegmentExtractor(object):
 
         return segments
 
-    @staticmethod
-    def _get_all_bounds_in_score(bound_codes, score):
-        # start bounds with the first note
-        first_note_idx = ScoreProcessor.get_first_note_index(score)
-
-        all_bounds = [first_note_idx]
-        for i, code in enumerate(score['code']):
-            if code in bound_codes and i > first_note_idx:
-                all_bounds.append(i)
-
-        return all_bounds
-
     def extract_segments(self, score, segment_note_bound_idx, sections=None):
         try:
             if segment_note_bound_idx:
@@ -81,11 +69,8 @@ class SegmentExtractor(object):
         # sort & tidy
         bounds = self._parse_bounds(bounds, score)
 
-        all_labels = [l for sub_list in
-                      ScoreProcessor.get_symbtr_labels().values()
-                      for l in sub_list]
         real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
-            score['lyrics'], all_labels, score['duration'])
+            score['lyrics'], score['duration'])
 
         segments = []
         for pp in range(0, len(bounds) - 1):
@@ -97,16 +82,12 @@ class SegmentExtractor(object):
             end_note = score['index'][end_note_idx]
 
             # cesni/flavor
-            flavor = [score['lyrics'][start_note_idx + i]
-                      for i, code in
-                      enumerate(score['code'][start_note_idx:end_note_idx + 1])
-                      if code == 54]
+            flavor = self._get_segment_flavor_idx(score, start_note_idx,
+                                                  end_note_idx)
 
             # lyrics
-            segment_lyrics_idx = ([rl for rl in real_lyrics_idx
-                                  if start_note <= rl <= end_note])
-            syllables = [score['lyrics'][li] for li in segment_lyrics_idx]
-            lyrics = ''.join(syllables)
+            lyrics = self._get_segment_lyrics(score, real_lyrics_idx,
+                                              start_note, end_note)
 
             # sections the segment is in
             segment_sections = []
@@ -135,6 +116,36 @@ class SegmentExtractor(object):
                              'lyrics': lyrics, 'sections': segment_sections})
 
         return self.segmentLabeler.label_structures(segments, score)
+
+    @staticmethod
+    def _get_all_bounds_in_score(bound_codes, score):
+        # start bounds with the first note
+        first_note_idx = ScoreProcessor.get_first_note_index(score)
+
+        all_bounds = [first_note_idx]
+        for i, code in enumerate(score['code']):
+            if code in bound_codes and i > first_note_idx:
+                all_bounds.append(i)
+
+        return all_bounds
+
+    @staticmethod
+    def _get_segment_lyrics(score, real_lyrics_idx, start_note, end_note):
+        segment_lyrics_idx = ([rl for rl in real_lyrics_idx
+                               if start_note <= rl <= end_note])
+        syllables = [score['lyrics'][li] for li in segment_lyrics_idx]
+        lyrics = ''.join(syllables)
+        return lyrics
+
+    @staticmethod
+    def _get_segment_flavor_idx(score, start_note_idx, end_note_idx):
+        flavor = []
+        for i, code in enumerate(
+                score['code'][start_note_idx:end_note_idx + 1]):
+            if code == 54:
+                flavor.append(score['lyrics'][start_note_idx + i])
+
+        return flavor
 
     @staticmethod
     def _get_section_idx(sections, note_idx):

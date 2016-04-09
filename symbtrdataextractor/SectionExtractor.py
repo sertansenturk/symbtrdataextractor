@@ -43,11 +43,9 @@ class SectionExtractor(object):
             melody_sim_thres=self.melody_sim_thres)
 
     def extract(self, score, symbtrname):
-        all_labels = [l for sub_list in
-                      ScoreProcessor.get_symbtr_labels().values()
-                      for l in sub_list]
+        all_labels = ScoreProcessor.get_all_symbtr_labels()
         struct_lbl = all_labels if self.extract_all_labels else \
-            ScoreProcessor.get_symbtr_labels()['structure']
+            ScoreProcessor.get_grouped_symbtr_labels()['structure']
 
         measure_start_idx, is_measure_start_valid = \
             self.offsetProcessor.find_measure_start_idx(
@@ -61,7 +59,7 @@ class SectionExtractor(object):
         else:
             sections = self._get_sections(score, struct_lbl)
             sections = self._locate_section_boundaries(
-                sections, score, all_labels, measure_start_idx)
+                sections, score, measure_start_idx)
 
             # the refine section names according to the lyrics, pitch and durs
             sections = self.sectionLabeler.label_structures(sections, score)
@@ -98,11 +96,10 @@ class SectionExtractor(object):
                                  'end_note': i, 'lyrics': ''})
         return sections
 
-    def _locate_section_boundaries(self, sections, score, struct_lbl,
-                                   measure_start_idx):
+    def _locate_section_boundaries(self, sections, score, measure_start_idx):
         first_note_idx = ScoreProcessor.get_first_note_index(score)
         real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
-            score['lyrics'], struct_lbl, score['duration'])
+            score['lyrics'], score['duration'])
 
         start_note_idx = [s['start_note'] for s in sections] + \
                          [len(score['lyrics'])]
@@ -236,9 +233,7 @@ class SectionExtractor(object):
 
         # check if there are any structure labels with a space
         # e.g. it is not found
-        all_labels = [l for sub_list in
-                      ScoreProcessor.get_symbtr_labels().values()
-                      for l in sub_list] + ['.']
+        all_labels = ScoreProcessor.get_all_symbtr_labels() + ['.']
         for i, ll in enumerate(score['lyrics']):
             for label in all_labels:
                 # invalid lyrics end
