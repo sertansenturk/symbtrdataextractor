@@ -4,6 +4,9 @@ engines:
     config:
       languages:
       - python
+    exclude_fingerprints:
+    # Similarity between NotImplemented Mu2Reader and MusicXMLReader classes
+    - d7e39af6c43936934270f9b66ef9cdd7
   fixme:
     enabled: true
   radon:
