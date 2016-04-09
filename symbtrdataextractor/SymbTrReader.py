@@ -290,17 +290,9 @@ class SymbTrReader(object):
 
         # get the metadata
         slugs = MetadataExtractor.get_slugs(symbtr_name)
-        header['makam']['symbtr_slug'] = slugs['makam']
-        header['makam']['attribute_key'] = MetadataExtractor.get_attribute_key(
-            header['makam']['symbtr_slug'], 'makam')
-
-        header['form']['symbtr_slug'] = slugs['form']
-        header['form']['attribute_key'] = MetadataExtractor.get_attribute_key(
-            header['form']['symbtr_slug'], 'form')
-
-        header['usul']['symbtr_slug'] = slugs['usul']
-        header['usul']['attribute_key'] = MetadataExtractor.get_attribute_key(
-            header['usul']['symbtr_slug'], 'usul')
+        SymbTrReader._read_attribute_slug(header, slugs, 'makam')
+        SymbTrReader._read_attribute_slug(header, slugs, 'form')
+        SymbTrReader._read_attribute_slug(header, slugs, 'usul')
 
         header['title']['symbtr_slug'] = slugs['name']
         header['composer']['symbtr_slug'] = slugs['composer']
@@ -323,3 +315,9 @@ class SymbTrReader(object):
                            is_key_sig_valid)
 
         return header, header_row, is_header_valid
+
+    @staticmethod
+    def _read_attribute_slug(header, slugs):
+        header['makam']['symbtr_slug'] = slugs['makam']
+        header['makam']['attribute_key'] = MetadataExtractor.get_attribute_key(
+            header['makam']['symbtr_slug'], 'makam')
