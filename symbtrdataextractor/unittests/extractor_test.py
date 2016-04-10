@@ -36,7 +36,7 @@ def test_extractor():
         segment_note_bound_idx=auto_seg_bounds)
 
     # extract mu2 header metadata
-    mu2_header, header_row, is_header_valid = Mu2Reader.read_mu2_header(
+    mu2_header, header_row, is_header_valid = Mu2Reader.read_header(
         mu2_filename, symbtr_name=scorename)
 
     # merge

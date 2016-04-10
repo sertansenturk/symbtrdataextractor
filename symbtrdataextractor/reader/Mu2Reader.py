@@ -13,7 +13,7 @@ class Mu2Reader(SymbTrReader):
         pass
 
     @classmethod
-    def read_mu2_score(cls, score_file, symbtr_name=None):
+    def read(cls, score_file, symbtr_name=None):
         """
         Reader method for the SymbTr-mu2 scores. This method is not
         implemented yet.
@@ -36,7 +36,7 @@ class Mu2Reader(SymbTrReader):
         return NotImplemented
 
     @staticmethod
-    def read_mu2_header(score_file, symbtr_name=None):
+    def read_header(score_file, symbtr_name=None):
         """
         Reads the metadata in the header of the SymbTr-mu2 scores.
 

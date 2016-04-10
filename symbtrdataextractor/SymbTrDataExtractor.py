@@ -2,6 +2,8 @@ import os
 
 from symbtrdataextractor.metadata.MetadataExtractor import MetadataExtractor
 from symbtrdataextractor.reader.TxtReader import TxtReader
+from symbtrdataextractor.reader.MusicXMLReader import MusicXMLReader
+from symbtrdataextractor.reader.Mu2Reader import Mu2Reader
 from .RhythmicFeatureExtractor import RhythmicFeatureExtractor
 from .SectionExtractor import SectionExtractor
 from .SegmentExtractor import SegmentExtractor
@@ -171,10 +173,10 @@ class SymbTrDataExtractor(SymbTrDataMerger):
             score, is_score_content_valid = TxtReader.read(
                 score_file, symbtr_name=symbtr_name)
         elif extension == ".xml":
-            score, is_score_content_valid = TxtReader.read_musicxml_score(
+            score, is_score_content_valid = MusicXMLReader.read(
                 score_file, symbtr_name=symbtr_name)
         elif extension == ".mu2":
-            score, is_score_content_valid = TxtReader.read_mu2_score(
+            score, is_score_content_valid = Mu2Reader.read(
                 score_file, symbtr_name=symbtr_name)
         else:
             raise IOError("Unknown format")
