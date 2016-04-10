@@ -54,7 +54,10 @@ class GraphOperations(object):
 
         # sort minimum indices to get the actual sort indices for the clique
         # list
-        sort_key = [i[0] for i in
-                    sorted(enumerate(min_idx), key=lambda x:x[1])]
+        return GraphOperations.sort_by_idx(cliques, min_idx)
 
+    @staticmethod
+    def sort_by_idx(cliques, min_idx):
+        sort_key = [i[0] for i in
+                    sorted(enumerate(min_idx), key=lambda x: x[1])]
         return [cliques[k] for k in sort_key]

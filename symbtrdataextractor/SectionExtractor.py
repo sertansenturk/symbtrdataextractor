@@ -3,6 +3,7 @@ from fileoperations.slugify_tr import slugify_tr
 from . ScoreProcessor import ScoreProcessor
 from . StructureLabeler import StructureLabeler
 from . OffsetProcessor import OffsetProcessor
+from . GraphOperations import GraphOperations
 import warnings
 
 
@@ -210,11 +211,9 @@ class SectionExtractor(object):
         # one boundary is enough since they do not overlap
         sec_bound_idx = [s['start_note'] if s['start_note'] else s['end_note']
                          for s in sections]
-        # sort the sections
-        sort_idx = [i[0] for i in sorted(enumerate(sec_bound_idx),
-                                         key=lambda x: x[1])]
 
-        return [sections[s] for s in sort_idx]
+        # sort the sections
+        return GraphOperations.sort_by_idx(sections, sec_bound_idx)
 
     def _validate_sections(self, sections, score, ignore_labels, symbtrname):
         # treat some of these are warning; they'll be made stricter later
