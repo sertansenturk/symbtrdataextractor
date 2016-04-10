@@ -88,37 +88,17 @@ class MetadataExtractor(object):
     def validate_attribute(data, scorename, attrib_name):
         score_attrib = data[attrib_name]
 
-        attrib_getter = getattr(MetadataExtractor, 'get_' + attrib_name)
-        attrib_dict = attrib_getter(score_attrib['symbtr_slug'])
+        attrib_dict = MetadataExtractor.get_attr(score_attrib['symbtr_slug'],
+                                                 attrib_name)
 
-        is_attribute_valid = True  # initialize
-        if 'symbtr_slug' in score_attrib.keys():
-            if not score_attrib['symbtr_slug'] == attrib_dict['symbtr_slug']:
-                is_attribute_valid = False
-                warnings.warn("    " + scorename + ', ' +
-                              score_attrib['symbtr_slug'] + ': The slug does '
-                                                            'not match.')
+        is_attribute_valid = MetadataExtractor._validate_slug(
+            attrib_dict, score_attrib, scorename)
 
         if 'mu2_name' in score_attrib.keys():  # work
             try:  # usul
-                mu2_name = ''
-                for uv in attrib_dict['variants']:
-                    if uv['mu2_name'] == score_attrib['mu2_name']:
-                        # found variant
-                        mu2_name = uv['mu2_name']
-                        if not uv['mertebe'] == score_attrib['mertebe']:
-                            is_attribute_valid = False
-                            warnings.warn("    " + scorename + ', ' +
-                                          uv['mu2_name'] +
-                                          ': The mertebe of the score does '
-                                          'not match.')
-                        if not uv['num_pulses'] == \
-                                score_attrib['number_of_pulses']:
-                            is_attribute_valid = False
-                            warnings.warn("    " + scorename + ', ' +
-                                          uv['mu2_name'] +
-                                          ': The number of pulses in an usul '
-                                          'cycle does not match.')
+                is_attribute_valid, mu2_name = MetadataExtractor.\
+                    validate_mu2_usul_variant(attrib_dict, is_attribute_valid,
+                                              score_attrib, scorename)
 
                 if not mu2_name:  # no matching variant
                     is_attribute_valid = False
@@ -127,12 +107,8 @@ class MetadataExtractor(object):
                                   ': The Mu2 attribute does not match.')
 
             except KeyError:  # makam, form
-                mu2_name = attrib_dict['mu2_name']
-                if not score_attrib['mu2_name'] == mu2_name:
-                    is_attribute_valid = False
-                    warnings.warn("    " + scorename + ', ' +
-                                  score_attrib['mu2_name'] +
-                                  ': The Mu2 attribute does not match.')
+                is_attribute_valid = MetadataExtractor.validate_mu2_makam_form(
+                    attrib_dict, is_attribute_valid, score_attrib, scorename)
 
         if 'mb_attribute' in score_attrib.keys():  # work
             skip_makam_slug = ['12212212', '22222221', '223', '232223', '262',
@@ -157,13 +133,64 @@ class MetadataExtractor(object):
                                       ': The MusicBrainz attribute does not '
                                       'exist.')
 
+        is_attribute_valid = MetadataExtractor.validate_mb_tag(
+            attrib_dict, is_attribute_valid, score_attrib, scorename)
+
+        return is_attribute_valid
+
+    @staticmethod
+    def validate_mu2_makam_form(attrib_dict, is_attribute_valid, score_attrib,
+                                scorename):
+        mu2_name = attrib_dict['mu2_name']
+        if not score_attrib['mu2_name'] == mu2_name:
+            is_attribute_valid = False
+            warnings.warn("    " + scorename + ', ' +
+                          score_attrib['mu2_name'] +
+                          ': The Mu2 attribute does not match.')
+        return is_attribute_valid
+
+    @staticmethod
+    def _validate_slug(attrib_dict, score_attrib, scorename):
+        if 'symbtr_slug' in score_attrib.keys():
+            if not score_attrib['symbtr_slug'] == attrib_dict['symbtr_slug']:
+                is_attribute_valid = False
+                warnings.warn("    " + scorename + ', ' +
+                              score_attrib['symbtr_slug'] + ': The slug does '
+                                                            'not match.')
+        return is_attribute_valid
+
+    @staticmethod
+    def validate_mu2_usul_variant(attrib_dict, is_attribute_valid,
+                                  score_attrib, scorename):
+        mu2_name = ''
+        for uv in attrib_dict['variants']:
+            if uv['mu2_name'] == score_attrib['mu2_name']:
+                # found variant
+                mu2_name = uv['mu2_name']
+                if not uv['mertebe'] == score_attrib['mertebe']:
+                    is_attribute_valid = False
+                    warnings.warn("    " + scorename + ', ' +
+                                  uv['mu2_name'] +
+                                  ': The mertebe of the score does '
+                                  'not match.')
+                if not uv['num_pulses'] == \
+                        score_attrib['number_of_pulses']:
+                    is_attribute_valid = False
+                    warnings.warn("    " + scorename + ', ' +
+                                  uv['mu2_name'] +
+                                  ': The number of pulses in an usul '
+                                  'cycle does not match.')
+        return is_attribute_valid, mu2_name
+
+    @staticmethod
+    def validate_mb_tag(attrib_dict, is_attribute_valid, score_attrib,
+                        scorename):
         if 'mb_tag' in score_attrib.keys():  # recording
             if not score_attrib['mb_tag'] in attrib_dict['mb_tag']:
                 is_attribute_valid = False
                 warnings.warn("    " + scorename + ', ' +
                               score_attrib['mb_tag'] +
                               ': The MusicBrainz tag does not match.')
-
         return is_attribute_valid
 
     @staticmethod
@@ -181,10 +208,9 @@ class MetadataExtractor(object):
     def validate_key_signature(key_signature, makam_slug, symbtr_name):
         attr_dict = MetadataExtractor.get_attribute_dict('makam')
         key_sig_makam = attr_dict[makam_slug]['key_signature']
-        is_key_sig_valid = True
+
         # the number of accidentals should be the same
-        if len(key_signature) != len(key_sig_makam):
-            is_key_sig_valid = False
+        is_key_sig_valid = len(key_signature) == len(key_sig_makam)
 
         # the sequence should be the same, allow a single comma deviation
         # due to AEU theory and practice mismatch
