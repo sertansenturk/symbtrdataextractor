@@ -81,8 +81,8 @@ class MBMetadata(object):
 
                         warnings.warn(w_str)
                     else:
-                        warnings.warn(u'%s: The MusicBrainz attribute does'
-                                      u' not exist.' % scorename)
+                        warnings.warn(u'{0:s}: The MusicBrainz attribute does'
+                                      u' not exist.'.format(scorename))
         return is_attribute_valid
 
     @staticmethod
