@@ -168,10 +168,9 @@ class StructureLabeler(object):
         num_nodes = len(set.union(*cliques['exact']))
         labels = ['?'] * num_nodes  # labels to fill for each note
 
-        sim_clq_it = [1] * len(cliques['similar'])  # idx to label similar
-        # cliques
-        mix_clq_it = dict()  # the index to label mixture cliques, if they
-        # exist
+        # define clique indices for labeling the exact cliques
+        sim_clq_it = [1] * len(cliques['similar'])  # similar cliques indices
+        mix_clq_it = dict()  # initialize the mixture clique indices
 
         # similar cliques give us the base structure
         basenames = StructureLabeler._get_basenames(cliques['similar'])
@@ -179,7 +178,8 @@ class StructureLabeler(object):
         for ec in cliques['exact']:
             # find the similar cliques of which the current exact clique is
             # a subset of
-            sim_clique_idx = StructureLabeler._get_similar_cliques(cliques, ec)
+            sim_clique_idx = StructureLabeler._get_related_similar_clique_idx(
+                cliques, ec)
 
             if len(sim_clique_idx) == 1:  # belongs to one similar clique
                 for e in sorted(ec):  # label with basename + number
@@ -187,16 +187,20 @@ class StructureLabeler(object):
                                  str(sim_clq_it[sim_clique_idx[0]]))
                 sim_clq_it[sim_clique_idx[0]] += 1
             else:  # belongs to more than one similar clique
-                mix_str = ''.join([basenames[i] for i in sim_clique_idx])
-                if mix_str not in mix_clq_it.keys():
-                    mix_clq_it[mix_str] = 1
-
-                for e in ec:  # join the labels of all basenames
-                    labels[e] = mix_str + str(mix_clq_it[mix_str])
-
-                mix_clq_it[mix_str] += 1
+                StructureLabeler._label_mixture_clique(
+                    ec, labels, sim_clique_idx, mix_clq_it, basenames)
 
         return labels
+
+    @staticmethod
+    def _label_mixture_clique(ec, labels, sim_clique_idx, mix_clq_it,
+                              basenames):
+        mix_str = ''.join([basenames[i] for i in sim_clique_idx])
+        if mix_str not in mix_clq_it.keys():
+            mix_clq_it[mix_str] = 1
+        for e in ec:  # join the labels of all basenames
+            labels[e] = mix_str + str(mix_clq_it[mix_str])
+        mix_clq_it[mix_str] += 1
 
     @staticmethod
     def _get_basenames(similar_cliques):
@@ -211,7 +215,7 @@ class StructureLabeler(object):
         return basenames
 
     @staticmethod
-    def _get_similar_cliques(cliques, ec):
+    def _get_related_similar_clique_idx(cliques, ec):
         in_cliques_idx = [i for i, x in enumerate(cliques['similar'])
                           if ec <= x]
         assert len(in_cliques_idx) > 0,\
