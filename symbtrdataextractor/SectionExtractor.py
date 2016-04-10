@@ -134,15 +134,13 @@ class SectionExtractor(object):
                 pass  # the start and end are already fixed
 
         # if the first rows are control rows and the first section starts next
-        self._arrange_first_section(score, sections)
+        self._fill_gap_in_start(score, sections)
 
         return sections
 
-    def _arrange_first_section(self, score, sections):
-        first_note_idx = ScoreProcessor.get_first_note_index(score)
-        first_sec = sections[0]
-
+    def _fill_gap_in_start(self, score, sections):
         # if there is a gap in the start, create a new section
+        first_note_idx = ScoreProcessor.get_first_note_index(score)
         if sections[0]['start_note'] > first_note_idx:
             end_note = sections[0]['start_note'] - 1
             sections.append({'name': u'INSTRUMENTAL_SECTION',
