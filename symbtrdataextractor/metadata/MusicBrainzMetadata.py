@@ -1,7 +1,50 @@
 import warnings
+from musicbrainzngs import ResponseError
+from urlparse import urlparse
+from makammusicbrainz.AudioMetadata import AudioMetadata
+from makammusicbrainz.WorkMetadata import WorkMetadata
 
 
 class MusicBrainzMetadata(object):
+    def __init__(self, get_recording_rels=False):
+        self._audioMetadata = AudioMetadata(
+            get_work_attributes=False, print_warnings=False)
+        self._workMetadata = WorkMetadata(
+            get_recording_rels=get_recording_rels, print_warnings=False)
+
+    @property
+    def get_recording_rels(self):
+        return self._workMetadata.get_recording_rels
+
+    @get_recording_rels.setter
+    def get_recording_rels(self, value):
+        self._workMetadata.get_recording_rels = value
+
+    def get_metadata_from_musicbrainz(self, mbid):
+        o = urlparse(mbid)
+        if o.netloc:  # url supplied
+            o_splitted = o.path.split('/')
+            mbid = o_splitted[2]
+
+        try:  # assume mbid is a work
+            data = self._workMetadata.from_musicbrainz(mbid)
+            data['work'] = {'title': data.pop("title", None),
+                            'mbid': data.pop('mbid', None)}
+        except ResponseError:  # assume mbid is a recording
+            data = self._audioMetadata.from_musicbrainz(mbid)
+            data['recording'] = {'title': data.pop("title", None),
+                                 'mbid': data.pop('mbid', None)}
+            if self.get_recording_rels:
+                warnings.warn(u"Recording mbid is given. Ignored "
+                              u"get_recording_rels boolean.")
+
+        # scores should have one attribute per type
+        for attr in ['makam', 'form', 'usul']:
+            if len(data[attr]) == 1:
+                data[attr] = data[attr][0]
+
+        return data
+
     @staticmethod
     def validate_mb_attribute(attrib_dict, score_attrib, scorename):
         is_attribute_valid = True

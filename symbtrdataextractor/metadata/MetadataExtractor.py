@@ -1,10 +1,6 @@
 import os
 import json
 import warnings
-from urlparse import urlparse
-from makammusicbrainz.AudioMetadata import AudioMetadata
-from makammusicbrainz.WorkMetadata import WorkMetadata
-from musicbrainzngs import ResponseError
 from .Mu2Metadata import Mu2Metadata
 from .MusicBrainzMetadata import MusicBrainzMetadata as MBMetadata
 
@@ -14,18 +10,15 @@ class MetadataExtractor(object):
 
     """
     def __init__(self, get_recording_rels=False):
-        self._audioMetadata = AudioMetadata(get_work_attributes=False,
-                                            print_warnings=False)
-        self._workMetadata = WorkMetadata(
-            get_recording_rels=get_recording_rels, print_warnings=False)
+        self._MBMetadata = MBMetadata(get_recording_rels=get_recording_rels)
 
     @property
     def get_recording_rels(self):
-        return self._workMetadata.get_recording_rels
+        return self._MBMetadata.get_recording_rels
 
     @get_recording_rels.setter
     def get_recording_rels(self, value):
-        self._workMetadata.get_recording_rels = value
+        self._MBMetadata.get_recording_rels = value
 
     @staticmethod
     def get_slugs(scorename):
@@ -35,7 +28,7 @@ class MetadataExtractor(object):
 
     def get_metadata(self, scorename, mbid=''):
         if mbid:
-            data = self._get_metadata_from_musicbrainz(mbid)
+            data = self._MBMetadata.get_metadata_from_musicbrainz(mbid)
         else:
             data = {'makam': {}, 'form': {}, 'usul': {}, 'name': {},
                     'composer': {}, 'lyricist': {}}
@@ -74,7 +67,7 @@ class MetadataExtractor(object):
     def validate_makam_form_usul(data, scorename):
         is_valid_list = []
         for attr in ['makam', 'form', 'usul']:
-            is_valid_list.append(MetadataExtractor._validate_attribute(
+            is_valid_list.append(MetadataExtractor._validate_attributes(
                 data, scorename, attr))
 
         return all(is_valid_list)
@@ -87,7 +80,7 @@ class MetadataExtractor(object):
                 return attr_key
 
     @staticmethod
-    def _validate_attribute(data, scorename, attrib_name):
+    def _validate_attributes(data, scorename, attrib_name):
         score_attrib = data[attrib_name]
 
         attrib_dict = MetadataExtractor._get_attr(score_attrib['symbtr_slug'],
@@ -170,28 +163,3 @@ class MetadataExtractor(object):
 
         # no match
         return {}
-
-    def _get_metadata_from_musicbrainz(self, mbid):
-        o = urlparse(mbid)
-        if o.netloc:  # url supplied
-            o_splitted = o.path.split('/')
-            mbid = o_splitted[2]
-
-        try:  # assume mbid is a work
-            data = self._workMetadata.from_musicbrainz(mbid)
-            data['work'] = {'title': data.pop("title", None),
-                            'mbid': data.pop('mbid', None)}
-        except ResponseError:  # assume mbid is a recording
-            data = self._audioMetadata.from_musicbrainz(mbid)
-            data['recording'] = {'title': data.pop("title", None),
-                                 'mbid': data.pop('mbid', None)}
-            if self.get_recording_rels:
-                warnings.warn(u"Recording mbid is given. Ignored "
-                              u"get_recording_rels boolean.")
-
-        # scores should have one attribute per type
-        for attr in ['makam', 'form', 'usul']:
-            if len(data[attr]) == 1:
-                data[attr] = data[attr][0]
-
-        return data
