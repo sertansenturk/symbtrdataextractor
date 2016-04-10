@@ -13,7 +13,9 @@ class Mu2Metadata(object):
 
                 if not mu2_name:  # no matching variant
                     is_attr_valid = False
-                    warnings.warn(u'{0!s}, {1!s}: The Mu2 attribute does not match.'.format(scorename, score_attrib['mu2_name']))
+                    warnings.warn(u'{0!s}, {1!s}: The Mu2 attribute does not '
+                                  u'match.'.format(scorename,
+                                                   score_attrib['mu2_name']))
 
             except KeyError:  # makam, form
                 is_attr_valid = Mu2Metadata._validate_mu2_makam_form(
@@ -25,7 +27,8 @@ class Mu2Metadata(object):
     def _validate_mu2_makam_form(score_attrib, attrib_dict, scorename):
         mu2_name = attrib_dict['mu2_name']
         if not score_attrib['mu2_name'] == mu2_name:
-            warnings.warn(u'{0!s}, {1!s}: The Mu2 attribute does not match.'.format(scorename, score_attrib['mu2_name']))
+            warnings.warn(u'{0!s}, {1!s}: The Mu2 attribute does not match.'.
+                          format(scorename, score_attrib['mu2_name']))
             return False
 
         return True
