@@ -1,0 +1,155 @@
+{
+    "symbtr": "hicaz_humayun--beste--hafif--olmada_diller--abdulhalim_aga", 
+    "makam": {
+        "attribute_key": "hicaz_humayun", 
+        "symbtr_slug": "hicaz_humayun"
+    }, 
+    "form": {
+        "attribute_key": "beste", 
+        "symbtr_slug": "beste"
+    }, 
+    "lyricist": {}, 
+    "tonic": "A4", 
+    "rhythmic_structure": [
+        {
+            "endNote": 861, 
+            "startNote": 1, 
+            "usul": {
+                "symbtr_internal_id": 64, 
+                "attribute_key": "hafif", 
+                "mertebe": 4, 
+                "mu2_name": "Haf\u00eef", 
+                "number_of_pulses": 32
+            }, 
+            "tempo": {
+                "unit": "bpm", 
+                "value": 17
+            }
+        }
+    ], 
+    "phrase_annotations": [], 
+    "number_of_notes": 861, 
+    "composer": {
+        "symbtr_slug": "abdulhalim_aga"
+    }, 
+    "duration": {
+        "unit": "second", 
+        "value": 445.249
+    }, 
+    "segmentations": [], 
+    "usul": {
+        "attribute_key": "hafif", 
+        "symbtr_slug": "hafif"
+    }, 
+    "sections": [
+        {
+            "start_note": 2, 
+            "name": "VOCAL_SECTION", 
+            "lyrics": "Ah olmada diller rub\u00fbde ah gamze i c\u00e2dusuna aman  ", 
+            "lyric_structure": "A1", 
+            "end_note": 112, 
+            "melodic_structure": "A1", 
+            "slug": "VOCAL_SECTION"
+        }, 
+        {
+            "start_note": 113, 
+            "name": "VOCAL_SECTION", 
+            "lyrics": "Ah be li be li tir ye le lel li c\u00e2n\u0131m y\u00e2 l\u00e2 yel le lel li vay  ", 
+            "lyric_structure": "B1", 
+            "end_note": 163, 
+            "melodic_structure": "B1", 
+            "slug": "VOCAL_SECTION"
+        }, 
+        {
+            "start_note": 164, 
+            "name": "VOCAL_SECTION", 
+            "lyrics": "Aman aman aman aman c\u00e2dusuna  ", 
+            "lyric_structure": "C1", 
+            "end_note": 215, 
+            "melodic_structure": "C1", 
+            "slug": "VOCAL_SECTION"
+        }, 
+        {
+            "start_note": 216, 
+            "name": "VOCAL_SECTION", 
+            "lyrics": "Ah olmada diller rub\u00fbde ah gamze i c\u00e2dusuna aman  ", 
+            "lyric_structure": "A1", 
+            "end_note": 326, 
+            "melodic_structure": "A1", 
+            "slug": "VOCAL_SECTION"
+        }, 
+        {
+            "start_note": 327, 
+            "name": "VOCAL_SECTION", 
+            "lyrics": "Ah be li be li tir ye le lel li c\u00e2n\u0131m y\u00e2 l\u00e2 yel le lel li vay  ", 
+            "lyric_structure": "B1", 
+            "end_note": 377, 
+            "melodic_structure": "B1", 
+            "slug": "VOCAL_SECTION"
+        }, 
+        {
+            "start_note": 378, 
+            "name": "VOCAL_SECTION", 
+            "lyrics": "Aman aman aman aman c\u00e2dusuna  ", 
+            "lyric_structure": "C1", 
+            "end_note": 429, 
+            "melodic_structure": "C2", 
+            "slug": "VOCAL_SECTION"
+        }, 
+        {
+            "start_note": 430, 
+            "name": "VOCAL_SECTION", 
+            "lyrics": "Ah \u00e7ille i saht\u0131n\u00e7eker her dem keman ebr\u00fblerin aman  ", 
+            "lyric_structure": "D1", 
+            "end_note": 546, 
+            "melodic_structure": "D1", 
+            "slug": "VOCAL_SECTION"
+        }, 
+        {
+            "start_note": 547, 
+            "name": "VOCAL_SECTION", 
+            "lyrics": "Ah be li be li tir ye le lel li c\u00e2n\u0131m y\u00e2 l\u00e2 ye le lel li vay  ", 
+            "lyric_structure": "B2", 
+            "end_note": 596, 
+            "melodic_structure": "B1", 
+            "slug": "VOCAL_SECTION"
+        }, 
+        {
+            "start_note": 597, 
+            "name": "VOCAL_SECTION", 
+            "lyrics": "Aman aman aman aman ebr\u00fblerin  ", 
+            "lyric_structure": "E1", 
+            "end_note": 647, 
+            "melodic_structure": "C3", 
+            "slug": "VOCAL_SECTION"
+        }, 
+        {
+            "start_note": 648, 
+            "name": "VOCAL_SECTION", 
+            "lyrics": "\u00c2ferin erb\u00e2b_\u0131 a\u015fk\u0131n ah kuvvet_i b\u00e2zusuna aman  ", 
+            "lyric_structure": "F1", 
+            "end_note": 760, 
+            "melodic_structure": "A1", 
+            "slug": "VOCAL_SECTION"
+        }, 
+        {
+            "start_note": 761, 
+            "name": "VOCAL_SECTION", 
+            "lyrics": "Ah be li be li tir ye le lel li c\u00e2n\u0131m y\u00e2 l\u00e2 ye le lel li vay  ", 
+            "lyric_structure": "B2", 
+            "end_note": 810, 
+            "melodic_structure": "B1", 
+            "slug": "VOCAL_SECTION"
+        }, 
+        {
+            "start_note": 811, 
+            "name": "VOCAL_SECTION", 
+            "lyrics": "Aman aman aman aman ebr\u00fblerin  ", 
+            "lyric_structure": "E1", 
+            "end_note": 861, 
+            "melodic_structure": "C3", 
+            "slug": "VOCAL_SECTION"
+        }
+    ], 
+    "name": {}
+}

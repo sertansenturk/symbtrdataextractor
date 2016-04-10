@@ -1,1 +1,3 @@
 recursive-include symbtrdataextractor/makam_data *.json
+recursive-include symbtrdataextractor/unittests/data *.json
+recursive-include symbtrdataextractor/unittests/data *.txt
