@@ -142,10 +142,10 @@ class SectionExtractor(object):
         first_note_idx = ScoreProcessor.get_first_note_index(score)
         if sections[0]['start_note'] > first_note_idx:
             end_note = sections[0]['start_note'] - 1
-            sections.append({'name': u'INSTRUMENTAL_SECTION',
-                             'slug': u'INSTRUMENTAL_SECTION',
-                             'start_note': first_note_idx,
-                             'end_note': end_note})
+            sections.insert(0, {'name': u'INSTRUMENTAL_SECTION',
+                                'slug': u'INSTRUMENTAL_SECTION',
+                                'start_note': first_note_idx,
+                                'end_note': end_note})
 
         assert sections[0]['start_note'] == first_note_idx, \
             'The first section does not start in the start note: ' \
