@@ -107,9 +107,8 @@ class Mu2Reader(SymbTrReader):
 
         # get the metadata
         slugs = MetadataExtractor.get_slugs(symbtr_name)
-        Mu2Reader._add_attribute_slug_to_header(header, slugs, 'makam')
-        Mu2Reader._add_attribute_slug_to_header(header, slugs, 'form')
-        Mu2Reader._add_attribute_slug_to_header(header, slugs, 'usul')
+        for attr in ['makam', 'form', 'usul']:
+            MetadataExtractor.add_attribute_slug(header, slugs, attr)
 
         header['title']['symbtr_slug'] = slugs['name']
         header['composer']['symbtr_slug'] = slugs['composer']
@@ -157,10 +156,3 @@ class Mu2Reader(SymbTrReader):
                 is_tempo_unit_valid = False
 
         return is_tempo_unit_valid
-
-    @staticmethod
-    def _add_attribute_slug_to_header(header, slugs, attr_name):
-        header[attr_name]['symbtr_slug'] = slugs[attr_name]
-        header[attr_name]['attribute_key'] = \
-            MetadataExtractor.get_attribute_key(
-                header[attr_name]['symbtr_slug'], attr_name)

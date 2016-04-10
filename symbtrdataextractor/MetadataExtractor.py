@@ -41,9 +41,7 @@ class MetadataExtractor(object):
 
         slugs = MetadataExtractor.get_slugs(scorename)
         for attr in ['makam', 'form', 'usul']:
-            data[attr]['symbtr_slug'] = slugs[attr]
-            data[attr]['attribute_key'] = MetadataExtractor.\
-                get_attribute_key(data[attr]['symbtr_slug'], attr)
+            self.add_attribute_slug(data, slugs, attr)
 
         if 'work' in data.keys():
             data['work']['symbtr_slug'] = slugs['name']
@@ -63,16 +61,19 @@ class MetadataExtractor(object):
         return data, is_attr_meta_valid
 
     @staticmethod
-    def validate_makam_form_usul(data, scorename):
-        is_makam_valid = MetadataExtractor.validate_attribute(
-            data, scorename, 'makam')
-        is_form_valid = MetadataExtractor.validate_attribute(
-            data, scorename, 'form')
-        is_usul_valid = MetadataExtractor.validate_attribute(
-            data, scorename, 'usul')
-        is_attr_meta_valid = is_makam_valid and is_form_valid and is_usul_valid
+    def add_attribute_slug(data, slugs, attr):
+        data[attr]['symbtr_slug'] = slugs[attr]
+        data[attr]['attribute_key'] = MetadataExtractor. \
+            get_attribute_key(data[attr]['symbtr_slug'], attr)
 
-        return is_attr_meta_valid
+    @staticmethod
+    def validate_makam_form_usul(data, scorename):
+        is_valid_list = []
+        for attr in ['makam', 'form', 'usul']:
+            is_valid_list.append(MetadataExtractor.validate_attribute(
+                data, scorename, attr))
+
+        return all(is_valid_list)
 
     @staticmethod
     def get_attribute_key(attr_str, attr_type):
