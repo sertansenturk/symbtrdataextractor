@@ -123,7 +123,7 @@ class MetadataExtractor(object):
                     if score_attrib['mb_attribute']:
                         w_str = u'%s, %s: The MusicBrainz attribute does not' \
                                 u' match.' % (scorename,
-                                             score_attrib['mb_attribute'])
+                                              score_attrib['mb_attribute'])
                         warnings.warn(w_str)
                     else:
                         warnings.warn(u'%s: The MusicBrainz attribute does'

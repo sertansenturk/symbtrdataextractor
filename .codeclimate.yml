@@ -6,7 +6,7 @@ engines:
       - python
     exclude_fingerprints:
     # Similarity between NotImplemented Mu2Reader and MusicXMLReader classes
-    - d7e39af6c43936934270f9b66ef9cdd7
+    - e86349804e5f19e4661198854a6d6931
   fixme:
     enabled: true
   radon:
