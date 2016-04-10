@@ -7,14 +7,26 @@ from symbtrdataextractor.reader.Mu2Reader import Mu2Reader
 _curr_folder = os.path.dirname(os.path.abspath(__file__))
 
 
+def test_free_usul():
+    """
+    Tests the result of a score with free (serbest) usul
+    """
+    scorename = 'saba--miraciye--serbest--pes_heman--nayi_osman_dede'
+
+    assert _basic_txt_extractor(scorename)
+
+
 def test_with_vocal_section_starting_mid_measure():
     """
     Tests the result with the score of a vocal composition in which some of
     the lyrical lines start in middle of the measure
     """
-    # inputs
     scorename = 'hicaz_humayun--beste--hafif--olmada_diller--abdulhalim_aga'
 
+    assert _basic_txt_extractor(scorename)
+
+
+def _basic_txt_extractor(scorename):
     txt_filename = os.path.join(_curr_folder, 'data', scorename + '.txt')
 
     # initialize the extractor
@@ -30,7 +42,7 @@ def test_with_vocal_section_starting_mid_measure():
     score_data_file = os.path.join(_curr_folder, 'data', scorename + '.json')
     saved_data = json.load(open(score_data_file))
 
-    assert saved_data == txt_data and is_data_valid
+    return saved_data == txt_data and is_data_valid
 
 
 def test_full_input():
