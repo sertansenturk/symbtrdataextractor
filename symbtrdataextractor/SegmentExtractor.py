@@ -45,7 +45,7 @@ class SegmentExtractor(object):
 
         if anno_bounds:
             phrases = self._extract(all_bounds, score, sections=sections,
-                                    segment_str = 'PHRASE')
+                                    segment_str='PHRASE')
         else:
             phrases = []
 
@@ -70,10 +70,6 @@ class SegmentExtractor(object):
         # add the first and the last bound if they are not already given,
         # sort & tidy
         bounds = self._parse_bounds(bounds, score)
-
-        real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
-            score['lyrics'], score['duration'])
-
         segments = []
         for pp in range(0, len(bounds) - 1):
             start_note_idx = bounds[pp]
