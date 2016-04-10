@@ -272,7 +272,9 @@ class SectionExtractor(object):
         for i, ll in enumerate(score['lyrics']):
             for label in all_labels:
                 # invalid lyrics end
-                if label + ' ' in ll:
+                if label + ' ' == ll or label + '  ' == ll:
+                    import pdb
+                    pdb.set_trace()
                     warnings.warn(u'{0!s}, {1!s}: Extra space in {2!s}'.format(
                         symbtrname, str(i), ll))
                     no_space_bool = False
