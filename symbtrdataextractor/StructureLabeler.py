@@ -151,7 +151,7 @@ class StructureLabeler(object):
             chk_strm = ([stream[i] for i, x in enumerate(labels)
                          if x == lbl])
             assert all(strm == cl for cl in chk_strm), \
-                'Mismatch in %s label: %s' % (name, lbl)
+                'Mismatch in {0!s} label: {1!s}'.format(name, lbl)
 
     @staticmethod
     def _semiotize(cliques):

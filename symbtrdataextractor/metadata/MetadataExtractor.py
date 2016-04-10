@@ -100,8 +100,8 @@ class MetadataExtractor(object):
     def _validate_slug(attrib_dict, score_attrib, scorename):
         if 'symbtr_slug' in score_attrib.keys():
             if not score_attrib['symbtr_slug'] == attrib_dict['symbtr_slug']:
-                warnings.warn(u'%s, %s: The slug does not match.'
-                              % (scorename, score_attrib['symbtr_slug']))
+                warnings.warn(u'{0!s}, {1!s}: The slug does not match.'.
+                              format(scorename, score_attrib['symbtr_slug']))
                 return False
 
         return True
@@ -128,9 +128,9 @@ class MetadataExtractor(object):
                                 MetadataExtractor._compare_accidentals(k1, k2))
 
         if not is_key_sig_valid:
-            warnings.warn(u'%s: Key signature is different! %s -> %s'
-                          % (symbtr_name, ' '.join(key_signature),
-                             ' '.join(key_sig_makam)))
+            warnings.warn(u'{0!s}: Key signature is different! {1!s} -> {2!s}'.
+                          format(symbtr_name, ' '.join(key_signature),
+                                 ' '.join(key_sig_makam)))
 
         return is_key_sig_valid
 
