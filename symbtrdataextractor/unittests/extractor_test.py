@@ -13,7 +13,7 @@ def test_free_usul():
     """
     scorename = 'saba--miraciye--serbest--pes_heman--nayi_osman_dede'
 
-    assert _basic_txt_extractor(scorename)
+    _basic_txt_extractor(scorename)
 
 
 def test_with_vocal_section_starting_mid_measure():
@@ -42,7 +42,8 @@ def _basic_txt_extractor(scorename):
     score_data_file = os.path.join(_curr_folder, 'data', scorename + '.json')
     saved_data = json.load(open(score_data_file))
 
-    return saved_data == txt_data and is_data_valid
+    assert saved_data == txt_data, "The result is different"
+    assert is_data_valid, "The data is not valid (or the validations failed.)"
 
 
 def test_full_input():
@@ -84,4 +85,5 @@ def test_full_input():
     score_data_file = os.path.join(_curr_folder, 'data', scorename + '.json')
     saved_data = json.load(open(score_data_file))
 
-    assert saved_data == data and is_valid
+    assert saved_data == data, "The result is different"
+    assert is_valid, "The data is not valid (or the validations failed.)"

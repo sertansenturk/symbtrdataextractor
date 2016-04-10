@@ -116,7 +116,8 @@ class SegmentExtractor(object):
 
         return segments
 
-    def _name_segment(self, lyrics, segment_str):
+    @staticmethod
+    def _name_segment(lyrics, segment_str):
         if lyrics:
             name = u"VOCAL_" + segment_str
             slug = u"VOCAL_" + segment_str
