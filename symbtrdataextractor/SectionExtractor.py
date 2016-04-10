@@ -103,12 +103,17 @@ class SectionExtractor(object):
         real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
             score['lyrics'], score['duration'])
 
-        start_note_idx = self._section_start_note_idx(score, sections)
-        # end_note_idx = [-1] + [s['end_note'] for s in sections]
         for i, se in reversed(list(enumerate(sections))):
+            # update start_note_idx
+            start_note_idx = self._section_start_note_idx(score, sections)
+
             # carry the 'end_note' to the next start
             se['end_note'] = start_note_idx[i + 1] - 1
-            end_note_idx = [-1] + [s['end_note'] for s in sections]
+
+            # update end_note_idx
+            end_note_idx = self._section_end_note_idx(sections)
+
+            # find the start index of the vocal section
             if se['slug'] == u'VOCAL_SECTION':
                 # estimate the start of the lyrics sections
                 next_lyrics_start_ind = self._find_vocal_section_start_idx(
@@ -116,17 +121,9 @@ class SectionExtractor(object):
                     real_lyrics_idx)
                 se['start_note'] = next_lyrics_start_ind
 
-                # update start_note_idx
-                start_note_idx = SectionExtractor._section_start_note_idx(
-                    score, sections)
-
                 # update lyrics
-                section_lyrics_idx = ([rl for rl in real_lyrics_idx
-                                       if se['start_note'] <= rl <=
-                                       se['end_note']])
-
-                syllables = [score['lyrics'][li] for li in section_lyrics_idx]
-                se['lyrics'] = ''.join(syllables)
+                se['lyrics'] = ScoreProcessor.get_lyrics_between(
+                    score, se['start_note'], se['end_note'])
             else:  # instrumental
                 pass  # the start and end are already fixed
 
@@ -149,6 +146,10 @@ class SectionExtractor(object):
                                  'end_note': min([s['start_note']
                                                   for s in sections]) - 1})
         return self._sort_sections(sections)
+
+    def _section_end_note_idx(self, sections):
+        end_note_idx = [-1] + [s['end_note'] for s in sections]
+        return end_note_idx
 
     def _find_vocal_section_start_idx(self, section, score, start_note_idx,
                                       end_note_idx, measure_start_idx,

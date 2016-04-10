@@ -151,7 +151,7 @@ class SymbTrDataExtractor(SymbTrDataMerger):
         data['sections'], is_section_data_valid = self._sectionExtractor. \
             from_txt_score(score, symbtr_name)
 
-        anno_phrases = self._segmentExtractor.extract_annotations(
+        anno_phrases = self._segmentExtractor.extract_phrases(
             score, sections=data['sections'])
         segments = self._segmentExtractor.extract_segments(
             score, segment_note_bound_idx, sections=data['sections'])

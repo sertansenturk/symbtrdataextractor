@@ -35,6 +35,16 @@ class ScoreProcessor(object):
         return real_lyrics_idx
 
     @staticmethod
+    def get_lyrics_between(score, start_note, end_note):
+        real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
+            score['lyrics'], score['duration'])
+
+        segment_lyrics_idx = ([rl for rl in real_lyrics_idx
+                               if start_note <= rl <= end_note])
+        syllables = [score['lyrics'][li] for li in segment_lyrics_idx]
+        return ''.join(syllables)
+
+    @staticmethod
     def get_all_symbtr_labels():
         all_labels = [l for sub_list in
                       ScoreProcessor.get_grouped_symbtr_labels().values()

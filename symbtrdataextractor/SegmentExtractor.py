@@ -31,7 +31,7 @@ class SegmentExtractor(object):
             lyrics_sim_thres=self.lyrics_sim_thres,
             melody_sim_thres=self.melody_sim_thres)
 
-    def extract_annotations(self, score, sections=None):
+    def extract_phrases(self, score, sections=None):
         # code 51 is the usul change and it always marks a segment boundary
         bound_codes = [51, 53, 54, 55]
         anno_codes = [53, 54, 55]
@@ -44,17 +44,19 @@ class SegmentExtractor(object):
                        if code in anno_codes]
 
         if anno_bounds:
-            segments = self._extract(all_bounds, score, sections=sections)
+            phrases = self._extract(all_bounds, score, sections=sections,
+                                    segment_str = 'PHRASE')
         else:
-            segments = []
+            phrases = []
 
-        return segments
+        return phrases
 
     def extract_segments(self, score, segment_note_bound_idx, sections=None):
         try:
             if segment_note_bound_idx:
                 segments = self._extract(segment_note_bound_idx, score,
-                                         sections=sections)
+                                         sections=sections,
+                                         segment_str='SEGMENT')
             else:
                 segments = []
         except TypeError:  # the json saved by automatic phrase segmentation
@@ -64,7 +66,7 @@ class SegmentExtractor(object):
 
         return segments
 
-    def _extract(self, bounds, score, sections=None):
+    def _extract(self, bounds, score, sections=None, segment_str='SEGMENT'):
         # add the first and the last bound if they are not already given,
         # sort & tidy
         bounds = self._parse_bounds(bounds, score)
@@ -86,8 +88,8 @@ class SegmentExtractor(object):
                                                   end_note_idx)
 
             # lyrics
-            lyrics = self._get_segment_lyrics(score, real_lyrics_idx,
-                                              start_note, end_note)
+            lyrics = ScoreProcessor.get_lyrics_between(score, start_note,
+                                                       end_note)
 
             # sections the segment is in
             segment_sections = []
@@ -105,11 +107,11 @@ class SegmentExtractor(object):
                          'lyric_structure': sec['lyric_structure']})
 
             if lyrics:
-                name = u"VOCAL_SEGMENT"
-                slug = u"VOCAL_SEGMENT"
+                name = u"VOCAL_" + segment_str
+                slug = u"VOCAL_" + segment_str
             else:
-                name = u"INSTRUMENTAL_SEGMENT"
-                slug = u"INSTRUMENTAL_SEGMENT"
+                name = u"INSTRUMENTAL_" + segment_str
+                slug = u"INSTRUMENTAL_" + segment_str
 
             segments.append({'name': name, 'slug': slug, 'flavor': flavor,
                              'start_note': start_note, 'end_note': end_note,
@@ -128,14 +130,6 @@ class SegmentExtractor(object):
                 all_bounds.append(i)
 
         return all_bounds
-
-    @staticmethod
-    def _get_segment_lyrics(score, real_lyrics_idx, start_note, end_note):
-        segment_lyrics_idx = ([rl for rl in real_lyrics_idx
-                               if start_note <= rl <= end_note])
-        syllables = [score['lyrics'][li] for li in segment_lyrics_idx]
-        lyrics = ''.join(syllables)
-        return lyrics
 
     @staticmethod
     def _get_segment_flavor_idx(score, start_note_idx, end_note_idx):
