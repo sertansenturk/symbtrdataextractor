@@ -2,7 +2,7 @@ import os
 import json
 import warnings
 from .Mu2Metadata import Mu2Metadata
-from .MusicBrainzMetadata import MusicBrainzMetadata as MBMetadata
+from .MBMetadata import MBMetadata
 
 
 class MetadataExtractor(object):
@@ -26,12 +26,8 @@ class MetadataExtractor(object):
         return {'makam': splitted[0], 'form': splitted[1], 'usul': splitted[2],
                 'name': splitted[3], 'composer': splitted[4]}
 
-    def get_metadata(self, scorename, mbid=''):
-        if mbid:
-            data = self._MBMetadata.get_metadata_from_musicbrainz(mbid)
-        else:
-            data = {'makam': {}, 'form': {}, 'usul': {}, 'name': {},
-                    'composer': {}, 'lyricist': {}}
+    def get_metadata(self, scorename, mbid=None):
+        data = self._MBMetadata.get_metadata_from_musicbrainz(mbid)
 
         data['symbtr'] = scorename
 

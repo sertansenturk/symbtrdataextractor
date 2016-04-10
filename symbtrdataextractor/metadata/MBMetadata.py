@@ -5,7 +5,7 @@ from makammusicbrainz.AudioMetadata import AudioMetadata
 from makammusicbrainz.WorkMetadata import WorkMetadata
 
 
-class MusicBrainzMetadata(object):
+class MBMetadata(object):
     def __init__(self, get_recording_rels=False):
         self._audioMetadata = AudioMetadata(
             get_work_attributes=False, print_warnings=False)
@@ -21,29 +21,43 @@ class MusicBrainzMetadata(object):
         self._workMetadata.get_recording_rels = value
 
     def get_metadata_from_musicbrainz(self, mbid):
-        o = urlparse(mbid)
-        if o.netloc:  # url supplied
-            o_splitted = o.path.split('/')
-            mbid = o_splitted[2]
+        if mbid is None:  # empty mbid
+            return {'makam': {}, 'form': {}, 'usul': {}, 'name': {},
+                    'composer': {}, 'lyricist': {}}
+        else:
+            mbid = self._parse_mbid(mbid)
+            try:  # assume mbid is a work
+                data = self._workMetadata.from_musicbrainz(mbid)
+                data['work'] = {'title': data.pop("title", None),
+                                'mbid': data.pop('mbid', None)}
+            except ResponseError:  # assume mbid is a recording
+                data = self._audioMetadata.from_musicbrainz(mbid)
+                data['recording'] = {'title': data.pop("title", None),
+                                     'mbid': data.pop('mbid', None)}
+                if self.get_recording_rels:
+                    warnings.warn(u"Recording mbid is given. Ignored "
+                                  u"get_recording_rels boolean.")
 
-        try:  # assume mbid is a work
-            data = self._workMetadata.from_musicbrainz(mbid)
-            data['work'] = {'title': data.pop("title", None),
-                            'mbid': data.pop('mbid', None)}
-        except ResponseError:  # assume mbid is a recording
-            data = self._audioMetadata.from_musicbrainz(mbid)
-            data['recording'] = {'title': data.pop("title", None),
-                                 'mbid': data.pop('mbid', None)}
-            if self.get_recording_rels:
-                warnings.warn(u"Recording mbid is given. Ignored "
-                              u"get_recording_rels boolean.")
+            self._add_mb_attributes(data)
 
+            return data
+
+    @staticmethod
+    def _add_mb_attributes(data):
         # scores should have one attribute per type
         for attr in ['makam', 'form', 'usul']:
-            if len(data[attr]) == 1:
+            if attr in data:
                 data[attr] = data[attr][0]
 
-        return data
+    @staticmethod
+    def _parse_mbid(mbid):
+        o = urlparse(mbid)
+
+        # if the url is given get the mbid, which is the last field
+        o_splitted = o.path.split('/')
+        mbid = o_splitted[-1]
+
+        return mbid
 
     @staticmethod
     def validate_mb_attribute(attrib_dict, score_attrib, scorename):
