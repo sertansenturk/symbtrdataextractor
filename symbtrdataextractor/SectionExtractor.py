@@ -262,7 +262,7 @@ class SectionExtractor(object):
         for i, ll in enumerate(score['lyrics']):
             for label in all_labels:
                 # invalid lyrics end
-                if (label + ' ') == ll or (label + '  ') == ll:
+                if label + ' ' in ll:
                     warnings.warn(u'%s, %s: Extra space in %s'
                                   % (symbtrname, str(i), ll))
                     no_space_bool = False
