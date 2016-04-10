@@ -1,6 +1,6 @@
 #### symbtrmetadataextractor 2.0.0-alpha.5
 - All the output note indices are given in 1-indexing to comply with SymbTr-txt scores
-- ```segment_note_bound_idx``` parameter to ```SymbTrDataExtractor``` is expected to be given in **1-indexing (not the "Pythonic" 0-indexing)** to comply with SymbTr-txt scores
+- ```segment_note_bound_idx``` parameter to ```SymbTrDataExtractor``` is expected to be given in **1-indexing** (not the "Pythonic" 0-indexing) to comply with the note indices in the SymbTr-txt scores
 - Fixed the index shift (and hence erroneous semiotic labels) in the SegmentExtractor
 
 #### symbtrmetadataextractor 2.0.0-alpha.4
