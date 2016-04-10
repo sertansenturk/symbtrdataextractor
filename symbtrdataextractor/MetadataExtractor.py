@@ -56,7 +56,8 @@ class MetadataExtractor(object):
         is_attr_meta_valid = self.validate_makam_form_usul(data, scorename)
 
         # get the tonic
-        makam = MetadataExtractor.get_makam(data['makam']['symbtr_slug'])
+        makam = MetadataExtractor.get_attr(data['makam']['symbtr_slug'],
+                                           'makam')
         data['tonic'] = makam['karar_symbol']
 
         return data, is_attr_meta_valid
@@ -207,33 +208,12 @@ class MetadataExtractor(object):
         return is_key_sig_valid
 
     @staticmethod
-    def get_makam(makam_slug):
-        makam_dict = MetadataExtractor.get_attribute_dict('makam')
+    def get_attr(slug, attr_name):
+        attr_dict = MetadataExtractor.get_attribute_dict(attr_name)
 
-        for makam in makam_dict.values():
-            if makam['symbtr_slug'] == makam_slug:
-                return makam
-
-        # no match
-        return {}
-
-    @staticmethod
-    def get_form(form_slug):
-        form_dict = MetadataExtractor.get_attribute_dict('form')
-        for form in form_dict.values():
-            if form['symbtr_slug'] == form_slug:
-                return form
-
-        # no match
-        return {}
-
-    @staticmethod
-    def get_usul(usul_slug):
-        usul_dict = MetadataExtractor.get_attribute_dict('usul')
-
-        for usul in usul_dict.values():
-            if usul['symbtr_slug'] == usul_slug:
-                return usul
+        for attr in attr_dict.values():
+            if attr['symbtr_slug'] == slug:
+                return attr
 
         # no match
         return {}
@@ -257,11 +237,8 @@ class MetadataExtractor(object):
                                        "get_recording_rels boolean.")
 
         # scores should have one attribute per type
-        if len(data['makam']) == 1:
-            data['makam'] = data['makam'][0]
-        if len(data['form']) == 1:
-            data['form'] = data['form'][0]
-        if len(data['usul']) == 1:
-            data['usul'] = data['usul'][0]
+        for attr in ['makam', 'form', 'usul']:
+            if len(data[attr]) == 1:
+                data[attr] = data[attr][0]
 
         return data
