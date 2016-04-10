@@ -112,8 +112,8 @@ class MetadataExtractor(object):
             skip_makam_slug = ['12212212', '22222221', '223', '232223', '262',
                                '3223323', '3334', '14_4']
             if score_attrib['symbtr_slug'] in skip_makam_slug:
-                warnings.warn('%s: The usul attribute is not stored in '
-                              'MusicBrainz.' % scorename)
+                warnings.warn(u'%s: The usul attribute is not stored in '
+                              u'MusicBrainz.' % scorename)
             else:
                 if not score_attrib['mb_attribute'] == \
                         attrib_dict['dunya_name']:
@@ -121,13 +121,13 @@ class MetadataExtractor(object):
                     # musicbrainz attributes
                     is_attribute_valid = False
                     if score_attrib['mb_attribute']:
-                        w_str = '%s, %s: The MusicBrainz attribute does not' \
-                                ' match.' % (scorename,
+                        w_str = u'%s, %s: The MusicBrainz attribute does not' \
+                                u' match.' % (scorename,
                                              score_attrib['mb_attribute'])
                         warnings.warn(w_str)
                     else:
-                        warnings.warn('%s: The MusicBrainz attribute does'
-                                      ' not exist.' % scorename)
+                        warnings.warn(u'%s: The MusicBrainz attribute does'
+                                      u' not exist.' % scorename)
         return is_attribute_valid
 
     @staticmethod
@@ -141,7 +141,7 @@ class MetadataExtractor(object):
 
                 if not mu2_name:  # no matching variant
                     is_attr_valid = False
-                    warnings.warn('%s, %s: The Mu2 attribute does not match.'
+                    warnings.warn(u'%s, %s: The Mu2 attribute does not match.'
                                   % (scorename, score_attrib['mu2_name']))
 
             except KeyError:  # makam, form
@@ -156,7 +156,7 @@ class MetadataExtractor(object):
         mu2_name = attrib_dict['mu2_name']
         if not score_attrib['mu2_name'] == mu2_name:
             is_attribute_valid = False
-            warnings.warn('%s, %s: The Mu2 attribute does not match.'
+            warnings.warn(u'%s, %s: The Mu2 attribute does not match.'
                           % (scorename, score_attrib['mu2_name']))
         return is_attribute_valid
 
@@ -164,7 +164,7 @@ class MetadataExtractor(object):
     def _validate_slug(attrib_dict, score_attrib, scorename):
         if 'symbtr_slug' in score_attrib.keys():
             if not score_attrib['symbtr_slug'] == attrib_dict['symbtr_slug']:
-                warnings.warn('%s, %s: The slug does not match.'
+                warnings.warn(u'%s, %s: The slug does not match.'
                               % (scorename, score_attrib['symbtr_slug']))
                 return False
 
@@ -181,9 +181,11 @@ class MetadataExtractor(object):
                     # found variant
                     if not uv[v_key] == score_attrib[v_key]:
                         is_attribute_valid = False
-                    warnings.warn('%s, %s: The %s of the usul in the '
-                                  'score does not match.'
-                                  % (scorename, uv['mu2_name'], v_key))
+
+                        warnings.warn(u'%s, %s: The %s of the usul in the '
+                                      u'score does not match.'
+                                      % (scorename, uv['mu2_name'], v_key))
+
                     return is_attribute_valid, mu2_name
 
         assert mu2_name == '', 'The mu2 usul is not matched.'
@@ -194,7 +196,7 @@ class MetadataExtractor(object):
         if 'mb_tag' in score_attrib.keys():  # recording
             if not score_attrib['mb_tag'] in attrib_dict['mb_tag']:
                 is_attribute_valid = False
-                warnings.warn('%s, %s: The MusicBrainz tag does not match.'
+                warnings.warn(u'%s, %s: The MusicBrainz tag does not match.'
                               % (scorename, score_attrib['mb_tag']))
         return is_attribute_valid
 
@@ -226,7 +228,7 @@ class MetadataExtractor(object):
                 is_key_sig_valid = False
 
         if not is_key_sig_valid:
-            warnings.warn('%s: Key signature is different! %s -> %s'
+            warnings.warn(u'%s: Key signature is different! %s -> %s'
                           % (symbtr_name, ' '.join(key_signature),
                              ' '.join(key_sig_makam)))
 
@@ -258,8 +260,8 @@ class MetadataExtractor(object):
             data['recording'] = {'title': data.pop("title", None),
                                  'mbid': data.pop('mbid', None)}
             if self.get_recording_rels:
-                warnings.warn("Recording mbid is given. Ignored "
-                              "get_recording_rels boolean.")
+                warnings.warn(u"Recording mbid is given. Ignored "
+                              u"get_recording_rels boolean.")
 
         # scores should have one attribute per type
         for attr in ['makam', 'form', 'usul']:

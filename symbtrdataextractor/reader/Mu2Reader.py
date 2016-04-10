@@ -101,7 +101,7 @@ class Mu2Reader(SymbTrReader):
                 elif code == 63:
                     header['notation'] = row[7]
                 elif code in range(50, 64):
-                    warnings.warn('Unparsed code: %s' % ' '.join(row))
+                    warnings.warn(u'Unparsed code: %s' % ' '.join(row))
                 else:  # end of header
                     break
 
@@ -148,7 +148,7 @@ class Mu2Reader(SymbTrReader):
 
         if not int(row[3]) == header['usul']['mertebe']:
             if not header['usul']['mu2_name'] == '[Serbest]':
-                warnings.warn('%s: Mertebe and tempo unit are different!'
+                warnings.warn(u'%s: Mertebe and tempo unit are different!'
                               % symbtr_name)
                 is_tempo_unit_valid = False
 
