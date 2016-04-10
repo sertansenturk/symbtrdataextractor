@@ -1,7 +1,8 @@
 import csv
 import warnings
-from ..MetadataExtractor import MetadataExtractor
+
 from SymbTrReader import SymbTrReader
+from symbtrdataextractor.metadata.MetadataExtractor import MetadataExtractor
 
 
 class Mu2Reader(SymbTrReader):

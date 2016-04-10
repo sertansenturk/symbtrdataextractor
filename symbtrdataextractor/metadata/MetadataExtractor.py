@@ -218,7 +218,7 @@ class MetadataExtractor(object):
         # due to AEU theory and practice mismatch
         for k1, k2 in zip(key_signature, key_sig_makam):
             is_key_sig_valid = (is_key_sig_valid and
-                                MetadataExtractor._are_accidentals_same(k1, k2))
+                                MetadataExtractor._compare_accidentals(k1, k2))
 
         if not is_key_sig_valid:
             warnings.warn(u'%s: Key signature is different! %s -> %s'
@@ -228,7 +228,7 @@ class MetadataExtractor(object):
         return is_key_sig_valid
 
     @staticmethod
-    def _are_accidentals_same(acc1, acc2):
+    def _compare_accidentals(acc1, acc2):
         same_acc= True
         if acc1 == acc2:  # same note
             pass

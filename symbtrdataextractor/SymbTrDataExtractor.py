@@ -1,7 +1,7 @@
 import os
 
+from symbtrdataextractor.metadata.MetadataExtractor import MetadataExtractor
 from symbtrdataextractor.reader.TxtReader import TxtReader
-from .MetadataExtractor import MetadataExtractor
 from .RhythmicFeatureExtractor import RhythmicFeatureExtractor
 from .SectionExtractor import SectionExtractor
 from .SegmentExtractor import SegmentExtractor
