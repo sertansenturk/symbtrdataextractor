@@ -217,15 +217,8 @@ class MetadataExtractor(object):
         # the sequence should be the same, allow a single comma deviation
         # due to AEU theory and practice mismatch
         for k1, k2 in zip(key_signature, key_sig_makam):
-            if k1 == k2:  # same note
-                pass
-            elif k1[:3] == k2[:3]:  # same note symbol
-                if abs(int(k1[3:]) - int(k2[3:])) <= 1:  # 1 comma deviation
-                    pass
-                else:  # more than one comma deviation
-                    is_key_sig_valid = False
-            else:  # different notes
-                is_key_sig_valid = False
+            is_key_sig_valid = (is_key_sig_valid and
+                                MetadataExtractor._are_accidentals_same(k1, k2))
 
         if not is_key_sig_valid:
             warnings.warn(u'%s: Key signature is different! %s -> %s'
@@ -233,6 +226,21 @@ class MetadataExtractor(object):
                              ' '.join(key_sig_makam)))
 
         return is_key_sig_valid
+
+    @staticmethod
+    def _are_accidentals_same(acc1, acc2):
+        same_acc= True
+        if acc1 == acc2:  # same note
+            pass
+        elif acc1[:3] == acc2[:3]:  # same note symbol
+            if abs(int(acc1[3:]) - int(acc2[3:])) <= 1:  # 1 comma deviation
+                pass
+            else:  # more than one comma deviation
+                same_acc = False
+        else:  # different notes
+            same_acc = False
+
+        return same_acc
 
     @staticmethod
     def _get_attr(slug, attr_name):
