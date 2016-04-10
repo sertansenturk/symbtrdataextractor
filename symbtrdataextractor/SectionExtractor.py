@@ -67,9 +67,7 @@ class SectionExtractor(object):
             sections, score, set(all_labels) - set(struct_lbl), symbtrname)
 
         # map the python indices in start_note and end_note to SymbTr index
-        for se in sections:
-            se['start_note'] = score['index'][se['start_note']]
-            se['end_note'] = score['index'][se['end_note']]
+        StructureLabeler.symbtr_idx_to_python_idx(sections, score)
 
         return sections, all([sections_valid, is_measure_start_valid])
 

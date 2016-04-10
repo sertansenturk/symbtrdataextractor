@@ -166,7 +166,7 @@ class SegmentExtractor(object):
 
     def _parse_bounds(self, bounds, score):
         # convert from Symbtr index (starting from 1) to python index
-        bounds = [b-1 for b in bounds]
+        bounds = [b - 1 for b in bounds]
 
         # add start and end if they are not already in the list
         first_bound_idx = ScoreProcessor.get_first_note_index(score)
