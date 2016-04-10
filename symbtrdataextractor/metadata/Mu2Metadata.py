@@ -45,9 +45,10 @@ class Mu2Metadata(object):
                     if not uv[v_key] == score_attrib[v_key]:
                         is_usul_valid = False
 
-                        warnings.warn(u'%s, %s: The %s of the usul in the '
-                                      u'score does not match.'
-                                      % (scorename, uv['mu2_name'], v_key))
+                        warnings.warn(
+                            u'{0:s}, {1:s}: The {2:s} of the usul in the '
+                            u'score does not match.'
+                            .format(scorename, uv['mu2_name'], v_key))
 
                     return is_usul_valid, mu2_name
 

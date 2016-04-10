@@ -207,8 +207,8 @@ class SymbTrDataExtractor(SymbTrDataMerger):
         segment_sim_thres = getattr(self._segmentExtractor, p)
         section_sim_thres = getattr(self._sectionExtractor, p)
         assert segment_sim_thres == section_sim_thres, \
-            'The %s of the _segmentExtractor and _sectionExtractor should ' \
-            'have the same value' % p
+            u'The {0:s} of the _segmentExtractor and _sectionExtractor ' \
+            u'should have the same value'.format(p)
 
     def _set_sim_thres(self, value, name):
         self._chk_sim_thres_val(value)
