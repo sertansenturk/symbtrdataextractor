@@ -42,9 +42,9 @@ class TxtReader(SymbTrReader):
             index_col = header.index('Sira')
             code_col = header.index('Kod')
             note53_col = header.index('Nota53')
-            noteAE_col = header.index('NotaAE')
+            noteae_col = header.index('NotaAE')
             comma53_col = header.index('Koma53')
-            commaAE_col = header.index('KomaAE')
+            commaae_col = header.index('KomaAE')
             numerator_col = header.index('Pay')
             denumerator_col = header.index('Payda')
             duration_col = header.index('Ms')
@@ -61,9 +61,9 @@ class TxtReader(SymbTrReader):
                 score['index'].append(int(row[index_col]))
                 score['code'].append(int(row[code_col]))
                 score['note53'].append(row[note53_col])
-                score['noteAE'].append(row[noteAE_col])
+                score['noteAE'].append(row[noteae_col])
                 score['comma53'].append(int(row[comma53_col]))
-                score['commaAE'].append(int(row[commaAE_col]))
+                score['commaAE'].append(int(row[commaae_col]))
                 score['numerator'].append(int(row[numerator_col]))
                 score['denumerator'].append(int(row[denumerator_col]))
                 score['duration'].append(int(row[duration_col]))
@@ -141,7 +141,8 @@ class TxtReader(SymbTrReader):
     @staticmethod
     def _validate_index_jump(score_idx, jump_ii, is_index_valid, score_name):
         if score_idx - jump_ii != 1:
-            warnings.warn(u"{0!s}: {1!s}, note index jump.".format(score_name, str(score_idx)))
+            warnings.warn(u"{0!s}: {1!s}, note index jump.".format(
+                score_name, str(score_idx)))
             is_index_valid = False
 
         jump_ii = score_idx  # we assign to the score_idx so the we can warn
@@ -153,7 +154,8 @@ class TxtReader(SymbTrReader):
     def _starts_with_usul_row(score, score_name):
         # check usul row in the start
         if not score['code'][0] == 51:
-            warnings.warn(u'{0!s} Missing the usul row in the start'.format(score_name))
+            warnings.warn(u'{0!s} Missing the usul row in the start'.format(
+                score_name))
             start_usul_row = False
         else:
             start_usul_row = True
@@ -174,6 +176,7 @@ class TxtReader(SymbTrReader):
 
         if any(v1 != v2 for v1, v2 in zip(val_list, [9, -1, -1, 'Es', 'Es'])):
             is_rest_valid = False
-            warnings.warn(u'{0!s} {1!s}: Invalid Rest'.format(score_name, str(score['index'][ii])))
+            warnings.warn(u'{0!s} {1!s}: Invalid Rest'.format(
+                score_name, str(score['index'][ii])))
 
         return is_rest_valid

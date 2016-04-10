@@ -160,14 +160,13 @@ class SegmentExtractor(object):
     def _parse_bounds(self, bounds, score):
         # add start and end if they are not already in the list
         first_bound_idx = ScoreProcessor.get_first_note_index(score)
-        bounds = [first_bound_idx] + bounds
+        bounds.insert(0, first_bound_idx)
 
         # create the boundary outside the score idx
         last_bound_idx = len(score['code'])
-        bounds = bounds + [last_bound_idx]
+        bounds += [last_bound_idx]
 
-        # sort and tidy
-        bounds = sorted(list(set(bounds)))
+        bounds = sorted(list(set(bounds)))  # sort and tidy
 
         # remove consecutive boundaries
         self._crop_consec_bounds(bounds, first_bound_idx)
