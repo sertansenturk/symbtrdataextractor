@@ -33,7 +33,7 @@ class MetadataExtractor(object):
 
     def get_metadata(self, scorename, mbid=''):
         if mbid:
-            data = self.get_metadata_from_musicbrainz(mbid)
+            data = self._get_metadata_from_musicbrainz(mbid)
         else:
             data = {'makam': {}, 'form': {}, 'usul': {}, 'name': {},
                     'composer': {}, 'lyricist': {}}
@@ -56,8 +56,8 @@ class MetadataExtractor(object):
         is_attr_meta_valid = self.validate_makam_form_usul(data, scorename)
 
         # get the tonic
-        makam = MetadataExtractor.get_attr(data['makam']['symbtr_slug'],
-                                           'makam')
+        makam = MetadataExtractor._get_attr(data['makam']['symbtr_slug'],
+                                            'makam')
         data['tonic'] = makam['karar_symbol']
 
         return data, is_attr_meta_valid
@@ -66,50 +66,48 @@ class MetadataExtractor(object):
     def add_attribute_slug(data, slugs, attr):
         data[attr]['symbtr_slug'] = slugs[attr]
         data[attr]['attribute_key'] = MetadataExtractor. \
-            get_attribute_key(data[attr]['symbtr_slug'], attr)
+            _get_attribute_key(data[attr]['symbtr_slug'], attr)
 
     @staticmethod
     def validate_makam_form_usul(data, scorename):
         is_valid_list = []
         for attr in ['makam', 'form', 'usul']:
-            is_valid_list.append(MetadataExtractor.validate_attribute(
+            is_valid_list.append(MetadataExtractor._validate_attribute(
                 data, scorename, attr))
 
         return all(is_valid_list)
 
     @staticmethod
-    def get_attribute_key(attr_str, attr_type):
+    def _get_attribute_key(attr_str, attr_type):
         attr_dict = MetadataExtractor.get_attribute_dict(attr_type)
         for attr_key, attr_val in attr_dict.iteritems():
             if attr_val['symbtr_slug'] == attr_str:
                 return attr_key
 
     @staticmethod
-    def validate_attribute(data, scorename, attrib_name):
+    def _validate_attribute(data, scorename, attrib_name):
         score_attrib = data[attrib_name]
 
-        attrib_dict = MetadataExtractor.get_attr(score_attrib['symbtr_slug'],
-                                                 attrib_name)
+        attrib_dict = MetadataExtractor._get_attr(score_attrib['symbtr_slug'],
+                                                  attrib_name)
 
         is_attribute_valid = MetadataExtractor._validate_slug(
             attrib_dict, score_attrib, scorename)
 
-        if 'mu2_name' in score_attrib.keys():  # work
-            try:  # usul
-                is_attribute_valid, mu2_name = MetadataExtractor.\
-                    validate_mu2_usul_variant(attrib_dict, is_attribute_valid,
-                                              score_attrib, scorename)
+        is_attribute_valid = MetadataExtractor._validate_mu2_attribute(
+            attrib_dict, is_attribute_valid, score_attrib, scorename)
 
-                if not mu2_name:  # no matching variant
-                    is_attribute_valid = False
-                    warnings.warn("    " + scorename + ', ' +
-                                  score_attrib['mu2_name'] +
-                                  ': The Mu2 attribute does not match.')
+        is_attribute_valid = MetadataExtractor._validate_mb_attribute(
+            attrib_dict, is_attribute_valid, score_attrib, scorename)
 
-            except KeyError:  # makam, form
-                is_attribute_valid = MetadataExtractor.validate_mu2_makam_form(
-                    attrib_dict, is_attribute_valid, score_attrib, scorename)
+        is_attribute_valid = MetadataExtractor._validate_mb_attribute_tag(
+            attrib_dict, is_attribute_valid, score_attrib, scorename)
 
+        return is_attribute_valid
+
+    @staticmethod
+    def _validate_mb_attribute(attrib_dict, is_attribute_valid, score_attrib,
+                               scorename):
         if 'mb_attribute' in score_attrib.keys():  # work
             skip_makam_slug = ['12212212', '22222221', '223', '232223', '262',
                                '3223323', '3334', '14_4']
@@ -132,15 +130,32 @@ class MetadataExtractor(object):
                         warnings.warn("    " + scorename +
                                       ': The MusicBrainz attribute does not '
                                       'exist.')
-
-        is_attribute_valid = MetadataExtractor.validate_mb_tag(
-            attrib_dict, is_attribute_valid, score_attrib, scorename)
-
         return is_attribute_valid
 
     @staticmethod
-    def validate_mu2_makam_form(attrib_dict, is_attribute_valid, score_attrib,
+    def _validate_mu2_attribute(attrib_dict, is_attr_valid, score_attrib,
                                 scorename):
+        if 'mu2_name' in score_attrib.keys():  # work
+            try:  # usul
+                is_attr_valid, mu2_name = MetadataExtractor. \
+                    _validate_mu2_usul_variant(attrib_dict, is_attr_valid,
+                                               score_attrib, scorename)
+
+                if not mu2_name:  # no matching variant
+                    is_attr_valid = False
+                    warnings.warn("    " + scorename + ', ' +
+                                  score_attrib['mu2_name'] +
+                                  ': The Mu2 attribute does not match.')
+
+            except KeyError:  # makam, form
+                is_attr_valid = MetadataExtractor._validate_mu2_makam_form(
+                    attrib_dict, is_attr_valid, score_attrib, scorename)
+
+        return is_attr_valid
+
+    @staticmethod
+    def _validate_mu2_makam_form(attrib_dict, is_attribute_valid, score_attrib,
+                                 scorename):
         mu2_name = attrib_dict['mu2_name']
         if not score_attrib['mu2_name'] == mu2_name:
             is_attribute_valid = False
@@ -153,15 +168,16 @@ class MetadataExtractor(object):
     def _validate_slug(attrib_dict, score_attrib, scorename):
         if 'symbtr_slug' in score_attrib.keys():
             if not score_attrib['symbtr_slug'] == attrib_dict['symbtr_slug']:
-                is_attribute_valid = False
                 warnings.warn("    " + scorename + ', ' +
                               score_attrib['symbtr_slug'] + ': The slug does '
                                                             'not match.')
-        return is_attribute_valid
+                return False
+
+        return True
 
     @staticmethod
-    def validate_mu2_usul_variant(attrib_dict, is_attribute_valid,
-                                  score_attrib, scorename):
+    def _validate_mu2_usul_variant(attrib_dict, is_attribute_valid,
+                                   score_attrib, scorename):
         mu2_name = ''
         for uv in attrib_dict['variants']:
             if uv['mu2_name'] == score_attrib['mu2_name']:
@@ -183,8 +199,8 @@ class MetadataExtractor(object):
         return is_attribute_valid, mu2_name
 
     @staticmethod
-    def validate_mb_tag(attrib_dict, is_attribute_valid, score_attrib,
-                        scorename):
+    def _validate_mb_attribute_tag(attrib_dict, is_attribute_valid,
+                                   score_attrib, scorename):
         if 'mb_tag' in score_attrib.keys():  # recording
             if not score_attrib['mb_tag'] in attrib_dict['mb_tag']:
                 is_attribute_valid = False
@@ -198,11 +214,6 @@ class MetadataExtractor(object):
         attrfile = os.path.join(os.path.dirname(
             os.path.abspath(__file__)), 'makam_data', attrstr + '.json')
         return json.load(open(attrfile, 'r'))
-
-    @staticmethod
-    def get_key_signature_from_makam_slug(makam_slug):
-        attr_dict = MetadataExtractor.get_attribute_dict('makam')
-        return attr_dict[makam_slug]['key_signature']
 
     @staticmethod
     def validate_key_signature(key_signature, makam_slug, symbtr_name):
@@ -234,7 +245,7 @@ class MetadataExtractor(object):
         return is_key_sig_valid
 
     @staticmethod
-    def get_attr(slug, attr_name):
+    def _get_attr(slug, attr_name):
         attr_dict = MetadataExtractor.get_attribute_dict(attr_name)
 
         for attr in attr_dict.values():
@@ -244,7 +255,7 @@ class MetadataExtractor(object):
         # no match
         return {}
 
-    def get_metadata_from_musicbrainz(self, mbid):
+    def _get_metadata_from_musicbrainz(self, mbid):
         o = urlparse(mbid)
         if o.netloc:  # url supplied
             o_splitted = o.path.split('/')
