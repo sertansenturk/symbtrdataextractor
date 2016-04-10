@@ -169,11 +169,10 @@ class SectionExtractor(object):
         if next_lyrics_measure_offset == floor(
                 score['offset'][prev_closest_end_ind]):
             if self.print_warnings:
-                warnings.warn(
-                    "    " + str(next_lyrics_measure_offset) + ':' +
-                    score['lyrics'][prev_closest_end_ind] + ' and ' +
-                    score['lyrics'][next_lyrics_start_ind] +
-                    ' are in the same measure!')
+                warnings.warn('%s: %s and %s are in the same measure!'
+                              % (str(next_lyrics_measure_offset),
+                                 score['lyrics'][prev_closest_end_ind],
+                                 score['lyrics'][next_lyrics_start_ind]))
             return next_lyrics_measure_offset
         else:  # The section starts on the first measure the lyrics
             # start
@@ -208,8 +207,8 @@ class SectionExtractor(object):
         # treat some of these are warning; they'll be made stricter later
         if not sections:  # check section presence
             if self.print_warnings:
-                warnings.warn("    " + symbtrname + ", Missing section info "
-                                                    "in lyrics.")
+                warnings.warn("%s, Missing section info in lyrics."
+                              % symbtrname)
             valid_bool = True  # nothing to validate
         else:  # check section continuity
             section_continuity_bool = self._validate_section_continuity(
@@ -235,11 +234,10 @@ class SectionExtractor(object):
         section_bound_bool = True
         for s in sections:
             if s['start_note'] > s['end_note']:
-                warnings.warn(
-                    "    " + symbtrname + ", " + str(s['start_note']) + '->' +
-                    str(s['end_note']) + ', ' + s['slug'] +
-                    ' ends before it starts: ' +
-                    str(score['offset'][s['start_note']]))
+                warnings.warn('%s, %s -> %s, %s ends before it starts: %s'
+                              % (symbtrname, str(s['start_note']),
+                                 str(s['end_note']), s['slug'],
+                                 str(score['offset'][s['start_note']])))
                 section_bound_bool = False
 
         return section_bound_bool
@@ -253,7 +251,7 @@ class SectionExtractor(object):
             if starts_on_measure and self.print_warnings:
                 # This is not a warning but a indication to the user as it can
                 # happen occasionally especially in the folk forms
-                print("    " + symbtrname + ", " + str(s['start_note']) +
+                print(symbtrname + ", " + str(s['start_note']) +
                       ', ' + s['slug'] + ' does not start on a measure: ' +
                       str(score['offset'][s['start_note']]))
 
@@ -265,8 +263,8 @@ class SectionExtractor(object):
             for label in all_labels:
                 # invalid lyrics end
                 if (label + ' ') == ll or (label + '  ') == ll:
-                    warnings.warn("    " + symbtrname + ', ' + str(i) +
-                                  ": Extra space in " + ll)
+                    warnings.warn('%s, %s: Extra space in %s'
+                                  % (symbtrname, str(i), ll))
                     no_space_bool = False
 
         return no_space_bool
@@ -280,8 +278,8 @@ class SectionExtractor(object):
         for s, e in zip(start_note_idx, ends):
             if not s - e == 1:
                 if self.print_warnings:
-                    warnings.warn("    " + symbtrname + ", " + str(e) + '->' +
-                                  str(s) + ', Gap between the sections')
+                    warnings.warn('%s, %s -> %s, Gap between the sections'
+                                  % (symbtrname, str(e), str(s)))
                     section_continuity_bool = False
 
         return section_continuity_bool
