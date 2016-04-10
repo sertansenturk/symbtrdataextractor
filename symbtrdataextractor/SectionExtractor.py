@@ -100,6 +100,11 @@ class SectionExtractor(object):
         return sections
 
     def _locate_section_boundaries(self, sections, score, measure_start_idx):
+        if not sections:  # no sections
+            return sections
+        else:
+            sections = self._sort_sections(sections)
+
         real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
             score['lyrics'], score['duration'])
 
@@ -128,24 +133,25 @@ class SectionExtractor(object):
                 pass  # the start and end are already fixed
 
         # if the first rows are control rows and the first section starts next
-        if sections:
-            first_note_idx = ScoreProcessor.get_first_note_index(score)
+        self._arrange_first_section(score, sections)
 
-            first_sec = sections[0]
-            # first_sec_idx = -1
-            for ii, sec in enumerate(sections):
-                if sec['start_note'] < first_sec['start_note']:
-                    first_sec = sec
-                    # first_sec_idx = ii
+        return sections
 
-            # if there is a gap in the start, create a new section
-            if first_sec['start_note'] > first_note_idx:
-                sections.append({'name': u'INSTRUMENTAL_SECTION',
-                                 'slug': u'INSTRUMENTAL_SECTION',
-                                 'start_note': first_note_idx,
-                                 'end_note': min([s['start_note']
-                                                  for s in sections]) - 1})
-        return self._sort_sections(sections)
+    def _arrange_first_section(self, score, sections):
+        first_note_idx = ScoreProcessor.get_first_note_index(score)
+        first_sec = sections[0]
+
+        # if there is a gap in the start, create a new section
+        if sections[0]['start_note'] > first_note_idx:
+            end_note = sections[0]['start_note'] - 1
+            sections.append({'name': u'INSTRUMENTAL_SECTION',
+                             'slug': u'INSTRUMENTAL_SECTION',
+                             'start_note': first_note_idx,
+                             'end_note': end_note})
+
+        assert sections[0]['start_note'] == first_note_idx, \
+            'The first section does not start in the start note: ' \
+            '{0:s} -> {1:s}'.format(sections[0]['start_note'], first_note_idx)
 
     def _section_end_note_idx(self, sections):
         end_note_idx = [-1] + [s['end_note'] for s in sections]
@@ -201,9 +207,11 @@ class SectionExtractor(object):
 
     @staticmethod
     def _sort_sections(sections):
+        # one boundary is enough since they do not overlap
+        sec_bound_idx = [s['start_note'] if s['start_note'] else s['end_note']
+                         for s in sections]
         # sort the sections
-        sort_idx = [i[0] for i in sorted(enumerate([s['start_note']
-                                                    for s in sections]),
+        sort_idx = [i[0] for i in sorted(enumerate(sec_bound_idx),
                                          key=lambda x: x[1])]
 
         return [sections[s] for s in sort_idx]
