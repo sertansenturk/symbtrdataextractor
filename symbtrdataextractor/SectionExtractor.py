@@ -284,6 +284,6 @@ class SectionExtractor(object):
                     warnings.warn(u'{0!s}, {1!s} -> {2!s}, Gap between the '
                                   u'sections'.format(symbtrname,
                                                      str(e), str(s)))
-                    section_continuity_bool = False
+                section_continuity_bool = False
 
         return section_continuity_bool

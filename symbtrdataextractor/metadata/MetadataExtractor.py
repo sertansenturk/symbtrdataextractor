@@ -98,8 +98,8 @@ class MetadataExtractor(object):
 
     @staticmethod
     def _validate_slug(attrib_dict, score_attrib, scorename):
-        if 'symbtr_slug' in score_attrib.keys():
-            if not score_attrib['symbtr_slug'] == attrib_dict['symbtr_slug']:
+        if 'symbtr_slug' in score_attrib.keys() and not (
+                    score_attrib['symbtr_slug'] == attrib_dict['symbtr_slug']):
                 warnings.warn(u'{0!s}, {1!s}: The slug does not match.'.
                               format(scorename, score_attrib['symbtr_slug']))
                 return False
