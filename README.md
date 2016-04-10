@@ -24,7 +24,7 @@ If you are using this code for academic purposes please cite the software as:
 
 Usage
 ----------
-Extracting (meta)data from the txt-score:
+##### Extracting (meta)data from the txt-score:
 
 ```python
 from symbtrdataextractor.SymbTrDataExtractor import SymbTrDataExtractor
@@ -65,14 +65,21 @@ symbtr_name             : (optional) the SymbTr-name in the
 mbid                    : (optional) the work or recording mbid of the
                           composition/performance related to the score
 segment_note_bound_idx  : (optional) user provided segment boundaries.
-                          makam-symbolic-phrase-segmentation
+                          NOTE - the indexing should start from 1, as this is
+                          the convention in the SymbTr-txt scores.
+                          TIP - makam-symbolic-phrase-segmentation package
                           (https://github.com/MTG/makam-symbolic-phrase-segmentation)
                           can be used to segment the SymbTr-txt scores
                           automatically.
 """
 ```
 
-Extracting metadata stored in the mu2 headers: 
+**Important note**: For the sake of consistency with the indexing in the
+SymbTr-txt scores, the output note indices **start from 1, not 0!** Likewise,
+```segment_note_bound_idx``` input should also obey to the 1 indexing
+convention, otherwise the semiotic labels will be wrong.
+
+##### Extracting metadata stored in the mu2 headers:
 ```python
 from symbtrdataextractor.reader.Mu2Reader import Mu2Reader
 mu2_header, header_row, is_header_valid = Mu2Reader.read_mu2_header(

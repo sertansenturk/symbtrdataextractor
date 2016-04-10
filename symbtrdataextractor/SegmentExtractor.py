@@ -75,23 +75,20 @@ class SegmentExtractor(object):
             start_note_idx = bounds[pp]
             end_note_idx = bounds[pp + 1] - 1
 
-            # start and endNotes
-            start_note = score['index'][start_note_idx]
-            end_note = score['index'][end_note_idx]
-
             # cesni/flavor
             flavor = self._get_segment_flavor_idx(score, start_note_idx,
                                                   end_note_idx)
 
             # lyrics
-            lyrics = ScoreProcessor.get_lyrics_between(score, start_note,
-                                                       end_note)
+            lyrics = ScoreProcessor.get_lyrics_between(score, start_note_idx,
+                                                       end_note_idx)
 
             # sections the segment is in
             segment_sections = []
             if sections:
-                start_section_idx = self._get_section_idx(sections, start_note)
-                end_section_idx = self._get_section_idx(sections, end_note)
+                start_section_idx = self._get_section_idx(sections,
+                                                          start_note_idx)
+                end_section_idx = self._get_section_idx(sections, end_note_idx)
 
                 for idx, sec in zip(range(start_section_idx,
                                           end_section_idx + 1),
@@ -102,18 +99,30 @@ class SegmentExtractor(object):
                          'melodic_structure': sec['melodic_structure'],
                          'lyric_structure': sec['lyric_structure']})
 
-            if lyrics:
-                name = u"VOCAL_" + segment_str
-                slug = u"VOCAL_" + segment_str
-            else:
-                name = u"INSTRUMENTAL_" + segment_str
-                slug = u"INSTRUMENTAL_" + segment_str
+            name, slug = self._name_segment(lyrics, segment_str)
 
+            # append section
             segments.append({'name': name, 'slug': slug, 'flavor': flavor,
-                             'start_note': start_note, 'end_note': end_note,
-                             'lyrics': lyrics, 'sections': segment_sections})
+                             'lyrics': lyrics, 'sections': segment_sections,
+                             'start_note': start_note_idx,
+                             'end_note': end_note_idx})
 
-        return self.segmentLabeler.label_structures(segments, score)
+        segments = self.segmentLabeler.label_structures(segments, score)
+
+        # map the python indices in start_note and end_note to SymbTr index
+        self.segmentLabeler.symbtr_idx_to_python_idx(segments, score)
+
+        return segments
+
+    def _name_segment(self, lyrics, segment_str):
+        if lyrics:
+            name = u"VOCAL_" + segment_str
+            slug = u"VOCAL_" + segment_str
+        else:
+            name = u"INSTRUMENTAL_" + segment_str
+            slug = u"INSTRUMENTAL_" + segment_str
+
+        return name, slug
 
     @staticmethod
     def _get_all_bounds_in_score(bound_codes, score):
@@ -139,8 +148,16 @@ class SegmentExtractor(object):
 
     @staticmethod
     def _get_section_idx(sections, note_idx):
-        section_idx = [i for i, sec in enumerate(sections)
-                       if sec['start_note'] <= note_idx <= sec['end_note']]
+        # there should be only one but we accumulate the resulting index in
+        # an array for the asserting later
+        section_idx = []
+        for i, sec in enumerate(sections):
+            # the section indices are given as symbtr indexing (from 1)
+            # convert them to python indexing
+            sec_start_idx = sec['start_note'] - 1
+            sec_end_idx = sec['end_note'] - 1
+            if sec_start_idx <= note_idx <= sec_end_idx:
+                section_idx.append(i)
 
         assert len(section_idx) == 1, 'Unexpected indexing: the note should ' \
                                       'have been in a single section'
@@ -148,6 +165,9 @@ class SegmentExtractor(object):
         return section_idx[0]
 
     def _parse_bounds(self, bounds, score):
+        # convert from Symbtr index (starting from 1) to python index
+        bounds = [b-1 for b in bounds]
+
         # add start and end if they are not already in the list
         first_bound_idx = ScoreProcessor.get_first_note_index(score)
         bounds.insert(0, first_bound_idx)
