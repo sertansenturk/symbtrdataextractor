@@ -230,7 +230,6 @@ class SectionExtractor(object):
 
             # check if there are any structure labels with a space
             no_space_bool = self._validate_section_labels(score, symbtrname)
-
             valid_bool = all([section_continuity_bool, no_space_bool,
                               section_bound_bool])
 
@@ -268,13 +267,11 @@ class SectionExtractor(object):
     @staticmethod
     def _validate_section_labels(score, symbtrname):
         all_labels = ScoreProcessor.get_all_symbtr_labels() + ['.']
-        no_space_bool = False
+        no_space_bool = True
         for i, ll in enumerate(score['lyrics']):
             for label in all_labels:
                 # invalid lyrics end
                 if label + ' ' == ll or label + '  ' == ll:
-                    import pdb
-                    pdb.set_trace()
                     warnings.warn(u'{0!s}, {1!s}: Extra space in {2!s}'.format(
                         symbtrname, str(i), ll))
                     no_space_bool = False
