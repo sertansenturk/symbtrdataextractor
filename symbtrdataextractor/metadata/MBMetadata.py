@@ -90,6 +90,5 @@ class MBMetadata(object):
         if 'mb_tag' in score_attrib.keys():  # recording
             if not score_attrib['mb_tag'] in attrib_dict['mb_tag']:
                 is_attribute_valid = False
-                warnings.warn(u'%s, %s: The MusicBrainz tag does not match.'
-                              % (scorename, score_attrib['mb_tag']))
+                warnings.warn(u'{0!s}, {1!s}: The MusicBrainz tag does not match.'.format(scorename, score_attrib['mb_tag']))
         return is_attribute_valid
