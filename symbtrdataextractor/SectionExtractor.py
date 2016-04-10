@@ -44,9 +44,7 @@ class SectionExtractor(object):
             melody_sim_thres=self.melody_sim_thres)
 
     def from_txt_score(self, score, symbtrname):
-        all_labels = ScoreProcessor.get_all_symbtr_labels()
-        struct_lbl = all_labels if self.extract_all_labels else \
-            ScoreProcessor.get_grouped_symbtr_labels()['structure']
+        all_labels, struct_lbl = self._get_structure_labels()
 
         measure_start_idx, is_measure_start_valid = \
             self.offsetProcessor.find_measure_start_idx(score['offset'])
@@ -66,14 +64,19 @@ class SectionExtractor(object):
 
         sections_valid = self._validate_sections(
             sections, score, set(all_labels) - set(struct_lbl), symbtrname)
-        valid_bool = sections_valid and is_measure_start_valid
 
         # map the python indices in start_note and end_note to SymbTr index
         for se in sections:
             se['start_note'] = score['index'][se['start_note']]
             se['end_note'] = score['index'][se['end_note']]
 
-        return sections, valid_bool
+        return sections, all([sections_valid, is_measure_start_valid])
+
+    def _get_structure_labels(self):
+        all_labels = ScoreProcessor.get_all_symbtr_labels()
+        struct_lbl = all_labels if self.extract_all_labels else \
+            ScoreProcessor.get_grouped_symbtr_labels()['structure']
+        return all_labels, struct_lbl
 
     def from_musicxml_score(self, score):
         return NotImplemented
