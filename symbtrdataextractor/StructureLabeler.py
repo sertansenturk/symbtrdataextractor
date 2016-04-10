@@ -36,7 +36,7 @@ class StructureLabeler(object):
         return structures
 
     @staticmethod
-    def symbtr_idx_to_python_idx(structures, score):
+    def python_idx_to_symbtr_idx(structures, score):
         for st in structures:
             st['start_note'] = score['index'][st['start_note']]
             st['end_note'] = score['index'][st['end_note']]

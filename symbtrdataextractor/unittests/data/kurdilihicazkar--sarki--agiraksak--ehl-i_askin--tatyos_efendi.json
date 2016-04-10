@@ -55,7 +55,7 @@
             "lyrics": "", 
             "melodic_structure": "A1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 14, 
+            "end_note": 15, 
             "flavor": [], 
             "sections": [
                 {
@@ -67,12 +67,12 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 15, 
+            "start_note": 16, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
             "melodic_structure": "B1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 20, 
+            "end_note": 21, 
             "flavor": [], 
             "sections": [
                 {
@@ -84,12 +84,12 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 21, 
+            "start_note": 22, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
             "melodic_structure": "C1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 27, 
+            "end_note": 28, 
             "flavor": [], 
             "sections": [
                 {
@@ -101,12 +101,12 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 28, 
+            "start_note": 29, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
             "melodic_structure": "D1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 38, 
+            "end_note": 39, 
             "flavor": [], 
             "sections": [
                 {
@@ -118,12 +118,12 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 39, 
+            "start_note": 40, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
             "melodic_structure": "E1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 44, 
+            "end_note": 45, 
             "flavor": [], 
             "sections": [
                 {
@@ -135,12 +135,12 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 45, 
+            "start_note": 46, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
             "melodic_structure": "F1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 59, 
+            "end_note": 60, 
             "flavor": [], 
             "sections": [
                 {
@@ -152,12 +152,12 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 60, 
+            "start_note": 61, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
             "melodic_structure": "G1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 71, 
+            "end_note": 72, 
             "flavor": [], 
             "sections": [
                 {
@@ -169,12 +169,12 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 72, 
+            "start_note": 73, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
             "melodic_structure": "H1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 80, 
+            "end_note": 81, 
             "flavor": [], 
             "sections": [
                 {
@@ -186,12 +186,12 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 81, 
+            "start_note": 82, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
             "melodic_structure": "I1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 89, 
+            "end_note": 90, 
             "flavor": [], 
             "sections": [
                 {
@@ -203,12 +203,12 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 90, 
+            "start_note": 91, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
             "melodic_structure": "J1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 97, 
+            "end_note": 98, 
             "flavor": [], 
             "sections": [
                 {
@@ -220,51 +220,204 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 98, 
+            "start_note": 99, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "E1", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 104, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "INSTRUMENTAL", 
+                    "melodic_structure": "ARANAGME_1", 
+                    "section_idx": 0
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 105, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "A1", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 119, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "INSTRUMENTAL", 
+                    "melodic_structure": "ARANAGME_1", 
+                    "section_idx": 0
+                }, 
+                {
+                    "lyric_structure": "INSTRUMENTAL", 
+                    "melodic_structure": "ARANAGME_2", 
+                    "section_idx": 1
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 120, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "B1", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 125, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "INSTRUMENTAL", 
+                    "melodic_structure": "ARANAGME_2", 
+                    "section_idx": 1
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 126, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "C1", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 132, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "INSTRUMENTAL", 
+                    "melodic_structure": "ARANAGME_2", 
+                    "section_idx": 1
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 133, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "D1", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 143, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "INSTRUMENTAL", 
+                    "melodic_structure": "ARANAGME_2", 
+                    "section_idx": 1
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 144, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "E1", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 149, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "INSTRUMENTAL", 
+                    "melodic_structure": "ARANAGME_2", 
+                    "section_idx": 1
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 150, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "F1", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 164, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "INSTRUMENTAL", 
+                    "melodic_structure": "ARANAGME_2", 
+                    "section_idx": 1
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 165, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "G1", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 176, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "INSTRUMENTAL", 
+                    "melodic_structure": "ARANAGME_2", 
+                    "section_idx": 1
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 177, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "H1", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 185, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "INSTRUMENTAL", 
+                    "melodic_structure": "ARANAGME_2", 
+                    "section_idx": 1
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 186, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "I1", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 194, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "INSTRUMENTAL", 
+                    "melodic_structure": "ARANAGME_2", 
+                    "section_idx": 1
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 195, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "J2", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 202, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "INSTRUMENTAL", 
+                    "melodic_structure": "ARANAGME_2", 
+                    "section_idx": 1
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 203, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
             "melodic_structure": "K1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 103, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "INSTRUMENTAL", 
-                    "melodic_structure": "ARANAGME_1", 
-                    "section_idx": 0
-                }
-            ], 
-            "slug": "INSTRUMENTAL_PHRASE"
-        }, 
-        {
-            "start_note": 104, 
-            "name": "INSTRUMENTAL_PHRASE", 
-            "lyrics": "", 
-            "melodic_structure": "A2", 
-            "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 118, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "INSTRUMENTAL", 
-                    "melodic_structure": "ARANAGME_1", 
-                    "section_idx": 0
-                }, 
-                {
-                    "lyric_structure": "INSTRUMENTAL", 
-                    "melodic_structure": "ARANAGME_2", 
-                    "section_idx": 1
-                }
-            ], 
-            "slug": "INSTRUMENTAL_PHRASE"
-        }, 
-        {
-            "start_note": 119, 
-            "name": "INSTRUMENTAL_PHRASE", 
-            "lyrics": "", 
-            "melodic_structure": "B1", 
-            "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 124, 
+            "end_note": 206, 
             "flavor": [], 
             "sections": [
                 {
@@ -276,187 +429,29 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 125, 
-            "name": "INSTRUMENTAL_PHRASE", 
-            "lyrics": "", 
-            "melodic_structure": "C1", 
-            "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 131, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "INSTRUMENTAL", 
-                    "melodic_structure": "ARANAGME_2", 
-                    "section_idx": 1
-                }
-            ], 
-            "slug": "INSTRUMENTAL_PHRASE"
-        }, 
-        {
-            "start_note": 132, 
-            "name": "INSTRUMENTAL_PHRASE", 
-            "lyrics": "", 
-            "melodic_structure": "D1", 
-            "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 142, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "INSTRUMENTAL", 
-                    "melodic_structure": "ARANAGME_2", 
-                    "section_idx": 1
-                }
-            ], 
-            "slug": "INSTRUMENTAL_PHRASE"
-        }, 
-        {
-            "start_note": 143, 
-            "name": "INSTRUMENTAL_PHRASE", 
-            "lyrics": "", 
-            "melodic_structure": "E1", 
-            "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 148, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "INSTRUMENTAL", 
-                    "melodic_structure": "ARANAGME_2", 
-                    "section_idx": 1
-                }
-            ], 
-            "slug": "INSTRUMENTAL_PHRASE"
-        }, 
-        {
-            "start_note": 149, 
-            "name": "INSTRUMENTAL_PHRASE", 
-            "lyrics": "", 
-            "melodic_structure": "F1", 
-            "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 163, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "INSTRUMENTAL", 
-                    "melodic_structure": "ARANAGME_2", 
-                    "section_idx": 1
-                }
-            ], 
-            "slug": "INSTRUMENTAL_PHRASE"
-        }, 
-        {
-            "start_note": 164, 
-            "name": "INSTRUMENTAL_PHRASE", 
-            "lyrics": "", 
-            "melodic_structure": "G1", 
-            "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 175, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "INSTRUMENTAL", 
-                    "melodic_structure": "ARANAGME_2", 
-                    "section_idx": 1
-                }
-            ], 
-            "slug": "INSTRUMENTAL_PHRASE"
-        }, 
-        {
-            "start_note": 176, 
-            "name": "INSTRUMENTAL_PHRASE", 
-            "lyrics": "", 
-            "melodic_structure": "H1", 
-            "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 184, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "INSTRUMENTAL", 
-                    "melodic_structure": "ARANAGME_2", 
-                    "section_idx": 1
-                }
-            ], 
-            "slug": "INSTRUMENTAL_PHRASE"
-        }, 
-        {
-            "start_note": 185, 
-            "name": "INSTRUMENTAL_PHRASE", 
-            "lyrics": "", 
-            "melodic_structure": "I1", 
-            "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 193, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "INSTRUMENTAL", 
-                    "melodic_structure": "ARANAGME_2", 
-                    "section_idx": 1
-                }
-            ], 
-            "slug": "INSTRUMENTAL_PHRASE"
-        }, 
-        {
-            "start_note": 194, 
-            "name": "INSTRUMENTAL_PHRASE", 
-            "lyrics": "", 
-            "melodic_structure": "J1", 
-            "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 201, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "INSTRUMENTAL", 
-                    "melodic_structure": "ARANAGME_2", 
-                    "section_idx": 1
-                }
-            ], 
-            "slug": "INSTRUMENTAL_PHRASE"
-        }, 
-        {
-            "start_note": 202, 
+            "start_note": 207, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
             "melodic_structure": "L1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 205, 
+            "end_note": 208, 
             "flavor": [], 
             "sections": [
                 {
-                    "lyric_structure": "INSTRUMENTAL", 
-                    "melodic_structure": "ARANAGME_2", 
-                    "section_idx": 1
+                    "lyric_structure": "B1", 
+                    "melodic_structure": "B1", 
+                    "section_idx": 2
                 }
             ], 
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 206, 
-            "name": "INSTRUMENTAL_PHRASE", 
-            "lyrics": "", 
+            "start_note": 209, 
+            "name": "VOCAL_PHRASE", 
+            "lyrics": "Ehl_i a\u015f", 
             "melodic_structure": "M1", 
-            "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 207, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "INSTRUMENTAL", 
-                    "melodic_structure": "ARANAGME_2", 
-                    "section_idx": 1
-                }, 
-                {
-                    "lyric_structure": "B1", 
-                    "melodic_structure": "B1", 
-                    "section_idx": 2
-                }
-            ], 
-            "slug": "INSTRUMENTAL_PHRASE"
-        }, 
-        {
-            "start_note": 208, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "Ehl_i ", 
-            "melodic_structure": "N1", 
             "lyric_structure": "B1", 
-            "end_note": 212, 
+            "end_note": 213, 
             "flavor": [], 
             "sections": [
                 {
@@ -468,12 +463,12 @@
             "slug": "VOCAL_PHRASE"
         }, 
         {
-            "start_note": 213, 
+            "start_note": 214, 
             "name": "VOCAL_PHRASE", 
-            "lyrics": "a\u015fk\u0131n ", 
-            "melodic_structure": "O1", 
+            "lyrics": "k\u0131n ", 
+            "melodic_structure": "N1", 
             "lyric_structure": "C1", 
-            "end_note": 226, 
+            "end_note": 227, 
             "flavor": [], 
             "sections": [
                 {
@@ -485,12 +480,12 @@
             "slug": "VOCAL_PHRASE"
         }, 
         {
-            "start_note": 227, 
+            "start_note": 228, 
             "name": "VOCAL_PHRASE", 
             "lyrics": "ne\u015fveg\u00e2h\u0131 ", 
-            "melodic_structure": "P1", 
+            "melodic_structure": "O1", 
             "lyric_structure": "D1", 
-            "end_note": 243, 
+            "end_note": 244, 
             "flavor": [], 
             "sections": [
                 {
@@ -502,12 +497,12 @@
             "slug": "VOCAL_PHRASE"
         }, 
         {
-            "start_note": 244, 
+            "start_note": 245, 
             "name": "VOCAL_PHRASE", 
             "lyrics": "k\u00fb\u015fe_i mey", 
-            "melodic_structure": "Q1", 
+            "melodic_structure": "P1", 
             "lyric_structure": "E1", 
-            "end_note": 268, 
+            "end_note": 269, 
             "flavor": [], 
             "sections": [
                 {
@@ -519,12 +514,12 @@
             "slug": "VOCAL_PHRASE"
         }, 
         {
-            "start_note": 269, 
+            "start_note": 270, 
             "name": "VOCAL_PHRASE", 
-            "lyrics": "hane", 
-            "melodic_structure": "R1", 
+            "lyrics": "hanedir  ", 
+            "melodic_structure": "Q1", 
             "lyric_structure": "F1", 
-            "end_note": 280, 
+            "end_note": 281, 
             "flavor": [], 
             "sections": [
                 {
@@ -536,143 +531,138 @@
             "slug": "VOCAL_PHRASE"
         }, 
         {
-            "start_note": 281, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "dir  ", 
-            "melodic_structure": "S1", 
-            "lyric_structure": "G1", 
-            "end_note": 292, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "B1", 
-                    "melodic_structure": "B1", 
-                    "section_idx": 2
-                }, 
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C1", 
-                    "section_idx": 3
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 293, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "S\u00e2kiy\u00e2 u\u015f", 
-            "melodic_structure": "T1", 
-            "lyric_structure": "H1", 
-            "end_note": 312, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C1", 
-                    "section_idx": 3
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 313, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "\u015f\u00e2k\u0131 dil", 
-            "melodic_structure": "U1", 
-            "lyric_structure": "I1", 
-            "end_note": 324, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C1", 
-                    "section_idx": 3
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 325, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "\u015f\u00e2d ", 
-            "melodic_structure": "V1", 
-            "lyric_structure": "J1", 
-            "end_note": 339, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C1", 
-                    "section_idx": 3
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 340, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "eyleyen pey", 
-            "melodic_structure": "W1", 
-            "lyric_structure": "K1", 
-            "end_note": 367, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C1", 
-                    "section_idx": 3
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 368, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "m\u00e2", 
-            "melodic_structure": "X1", 
-            "lyric_structure": "L1", 
-            "end_note": 378, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C1", 
-                    "section_idx": 3
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 379, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "nedir  ", 
-            "melodic_structure": "Y1", 
-            "lyric_structure": "M1", 
-            "end_note": 386, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C1", 
-                    "section_idx": 3
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 387, 
+            "start_note": 282, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
-            "melodic_structure": "Z1", 
+            "melodic_structure": "R1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 392, 
+            "end_note": 293, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "B1", 
+                    "melodic_structure": "B1", 
+                    "section_idx": 2
+                }, 
+                {
+                    "lyric_structure": "C1", 
+                    "melodic_structure": "C1", 
+                    "section_idx": 3
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 294, 
+            "name": "VOCAL_PHRASE", 
+            "lyrics": "S\u00e2kiy\u00e2 u\u015f", 
+            "melodic_structure": "S1", 
+            "lyric_structure": "G1", 
+            "end_note": 313, 
             "flavor": [], 
             "sections": [
                 {
                     "lyric_structure": "C1", 
                     "melodic_structure": "C1", 
                     "section_idx": 3
-                }, 
+                }
+            ], 
+            "slug": "VOCAL_PHRASE"
+        }, 
+        {
+            "start_note": 314, 
+            "name": "VOCAL_PHRASE", 
+            "lyrics": "\u015f\u00e2k\u0131 dil\u015f\u00e2d ", 
+            "melodic_structure": "T1", 
+            "lyric_structure": "H1", 
+            "end_note": 325, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "C1", 
+                    "melodic_structure": "C1", 
+                    "section_idx": 3
+                }
+            ], 
+            "slug": "VOCAL_PHRASE"
+        }, 
+        {
+            "start_note": 326, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "U1", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 340, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "C1", 
+                    "melodic_structure": "C1", 
+                    "section_idx": 3
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 341, 
+            "name": "VOCAL_PHRASE", 
+            "lyrics": "eyleyen pey", 
+            "melodic_structure": "V1", 
+            "lyric_structure": "I1", 
+            "end_note": 368, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "C1", 
+                    "melodic_structure": "C1", 
+                    "section_idx": 3
+                }
+            ], 
+            "slug": "VOCAL_PHRASE"
+        }, 
+        {
+            "start_note": 369, 
+            "name": "VOCAL_PHRASE", 
+            "lyrics": "m\u00e2ne", 
+            "melodic_structure": "W1", 
+            "lyric_structure": "J1", 
+            "end_note": 379, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "C1", 
+                    "melodic_structure": "C1", 
+                    "section_idx": 3
+                }
+            ], 
+            "slug": "VOCAL_PHRASE"
+        }, 
+        {
+            "start_note": 380, 
+            "name": "VOCAL_PHRASE", 
+            "lyrics": "dir  ", 
+            "melodic_structure": "X1", 
+            "lyric_structure": "K1", 
+            "end_note": 387, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "C1", 
+                    "melodic_structure": "C1", 
+                    "section_idx": 3
+                }
+            ], 
+            "slug": "VOCAL_PHRASE"
+        }, 
+        {
+            "start_note": 388, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "Y1", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 393, 
+            "flavor": [], 
+            "sections": [
                 {
                     "lyric_structure": "C1", 
                     "melodic_structure": "C2", 
@@ -682,12 +672,29 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 393, 
+            "start_note": 394, 
             "name": "VOCAL_PHRASE", 
             "lyrics": "S\u00e2kiy\u00e2 u\u015f", 
+            "melodic_structure": "S1", 
+            "lyric_structure": "G1", 
+            "end_note": 413, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "C1", 
+                    "melodic_structure": "C2", 
+                    "section_idx": 4
+                }
+            ], 
+            "slug": "VOCAL_PHRASE"
+        }, 
+        {
+            "start_note": 414, 
+            "name": "VOCAL_PHRASE", 
+            "lyrics": "\u015f\u00e2k\u0131 dil\u015f\u00e2d ", 
             "melodic_structure": "T1", 
             "lyric_structure": "H1", 
-            "end_note": 412, 
+            "end_note": 425, 
             "flavor": [], 
             "sections": [
                 {
@@ -699,80 +706,63 @@
             "slug": "VOCAL_PHRASE"
         }, 
         {
-            "start_note": 413, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "\u015f\u00e2k\u0131 dil", 
-            "melodic_structure": "U1", 
-            "lyric_structure": "I1", 
-            "end_note": 424, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C2", 
-                    "section_idx": 4
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 425, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "\u015f\u00e2d ", 
-            "melodic_structure": "V1", 
-            "lyric_structure": "J1", 
-            "end_note": 439, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C2", 
-                    "section_idx": 4
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 440, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "eyleyen pey", 
-            "melodic_structure": "W1", 
-            "lyric_structure": "K1", 
-            "end_note": 467, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C2", 
-                    "section_idx": 4
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 468, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "m\u00e2nedir  ", 
-            "melodic_structure": "\u00c01", 
-            "lyric_structure": "N1", 
-            "end_note": 480, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C2", 
-                    "section_idx": 4
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 481, 
+            "start_note": 426, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
-            "melodic_structure": "\u00c11", 
+            "melodic_structure": "U1", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 493, 
+            "end_note": 440, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "C1", 
+                    "melodic_structure": "C2", 
+                    "section_idx": 4
+                }
+            ], 
+            "slug": "INSTRUMENTAL_PHRASE"
+        }, 
+        {
+            "start_note": 441, 
+            "name": "VOCAL_PHRASE", 
+            "lyrics": "eyleyen pey", 
+            "melodic_structure": "V1", 
+            "lyric_structure": "I1", 
+            "end_note": 468, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "C1", 
+                    "melodic_structure": "C2", 
+                    "section_idx": 4
+                }
+            ], 
+            "slug": "VOCAL_PHRASE"
+        }, 
+        {
+            "start_note": 469, 
+            "name": "VOCAL_PHRASE", 
+            "lyrics": "m\u00e2nedir  ", 
+            "melodic_structure": "Z1", 
+            "lyric_structure": "L1", 
+            "end_note": 481, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "C1", 
+                    "melodic_structure": "C2", 
+                    "section_idx": 4
+                }
+            ], 
+            "slug": "VOCAL_PHRASE"
+        }, 
+        {
+            "start_note": 482, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "\u00c01", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 494, 
             "flavor": [
                 "nev`eser@sol4"
             ], 
@@ -791,12 +781,12 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 494, 
+            "start_note": 495, 
             "name": "VOCAL_PHRASE", 
             "lyrics": "G\u00fcft_\u00fc g\u00fby_i ", 
-            "melodic_structure": "\u00c21", 
-            "lyric_structure": "O1", 
-            "end_note": 504, 
+            "melodic_structure": "\u00c11", 
+            "lyric_structure": "M1", 
+            "end_note": 505, 
             "flavor": [], 
             "sections": [
                 {
@@ -808,12 +798,12 @@
             "slug": "VOCAL_PHRASE"
         }, 
         {
-            "start_note": 505, 
+            "start_note": 506, 
             "name": "INSTRUMENTAL_PHRASE", 
             "lyrics": "", 
-            "melodic_structure": "\u00c31", 
+            "melodic_structure": "\u00c21", 
             "lyric_structure": "INSTRUMENTAL", 
-            "end_note": 515, 
+            "end_note": 516, 
             "flavor": [
                 "nikriz@do5"
             ], 
@@ -827,12 +817,12 @@
             "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 516, 
+            "start_note": 517, 
             "name": "VOCAL_PHRASE", 
             "lyrics": "\u00e2leme al", 
-            "melodic_structure": "\u00c41", 
-            "lyric_structure": "P1", 
-            "end_note": 536, 
+            "melodic_structure": "\u00c31", 
+            "lyric_structure": "N1", 
+            "end_note": 537, 
             "flavor": [], 
             "sections": [
                 {
@@ -844,12 +834,12 @@
             "slug": "VOCAL_PHRASE"
         }, 
         {
-            "start_note": 537, 
+            "start_note": 538, 
             "name": "VOCAL_PHRASE", 
             "lyrics": "danma hep ", 
-            "melodic_structure": "\u00c51", 
-            "lyric_structure": "Q1", 
-            "end_note": 545, 
+            "melodic_structure": "\u00c41", 
+            "lyric_structure": "O1", 
+            "end_note": 546, 
             "flavor": [], 
             "sections": [
                 {
@@ -861,12 +851,12 @@
             "slug": "VOCAL_PHRASE"
         }, 
         {
-            "start_note": 546, 
+            "start_note": 547, 
             "name": "VOCAL_PHRASE", 
             "lyrics": "ef", 
-            "melodic_structure": "\u00c61", 
-            "lyric_structure": "R1", 
-            "end_note": 559, 
+            "melodic_structure": "\u00c51", 
+            "lyric_structure": "P1", 
+            "end_note": 560, 
             "flavor": [], 
             "sections": [
                 {
@@ -878,12 +868,12 @@
             "slug": "VOCAL_PHRASE"
         }, 
         {
-            "start_note": 560, 
+            "start_note": 561, 
             "name": "VOCAL_PHRASE", 
-            "lyrics": "sane", 
-            "melodic_structure": "R2", 
+            "lyrics": "sanedir  ", 
+            "melodic_structure": "Q1", 
             "lyric_structure": "F2", 
-            "end_note": 571, 
+            "end_note": 572, 
             "flavor": [], 
             "sections": [
                 {
@@ -895,12 +885,12 @@
             "slug": "VOCAL_PHRASE"
         }, 
         {
-            "start_note": 572, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "dir  ", 
-            "melodic_structure": "S1", 
-            "lyric_structure": "G1", 
-            "end_note": 583, 
+            "start_note": 573, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
+            "melodic_structure": "R1", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 584, 
             "flavor": [], 
             "sections": [
                 {
@@ -914,15 +904,32 @@
                     "section_idx": 6
                 }
             ], 
-            "slug": "VOCAL_PHRASE"
+            "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 584, 
+            "start_note": 585, 
             "name": "VOCAL_PHRASE", 
             "lyrics": "S\u00e2kiy\u00e2 u\u015f", 
+            "melodic_structure": "S1", 
+            "lyric_structure": "G1", 
+            "end_note": 604, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "C1", 
+                    "melodic_structure": "C3", 
+                    "section_idx": 6
+                }
+            ], 
+            "slug": "VOCAL_PHRASE"
+        }, 
+        {
+            "start_note": 605, 
+            "name": "VOCAL_PHRASE", 
+            "lyrics": "\u015f\u00e2k\u0131 dil\u015f\u00e2d ", 
             "melodic_structure": "T1", 
             "lyric_structure": "H1", 
-            "end_note": 603, 
+            "end_note": 616, 
             "flavor": [], 
             "sections": [
                 {
@@ -934,12 +941,12 @@
             "slug": "VOCAL_PHRASE"
         }, 
         {
-            "start_note": 604, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "\u015f\u00e2k\u0131 dil", 
+            "start_note": 617, 
+            "name": "INSTRUMENTAL_PHRASE", 
+            "lyrics": "", 
             "melodic_structure": "U1", 
-            "lyric_structure": "I1", 
-            "end_note": 615, 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 631, 
             "flavor": [], 
             "sections": [
                 {
@@ -948,65 +955,48 @@
                     "section_idx": 6
                 }
             ], 
-            "slug": "VOCAL_PHRASE"
+            "slug": "INSTRUMENTAL_PHRASE"
         }, 
         {
-            "start_note": 616, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "\u015f\u00e2d ", 
-            "melodic_structure": "V1", 
-            "lyric_structure": "J1", 
-            "end_note": 630, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C3", 
-                    "section_idx": 6
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 631, 
+            "start_note": 632, 
             "name": "VOCAL_PHRASE", 
             "lyrics": "eyleyen pey", 
+            "melodic_structure": "V1", 
+            "lyric_structure": "I1", 
+            "end_note": 659, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "C1", 
+                    "melodic_structure": "C3", 
+                    "section_idx": 6
+                }
+            ], 
+            "slug": "VOCAL_PHRASE"
+        }, 
+        {
+            "start_note": 660, 
+            "name": "VOCAL_PHRASE", 
+            "lyrics": "m\u00e2ne", 
             "melodic_structure": "W1", 
+            "lyric_structure": "J1", 
+            "end_note": 670, 
+            "flavor": [], 
+            "sections": [
+                {
+                    "lyric_structure": "C1", 
+                    "melodic_structure": "C3", 
+                    "section_idx": 6
+                }
+            ], 
+            "slug": "VOCAL_PHRASE"
+        }, 
+        {
+            "start_note": 671, 
+            "name": "VOCAL_PHRASE", 
+            "lyrics": "dir  ", 
+            "melodic_structure": "\u00c61", 
             "lyric_structure": "K1", 
-            "end_note": 658, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C3", 
-                    "section_idx": 6
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 659, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "m\u00e2", 
-            "melodic_structure": "X1", 
-            "lyric_structure": "L1", 
-            "end_note": 669, 
-            "flavor": [], 
-            "sections": [
-                {
-                    "lyric_structure": "C1", 
-                    "melodic_structure": "C3", 
-                    "section_idx": 6
-                }
-            ], 
-            "slug": "VOCAL_PHRASE"
-        }, 
-        {
-            "start_note": 670, 
-            "name": "VOCAL_PHRASE", 
-            "lyrics": "nedir  ", 
-            "melodic_structure": "\u00c71", 
-            "lyric_structure": "M1", 
             "end_note": 672, 
             "flavor": [], 
             "sections": [

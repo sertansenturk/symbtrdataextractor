@@ -54,8 +54,10 @@ class SegmentExtractor(object):
     def extract_segments(self, score, segment_note_bound_idx, sections=None):
         try:
             if segment_note_bound_idx:
-                segments = self._extract(segment_note_bound_idx, score,
-                                         sections=sections,
+                # convert from Symbtr index (starting from 1) to python index
+                bounds = [b - 1 for b in segment_note_bound_idx]
+
+                segments = self._extract(bounds, score, sections=sections,
                                          segment_str='SEGMENT')
             else:
                 segments = []
@@ -110,7 +112,7 @@ class SegmentExtractor(object):
         segments = self.segmentLabeler.label_structures(segments, score)
 
         # map the python indices in start_note and end_note to SymbTr index
-        self.segmentLabeler.symbtr_idx_to_python_idx(segments, score)
+        self.segmentLabeler.python_idx_to_symbtr_idx(segments, score)
 
         return segments
 
@@ -165,9 +167,6 @@ class SegmentExtractor(object):
         return section_idx[0]
 
     def _parse_bounds(self, bounds, score):
-        # convert from Symbtr index (starting from 1) to python index
-        bounds = [b - 1 for b in bounds]
-
         # add start and end if they are not already in the list
         first_bound_idx = ScoreProcessor.get_first_note_index(score)
         bounds.insert(0, first_bound_idx)
