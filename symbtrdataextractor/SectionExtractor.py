@@ -100,25 +100,21 @@ class SectionExtractor(object):
         real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
             score['lyrics'], score['duration'])
 
-        start_note_idx = self._get_section_start_note_idx(score, sections)
+        start_note_idx = self._section_start_note_idx(score, sections)
         # end_note_idx = [-1] + [s['end_note'] for s in sections]
-        for se in reversed(sections):  # start from the last section
+        for i, se in reversed(list(enumerate(sections))):
+            # carry the 'end_note' to the next start
+            se['end_note'] = start_note_idx[i + 1] - 1
+            end_note_idx = [-1] + [s['end_note'] for s in sections]
             if se['slug'] == u'VOCAL_SECTION':
-                # carry the 'end_note' to the next closest start
-                se['end_note'] = min(x for x in start_note_idx
-                                     if x > se['end_note']) - 1
-
-                # update end_note_idx
-                end_note_idx = [-1] + [s['end_note'] for s in sections]
-
                 # estimate the start of the lyrics sections
-                next_lyrics_start_ind = self.get_vocal_section_start_idx(
+                next_lyrics_start_ind = self._find_vocal_section_start_idx(
                     se, score, start_note_idx, end_note_idx, measure_start_idx,
                     real_lyrics_idx)
                 se['start_note'] = next_lyrics_start_ind
 
                 # update start_note_idx
-                start_note_idx = SectionExtractor._get_section_start_note_idx(
+                start_note_idx = SectionExtractor._section_start_note_idx(
                     score, sections)
 
                 # update lyrics
@@ -129,8 +125,7 @@ class SectionExtractor(object):
                 syllables = [score['lyrics'][li] for li in section_lyrics_idx]
                 se['lyrics'] = ''.join(syllables)
             else:  # instrumental
-                se['end_note'] = min(x for x in start_note_idx
-                                     if x > se['start_note']) - 1
+                pass  # the start and end are already fixed
 
         # if the first rows are control rows and the first section starts next
         if sections:
@@ -152,20 +147,19 @@ class SectionExtractor(object):
                                                   for s in sections]) - 1})
         return self._sort_sections(sections)
 
-    def get_vocal_section_start_idx(self, section, score, start_note_idx,
-                                    end_note_idx, measure_start_idx,
-                                    real_lyrics_idx):
+    def _find_vocal_section_start_idx(self, section, score, start_note_idx,
+                                      end_note_idx, measure_start_idx,
+                                      real_lyrics_idx):
 
         first_note_idx = ScoreProcessor.get_first_note_index(score)
         prev_closest_start_ind = self.find_prev_closest_bound(
-            start_note_idx, section)
+            start_note_idx, section['end_note'])
         prev_closest_end_ind = self.find_prev_closest_bound(
-            end_note_idx, section)
+            end_note_idx, section['end_note'])
 
         # find where the lyrics of this section starts
         chk_ind = max([prev_closest_end_ind, prev_closest_start_ind])
-        next_lyrics_start_ind = min(x for x in real_lyrics_idx
-                                    if x > chk_ind)
+        next_lyrics_start_ind = min(x for x in real_lyrics_idx if x > chk_ind)
         next_lyrics_measure_offset = floor(
             score['offset'][next_lyrics_start_ind])
 
@@ -188,17 +182,17 @@ class SectionExtractor(object):
                 measure_start_idx), first_note_idx])
 
     @staticmethod
-    def find_prev_closest_bound(end_note_idx, se):
+    def find_prev_closest_bound(bound_note_idx, end_note):
         try:  # find the previous closest end
-            prev_closest_end_ind = max(x for x in end_note_idx
-                                       if x < se['end_note'])
+            prev_closest_ind = max(x for x in bound_note_idx if x < end_note)
         except ValueError:  # no vocal sections
-            prev_closest_end_ind = -1
+            prev_closest_ind = -1
 
-        return prev_closest_end_ind
+        return prev_closest_ind
 
     @staticmethod
-    def _get_section_start_note_idx(score, sections):
+    def _section_start_note_idx(score, sections):
+        # dummy add the last note + 1
         return [s['start_note'] for s in sections] + [len(score['lyrics'])]
 
     @staticmethod
@@ -280,7 +274,7 @@ class SectionExtractor(object):
     def _validate_section_continuity(self, score, sections, symbtrname):
         first_note_idx = ScoreProcessor.get_first_note_index(score)
         ends = [first_note_idx - 1] + [s['end_note'] for s in sections]
-        start_note_idx = self._get_section_start_note_idx(score, sections)
+        start_note_idx = self._section_start_note_idx(score, sections)
 
         section_continuity_bool = True
         for s, e in zip(start_note_idx, ends):

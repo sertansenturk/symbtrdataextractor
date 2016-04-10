@@ -40,17 +40,10 @@ class MetadataExtractor(object):
         data['symbtr'] = scorename
 
         slugs = MetadataExtractor.get_slugs(scorename)
-        data['makam']['symbtr_slug'] = slugs['makam']
-        data['makam']['attribute_key'] = MetadataExtractor.get_attribute_key(
-            data['makam']['symbtr_slug'], 'makam')
-
-        data['form']['symbtr_slug'] = slugs['form']
-        data['form']['attribute_key'] = MetadataExtractor.get_attribute_key(
-            data['form']['symbtr_slug'], 'form')
-
-        data['usul']['symbtr_slug'] = slugs['usul']
-        data['usul']['attribute_key'] = MetadataExtractor.get_attribute_key(
-            data['usul']['symbtr_slug'], 'usul')
+        for attr in ['makam', 'form', 'usul']:
+            data[attr]['symbtr_slug'] = slugs[attr]
+            data[attr]['attribute_key'] = MetadataExtractor.\
+                get_attribute_key(data[attr]['symbtr_slug'], attr)
 
         if 'work' in data.keys():
             data['work']['symbtr_slug'] = slugs['name']
