@@ -1,3 +1,6 @@
+#### symbtrmetadataextractor 2.0.0-alpha.4
+ - Improvement in code quality
+
 #### symbtrmetadataextractor 2.0.0-alpha.3
  - Musicbrainz metadata is now fetched using makammusicbrainz repository
 
