@@ -136,7 +136,8 @@ class SectionExtractor(object):
 
         return sections
 
-    def _fill_gap_in_start(self, score, sections):
+    @staticmethod
+    def _fill_gap_in_start(score, sections):
         # if there is a gap in the start, create a new section
         first_note_idx = ScoreProcessor.get_first_note_index(score)
         if sections[0]['start_note'] > first_note_idx:
@@ -150,7 +151,8 @@ class SectionExtractor(object):
             'The first section does not start in the start note: ' \
             '{0:s} -> {1:s}'.format(sections[0]['start_note'], first_note_idx)
 
-    def _section_end_note_idx(self, sections):
+    @staticmethod
+    def _section_end_note_idx(sections):
         end_note_idx = [-1] + [s['end_note'] for s in sections]
         return end_note_idx
 
@@ -158,34 +160,38 @@ class SectionExtractor(object):
                                       end_note_idx, measure_start_idx,
                                       real_lyrics_idx):
 
-        first_note_idx = ScoreProcessor.get_first_note_index(score)
+        # find the previous boundary
         prev_closest_start_ind = self.find_prev_closest_bound(
             start_note_idx, section['end_note'])
         prev_closest_end_ind = self.find_prev_closest_bound(
             end_note_idx, section['end_note'])
+        prev_bound_idx = max([prev_closest_end_ind, prev_closest_start_ind])
 
-        # find where the lyrics of this section starts
-        chk_ind = max([prev_closest_end_ind, prev_closest_start_ind])
-        next_lyrics_start_ind = min(x for x in real_lyrics_idx if x > chk_ind)
-        next_lyrics_measure_offset = floor(
-            score['offset'][next_lyrics_start_ind])
+        # find where the lyrics of this section starts: it has to be after
+        # the previous boundary found above
+        curr_lyrics_start_ind = min(x for x in real_lyrics_idx
+                                    if x > prev_bound_idx)
+        curr_lyrics_measure_offset = floor(
+            score['offset'][curr_lyrics_start_ind])
 
         # check if next_lyrics_start_ind and prev_closest_end_ind are
         # in the same measure. Ideally they should be in different
         # measures
-        if next_lyrics_measure_offset == floor(
+        if curr_lyrics_measure_offset == floor(
                 score['offset'][prev_closest_end_ind]):
             if self.print_warnings:
-                warnings.warn(u'{0!s}: {1!s} and {2!s} are in the same '
-                              u'measure!'.
-                              format(str(next_lyrics_measure_offset),
-                                     score['lyrics'][prev_closest_end_ind],
-                                     score['lyrics'][next_lyrics_start_ind]))
-            return next_lyrics_measure_offset
+                # This is not a warning but a indication to the user as it can
+                # happen occasionally especially in the folk forms
+                print(u'{0!s}: {1!s} and {2!s} are in the same measure!'.
+                      format(str(curr_lyrics_measure_offset),
+                             score['lyrics'][prev_closest_end_ind],
+                             score['lyrics'][curr_lyrics_start_ind]))
+            return curr_lyrics_start_ind
         else:  # The section starts on the first measure the lyrics
             # start
+            first_note_idx = ScoreProcessor.get_first_note_index(score)
             return max([OffsetProcessor.get_measure_offset_id(
-                next_lyrics_measure_offset, score['offset'],
+                curr_lyrics_measure_offset, score['offset'],
                 measure_start_idx), first_note_idx])
 
     @staticmethod
@@ -260,9 +266,9 @@ class SectionExtractor(object):
             if starts_on_measure and self.print_warnings:
                 # This is not a warning but a indication to the user as it can
                 # happen occasionally especially in the folk forms
-                print(symbtrname + ", " + str(s['start_note']) +
-                      ', ' + s['slug'] + ' does not start on a measure: ' +
-                      str(score['offset'][s['start_note']]))
+                print('{0:s}, {1:s}, {2:s} does not start on a measure: {3:s}'.
+                      format(symbtrname, str(s['start_note']), s['slug'],
+                             str(score['offset'][s['start_note']])))
 
     @staticmethod
     def _validate_section_labels(score, symbtrname):
