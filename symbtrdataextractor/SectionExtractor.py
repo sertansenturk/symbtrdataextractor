@@ -49,8 +49,7 @@ class SectionExtractor(object):
             ScoreProcessor.get_grouped_symbtr_labels()['structure']
 
         measure_start_idx, is_measure_start_valid = \
-            self.offsetProcessor.find_measure_start_idx(
-                score['offset'])
+            self.offsetProcessor.find_measure_start_idx(score['offset'])
 
         # Check lyrics information
         if all(l == '' for l in score['lyrics']):
@@ -98,7 +97,6 @@ class SectionExtractor(object):
         return sections
 
     def _locate_section_boundaries(self, sections, score, measure_start_idx):
-        first_note_idx = ScoreProcessor.get_first_note_index(score)
         real_lyrics_idx = ScoreProcessor.get_true_lyrics_idx(
             score['lyrics'], score['duration'])
 
@@ -114,53 +112,20 @@ class SectionExtractor(object):
                 end_note_idx = [-1] + [s['end_note'] for s in sections]
 
                 # estimate the start of the lyrics sections
-                try:  # find the previous closest start
-                    prev_closest_start_ind = max(x for x in start_note_idx
-                                                 if x < se['end_note'])
-                except ValueError:  # no section label in lyrics columns
-                    prev_closest_start_ind = -1
-
-                try:  # find the previous closest end
-                    prev_closest_end_ind = max(x for x in end_note_idx
-                                               if x < se['end_note'])
-                except ValueError:  # no vocal sections
-                    prev_closest_end_ind = -1
-
-                # find where the lyrics of this section starts
-                chk_ind = max([prev_closest_end_ind, prev_closest_start_ind])
-                next_lyrics_start_ind = min(x for x in real_lyrics_idx
-                                            if x > chk_ind)
-                next_lyrics_measure_offset = floor(
-                    score['offset'][next_lyrics_start_ind])
-
-                # check if next_lyrics_start_ind and prev_closest_end_ind are
-                # in the same measure. Ideally they should be in different
-                # measures
-                if next_lyrics_measure_offset == floor(
-                        score['offset'][prev_closest_end_ind]):
-                    if self.print_warnings:
-                        warnings.warn(
-                            "    " + str(next_lyrics_measure_offset) + ':' +
-                            score['lyrics'][prev_closest_end_ind] + ' and ' +
-                            score['lyrics'][next_lyrics_start_ind] +
-                            ' are in the same measure!')
-
-                    se['start_note'] = next_lyrics_start_ind
-                else:  # The section starts on the first measure the lyrics
-                    # start
-                    se['start_note'] = max(
-                        [OffsetProcessor.get_measure_offset_id(
-                            next_lyrics_measure_offset, score['offset'],
-                            measure_start_idx), first_note_idx])
+                next_lyrics_start_ind = self.get_vocal_section_start_idx(
+                    se, score, start_note_idx, end_note_idx, measure_start_idx,
+                    real_lyrics_idx)
+                se['start_note'] = next_lyrics_start_ind
 
                 # update start_note_idx
                 start_note_idx = SectionExtractor._get_section_start_note_idx(
-                        score, sections)
+                    score, sections)
 
                 # update lyrics
                 section_lyrics_idx = ([rl for rl in real_lyrics_idx
                                        if se['start_note'] <= rl <=
                                        se['end_note']])
+
                 syllables = [score['lyrics'][li] for li in section_lyrics_idx]
                 se['lyrics'] = ''.join(syllables)
             else:  # instrumental
@@ -186,6 +151,51 @@ class SectionExtractor(object):
                                  'end_note': min([s['start_note']
                                                   for s in sections]) - 1})
         return self._sort_sections(sections)
+
+    def get_vocal_section_start_idx(self, section, score, start_note_idx,
+                                    end_note_idx, measure_start_idx,
+                                    real_lyrics_idx):
+
+        first_note_idx = ScoreProcessor.get_first_note_index(score)
+        prev_closest_start_ind = self.find_prev_closest_bound(
+            start_note_idx, section)
+        prev_closest_end_ind = self.find_prev_closest_bound(
+            end_note_idx, section)
+
+        # find where the lyrics of this section starts
+        chk_ind = max([prev_closest_end_ind, prev_closest_start_ind])
+        next_lyrics_start_ind = min(x for x in real_lyrics_idx
+                                    if x > chk_ind)
+        next_lyrics_measure_offset = floor(
+            score['offset'][next_lyrics_start_ind])
+
+        # check if next_lyrics_start_ind and prev_closest_end_ind are
+        # in the same measure. Ideally they should be in different
+        # measures
+        if next_lyrics_measure_offset == floor(
+                score['offset'][prev_closest_end_ind]):
+            if self.print_warnings:
+                warnings.warn(
+                    "    " + str(next_lyrics_measure_offset) + ':' +
+                    score['lyrics'][prev_closest_end_ind] + ' and ' +
+                    score['lyrics'][next_lyrics_start_ind] +
+                    ' are in the same measure!')
+            return next_lyrics_measure_offset
+        else:  # The section starts on the first measure the lyrics
+            # start
+            return max([OffsetProcessor.get_measure_offset_id(
+                next_lyrics_measure_offset, score['offset'],
+                measure_start_idx), first_note_idx])
+
+    @staticmethod
+    def find_prev_closest_bound(end_note_idx, se):
+        try:  # find the previous closest end
+            prev_closest_end_ind = max(x for x in end_note_idx
+                                       if x < se['end_note'])
+        except ValueError:  # no vocal sections
+            prev_closest_end_ind = -1
+
+        return prev_closest_end_ind
 
     @staticmethod
     def _get_section_start_note_idx(score, sections):
@@ -215,7 +225,7 @@ class SectionExtractor(object):
                                      symbtrname)
 
             section_bound_bool = self._validate_section_start_end(
-                    sections, score, symbtrname)
+                sections, score, symbtrname)
 
             # check if there are any structure labels with a space
             no_space_bool = self._validate_section_labels(score, symbtrname)
