@@ -29,52 +29,61 @@ Extracting (meta)data from the txt-score:
 ```python
 from symbtrdataextractor.SymbTrDataExtractor import SymbTrDataExtractor
 
-extractor = SymbTrDataExtractor(extract_all_labels=False, melody_sim_thres=0.75, 
-                                lyrics_sim_thres=0.75, crop_consec_bounds=True,
+extractor = SymbTrDataExtractor(melody_sim_thres=0.75, lyrics_sim_thres=0.75,
+                                extract_all_labels=False, crop_consec_bounds=True,
                                 get_recording_rels=False, print_warnings=True)
 """
 Inputs
 ----------
-extract_all_labels: (optional) boolean to treat all (explicit) annotations in the lyrics as 
-                    a section or not (e.g. INSTRUMENTATION labels). The default is False.
-
-melody_sim_thres  : (optional) the maximum similarity threshold for two melodic stuctures to 
-                    be considered as variant of each other. The default is 0.75.
-lyrics_sim_thres  : (optional) the maximum similarity threshold for two lyric stuctures to be 
-                    considered as variant of each other. The default is 0.75.
-crop_consec_bounds: (optional) remove the first of the two consecutive boundaries inside the
-                    user given segmentation boundaries
-get_recording_rels: (optional) boolean to extract the relevant recording relations from MusicBrainz.
+melody_sim_thres  : (optional) the maximum similarity threshold for two melodic
+                    stuctures to be considered as variant of each other. The
+                    default is 0.75.
+lyrics_sim_thres  : (optional) the maximum similarity threshold for two lyric
+                    stuctures to be considered as variant of each other. The
+                    default is 0.75.
+extract_all_labels: (optional) boolean to treat all (explicit) annotations in
+                    the lyrics as a section or not (e.g. INSTRUMENTATION labels).
                     The default is False.
-print_warnings    : (optional) boolean to print possible warnings during reading the scores. 
-                    Note that errors will always be printed. The default is True
+crop_consec_bounds: (optional) remove the first of the two consecutive boundaries
+                    inside the user given segmentation boundaries
+get_recording_rels: (optional) boolean to extract the relevant recording relations
+                    from MusicBrainz. The default is False.
+print_warnings    : (optional) boolean to print possible warnings during reading
+                    the scores. Note that errors will always be printed. The
+                    default is True
 """
 
-txt_data, is_data_valid = extractor.extract(txt_filename, symbtr_name=scorename, mbid=mbid, 
-                                            segment_note_bound_idx=auto_seg_bounds)
+txt_data, is_data_valid = extractor.extract(txt_filename, symbtr_name=scorename,
+                                            segment_note_bound_idx=auto_seg_bounds,
+                                            mbid=mbid)
 """
 Inputs
 ----------
 txt_filename            : the filepath of the SymbTr-txt score
-symbtr_name             : (optional) the SymbTr-name in the "makam--form--usul--name--composer" format.
-mbid                    : (optional) the work or recording mbid of the composition/performance related 
-                          to the score
-segment_note_bound_idx  : (optional) user provided segment boundaries. makam-symbolic-phrase-segmentation
-                          (https://github.com/MTG/makam-symbolic-phrase-segmentation) can be used to 
-                          segment the SymbTr-txt scores automatically.
+symbtr_name             : (optional) the SymbTr-name in the
+                          "makam--form--usul--name--composer" format.
+mbid                    : (optional) the work or recording mbid of the
+                          composition/performance related to the score
+segment_note_bound_idx  : (optional) user provided segment boundaries.
+                          makam-symbolic-phrase-segmentation
+                          (https://github.com/MTG/makam-symbolic-phrase-segmentation)
+                          can be used to segment the SymbTr-txt scores
+                          automatically.
 """
 ```
 
 Extracting metadata stored in the mu2 headers: 
 ```python
 from symbtrdataextractor.reader.Mu2Reader import Mu2Reader
-mu2_header, header_row, is_header_valid = Mu2Reader.read_mu2_header(mu2_filename, symbtr_name=scorename)
+mu2_header, header_row, is_header_valid = Mu2Reader.read_mu2_header(
+    mu2_filename, symbtr_name=scorename)
 
 """
 Inputs
 ----------
 mu2filename       : the filepath of the mu2 score
-symbtr_name       : (optional) the SymbTr-name in the "makam--form--usul--name--composer" format.
+symbtr_name       : (optional) the SymbTr-name in the
+                    "makam--form--usul--name--composer" format.
 """
 ```
 
