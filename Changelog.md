@@ -3,6 +3,7 @@
 - ```segment_note_bound_idx``` parameter to ```SymbTrDataExtractor``` is expected to be given in **1-indexing** (not the "Pythonic" 0-indexing) to comply with the note indices in the SymbTr-txt scores
 - Fixed the index shift (and hence erroneous semiotic labels) in the SegmentExtractor
 - Fixed boundary cropping if there are groups of boundaries greater than 2 boundaries
+- Improved unittests
 
 #### symbtrmetadataextractor 2.0.0-alpha.4
  - Improvements in code quality
