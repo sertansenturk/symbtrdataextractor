@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 from setuptools import setup
+from setuptools import find_packages
+
 
 setup(name='symbtrdataextractor',
       version='2.0.0-alpha.5',
@@ -9,7 +11,7 @@ setup(name='symbtrdataextractor',
       description='Tools to extract (meta)data related to SymbTr from the '
                   'information in score file and MusicBrainz',
       url='http://sertansenturk.com',
-      packages=['symbtrdataextractor'],
+      packages=find_packages(),
       include_package_data=True,
       install_requires=[
           "python-Levenshtein",
