@@ -1,0 +1,194 @@
+{
+    "symbtr": "ussak--sazsemaisi--aksaksemai----neyzen_aziz_dede", 
+    "makam": {
+        "attribute_key": "ussak", 
+        "symbtr_slug": "ussak"
+    }, 
+    "form": {
+        "attribute_key": "sazsemaisi", 
+        "symbtr_slug": "sazsemaisi"
+    }, 
+    "lyricist": {}, 
+    "tonic": "A4", 
+    "rhythmic_structure": [
+        {
+            "endNote": 478, 
+            "startNote": 1, 
+            "usul": {
+                "symbtr_internal_id": 30, 
+                "attribute_key": "aksaksemai", 
+                "mertebe": 8, 
+                "mu2_name": "Aksaksem\u00e2\u00ee", 
+                "number_of_pulses": 10
+            }, 
+            "tempo": {
+                "unit": "bpm", 
+                "value": 112
+            }
+        }, 
+        {
+            "endNote": 573, 
+            "startNote": 479, 
+            "usul": {
+                "symbtr_internal_id": 87, 
+                "attribute_key": "yuruksemai_ii", 
+                "mertebe": 8, 
+                "mu2_name": "Y\u00fcr\u00fcksem\u00e2\u00ee II", 
+                "number_of_pulses": 6
+            }, 
+            "tempo": {
+                "unit": "bpm", 
+                "value": 54
+            }
+        }, 
+        {
+            "endNote": 680, 
+            "startNote": 574, 
+            "usul": {
+                "symbtr_internal_id": 30, 
+                "attribute_key": "aksaksemai", 
+                "mertebe": 8, 
+                "mu2_name": "Aksaksem\u00e2\u00ee", 
+                "number_of_pulses": 10
+            }, 
+            "tempo": {
+                "unit": "bpm", 
+                "value": 28
+            }
+        }
+    ], 
+    "phrase_annotations": [], 
+    "number_of_notes": 680, 
+    "composer": {
+        "symbtr_slug": "neyzen_aziz_dede"
+    }, 
+    "duration": {
+        "unit": "second", 
+        "value": 275.821
+    }, 
+    "segmentations": [], 
+    "usul": {
+        "attribute_key": "aksaksemai", 
+        "symbtr_slug": "aksaksemai"
+    }, 
+    "sections": [
+        {
+            "start_note": 2, 
+            "name": "1. HANE", 
+            "lyrics": "", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 56, 
+            "melodic_structure": "1-HANE_1", 
+            "slug": "1-HANE"
+        }, 
+        {
+            "start_note": 57, 
+            "name": "TESL\u0130M", 
+            "lyrics": "", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 109, 
+            "melodic_structure": "TESLIM_1", 
+            "slug": "TESLIM"
+        }, 
+        {
+            "start_note": 110, 
+            "name": "TESL\u0130M", 
+            "lyrics": "", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 162, 
+            "melodic_structure": "TESLIM_1", 
+            "slug": "TESLIM"
+        }, 
+        {
+            "start_note": 163, 
+            "name": "2. HANE", 
+            "lyrics": "", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 211, 
+            "melodic_structure": "2-HANE_1", 
+            "slug": "2-HANE"
+        }, 
+        {
+            "start_note": 212, 
+            "name": "TESL\u0130M", 
+            "lyrics": "", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 264, 
+            "melodic_structure": "TESLIM_1", 
+            "slug": "TESLIM"
+        }, 
+        {
+            "start_note": 265, 
+            "name": "TESL\u0130M", 
+            "lyrics": "", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 317, 
+            "melodic_structure": "TESLIM_1", 
+            "slug": "TESLIM"
+        }, 
+        {
+            "start_note": 318, 
+            "name": "3. HANE", 
+            "lyrics": "", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 372, 
+            "melodic_structure": "3-HANE_1", 
+            "slug": "3-HANE"
+        }, 
+        {
+            "start_note": 373, 
+            "name": "TESL\u0130M", 
+            "lyrics": "", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 425, 
+            "melodic_structure": "TESLIM_1", 
+            "slug": "TESLIM"
+        }, 
+        {
+            "start_note": 426, 
+            "name": "TESL\u0130M", 
+            "lyrics": "", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 479, 
+            "melodic_structure": "TESLIM_1", 
+            "slug": "TESLIM"
+        }, 
+        {
+            "start_note": 480, 
+            "name": "4. HANE", 
+            "lyrics": "", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 526, 
+            "melodic_structure": "4-HANE_1", 
+            "slug": "4-HANE"
+        }, 
+        {
+            "start_note": 527, 
+            "name": "4. HANE", 
+            "lyrics": "", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 574, 
+            "melodic_structure": "4-HANE_1", 
+            "slug": "4-HANE"
+        }, 
+        {
+            "start_note": 575, 
+            "name": "TESL\u0130M", 
+            "lyrics": "", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 627, 
+            "melodic_structure": "TESLIM_1", 
+            "slug": "TESLIM"
+        }, 
+        {
+            "start_note": 628, 
+            "name": "TESL\u0130M", 
+            "lyrics": "", 
+            "lyric_structure": "INSTRUMENTAL", 
+            "end_note": 680, 
+            "melodic_structure": "TESLIM_1", 
+            "slug": "TESLIM"
+        }
+    ], 
+    "name": {}
+}

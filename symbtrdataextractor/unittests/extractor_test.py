@@ -7,25 +7,6 @@ from symbtrdataextractor.reader.Mu2Reader import Mu2Reader
 _curr_folder = os.path.dirname(os.path.abspath(__file__))
 
 
-def test_free_usul():
-    """
-    Tests the result of a score with free (serbest) usul
-    """
-    scorename = 'saba--miraciye--serbest--pes_heman--nayi_osman_dede'
-
-    _basic_txt_extractor(scorename)
-
-
-def test_with_vocal_section_starting_mid_measure():
-    """
-    Tests the result with the score of a vocal composition in which some of
-    the lyrical lines start in middle of the measure
-    """
-    scorename = 'hicaz_humayun--beste--hafif--olmada_diller--abdulhalim_aga'
-
-    assert _basic_txt_extractor(scorename)
-
-
 def _basic_txt_extractor(scorename):
     txt_filename = os.path.join(_curr_folder, 'data', scorename + '.txt')
 
@@ -46,7 +27,44 @@ def _basic_txt_extractor(scorename):
     assert is_data_valid, "The data is not valid (or the validations failed.)"
 
 
-def test_full_input():
+def test_with_instrumental():
+    """
+    Tests the result of a score with free (serbest) usul
+    """
+    scorename = 'ussak--sazsemaisi--aksaksemai----neyzen_aziz_dede'
+
+    _basic_txt_extractor(scorename)
+
+
+def test_with_free_usul():
+    """
+    Tests the result of a score with free (serbest) usul
+    """
+    scorename = 'saba--miraciye--serbest--pes_heman--nayi_osman_dede'
+
+    _basic_txt_extractor(scorename)
+
+
+def test_with_phrase_annotation():
+    """
+    Tests the result of a score with free (serbest) usul
+    """
+    scorename = 'huzzam--sarki--curcuna--guzel_gun_gormedi--haci_arif_bey'
+
+    _basic_txt_extractor(scorename)
+
+
+def test_with_vocal_section_starting_mid_measure():
+    """
+    Tests the result with the score of a vocal composition in which some of
+    the lyrical lines start in middle of the measure
+    """
+    scorename = 'hicaz_humayun--beste--hafif--olmada_diller--abdulhalim_aga'
+
+    _basic_txt_extractor(scorename)
+
+
+def test_with_full_input():
     """
     Tests the result with complete information available, i.e. mbid, phrase
     annotation and user provided segmentation
