@@ -23,7 +23,8 @@ def _basic_txt_extractor(scorename):
     score_data_file = os.path.join(_curr_folder, 'data', scorename + '.json')
     saved_data = json.load(open(score_data_file))
 
-    assert saved_data == txt_data, "The result is different"
+    assert saved_data == txt_data, u"{0:s}: the result is different".format(
+        scorename)
     assert is_data_valid, "The data is not valid (or the validations failed.)"
 
 
@@ -103,5 +104,6 @@ def test_with_full_input():
     score_data_file = os.path.join(_curr_folder, 'data', scorename + '.json')
     saved_data = json.load(open(score_data_file))
 
-    assert saved_data == data, "The result is different"
+    assert saved_data == data, u"{0:s}: the result is different".format(
+        scorename)
     assert is_valid, "The data is not valid (or the validations failed.)"
