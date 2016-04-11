@@ -4,4 +4,4 @@ git+https://github.com/sertansenturk/makammusicbrainz.git@v1.2.2#egg=makammusicb
 
 python-Levenshtein==0.12.0
 networkx==1.11
-numpy<1.11.0
+numpy<=1.11.0
