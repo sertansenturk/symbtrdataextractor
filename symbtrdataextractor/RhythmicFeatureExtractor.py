@@ -44,7 +44,7 @@ class RhythmicFeatureExtractor(object):
                 if score['lyrics'][ub] == var['mu2_name']:
                     return usul_key
 
-        assert False, 'the usul key is missing in usul_dict'
+        assert False, u'{0:s} is missing in usul_dict'.format(ub)
 
     @classmethod
     def compute_tempo_from_next_note(cls, score, usul_boundary, usul):
