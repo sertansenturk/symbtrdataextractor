@@ -7,8 +7,9 @@ from symbtrdataextractor.reader.Mu2Reader import Mu2Reader
 _curr_folder = os.path.dirname(os.path.abspath(__file__))
 
 
-def _basic_txt_extractor(scorename):
-    txt_filename = os.path.join(_curr_folder, 'data', scorename + '.txt')
+def _basic_txt_extractor(score_name, use_name=True):
+    txt_filename = os.path.join(_curr_folder, 'data', score_name + '.txt')
+    symbtr_name = score_name if use_name is True else None
 
     # initialize the extractor
     extractor = SymbTrDataExtractor(
@@ -17,24 +18,33 @@ def _basic_txt_extractor(scorename):
 
     # extract txt_data
     txt_data, is_data_valid = extractor.extract(txt_filename,
-                                                symbtr_name=scorename)
+                                                symbtr_name=symbtr_name)
 
     # compare with a previously saved result
-    score_data_file = os.path.join(_curr_folder, 'data', scorename + '.json')
+    score_data_file = os.path.join(_curr_folder, 'data', score_name + '.json')
     saved_data = json.load(open(score_data_file))
 
     assert saved_data == txt_data, u"{0:s}: the result is different".format(
-        scorename)
+        score_name)
     assert is_data_valid, "The data is not valid (or the validations failed.)"
 
 
 def test_with_instrumental():
     """
-    Tests the result of a score with free (serbest) usul
+    Tests the result of a instrumental score
     """
     scorename = 'ussak--sazsemaisi--aksaksemai----neyzen_aziz_dede'
 
     _basic_txt_extractor(scorename)
+
+
+def test_without_name():
+    """
+    Tests the result of a score without the symbtr_name input given
+    """
+    scorename = 'ussak--sazsemaisi--aksaksemai----neyzen_aziz_dede'
+
+    _basic_txt_extractor(scorename, use_name=False)
 
 
 def test_with_free_usul():
@@ -48,7 +58,7 @@ def test_with_free_usul():
 
 def test_with_phrase_annotation():
     """
-    Tests the result of a score with free (serbest) usul
+    Tests the result of a score with phrase_annotations
     """
     scorename = 'huzzam--sarki--curcuna--guzel_gun_gormedi--haci_arif_bey'
 
