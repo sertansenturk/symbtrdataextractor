@@ -14,8 +14,8 @@ setup(name='symbtrdataextractor',
       packages=find_packages(),
       include_package_data=True,
       install_requires=[
-          "python-Levenshtein",
-          "networkx",
-          "numpy"
+          "python-Levenshtein==0.12.0",
+          "networkx==1.11",
+          "numpy==1.11.0"
       ],
       )
