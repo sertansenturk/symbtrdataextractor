@@ -190,12 +190,21 @@ class SegmentExtractor(object):
 
     def _crop_consec_bounds(self, bounds, first_bound_idx):
         if self.crop_consecutive_bounds:
-            for i in reversed(range(0, len(bounds) - 1)):
+            # find the boundary indices to pop. Don't pop them immediately,
+            # as there can be more than two consecutive boundaries and
+            # premature pop will leave some untouched
+            del_idx = []
+            next_to_start_idx = [first_bound_idx + 1]
+            for i in range(0, len(bounds) - 1):
                 if bounds[i + 1] - bounds[i] == 1:
-                    if bounds[i] == first_bound_idx:
-                        # if there are two consecutive bounds in the start,
-                        # pop the second
-                        bounds.pop(i + 1)
+                    if bounds[i + 1] - 1 in next_to_start_idx:
+                        # if there are consecutive bounds in the start,
+                        # pop all except the first bound
+                        del_idx.append(i + 1)
+                        next_to_start_idx.append(i + 1)
                     else:
                         # if there are two consecutive bounds, pop the first
-                        bounds.pop(i)
+                        del_idx.append(i)
+
+            for index in sorted(del_idx, reverse=True):
+                del bounds[index]
