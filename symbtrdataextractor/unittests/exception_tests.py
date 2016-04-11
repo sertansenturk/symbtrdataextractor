@@ -1,5 +1,6 @@
 from symbtrdataextractor.GraphOperations import GraphOperations
 
+
 def test_metric_exception():
     s1 = [0, 1, 2]
     s2 = [1, 2, 3]
