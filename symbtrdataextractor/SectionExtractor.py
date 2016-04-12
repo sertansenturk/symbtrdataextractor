@@ -96,6 +96,7 @@ class SectionExtractor(object):
                 sections.append({'name': u"VOCAL_SECTION",
                                  'slug': u"VOCAL_SECTION", 'start_note': [],
                                  'end_note': i, 'lyrics': ''})
+
         return sections
 
     def _locate_section_boundaries(self, sections, score, measure_start_idx):
@@ -211,8 +212,10 @@ class SectionExtractor(object):
     @staticmethod
     def _sort_sections(sections):
         # one boundary is enough since they do not overlap
-        sec_bound_idx = [s['start_note'] if s['start_note'] else s['end_note']
-                         for s in sections]
+        # NOTE: If there is a start in 0th index "if 0" will yield False.
+        # For this reason we if check if the start note is an empty list or not
+        sec_bound_idx = [s['start_note'] if s['start_note'] != []
+                         else s['end_note'] for s in sections]
 
         # sort the sections
         return GraphOperations.sort_by_idx(sections, sec_bound_idx)
