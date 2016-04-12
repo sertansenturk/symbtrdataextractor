@@ -1,34 +1,4 @@
 class SymbTrDataMerger(object):
-    @staticmethod
-    def _dictmerge(*data_dicts):
-        """
-        Given any number of dicts, shallow copy and merge into a new dict,
-        precedence goes to key value pairs in latter dicts.
-
-        Parameters
-        ----------
-        *data_dicts : *dict
-            Dictionaries of variable number to merge
-
-        Returns
-        ----------
-        dict
-            Merged dictionaries
-        """
-        result = {}
-        for dictionary in data_dicts:
-            dict_cp = dictionary.copy()
-            for key, val in dict_cp.iteritems():
-                if key not in result.keys():
-                    result[key] = val
-                elif not isinstance(result[key], dict):
-                    SymbTrDataMerger._chk_dict_key_override(key, result, val)
-                else:
-                    result[key] = SymbTrDataMerger._dictmerge(
-                        result[key], val)
-
-        return result
-
     @classmethod
     def merge(cls, data1, data2, verbose=True):
         """
@@ -62,6 +32,35 @@ class SymbTrDataMerger(object):
             data2_dict.pop('title')
 
         return cls._dictmerge(data1_dict, data2_dict)
+
+    @classmethod
+    def _dictmerge(cls, *data_dicts):
+        """
+        Given any number of dicts, shallow copy and merge into a new dict,
+        precedence goes to key value pairs in latter dicts.
+
+        Parameters
+        ----------
+        *data_dicts : *dict
+            Dictionaries of variable number to merge
+
+        Returns
+        ----------
+        dict
+            Merged dictionaries
+        """
+        result = {}
+        for dictionary in data_dicts:
+            dict_cp = dictionary.copy()
+            for key, val in dict_cp.iteritems():
+                if key not in result.keys():
+                    result[key] = val
+                elif not isinstance(result[key], dict):
+                    cls._chk_dict_key_override(key, result, val)
+                else:
+                    result[key] = cls._dictmerge(result[key], val)
+
+        return result
 
     @staticmethod
     def _chk_dict_key_override(key, result, val):
