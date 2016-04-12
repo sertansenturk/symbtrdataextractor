@@ -17,11 +17,11 @@ class GraphOperations(object):
         except ZeroDivisionError:  # both sections are instrumental
             return 0
 
-    @staticmethod
-    def get_dist_matrix(stream1, stream2=None, metric='norm_levenshtein'):
-        if metric not in GraphOperations._metrics:
+    @classmethod
+    def get_dist_matrix(cls, stream1, stream2=None, metric='norm_levenshtein'):
+        if metric not in cls._metrics:
             raise ValueError("The distance metric can be: {0!s}".
-                             format(', '.join(GraphOperations._metrics)))
+                             format(', '.join(cls._metrics)))
         dist_metric = getattr(GraphOperations, metric)
 
         if stream2 is None:  # return self distance matrix
