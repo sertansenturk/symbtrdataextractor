@@ -1,3 +1,8 @@
+#### symbtrmetadataextractor 2.0.0
+- Fixed a bug in section sorting  when there is a start note in the 0th index ([58f3bd4](https://github.com/sertansenturk/symbtrdataextractor/commit/58f3bd413b548c11a7144a603afa42bad654a347))
+- Finalized code quality improvements
+* Tested the extractor on the latest [SymbTr commit](https://github.com/MTG/SymbTr/commit/37bfb44fdf6fc3eb95acfe3ef484caefb4627f94)
+
 #### symbtrmetadataextractor 2.0.0-alpha.6
 - Froze requirements
 
