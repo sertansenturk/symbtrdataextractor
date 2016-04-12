@@ -35,8 +35,8 @@ class Mu2Reader(SymbTrReader):
 
         return NotImplemented
 
-    @staticmethod
-    def read_header(score_file, symbtr_name=None):
+    @classmethod
+    def read_header(cls, score_file, symbtr_name=None):
         """
         Reads the metadata in the header of the SymbTr-mu2 scores.
 
@@ -83,7 +83,7 @@ class Mu2Reader(SymbTrReader):
                                       'mertebe': int(row[3]),
                                       'number_of_pulses': int(row[2])}
                 elif code == 52:
-                    is_tempo_unit_valid = Mu2Reader._read_tempo_row(
+                    is_tempo_unit_valid = cls._read_tempo_row(
                         row, symbtr_name, header, is_tempo_unit_valid)
                 elif code == 56:
                     header['usul']['subdivision'] = {'mertebe': int(row[3]),
