@@ -75,9 +75,10 @@ class MBMetadata(object):
                     # musicbrainz attributes
                     is_attribute_valid = False
                     if score_attrib['mb_attribute']:
-                        warn_str = u'{0:s}, {1:s}: The MusicBrainz attribute ' \
-                                u'does not match.'.\
-                            format(scorename, score_attrib['mb_attribute'])
+                        warn_str = u'{0:s}, {1:s}: The MusicBrainz ' \
+                                   u'attribute does not match.' \
+                                   u''.format(scorename,
+                                              score_attrib['mb_attribute'])
 
                         warnings.warn(warn_str.encode('utf-8'))
                     else:
