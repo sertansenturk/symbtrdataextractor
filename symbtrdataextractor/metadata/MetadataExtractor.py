@@ -47,8 +47,7 @@ class MetadataExtractor(object):
         is_attr_meta_valid = self.validate_makam_form_usul(data, scorename)
 
         # get the tonic
-        makam = MetadataExtractor._get_attr(data['makam']['symbtr_slug'],
-                                            'makam')
+        makam = self._get_attr(data['makam']['symbtr_slug'], 'makam')
         data['tonic'] = makam['karar_symbol']
 
         return data, is_attr_meta_valid
@@ -59,11 +58,11 @@ class MetadataExtractor(object):
         data[attr]['attribute_key'] = MetadataExtractor. \
             _get_attribute_key(data[attr]['symbtr_slug'], attr)
 
-    @staticmethod
-    def validate_makam_form_usul(data, scorename):
+    @classmethod
+    def validate_makam_form_usul(cls, data, scorename):
         is_valid_list = []
         for attr in ['makam', 'form', 'usul']:
-            is_valid_list.append(MetadataExtractor._validate_attributes(
+            is_valid_list.append(cls._validate_attributes(
                 data, scorename, attr))
 
         return all(is_valid_list)
@@ -75,14 +74,14 @@ class MetadataExtractor(object):
             if attr_val['symbtr_slug'] == attr_str:
                 return attr_key
 
-    @staticmethod
-    def _validate_attributes(data, scorename, attrib_name):
+    @classmethod
+    def _validate_attributes(cls, data, scorename, attrib_name):
         score_attrib = data[attrib_name]
 
-        attrib_dict = MetadataExtractor._get_attr(score_attrib['symbtr_slug'],
-                                                  attrib_name)
+        attrib_dict = cls._get_attr(score_attrib['symbtr_slug'],
+                                    attrib_name)
 
-        slug_valid = MetadataExtractor._validate_slug(
+        slug_valid = cls._validate_slug(
             attrib_dict, score_attrib, scorename)
 
         mu2_valid = Mu2Metadata.validate_mu2_attribute(
@@ -114,8 +113,8 @@ class MetadataExtractor(object):
 
         return json.load(open(attrfile, 'r'))
 
-    @staticmethod
-    def validate_key_signature(key_signature, makam_slug, symbtr_name):
+    @classmethod
+    def validate_key_signature(cls, key_signature, makam_slug, symbtr_name):
         attr_dict = MetadataExtractor.get_attribute_dict('makam')
         key_sig_makam = attr_dict[makam_slug]['key_signature']
 
@@ -126,7 +125,7 @@ class MetadataExtractor(object):
         # due to AEU theory and practice mismatch
         for k1, k2 in zip(key_signature, key_sig_makam):
             is_key_sig_valid = (is_key_sig_valid and
-                                MetadataExtractor._compare_accidentals(k1, k2))
+                                cls._compare_accidentals(k1, k2))
 
         if not is_key_sig_valid:
             warnings.warn(u'{0!s}: Key signature is different! {1!s} -> {2!s}'.
