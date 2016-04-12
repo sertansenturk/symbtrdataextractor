@@ -82,8 +82,8 @@ class TxtReader(SymbTrReader):
 
         return score, is_score_valid
 
-    @staticmethod
-    def _validate(score, score_name):
+    @classmethod
+    def _validate(cls, score, score_name):
         """
         Validation method for the SymbTr-txt score
 
@@ -99,7 +99,7 @@ class TxtReader(SymbTrReader):
         bool
             True if the read SymbTr-txt score is valid, False otherwise
         """
-        start_usul_row = TxtReader._starts_with_usul_row(score, score_name)
+        start_usul_row = cls._starts_with_usul_row(score, score_name)
 
         is_rest_valid = True
         is_duration_valid = True
@@ -107,12 +107,12 @@ class TxtReader(SymbTrReader):
         jump_ii = 0
         for ii in range(0, len(score['index'])):
             # note index
-            is_index_valid, jump_ii = TxtReader._validate_index_jump(
+            is_index_valid, jump_ii = cls._validate_index_jump(
                 score['index'][ii], jump_ii, is_index_valid, score_name)
 
             if score['duration'][ii] > 0:  # note or rest
-                if TxtReader._is_rest(score, ii):  # check rest
-                    is_rest_valid = TxtReader._validate_rest(
+                if cls._is_rest(score, ii):  # check rest
+                    is_rest_valid = cls._validate_rest(
                         score, ii, is_rest_valid, score_name)
 
         # !! BELOW IS COMMENTED FOR CHECKING NOTE DURATIONS IN   !!
