@@ -52,11 +52,11 @@ class MetadataExtractor(object):
 
         return data, is_attr_meta_valid
 
-    @staticmethod
-    def add_attribute_slug(data, slugs, attr):
+    @classmethod
+    def add_attribute_slug(cls, data, slugs, attr):
         data[attr]['symbtr_slug'] = slugs[attr]
-        data[attr]['attribute_key'] = MetadataExtractor. \
-            _get_attribute_key(data[attr]['symbtr_slug'], attr)
+        data[attr]['attribute_key'] = cls._get_attribute_key(
+            data[attr]['symbtr_slug'], attr)
 
     @classmethod
     def validate_makam_form_usul(cls, data, scorename):
