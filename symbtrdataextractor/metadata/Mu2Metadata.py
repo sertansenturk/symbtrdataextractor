@@ -2,13 +2,13 @@ import warnings
 
 
 class Mu2Metadata(object):
-    @staticmethod
-    def validate_mu2_attribute(score_attrib, attrib_dict, scorename):
+    @classmethod
+    def validate_mu2_attribute(cls, score_attrib, attrib_dict, scorename):
 
         is_attr_valid = True
         if 'mu2_name' in score_attrib.keys():  # work
             try:  # usul
-                mu2_name, is_attr_valid = Mu2Metadata._validate_mu2_usul(
+                mu2_name, is_attr_valid = cls._validate_mu2_usul(
                     score_attrib, attrib_dict, scorename)
 
                 if not mu2_name:  # no matching variant
@@ -18,7 +18,7 @@ class Mu2Metadata(object):
                                                    score_attrib['mu2_name']))
 
             except KeyError:  # makam, form
-                is_attr_valid = Mu2Metadata._validate_mu2_makam_form(
+                is_attr_valid = cls._validate_mu2_makam_form(
                     score_attrib, attrib_dict, scorename)
 
         return is_attr_valid
