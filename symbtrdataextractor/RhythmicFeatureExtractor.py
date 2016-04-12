@@ -1,4 +1,5 @@
 from symbtrdataextractor.metadata.MetadataExtractor import MetadataExtractor
+import warnings
 
 
 class RhythmicFeatureExtractor(object):
@@ -44,7 +45,10 @@ class RhythmicFeatureExtractor(object):
                 if score['lyrics'][ub] == var['mu2_name']:
                     return usul_key
 
-        assert False, u'{0:s} is missing in usul_dict'.format(ub)
+        # Keep it as a warning, not assertion, so we can also process faulty
+        # scores
+        warnings.warn(u'{0:s} is missing in usul_dict'.format(ub))
+        return None
 
     @classmethod
     def compute_tempo_from_next_note(cls, score, usul_boundary, usul):
