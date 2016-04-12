@@ -82,7 +82,7 @@ class StructureLabeler(object):
                                                 metric='norm_levenshtein')
         cliques = GraphOperations.get_cliques(dists, self.melody_sim_thres)
 
-        melody_labels = StructureLabeler._semiotize(cliques)
+        melody_labels = self._semiotize(cliques)
 
         # label the instrumental structures, if present
         # all_labels = [l for sub_list in self.get_symbtr_labels().values()
@@ -159,8 +159,8 @@ class StructureLabeler(object):
             assert all(strm == cl for cl in chk_strm), \
                 'Mismatch in {0!s} label: {1!s}'.format(name, lbl)
 
-    @staticmethod
-    def _semiotize(cliques):
+    @classmethod
+    def _semiotize(cls, cliques):
         # Here we follow the annotation conventions explained in:
         #
         # Frederic Bimbot, Emmanuel Deruty, Gabriel Sargent, Emmanuel Vincent.
@@ -179,12 +179,12 @@ class StructureLabeler(object):
         mix_clq_it = dict()  # initialize the mixture clique indices
 
         # similar cliques give us the base structure
-        basenames = StructureLabeler._get_basenames(cliques['similar'])
+        basenames = cls._get_basenames(cliques['similar'])
 
         for ec in cliques['exact']:
             # find the similar cliques of which the current exact clique is
             # a subset of
-            sim_clique_idx = StructureLabeler._get_related_similar_clique_idx(
+            sim_clique_idx = cls._get_related_similar_clique_idx(
                 cliques, ec)
 
             if len(sim_clique_idx) == 1:  # belongs to one similar clique
@@ -193,7 +193,7 @@ class StructureLabeler(object):
                                  str(sim_clq_it[sim_clique_idx[0]]))
                 sim_clq_it[sim_clique_idx[0]] += 1
             else:  # belongs to more than one similar clique
-                StructureLabeler._label_mixture_clique(
+                cls._label_mixture_clique(
                     ec, labels, sim_clique_idx, mix_clq_it, basenames)
 
         return labels
