@@ -38,16 +38,18 @@ class RhythmicFeatureExtractor(object):
         return rhythmic_structure
 
     @staticmethod
-    def get_usul_symbtr_slug(score, ub, usul_dict):
+    def get_usul_symbtr_slug(score, usul_bound, usul_dict):
         # search the usul slug
         for usul_key, usul in usul_dict.iteritems():
             for var in usul['variants']:
-                if score['lyrics'][ub] == var['mu2_name']:
+                if score['lyrics'][usul_bound] == var['mu2_name']:
                     return usul_key
 
         # Keep it as a warning, not assertion, so we can also process faulty
         # scores
-        warnings.warn(u'{0:s} is missing in usul_dict'.format(ub))
+        warnstr = u'{0:s} in location {1:d} is missing in usul_dict'.format(
+            score['lyrics'][usul_bound], usul_bound + 1)
+        warnings.warn(warnstr.encode('utf-8'))
         return None
 
     @classmethod

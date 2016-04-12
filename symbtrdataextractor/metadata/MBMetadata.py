@@ -75,11 +75,11 @@ class MBMetadata(object):
                     # musicbrainz attributes
                     is_attribute_valid = False
                     if score_attrib['mb_attribute']:
-                        w_str = u'{0:s}, {1:s}: The MusicBrainz attribute ' \
+                        warn_str = u'{0:s}, {1:s}: The MusicBrainz attribute ' \
                                 u'does not match.'.\
                             format(scorename, score_attrib['mb_attribute'])
 
-                        warnings.warn(w_str)
+                        warnings.warn(warn_str.encode('utf-8'))
                     else:
                         warnings.warn(u'{0:s}: The MusicBrainz attribute does'
                                       u' not exist.'.format(scorename))
@@ -91,7 +91,9 @@ class MBMetadata(object):
         has_mb_tag = 'mb_tag' in score_attrib.keys()
         if has_mb_tag and score_attrib['mb_tag'] not in attrib_dict['mb_tag']:
             is_attribute_valid = False
-            warnings.warn(u'{0!s}, {1!s}: The MusicBrainz tag does not '
-                          u'match.'.format(scorename,
-                                           score_attrib['mb_tag']))
+
+            warn_str = u'{0!s}, {1!s}: The MusicBrainz tag does not match.'.\
+                format(scorename, score_attrib['mb_tag'])
+
+            warnings.warn(warn_str.encode('utf-8'))
         return is_attribute_valid

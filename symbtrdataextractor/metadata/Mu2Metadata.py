@@ -13,9 +13,10 @@ class Mu2Metadata(object):
 
                 if not mu2_name:  # no matching variant
                     is_attr_valid = False
-                    warnings.warn(u'{0!s}, {1!s}: The Mu2 attribute does not '
-                                  u'match.'.format(scorename,
-                                                   score_attrib['mu2_name']))
+                    warn_str = u'{0!s}, {1!s}: The Mu2 attribute does not ' \
+                               u'match.'.format(scorename,
+                                                score_attrib['mu2_name'])
+                    warnings.warn(warn_str.encode('utf-8'))
 
             except KeyError:  # makam, form
                 is_attr_valid = cls._validate_mu2_makam_form(
@@ -27,8 +28,10 @@ class Mu2Metadata(object):
     def _validate_mu2_makam_form(score_attrib, attrib_dict, scorename):
         mu2_name = attrib_dict['mu2_name']
         if not score_attrib['mu2_name'] == mu2_name:
-            warnings.warn(u'{0!s}, {1!s}: The Mu2 attribute does not match.'.
-                          format(scorename, score_attrib['mu2_name']))
+            warn_str = u'{0!s}, {1!s}: The Mu2 attribute does not match.'.\
+                format(scorename, score_attrib['mu2_name'])
+
+            warnings.warn(warn_str.encode('utf-8'))
             return False
 
         return True
@@ -44,11 +47,11 @@ class Mu2Metadata(object):
                     # found variant
                     if not uv[v_key] == score_attrib[v_key]:
                         is_usul_valid = False
-
-                        warnings.warn(
-                            u'{0:s}, {1:s}: The {2:s} of the usul in the '
-                            u'score does not match.'
-                            .format(scorename, uv['mu2_name'], v_key))
+                        warn_str = u'{0:s}, {1:s}: The {2:s} of the usul in ' \
+                                   u'the score does not ' \
+                                   u'match.'.format(scorename,
+                                                    uv['mu2_name'], v_key)
+                        warnings.warn(warn_str.encode('utf-8'))
 
                     return is_usul_valid, mu2_name
 
