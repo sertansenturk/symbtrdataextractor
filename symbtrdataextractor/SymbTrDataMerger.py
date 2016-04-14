@@ -1,3 +1,6 @@
+import warnings
+
+
 class SymbTrDataMerger(object):
     @classmethod
     def merge(cls, data1, data2, verbose=True):
@@ -28,7 +31,9 @@ class SymbTrDataMerger(object):
             data2_dict['recording'] = data2_dict.pop('title')
         else:
             if verbose:
-                print('   Unknown title target.')
+                warnings.warn("There is no information about whether the "
+                              "score is related to a composition or a "
+                              "performance. The title key is skipped.")
             data2_dict.pop('title')
 
         return cls._dictmerge(data1_dict, data2_dict)
@@ -66,5 +71,5 @@ class SymbTrDataMerger(object):
     def _chk_dict_key_override(key, result, val):
         if not result[key] == val:
             # overwrite
-            print('   ' + key + ' already exists! Overwriting...')
+            warnings.warn(u'{0:s} already exists! Overwriting...'.format(key))
             result[key] = val
