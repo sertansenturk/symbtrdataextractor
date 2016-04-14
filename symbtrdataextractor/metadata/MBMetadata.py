@@ -1,5 +1,5 @@
 import warnings
-from musicbrainzngs import ResponseError
+import musicbrainzngs
 from urlparse import urlparse
 from makammusicbrainz.AudioMetadata import AudioMetadata
 from makammusicbrainz.WorkMetadata import WorkMetadata
@@ -20,17 +20,18 @@ class MBMetadata(object):
     def get_recording_rels(self, value):
         self._workMetadata.get_recording_rels = value
 
-    def get_metadata_from_musicbrainz(self, mbid):
+    def crawl_musicbrainz(self, mbid):
         if mbid is None:  # empty mbid
             return {'makam': {}, 'form': {}, 'usul': {}, 'name': {},
                     'composer': {}, 'lyricist': {}}
-        else:
+
+        try:  # attempt crawling
             mbid = self._parse_mbid(mbid)
             try:  # assume mbid is a work
                 data = self._workMetadata.from_musicbrainz(mbid)
                 data['work'] = {'title': data.pop("title", None),
                                 'mbid': data.pop('mbid', None)}
-            except ResponseError:  # assume mbid is a recording
+            except musicbrainzngs.ResponseError:  # assume mbid is a recording
                 data = self._audioMetadata.from_musicbrainz(mbid)
                 data['recording'] = {'title': data.pop("title", None),
                                      'mbid': data.pop('mbid', None)}
@@ -39,8 +40,12 @@ class MBMetadata(object):
                                   u"get_recording_rels boolean.")
 
             self._add_mb_attributes(data)
-
             return data
+        except musicbrainzngs.NetworkError:
+            warnings.warn("Musicbrainz is not available, skipping metadata "
+                          "crawling...")
+            return {'makam': {}, 'form': {}, 'usul': {}, 'name': {},
+                    'composer': {}, 'lyricist': {}}
 
     @staticmethod
     def _add_mb_attributes(data):

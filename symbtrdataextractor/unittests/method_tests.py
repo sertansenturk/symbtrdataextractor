@@ -15,7 +15,7 @@ def test_musicbrainz_recording_request():
     save_data = json.load(open(saved_data_file, 'r'))
 
     for r in recs:
-        r_data = mbm.get_metadata_from_musicbrainz(r)
+        r_data = mbm.crawl_musicbrainz(r)
 
         assert r_data == save_data, u'Crawling {0:s} yields a different ' \
                                     u'result '.format(r)

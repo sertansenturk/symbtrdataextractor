@@ -27,7 +27,7 @@ class MetadataExtractor(object):
                 'name': splitted[3], 'composer': splitted[4]}
 
     def get_metadata(self, scorename, mbid=None):
-        data = self._MBMetadata.get_metadata_from_musicbrainz(mbid)
+        data = self._MBMetadata.crawl_musicbrainz(mbid)
 
         data['symbtr'] = scorename
 
@@ -54,9 +54,12 @@ class MetadataExtractor(object):
 
     @classmethod
     def add_attribute_slug(cls, data, slugs, attr):
-        data[attr]['symbtr_slug'] = slugs[attr]
-        data[attr]['attribute_key'] = cls._get_attribute_key(
-            data[attr]['symbtr_slug'], attr)
+        if attr in slugs.keys():
+            if attr not in data.keys():
+                data[attr] = {}
+            data[attr]['symbtr_slug'] = slugs[attr]
+            data[attr]['attribute_key'] = cls._get_attribute_key(
+                data[attr]['symbtr_slug'], attr)
 
     @classmethod
     def validate_makam_form_usul(cls, data, scorename):
