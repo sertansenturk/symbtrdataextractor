@@ -31,8 +31,7 @@ class TxtReader(SymbTrReader):
             True if the read SymbTr-txt score is valid, False otherwise
         """
         if symbtr_name is None:
-            symbtr_name = TxtReader.get_symbtr_name_from_filepath(
-                score_file, symbtr_name)
+            symbtr_name = TxtReader.get_symbtr_name_from_filepath(score_file)
 
         with open(score_file, "rb") as f:
             reader = csv.reader(f, delimiter='\t')

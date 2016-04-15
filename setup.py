@@ -4,7 +4,7 @@ from setuptools import find_packages
 
 
 setup(name='symbtrdataextractor',
-      version='2.1.0.dev',
+      version='2.0.0',
       author='Sertan Senturk',
       author_email='contact AT sertansenturk DOT com',
       license='agpl 3.0',

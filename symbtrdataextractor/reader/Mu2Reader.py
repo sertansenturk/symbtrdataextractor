@@ -30,8 +30,7 @@ class Mu2Reader(SymbTrReader):
         NotImplemented
         """
         if symbtr_name is None:
-            symbtr_name = Mu2Reader.get_symbtr_name_from_filepath(score_file,
-                                                                  symbtr_name)
+            symbtr_name = Mu2Reader.get_symbtr_name_from_filepath(score_file)
 
         return NotImplemented
 
@@ -58,8 +57,7 @@ class Mu2Reader(SymbTrReader):
             False otherwise
         """
         if symbtr_name is None:
-            symbtr_name = Mu2Reader.get_symbtr_name_from_filepath(score_file,
-                                                                  symbtr_name)
+            symbtr_name = Mu2Reader.get_symbtr_name_from_filepath(score_file)
 
         makam_slug = symbtr_name.split('--')[0]
 
