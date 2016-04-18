@@ -27,11 +27,11 @@ Usage
 ##### Extracting (meta)data from the txt-score:
 
 ```python
-from symbtrdataextractor.SymbTrDataExtractor import SymbTrDataExtractor
+from symbtrdataextractor.dataextractor import DataExtractor
 
-extractor = SymbTrDataExtractor(melody_sim_thres=0.75, lyrics_sim_thres=0.75,
-                                extract_all_labels=False, crop_consec_bounds=True,
-                                get_recording_rels=False, print_warnings=True)
+extractor = DataExtractor(melody_sim_thres=0.75, lyrics_sim_thres=0.75,
+                          extract_all_labels=False, crop_consec_bounds=True,
+                          get_recording_rels=False, print_warnings=True)
 """
 Inputs
 ----------
@@ -81,8 +81,8 @@ convention, otherwise the semiotic labels will be wrong.
 
 ##### Extracting metadata stored in the mu2 headers:
 ```python
-from symbtrdataextractor.reader.Mu2Reader import Mu2Reader
-mu2_header, header_row, is_header_valid = Mu2Reader.read_mu2_header(
+from symbtrdataextractor.reader.mu2 import Mu2Reader
+mu2_header, header_row, is_header_valid = Mu2Reader.read(
     mu2_filename, symbtr_name=scorename)
 
 """

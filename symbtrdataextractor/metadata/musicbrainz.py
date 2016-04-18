@@ -1,11 +1,11 @@
 import warnings
 import musicbrainzngs
 from urlparse import urlparse
-from makammusicbrainz.AudioMetadata import AudioMetadata
-from makammusicbrainz.WorkMetadata import WorkMetadata
+from makammusicbrainz.audiometadata import AudioMetadata
+from makammusicbrainz.workmetadata import WorkMetadata
 
 
-class MBMetadata(object):
+class MusicBrainzMetadata(object):
     def __init__(self, get_recording_rels=False):
         self._audioMetadata = AudioMetadata(
             get_work_attributes=False, print_warnings=False)

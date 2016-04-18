@@ -1,6 +1,6 @@
 import csv
 import warnings
-from SymbTrReader import SymbTrReader
+from symbtr import SymbTrReader
 
 
 class TxtReader(SymbTrReader):

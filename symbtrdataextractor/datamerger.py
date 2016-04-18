@@ -1,7 +1,7 @@
 import warnings
 
 
-class SymbTrDataMerger(object):
+class DataMerger(object):
     @classmethod
     def merge(cls, data1, data2, verbose=True):
         """

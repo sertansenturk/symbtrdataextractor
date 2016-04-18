@@ -1,4 +1,4 @@
-from SymbTrReader import SymbTrReader
+from symbtr import SymbTrReader
 
 
 class MusicXMLReader(SymbTrReader):

@@ -1,4 +1,4 @@
-from symbtrdataextractor.metadata.MetadataExtractor import MetadataExtractor
+from .metadata.metadataextractor import MetadataExtractor
 import warnings
 
 

@@ -1,9 +1,9 @@
-from .ScoreProcessor import ScoreProcessor
-from .GraphOperations import GraphOperations
+from .scoreprocessor import ScoreProcessor
+from .graph import GraphOperations
 from copy import deepcopy
 
 
-class StructureLabeler(object):
+class SegmentLabeler(object):
     """
 
     """

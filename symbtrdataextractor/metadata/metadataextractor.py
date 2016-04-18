@@ -1,8 +1,8 @@
 import os
 import json
 import warnings
-from .Mu2Metadata import Mu2Metadata
-from .MBMetadata import MBMetadata
+from .mu2 import Mu2Metadata
+from .musicbrainz import MusicBrainzMetadata
 
 
 class MetadataExtractor(object):
@@ -10,7 +10,7 @@ class MetadataExtractor(object):
 
     """
     def __init__(self, get_recording_rels=False):
-        self._MBMetadata = MBMetadata(get_recording_rels=get_recording_rels)
+        self._MBMetadata = MusicBrainzMetadata(get_recording_rels=get_recording_rels)
 
     @property
     def get_recording_rels(self):
@@ -90,10 +90,10 @@ class MetadataExtractor(object):
         mu2_valid = Mu2Metadata.validate_mu2_attribute(
             score_attrib, attrib_dict, scorename)
 
-        mb_attr_valid = MBMetadata.validate_mb_attribute(
+        mb_attr_valid = MusicBrainzMetadata.validate_mb_attribute(
             attrib_dict, score_attrib, scorename)
 
-        mb_tag_valid = MBMetadata.validate_mb_attribute_tag(
+        mb_tag_valid = MusicBrainzMetadata.validate_mb_attribute_tag(
             attrib_dict, score_attrib, scorename)
 
         return all([slug_valid, mu2_valid, mb_attr_valid, mb_tag_valid])

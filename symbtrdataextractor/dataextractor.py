@@ -1,16 +1,16 @@
 import os
 
-from symbtrdataextractor.metadata.MetadataExtractor import MetadataExtractor
-from symbtrdataextractor.reader.TxtReader import TxtReader
-from symbtrdataextractor.reader.MusicXMLReader import MusicXMLReader
-from symbtrdataextractor.reader.Mu2Reader import Mu2Reader
-from .RhythmicFeatureExtractor import RhythmicFeatureExtractor
-from .SectionExtractor import SectionExtractor
-from .SegmentExtractor import SegmentExtractor
-from .SymbTrDataMerger import SymbTrDataMerger
+from .metadata.metadataextractor import MetadataExtractor
+from .reader.txt import TxtReader
+from .reader.musicxml import MusicXMLReader
+from .reader.mu2 import Mu2Reader
+from .rhythmicfeature import RhythmicFeatureExtractor
+from .section import SectionExtractor
+from .segment import SegmentExtractor
+from .datamerger import DataMerger
 
 
-class SymbTrDataExtractor(SymbTrDataMerger):
+class DataExtractor(DataMerger):
     """
     The class to extract the relevant information from a SymbTr score.
 

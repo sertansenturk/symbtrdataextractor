@@ -1,4 +1,4 @@
-from symbtrdataextractor.GraphOperations import GraphOperations
+from symbtrdataextractor.graph import GraphOperations
 
 
 def test_metric_exception():

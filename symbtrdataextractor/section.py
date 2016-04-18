@@ -1,9 +1,9 @@
 from math import floor
 from fileoperations.slugify_tr import slugify_tr
-from . ScoreProcessor import ScoreProcessor
-from . StructureLabeler import StructureLabeler
-from . OffsetProcessor import OffsetProcessor
-from . GraphOperations import GraphOperations
+from . scoreprocessor import ScoreProcessor
+from . segmentlabeler import SegmentLabeler
+from . offset import OffsetProcessor
+from . graph import GraphOperations
 import warnings
 
 
@@ -40,7 +40,7 @@ class SectionExtractor(object):
 
         self.offsetProcessor = OffsetProcessor(
             print_warnings=self.print_warnings)
-        self.sectionLabeler = StructureLabeler(
+        self.sectionLabeler = SegmentLabeler(
             lyrics_sim_thres=self.lyrics_sim_thres,
             melody_sim_thres=self.melody_sim_thres)
 
@@ -67,7 +67,7 @@ class SectionExtractor(object):
             sections, score, set(all_labels) - set(struct_lbl), symbtrname)
 
         # map the python indices in start_note and end_note to SymbTr index
-        StructureLabeler.python_idx_to_symbtr_idx(sections, score)
+        SegmentLabeler.python_idx_to_symbtr_idx(sections, score)
 
         return sections, all([sections_valid, is_measure_start_valid])
 

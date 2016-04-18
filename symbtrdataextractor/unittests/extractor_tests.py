@@ -1,8 +1,8 @@
 import json
 import os
 
-from symbtrdataextractor.SymbTrDataExtractor import SymbTrDataExtractor
-from symbtrdataextractor.reader.Mu2Reader import Mu2Reader
+from symbtrdataextractor.dataextractor import DataExtractor
+from symbtrdataextractor.reader.mu2 import Mu2Reader
 
 _curr_folder = os.path.dirname(os.path.abspath(__file__))
 
@@ -12,7 +12,7 @@ def _basic_txt_extractor(score_name, use_name=True):
     symbtr_name = score_name if use_name is True else None
 
     # initialize the extractor
-    extractor = SymbTrDataExtractor(
+    extractor = DataExtractor(
         extract_all_labels=False, melody_sim_thres=0.75, lyrics_sim_thres=0.75,
         get_recording_rels=False, print_warnings=True)
 
@@ -93,7 +93,7 @@ def test_with_full_input():
     mu2_filename = os.path.join(_curr_folder, 'data', scorename + '.mu2')
 
     # initialize the extractor
-    extractor = SymbTrDataExtractor(
+    extractor = DataExtractor(
         extract_all_labels=False, melody_sim_thres=0.75, lyrics_sim_thres=0.75,
         get_recording_rels=False, print_warnings=True)
 
@@ -107,7 +107,7 @@ def test_with_full_input():
         mu2_filename, symbtr_name=scorename)
 
     # merge
-    data = SymbTrDataExtractor.merge(txt_data, mu2_header)
+    data = DataExtractor.merge(txt_data, mu2_header)
     is_valid = is_data_valid and is_header_valid
 
     # compare with a previously saved result
