@@ -28,9 +28,6 @@ class DataExtractor(DataMerger):
     Currently only the SymbTr-txt scores are supported. MusicXML and mu2
     support can be added, if demanded.
     """
-    _version = "1.1"
-    _sourcetype = "txt"
-    _slug = "symbtrdataextractor"
 
     def __init__(self, lyrics_sim_thres=0.75, melody_sim_thres=0.75,
                  extract_all_labels=False, crop_consec_bounds=True,
