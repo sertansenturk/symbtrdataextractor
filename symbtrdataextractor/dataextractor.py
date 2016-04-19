@@ -63,16 +63,16 @@ class DataExtractor(DataMerger):
             and the inconsistencies in the scores will be always displayed
             (the default is True)
         """
-        self._metadataExtractor = MetadataExtractor(
+        self._metadata_extractor = MetadataExtractor(
             get_recording_rels=get_recording_rels)
 
-        self._sectionExtractor = SectionExtractor(
+        self._section_extractor = SectionExtractor(
             lyrics_sim_thres=lyrics_sim_thres,
             melody_sim_thres=melody_sim_thres,
             extract_all_labels=extract_all_labels,
             print_warnings=print_warnings)
 
-        self._segmentExtractor = SegmentExtractor(
+        self._segment_extractor = SegmentExtractor(
             lyrics_sim_thres=lyrics_sim_thres,
             melody_sim_thres=melody_sim_thres,
             crop_consecutive_bounds=crop_consec_bounds)
@@ -131,7 +131,7 @@ class DataExtractor(DataMerger):
             symbtr_name = os.path.splitext(os.path.basename(score_file))[0]
 
         # get the metadata
-        data, is_metadata_valid = self._metadataExtractor.get_metadata(
+        data, is_metadata_valid = self._metadata_extractor.get_metadata(
             symbtr_name, mbid=mbid)
 
         # get the extension to determine the SymbTr-score format
@@ -145,12 +145,12 @@ class DataExtractor(DataMerger):
                             'unit': 'second'}
         data['number_of_notes'] = len(score['duration'])
 
-        data['sections'], is_section_data_valid = self._sectionExtractor. \
+        data['sections'], is_section_data_valid = self._section_extractor. \
             from_txt_score(score, symbtr_name)
 
-        anno_phrases = self._segmentExtractor.extract_phrases(
+        anno_phrases = self._segment_extractor.extract_phrases(
             score, sections=data['sections'])
-        segments = self._segmentExtractor.extract_segments(
+        segments = self._segment_extractor.extract_segments(
             score, segment_note_bound_idx, sections=data['sections'])
 
         data['rhythmic_structure'] = \
@@ -183,7 +183,7 @@ class DataExtractor(DataMerger):
     @property
     def lyrics_sim_thres(self):
         self._assert_sim_threshold('lyrics')
-        return self._segmentExtractor.lyrics_sim_thres
+        return self._segment_extractor.lyrics_sim_thres
 
     @lyrics_sim_thres.setter
     def lyrics_sim_thres(self, value):
@@ -193,7 +193,7 @@ class DataExtractor(DataMerger):
     def melody_sim_thres(self):
         self._assert_sim_threshold('melody')
 
-        return self._segmentExtractor.melody_sim_thres
+        return self._segment_extractor.melody_sim_thres
 
     @melody_sim_thres.setter
     def melody_sim_thres(self, value):
@@ -201,16 +201,16 @@ class DataExtractor(DataMerger):
 
     def _assert_sim_threshold(self, name):
         p = name + '_sim_thres'
-        segment_sim_thres = getattr(self._segmentExtractor, p)
-        section_sim_thres = getattr(self._sectionExtractor, p)
+        segment_sim_thres = getattr(self._segment_extractor, p)
+        section_sim_thres = getattr(self._section_extractor, p)
         assert segment_sim_thres == section_sim_thres, \
             u'The {0:s} of the _segmentExtractor and _sectionExtractor ' \
             u'should have the same value'.format(p)
 
     def _set_sim_thres(self, value, name):
         self._chk_sim_thres_val(value)
-        setattr(self._segmentExtractor, name + '_sim_thres', value)
-        setattr(self._sectionExtractor, name + '_sim_thres', value)
+        setattr(self._segment_extractor, name + '_sim_thres', value)
+        setattr(self._section_extractor, name + '_sim_thres', value)
 
     @staticmethod
     def _chk_sim_thres_val(value):
@@ -220,39 +220,39 @@ class DataExtractor(DataMerger):
 
     @property
     def extract_all_labels(self):
-        return self._sectionExtractor.extract_all_labels
+        return self._section_extractor.extract_all_labels
 
     @extract_all_labels.setter
     def extract_all_labels(self, value):
         self._chk_bool(value)
-        self._sectionExtractor.extract_all_labels = value
+        self._section_extractor.extract_all_labels = value
 
     @property
     def print_warnings(self):
-        return self._sectionExtractor.print_warnings
+        return self._section_extractor.print_warnings
 
     @print_warnings.setter
     def print_warnings(self, value):
         self._chk_bool(value)
-        self._sectionExtractor.print_warnings = value
+        self._section_extractor.print_warnings = value
 
     @property
     def get_recording_rels(self):
-        return self._metadataExtractor.get_recording_rels
+        return self._metadata_extractor.get_recording_rels
 
     @get_recording_rels.setter
     def get_recording_rels(self, value):
         self._chk_bool(value)
-        self._metadataExtractor.get_recording_rels = value
+        self._metadata_extractor.get_recording_rels = value
 
     @property
     def crop_consecutive_bounds(self):
-        return self._segmentExtractor.crop_consecutive_bounds
+        return self._segment_extractor.crop_consecutive_bounds
 
     @crop_consecutive_bounds.setter
     def crop_consecutive_bounds(self, value):
         self._chk_bool(value)
-        self._segmentExtractor.crop_consecutive_bounds = value
+        self._segment_extractor.crop_consecutive_bounds = value
 
     @staticmethod
     def _chk_bool(value):

@@ -10,15 +10,16 @@ class MetadataExtractor(object):
 
     """
     def __init__(self, get_recording_rels=False):
-        self._MBMetadata = MusicBrainzMetadata(get_recording_rels=get_recording_rels)
+        self._mb_metadata = MusicBrainzMetadata(
+            get_recording_rels=get_recording_rels)
 
     @property
     def get_recording_rels(self):
-        return self._MBMetadata.get_recording_rels
+        return self._mb_metadata.get_recording_rels
 
     @get_recording_rels.setter
     def get_recording_rels(self, value):
-        self._MBMetadata.get_recording_rels = value
+        self._mb_metadata.get_recording_rels = value
 
     @staticmethod
     def get_slugs(scorename):
@@ -27,7 +28,7 @@ class MetadataExtractor(object):
                 'name': splitted[3], 'composer': splitted[4]}
 
     def get_metadata(self, scorename, mbid=None):
-        data = self._MBMetadata.crawl_musicbrainz(mbid)
+        data = self._mb_metadata.crawl_musicbrainz(mbid)
 
         data['symbtr'] = scorename
 
