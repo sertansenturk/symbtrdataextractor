@@ -590,7 +590,7 @@
         "unit": "second", 
         "value": 119.509
     }, 
-    "segmentations": [], 
+    "segments": [],
     "usul": {
         "attribute_key": "curcuna", 
         "symbtr_slug": "curcuna"

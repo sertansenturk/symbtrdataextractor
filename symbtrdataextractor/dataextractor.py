@@ -156,7 +156,7 @@ class DataExtractor(DataMerger):
         data['rhythmic_structure'] = \
             RhythmicFeatureExtractor.extract_rhythmic_structure(score)
 
-        data['segmentations'] = segments
+        data['segments'] = segments
         data['phrase_annotations'] = anno_phrases
 
         is_data_valid = all([is_metadata_valid, is_section_data_valid,
