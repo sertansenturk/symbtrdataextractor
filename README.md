@@ -20,7 +20,7 @@ Currently you can:
 
 If you are using this code for academic purposes please cite the software as:
 
-> Sertan Senturk. (2016). symbtrdataextractor: symbtrdataextractor v2.0.0-alpha.5. Zenodo. 10.5281/zenodo.48421
+> Sertan Senturk. (2016). symbtrdataextractor: symbtrdataextractor v2.0.0. Zenodo. 10.5281/zenodo.50033
 
 Usage
 ----------
