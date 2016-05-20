@@ -84,20 +84,9 @@ class SegmentLabeler(object):
 
         melody_labels = self._semiotize(cliques)
 
-        # label the instrumental structures, if present
-        # all_labels = [l for sub_list in self.get_symbtr_labels().values()
-        #              for l in sub_list]
+        # label the structures
         for i in range(0, len(melody_labels)):
-            if all(lbl not in structures[i]['name']
-                   for lbl in ['VOCAL', 'INSTRUMENTAL']):
-                # if it's a mixture clique, keep the label altogether
-                mel_str = (
-                    structures[i]['slug'] + '_' + melody_labels[i][1:]
-                    if melody_labels[i][1].isdigit()
-                    else structures[i]['slug'] + '_' + melody_labels[i])
-                structures[i]['melodic_structure'] = mel_str
-            else:
-                structures[i]['melodic_structure'] = melody_labels[i]
+            structures[i]['melodic_structure'] = melody_labels[i]
 
         # sanity check
         self._assert_labels(melodies, melody_labels, 'melody')
@@ -180,11 +169,10 @@ class SegmentLabeler(object):
 
         # similar cliques give us the base structure
         basenames = cls._get_basenames(cliques['similar'])
-
         for ec in cliques['exact']:
             # find the similar cliques of which the current exact clique is
             # a subset of
-            sim_clique_idx = cls._get_related_similar_clique_idx(
+            sim_clique_idx = cls._get_similar_clique_idx(
                 cliques, ec)
 
             if len(sim_clique_idx) == 1:  # belongs to one similar clique
@@ -221,7 +209,7 @@ class SegmentLabeler(object):
         return basenames
 
     @staticmethod
-    def _get_related_similar_clique_idx(cliques, ec):
+    def _get_similar_clique_idx(cliques, ec):
         in_cliques_idx = [i for i, x in enumerate(cliques['similar'])
                           if ec <= x]
         assert len(in_cliques_idx) > 0,\
