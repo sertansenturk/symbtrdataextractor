@@ -1,5 +1,5 @@
 from . scoreprocessor import ScoreProcessor
-from . segmentlabeler import SegmentLabeler
+from . structuralelementlabeler import StructuralElementLabeler
 
 
 class SegmentExtractor(object):
@@ -27,7 +27,7 @@ class SegmentExtractor(object):
         self.melody_sim_thres = melody_sim_thres
         self.crop_consecutive_bounds = crop_consecutive_bounds
 
-        self.segmentLabeler = SegmentLabeler(
+        self.segmentLabeler = StructuralElementLabeler(
             lyrics_sim_thres=self.lyrics_sim_thres,
             melody_sim_thres=self.melody_sim_thres)
 

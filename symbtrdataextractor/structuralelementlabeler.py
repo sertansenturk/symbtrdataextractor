@@ -3,7 +3,7 @@ from .graph import GraphOperations
 from copy import deepcopy
 
 
-class SegmentLabeler(object):
+class StructuralElementLabeler(object):
     """
 
     """
