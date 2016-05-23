@@ -51,8 +51,12 @@ class MusicBrainzMetadata(object):
     def _add_mb_attributes(data):
         # scores should have one attribute per type
         for attr in ['makam', 'form', 'usul']:
-            if attr in data:
+            try:
                 data[attr] = data[attr][0]
+            except (IndexError, KeyError):
+                warnings.warn(
+                    "Missing the {0:s} attribute in MusicBrainz".format(attr))
+                data.pop(attr, None)
 
     @staticmethod
     def _parse_mbid(mbid):
