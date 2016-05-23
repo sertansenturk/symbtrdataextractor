@@ -70,7 +70,7 @@ class StructuralElementLabeler(object):
         # semiotic labeling
         lyrics_labels = self._semiotize(cliques)
         self._apply_labels_to_lyrics_structure(
-            structures, lyrics_labels, score_fragments)
+            structures, lyrics_labels, score_fragments, dists)
 
         # sanity check
         self._assert_labels(lyrics, lyrics_labels, 'lyrics')
@@ -87,6 +87,9 @@ class StructuralElementLabeler(object):
         # label the structures
         for i in range(0, len(melody_labels)):
             structures[i]['melodic_structure'] = melody_labels[i]
+            structures[i]['melodic_similarities'] = (1 - dists[i, :]).tolist(
+
+            )[0]
 
         # sanity check
         self._assert_labels(melodies, melody_labels, 'melody')
@@ -131,7 +134,7 @@ class StructuralElementLabeler(object):
 
     @staticmethod
     def _apply_labels_to_lyrics_structure(
-            structures, lyrics_labels, score_fragments):
+            structures, lyrics_labels, score_fragments, dists):
 
         for i in range(0, len(lyrics_labels)):
             # if there's no lyrics, label instrumental
@@ -139,6 +142,8 @@ class StructuralElementLabeler(object):
                 structures[i]['lyric_structure'] = 'INSTRUMENTAL'
             else:
                 structures[i]['lyric_structure'] = lyrics_labels[i]
+
+            structures[i]['lyric_similarities'] = (1 - dists[i, :]).tolist()[0]
 
     @staticmethod
     def _assert_labels(stream, labels, name):
