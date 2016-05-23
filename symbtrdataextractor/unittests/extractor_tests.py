@@ -94,7 +94,7 @@ def test_with_full_input():
 
     # initialize the extractor
     extractor = DataExtractor(
-        extract_all_labels=False, melody_sim_thres=0.7, lyrics_sim_thres=0.7,
+        extract_all_labels=False, melody_sim_thres=0.75, lyrics_sim_thres=0.75,
         get_recording_rels=False, print_warnings=True)
 
     # extract txt_data
