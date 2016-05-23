@@ -8,7 +8,7 @@ class StructuralElementLabeler(object):
 
     """
 
-    def __init__(self, lyrics_sim_thres=0.75, melody_sim_thres=0.75):
+    def __init__(self, lyrics_sim_thres=0.7, melody_sim_thres=0.7):
         self.lyrics_sim_thres = lyrics_sim_thres
         self.melody_sim_thres = melody_sim_thres
 

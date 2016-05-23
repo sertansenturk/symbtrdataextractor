@@ -6,7 +6,7 @@ class SegmentExtractor(object):
     """
 
     """
-    def __init__(self, lyrics_sim_thres=0.75, melody_sim_thres=0.75,
+    def __init__(self, lyrics_sim_thres=0.70, melody_sim_thres=0.70,
                  crop_consecutive_bounds=True):
         """
         Class constructor

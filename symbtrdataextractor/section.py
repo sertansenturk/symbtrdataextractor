@@ -11,7 +11,7 @@ class SectionExtractor(object):
     """
 
     """
-    def __init__(self, lyrics_sim_thres=0.75, melody_sim_thres=0.75,
+    def __init__(self, lyrics_sim_thres=0.7, melody_sim_thres=0.7,
                  extract_all_labels=False, print_warnings=True):
         """
         Class constructor
