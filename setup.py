@@ -4,7 +4,7 @@ from setuptools import find_packages
 
 
 setup(name='symbtrdataextractor',
-      version='2.0.0',
+      version='2.1.0',
       author='Sertan Senturk',
       author_email='contact AT sertansenturk DOT com',
       license='agpl 3.0',
@@ -14,8 +14,8 @@ setup(name='symbtrdataextractor',
       packages=find_packages(),
       include_package_data=True,
       install_requires=[
-          "python-Levenshtein==0.12.0",
-          "networkx==1.11",
+          "python-Levenshtein>=0.12.0",
+          "networkx>=1.11",
           "numpy>=1.8.0"
       ],
       )
