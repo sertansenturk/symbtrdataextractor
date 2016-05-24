@@ -1,3 +1,8 @@
+#### symbtrmetadataextractor v2.1.0
+- Melodic organization is not replaced by the instrumental section names anymore
+- Added melodic and lyric similarity to output
+- Default similarity threshold is lowered to 0.7 from 0.75
+
 #### symbtrmetadataextractor v2.0.0
 - Fixed a bug in section sorting  when there is a start note in the 0th index ([58f3bd4](https://github.com/sertansenturk/symbtrdataextractor/commit/58f3bd413b548c11a7144a603afa42bad654a347))
 - Finalized code quality improvements
