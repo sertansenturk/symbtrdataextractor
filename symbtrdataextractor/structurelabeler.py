@@ -30,7 +30,7 @@ class StructureLabeler(object):
 
         if structures:
             # get the lyric organization
-            self.get_lyric_organization(structures, score_fragments)
+            self.get_lyrics_organization(structures, score_fragments)
 
             # get the melodic organization
             self.get_melodic_organization(structures, score_fragments)
@@ -47,7 +47,7 @@ class StructureLabeler(object):
     def _get_score_key_in_structure(s, score, name):
         return score[name][s['start_note']:s['end_note'] + 1]
 
-    def get_lyric_organization(self, structures, score_fragments):
+    def get_lyrics_organization(self, structures, score_fragments):
         # Here we only check whether the lyrics are similar to others
         # We don't check whether they are sung on the same note / with
         # the same duration, or not. As a results, two structures having
@@ -140,12 +140,12 @@ class StructureLabeler(object):
         for i in range(0, len(lyrics_labels)):
             # if there's no lyrics, label instrumental
             if not score_fragments[i]['lyrics']:
-                structures[i]['lyric_structure'] = 'INSTRUMENTAL'
+                structures[i]['lyrics_structure'] = 'INSTRUMENTAL'
             else:
-                structures[i]['lyric_structure'] = lyrics_labels[i]
+                structures[i]['lyrics_structure'] = lyrics_labels[i]
 
             if self.save_structure_sim:
-                structures[i]['lyric_similarities'] = \
+                structures[i]['lyrics_similarities'] = \
                     (1 - dists[i, :]).tolist()[0]
 
     @staticmethod

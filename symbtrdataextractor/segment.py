@@ -104,7 +104,7 @@ class SegmentExtractor(object):
                     segment_sections.append(
                         {'section_idx': idx,
                          'melodic_structure': sec['melodic_structure'],
-                         'lyric_structure': sec['lyric_structure']})
+                         'lyrics_structure': sec['lyrics_structure']})
 
             name, slug = self._name_segment(lyrics, segment_str)
 
