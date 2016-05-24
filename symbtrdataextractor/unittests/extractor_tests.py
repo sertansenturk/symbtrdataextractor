@@ -14,7 +14,7 @@ def _basic_txt_extractor(score_name, use_name=True):
     # initialize the extractor
     extractor = DataExtractor(
         extract_all_labels=False, melody_sim_thres=0.7, lyrics_sim_thres=0.7,
-        get_recording_rels=False, print_warnings=True)
+        save_structure_sim=True, get_recording_rels=False, print_warnings=True)
 
     # extract txt_data
     txt_data, is_data_valid = extractor.extract(txt_filename,
@@ -95,7 +95,7 @@ def test_with_full_input():
     # initialize the extractor
     extractor = DataExtractor(
         extract_all_labels=False, melody_sim_thres=0.75, lyrics_sim_thres=0.75,
-        get_recording_rels=False, print_warnings=True)
+        save_structure_sim=True, get_recording_rels=False, print_warnings=True)
 
     # extract txt_data
     txt_data, is_data_valid = extractor.extract(
