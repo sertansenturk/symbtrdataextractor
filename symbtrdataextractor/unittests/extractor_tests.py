@@ -68,7 +68,7 @@ def test_with_phrase_annotation():
 def test_with_vocal_section_starting_mid_measure():
     """
     Tests the result with the score of a vocal composition in which some of
-    the lyrical lines start in middle of the measure
+    the lyrics lines start in middle of the measure
     """
     scorename = 'hicaz_humayun--beste--hafif--olmada_diller--abdulhalim_aga'
 
