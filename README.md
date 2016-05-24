@@ -29,9 +29,10 @@ Usage
 ```python
 from symbtrdataextractor.dataextractor import DataExtractor
 
-extractor = DataExtractor(melody_sim_thres=0.7, lyrics_sim_thres=0.7,
-                          extract_all_labels=False, crop_consec_bounds=True,
-                          get_recording_rels=False, print_warnings=True)
+extractor = DataExtractor(
+    melody_sim_thres=0.7, lyrics_sim_thres=0.7, save_structure_sim=True,
+    extract_all_labels=False, crop_consec_bounds=True,
+    get_recording_rels=False, print_warnings=True)
 """
 Inputs
 ----------
@@ -41,6 +42,8 @@ melody_sim_thres  : (optional) the maximum similarity threshold for two melodic
 lyrics_sim_thres  : (optional) the maximum similarity threshold for two lyric
                     stuctures to be considered as variant of each other. The
                     default is 0.75.
+save_structure_sim : (optional) boolean to add the melodic and lyrics similarity 
+                    between each section and segment to the output or not
 extract_all_labels: (optional) boolean to treat all (explicit) annotations in
                     the lyrics as a section or not (e.g. INSTRUMENTATION labels).
                     The default is False.
