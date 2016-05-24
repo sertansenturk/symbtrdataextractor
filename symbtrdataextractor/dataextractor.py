@@ -30,8 +30,9 @@ class DataExtractor(DataMerger):
     """
 
     def __init__(self, lyrics_sim_thres=0.7, melody_sim_thres=0.7,
-                 extract_all_labels=False, crop_consec_bounds=True,
-                 get_recording_rels=False, print_warnings=True):
+                 save_structure_sim=True, extract_all_labels=False,
+                 crop_consec_bounds=True, get_recording_rels=False,
+                 print_warnings=True):
         """
         Class constructor
 
@@ -43,6 +44,9 @@ class DataExtractor(DataMerger):
         melody_sim_thres : float[0, 1], optional
             The similarity threshold for the melody of two sections/segments
             to be regarded as similar. (the default is 0.75)
+        save_structure_sim : bool, optional
+            True to add the melodic and lyrics similarity between each
+            section and segment to the output, False otherwise
         extract_all_labels : bool, optional
             True to extract sections using all labels in written in the lyrics
             field regardless they are a section marking etc., False to only
@@ -69,12 +73,14 @@ class DataExtractor(DataMerger):
         self._section_extractor = SectionExtractor(
             lyrics_sim_thres=lyrics_sim_thres,
             melody_sim_thres=melody_sim_thres,
+            save_structure_sim=save_structure_sim,
             extract_all_labels=extract_all_labels,
             print_warnings=print_warnings)
 
         self._segment_extractor = SegmentExtractor(
             lyrics_sim_thres=lyrics_sim_thres,
             melody_sim_thres=melody_sim_thres,
+            save_structure_sim=save_structure_sim,
             crop_consecutive_bounds=crop_consec_bounds)
 
     def extract(self, score_file, symbtr_name=None, mbid=None,

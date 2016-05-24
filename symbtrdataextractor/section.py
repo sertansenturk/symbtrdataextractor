@@ -1,7 +1,7 @@
 from math import floor
 from fileoperations.slugify_tr import slugify_tr
 from . scoreprocessor import ScoreProcessor
-from . structuralelementlabeler import StructuralElementLabeler
+from . structurelabeler import StructureLabeler
 from . offset import OffsetProcessor
 from . graph import GraphOperations
 import warnings
@@ -12,7 +12,8 @@ class SectionExtractor(object):
 
     """
     def __init__(self, lyrics_sim_thres=0.7, melody_sim_thres=0.7,
-                 extract_all_labels=False, print_warnings=True):
+                 save_structure_sim=True, extract_all_labels=False,
+                 print_warnings=True):
         """
         Class constructor
 
@@ -24,6 +25,9 @@ class SectionExtractor(object):
         melody_sim_thres : float[0, 1], optional
             The similarity threshold for the melody of two sections/phrases
             to be regarded as similar. (the default is 0.75)
+        save_structure_sim : bool, optional
+            True to add the melodic and lyrics similarity between each
+            section and segment to the output, False otherwise
         extract_all_labels : bool, optional
             True to extract all labels in written in the lyrics field
             regardless they are a structural marking etc., False to only
@@ -37,12 +41,14 @@ class SectionExtractor(object):
         self.lyrics_sim_thres = lyrics_sim_thres
         self.melody_sim_thres = melody_sim_thres
         self.print_warnings = print_warnings
+        self.save_structure_sim = save_structure_sim
 
         self.offsetProcessor = OffsetProcessor(
             print_warnings=self.print_warnings)
-        self.sectionLabeler = StructuralElementLabeler(
+        self.sectionLabeler = StructureLabeler(
             lyrics_sim_thres=self.lyrics_sim_thres,
-            melody_sim_thres=self.melody_sim_thres)
+            melody_sim_thres=self.melody_sim_thres,
+            save_structure_sim=self.save_structure_sim)
 
     def from_txt_score(self, score, symbtrname):
         all_labels, struct_lbl = self._get_structure_labels()
@@ -67,7 +73,7 @@ class SectionExtractor(object):
             sections, score, set(all_labels) - set(struct_lbl), symbtrname)
 
         # map the python indices in start_note and end_note to SymbTr index
-        StructuralElementLabeler.python_idx_to_symbtr_idx(sections, score)
+        StructureLabeler.python_idx_to_symbtr_idx(sections, score)
 
         return sections, all([sections_valid, is_measure_start_valid])
 

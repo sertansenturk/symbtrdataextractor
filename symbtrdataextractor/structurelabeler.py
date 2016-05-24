@@ -3,14 +3,16 @@ from .graph import GraphOperations
 from copy import deepcopy
 
 
-class StructuralElementLabeler(object):
+class StructureLabeler(object):
     """
 
     """
 
-    def __init__(self, lyrics_sim_thres=0.7, melody_sim_thres=0.7):
+    def __init__(self, lyrics_sim_thres=0.7, melody_sim_thres=0.7,
+                 save_structure_sim=True):
         self.lyrics_sim_thres = lyrics_sim_thres
         self.melody_sim_thres = melody_sim_thres
+        self.save_structure_sim = save_structure_sim
 
     def label_structures(self, structures, score):
         # get the duration, pitch and lyrics related to the section
@@ -87,9 +89,9 @@ class StructuralElementLabeler(object):
         # label the structures
         for i in range(0, len(melody_labels)):
             structures[i]['melodic_structure'] = melody_labels[i]
-            structures[i]['melodic_similarities'] = (1 - dists[i, :]).tolist(
-
-            )[0]
+            if self.save_structure_sim:
+                structures[i]['melodic_similarities'] = \
+                    (1 - dists[i, :]).tolist()[0]
 
         # sanity check
         self._assert_labels(melodies, melody_labels, 'melody')
@@ -132,9 +134,8 @@ class StructuralElementLabeler(object):
 
         return copy_fragments
 
-    @staticmethod
     def _apply_labels_to_lyrics_structure(
-            structures, lyrics_labels, score_fragments, dists):
+            self, structures, lyrics_labels, score_fragments, dists):
 
         for i in range(0, len(lyrics_labels)):
             # if there's no lyrics, label instrumental
@@ -143,7 +144,9 @@ class StructuralElementLabeler(object):
             else:
                 structures[i]['lyric_structure'] = lyrics_labels[i]
 
-            structures[i]['lyric_similarities'] = (1 - dists[i, :]).tolist()[0]
+            if self.save_structure_sim:
+                structures[i]['lyric_similarities'] = \
+                    (1 - dists[i, :]).tolist()[0]
 
     @staticmethod
     def _assert_labels(stream, labels, name):

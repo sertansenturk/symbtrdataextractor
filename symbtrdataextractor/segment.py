@@ -1,5 +1,5 @@
 from . scoreprocessor import ScoreProcessor
-from . structuralelementlabeler import StructuralElementLabeler
+from . structurelabeler import StructureLabeler
 
 
 class SegmentExtractor(object):
@@ -7,7 +7,7 @@ class SegmentExtractor(object):
 
     """
     def __init__(self, lyrics_sim_thres=0.70, melody_sim_thres=0.70,
-                 crop_consecutive_bounds=True):
+                 save_structure_sim=True, crop_consecutive_bounds=True):
         """
         Class constructor
 
@@ -19,15 +19,20 @@ class SegmentExtractor(object):
         melody_sim_thres : float[0, 1], optional
             The similarity threshold for the melody of two segments
             to be regarded as similar. (the default is 0.75)
+        save_structure_sim : bool, optional
+            True to add the melodic and lyrics similarity between each
+            section and segment to the output, False otherwise
         crop_consecutive_bounds : bool, optional
             True to remove the first of the two consecutive boundaries,
             False otherwise. (the default is True)
         """
         self.lyrics_sim_thres = lyrics_sim_thres
         self.melody_sim_thres = melody_sim_thres
+        self.save_structure_sim = save_structure_sim
         self.crop_consecutive_bounds = crop_consecutive_bounds
 
-        self.segmentLabeler = StructuralElementLabeler(
+        self.segmentLabeler = StructureLabeler(
+            save_structure_sim=self.save_structure_sim,
             lyrics_sim_thres=self.lyrics_sim_thres,
             melody_sim_thres=self.melody_sim_thres)
 
