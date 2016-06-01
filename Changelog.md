@@ -2,7 +2,8 @@
 - Melodic organization is not replaced by the instrumental section names anymore
 - Added melodic and lyrics similarity to output
 - Default similarity threshold is lowered to 0.7 from 0.75
-- Fixed typos (lyric -> lyrics) in variable anmes and output dictionary keys.
+- Fixed typos (lyric -> lyrics) in variable names and output dictionary keys.
+- Improved warnings
 
 #### symbtrmetadataextractor v2.0.0
 - Fixed a bug in section sorting  when there is a start note in the 0th index ([58f3bd4](https://github.com/sertansenturk/symbtrdataextractor/commit/58f3bd413b548c11a7144a603afa42bad654a347))
