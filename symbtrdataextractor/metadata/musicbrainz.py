@@ -37,13 +37,13 @@ class MusicBrainzMetadata(object):
                                      'mbid': data.pop('mbid', None)}
                 if self.get_recording_rels:
                     warnings.warn(u"Recording mbid is given. Ignored "
-                                  u"get_recording_rels boolean.")
+                                  u"get_recording_rels boolean.", stacklevel=2)
 
             self._add_mb_attributes(data)
             return data
         except musicbrainzngs.NetworkError:
             warnings.warn("Musicbrainz is not available, skipping metadata "
-                          "crawling...")
+                          "crawling...", stacklevel=2)
             return {'makam': {}, 'form': {}, 'usul': {}, 'name': {},
                     'composer': {}, 'lyricist': {}}
 
@@ -55,7 +55,8 @@ class MusicBrainzMetadata(object):
                 data[attr] = data[attr][0]
             except (IndexError, KeyError):
                 warnings.warn(
-                    "Missing the {0:s} attribute in MusicBrainz".format(attr))
+                    "Missing the {0:s} attribute in MusicBrainz".format(attr),
+                    stacklevel=2)
                 data.pop(attr, None)
 
     @staticmethod
@@ -76,7 +77,7 @@ class MusicBrainzMetadata(object):
                                '3223323', '3334', '14_4']
             if score_attrib['symbtr_slug'] in skip_makam_slug:
                 warnings.warn(u'{0:s}: The usul attribute is not stored in '
-                              u'MusicBrainz.'.format(scorename))
+                              u'MusicBrainz.'.format(scorename), stacklevel=2)
             else:
                 if not score_attrib['mb_attribute'] == \
                         attrib_dict['dunya_name']:
@@ -89,10 +90,11 @@ class MusicBrainzMetadata(object):
                                    u''.format(scorename,
                                               score_attrib['mb_attribute'])
 
-                        warnings.warn(warn_str.encode('utf-8'))
+                        warnings.warn(warn_str.encode('utf-8'), stacklevel=2)
                     else:
                         warnings.warn(u'{0:s}: The MusicBrainz attribute does'
-                                      u' not exist.'.format(scorename))
+                                      u' not exist.'.format(scorename),
+                                      stacklevel=2)
         return is_attribute_valid
 
     @staticmethod
@@ -105,5 +107,5 @@ class MusicBrainzMetadata(object):
             warn_str = u'{0!s}, {1!s}: The MusicBrainz tag does not match.'.\
                 format(scorename, score_attrib['mb_tag'])
 
-            warnings.warn(warn_str.encode('utf-8'))
+            warnings.warn(warn_str.encode('utf-8'), stacklevel=2)
         return is_attribute_valid

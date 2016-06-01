@@ -141,7 +141,7 @@ class TxtReader(SymbTrReader):
     def _validate_index_jump(score_idx, jump_ii, is_index_valid, score_name):
         if score_idx - jump_ii != 1:
             warnings.warn(u"{0!s}: {1!s}, note index jump.".format(
-                score_name, str(score_idx)))
+                score_name, str(score_idx)), stacklevel=2)
             is_index_valid = False
 
         jump_ii = score_idx  # we assign to the score_idx so the we can warn
@@ -154,7 +154,7 @@ class TxtReader(SymbTrReader):
         # check usul row in the start
         if not score['code'][0] == 51:
             warnings.warn(u'{0!s} Missing the usul row in the start'.format(
-                score_name))
+                score_name), stacklevel=2)
             start_usul_row = False
         else:
             start_usul_row = True
@@ -176,6 +176,6 @@ class TxtReader(SymbTrReader):
         if any(v1 != v2 for v1, v2 in zip(val_list, [9, -1, -1, 'Es', 'Es'])):
             is_rest_valid = False
             warnings.warn(u'{0!s} {1!s}: Invalid Rest'.format(
-                score_name, str(score['index'][ii])))
+                score_name, str(score['index'][ii])), stacklevel=2)
 
         return is_rest_valid

@@ -16,7 +16,7 @@ class Mu2Metadata(object):
                     warn_str = u'{0!s}, {1!s}: The Mu2 attribute does not ' \
                                u'match.'.format(scorename,
                                                 score_attrib['mu2_name'])
-                    warnings.warn(warn_str.encode('utf-8'))
+                    warnings.warn(warn_str.encode('utf-8'), stacklevel=2)
 
             except KeyError:  # makam, form
                 is_attr_valid = cls._validate_mu2_makam_form(
@@ -31,7 +31,7 @@ class Mu2Metadata(object):
             warn_str = u'{0!s}, {1!s}: The Mu2 attribute does not match.'.\
                 format(scorename, score_attrib['mu2_name'])
 
-            warnings.warn(warn_str.encode('utf-8'))
+            warnings.warn(warn_str.encode('utf-8'), stacklevel=2)
             return False
 
         return True
@@ -51,7 +51,7 @@ class Mu2Metadata(object):
                                    u'the score does not ' \
                                    u'match.'.format(scorename,
                                                     uv['mu2_name'], v_key)
-                        warnings.warn(warn_str.encode('utf-8'))
+                        warnings.warn(warn_str.encode('utf-8'), stacklevel=2)
 
                     return is_usul_valid, mu2_name
 

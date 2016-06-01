@@ -231,7 +231,7 @@ class SectionExtractor(object):
         if not sections:  # check section presence
             if self.print_warnings:
                 warnings.warn(u"{0!s}, Missing section info in lyrics.".format(
-                    symbtrname))
+                    symbtrname), stacklevel=2)
             valid_bool = True  # nothing to validate
         else:  # check section continuity
             section_continuity_bool = self._validate_section_continuity(
@@ -261,7 +261,7 @@ class SectionExtractor(object):
                           u''.format(symbtrname, str(s['start_note']),
                                      str(s['end_note']), s['slug'],
                                      str(score['offset'][s['start_note']]))
-                warnings.warn(warnstr)
+                warnings.warn(warnstr, stacklevel=2)
                 section_bound_bool = False
 
         return section_bound_bool
@@ -288,7 +288,7 @@ class SectionExtractor(object):
                 # invalid lyrics end
                 if ll in [label + ' ', label + '  ']:
                     warnings.warn(u'{0!s}, {1!d}: Extra space in {2!s}'.format(
-                        symbtrname, i, ll))
+                        symbtrname, i, ll), stacklevel=2)
                     no_space_bool = False
 
         return no_space_bool
@@ -304,7 +304,8 @@ class SectionExtractor(object):
                 if self.print_warnings:
                     warnings.warn(u'{0!s}, {1!s} -> {2!s}, Gap between the '
                                   u'sections'.format(symbtrname,
-                                                     str(e), str(s)))
+                                                     str(e), str(s)),
+                                  stacklevel=2)
                 section_continuity_bool = False
 
         return section_continuity_bool

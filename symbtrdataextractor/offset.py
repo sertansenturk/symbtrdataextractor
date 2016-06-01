@@ -35,7 +35,7 @@ class OffsetProcessor(object):
                 warn_str = ', '.join(str(e) for e in noninteger_measure_starts)
 
                 warnings.warn(u"Some measures are skipped by the offsets: "
-                              u"{0!s}".format(warn_str))
+                              u"{0!s}".format(warn_str), stacklevel=2)
 
         return is_measure_start_valid
 

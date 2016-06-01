@@ -105,7 +105,8 @@ class MetadataExtractor(object):
         if has_slug and not score_attr['symbtr_slug'] ==\
                 attrib_dict['symbtr_slug']:
             warnings.warn(u'{0!s}, {1!s}: The slug does not match.'.
-                          format(scorename, score_attr['symbtr_slug']))
+                          format(scorename, score_attr['symbtr_slug']),
+                          stacklevel=2)
             return False
 
         return True
@@ -134,7 +135,7 @@ class MetadataExtractor(object):
         if not is_key_sig_valid:
             warnings.warn(u'{0!s}: Key signature is different! {1!s} -> {2!s}'.
                           format(symbtr_name, ' '.join(key_signature),
-                                 ' '.join(key_sig_makam)))
+                                 ' '.join(key_sig_makam)), stacklevel=2)
 
         return is_key_sig_valid
 

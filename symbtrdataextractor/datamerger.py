@@ -33,7 +33,8 @@ class DataMerger(object):
             if verbose:
                 warnings.warn("There is no information about whether the "
                               "score is related to a composition or a "
-                              "performance. The title key is skipped.")
+                              "performance. The title key is skipped.",
+                              stacklevel=2)
             data2_dict.pop('title')
 
         return cls._dictmerge(data1_dict, data2_dict)
@@ -71,5 +72,6 @@ class DataMerger(object):
     def _chk_dict_key_override(key, result, val):
         if not result[key] == val:
             # overwrite
-            warnings.warn(u'{0:s} already exists! Overwriting...'.format(key))
+            warnings.warn(u'{0:s} already exists! Overwriting...'.format(key),
+                          stacklevel=2)
             result[key] = val
