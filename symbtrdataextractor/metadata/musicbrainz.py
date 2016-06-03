@@ -45,7 +45,7 @@ class MusicBrainzMetadata(object):
             warnings.warn("Musicbrainz is not available, skipping metadata "
                           "crawling...", stacklevel=2)
             return {'makam': {}, 'form': {}, 'usul': {}, 'name': {},
-                    'composer': {}, 'lyricist': {}}
+                    'composer': {}, 'lyricist': {}, 'url': ''}
 
     @staticmethod
     def _add_mb_attributes(data):
