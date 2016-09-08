@@ -181,17 +181,19 @@ class SectionExtractor(object):
         curr_lyrics_measure_offset = floor(
             score['offset'][curr_lyrics_start_ind])
 
-        # check if next_lyrics_start_ind and prev_closest_end_ind are
+        # check if next_lyrics_start_ind and prev_bound_idx are
         # in the same measure. Ideally they should be in different
         # measures
+        # Note: don't check the previous end as it will be undefined if the
+        # previous section is instrumental
         if curr_lyrics_measure_offset == floor(
-                score['offset'][prev_closest_end_ind]):
+                score['offset'][prev_bound_idx]):
             if self.print_warnings:
                 # This is not a warning but a indication to the user as it can
                 # happen occasionally especially in the folk forms
                 print(u'{0!s}: {1!s} and {2!s} are in the same measure!'.
                       format(str(curr_lyrics_measure_offset),
-                             score['lyrics'][prev_closest_end_ind],
+                             score['lyrics'][prev_bound_idx],
                              score['lyrics'][curr_lyrics_start_ind]))
             return curr_lyrics_start_ind
         else:  # The section starts on the first measure the lyrics
