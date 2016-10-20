@@ -24,8 +24,15 @@ class MetadataExtractor(object):
     @staticmethod
     def get_slugs(scorename):
         splitted = scorename.split('--')
-        return {'makam': splitted[0], 'form': splitted[1], 'usul': splitted[2],
-                'name': splitted[3], 'composer': splitted[4]}
+        try:
+            return {'makam': splitted[0], 'form': splitted[1],
+                    'usul': splitted[2], 'name': splitted[3],
+                    'composer': splitted[4]}
+        except IndexError:
+            warnings.warn(u'Formatting error in the SymbTr-slug: {0!s}'.
+                          format(scorename), stacklevel=2)
+            return {'makam': '', 'form': '', 'usul': '', 'name': '',
+                    'composer': ''}
 
     def get_metadata(self, scorename, mbid=None):
         data = self._mb_metadata.crawl_musicbrainz(mbid)
@@ -33,6 +40,7 @@ class MetadataExtractor(object):
         data['symbtr'] = scorename
 
         slugs = MetadataExtractor.get_slugs(scorename)
+
         for attr in ['makam', 'form', 'usul']:
             self.add_attribute_slug(data, slugs, attr)
 
@@ -48,8 +56,14 @@ class MetadataExtractor(object):
         is_attr_meta_valid = self.validate_makam_form_usul(data, scorename)
 
         # get the tonic
-        makam = self._get_attr(data['makam']['symbtr_slug'], 'makam')
-        data['tonic'] = makam['karar_symbol']
+        try:
+            makam = self._get_attr(data['makam']['symbtr_slug'], 'makam')
+            data['tonic'] = makam['karar_symbol']
+        except KeyError:
+            warnings.warn(u'Unexpected error while fetching the tonic symbol '
+                          u'from the makam-slug: {0!s}'.
+                          format(data['makam']['symbtr_slug']), stacklevel=2)
+            is_attr_meta_valid = False
 
         return data, is_attr_meta_valid
 
@@ -101,15 +115,20 @@ class MetadataExtractor(object):
 
     @staticmethod
     def _validate_slug(attrib_dict, score_attr, scorename):
-        has_slug = 'symbtr_slug' in score_attr.keys()
-        if has_slug and not score_attr['symbtr_slug'] ==\
-                attrib_dict['symbtr_slug']:
-            warnings.warn(u'{0!s}, {1!s}: The slug does not match.'.
-                          format(scorename, score_attr['symbtr_slug']),
-                          stacklevel=2)
-            return False
+        try:
+            has_slug = 'symbtr_slug' in score_attr.keys()
+            if has_slug and not score_attr['symbtr_slug'] ==\
+                    attrib_dict['symbtr_slug']:
+                warnings.warn(u'{0!s}, {1!s}: The slug does not match.'.
+                              format(scorename, score_attr['symbtr_slug']),
+                              stacklevel=2)
+                return False
 
-        return True
+            return True
+        except KeyError:
+            warnings.warn(u'Unexpected error while validating the slug: {0!s}'.
+                          format(score_attr['symbtr_slug']), stacklevel=2)
+            return False
 
     @staticmethod
     def get_attribute_dict(attrstr):

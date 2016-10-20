@@ -4,6 +4,10 @@ symbtrdataextractor
 ===========
 Python tools for extracting relevant (meta)data from SymbTr-scores
 
+!!Before You Proceed!!
+----------------------
+This branch is for reading SymbTr v2.0.0 while by passing the strict validation modules introduced in [SymbTr v2.3.0](https://github.com/MTG/SymbTr/blob/symbtr_v2/Changelog.md#symbtr-v23). IF you want to read validated data from SymbTr >= v2.3, please use the latest release or the master branch! 
+
 Introduction
 ------------
 

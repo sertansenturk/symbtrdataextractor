@@ -289,8 +289,13 @@ class SectionExtractor(object):
             for label in all_labels:
                 # invalid lyrics end
                 if ll in [label + ' ', label + '  ']:
-                    warnings.warn(u'{0!s}, {1!d}: Extra space in {2!s}'.format(
-                        symbtrname, i, ll), stacklevel=2)
+                    try:
+                        warnings.warn(u'{0!s}, {1!d}: Extra space in {2!s}'.
+                            format(symbtrname, i, ll), stacklevel=2)
+                    except ValueError:
+                        warnings.warn(u'{0!s}: Unexpected error while '
+                                      u'validating the section label {0!s}'.
+                                      format(symbtrname, i, ll), stacklevel=2)
                     no_space_bool = False
 
         return no_space_bool
